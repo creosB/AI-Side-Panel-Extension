@@ -30,21 +30,25 @@ The **AI Side Panel Extension** for Chrome provides an easy and convenient way t
    - Click the extension icon in the Chrome toolbar.
    - Or use the keyboard shortcut `ALT + Q` to open/close the side panel.
 
+## Screenshots
+Gemini            |  Chatgpt
+:-------------------------:|:-------------------------:
+![Gemini](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/gemini.png) | ![Chatgpt](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/chatgpt.png)
 
 # License
 
 ---
 
 ## Please contact me first to share or make changes anywhere.
-
+***
 This work is licensed under a
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
 
-[CC BY-NC-SA 4.0][cc-by-nc-sa]
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
 
 [cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
 [cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
 [cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
----
+***
 
 Feel free to adjust any specifics to better match your extension’s functionality or your preferred contact details!
