@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Side Panel</title>
+    <link rel="stylesheet" href="sidepanel.css">
+  </head>
+  <body>
+    <div class="toolbar">
+      <div class="toolbar-section">
+        <button class="btn" data-url="https://gemini.google.com/">Gemini</button>
+        <button class="btn" data-url="https://chat.openai.com/">ChatGPT</button>
+        <button class="btn" id="support-btn">Support</button>
+      </div>
+    </div>
+
+    <div id="content" class="content">
+      <iframe
+        src="https://gemini.google.com"
+        frameborder="0"
+        allow="clipboard-write"
+      ></iframe>
+      <div id="support-page" class="support-page">
+       
+        <h1 class="gradient-text">Support Our Project</h1>
+        <img src="images/icon.png" alt="Logo" class="logo">
+        <p class="support-text">Made with ❤️ by AI enthusiasts. Your support helps us improve and grow!</p>
+        <a href="https://www.buymeacoffee.com/creos" class="donate-button" target="_blank">
+          Buy Me a Coffee
+      </a>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>

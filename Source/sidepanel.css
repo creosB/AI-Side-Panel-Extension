@@ -1,0 +1,119 @@
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --accent-color: #3a3a3a;
+    --hover-color: #4a4a4a;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Arial", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
+  .toolbar {
+    background-color: var(--accent-color);
+    border-radius: 25px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .toolbar-section {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .btn {
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.9rem;
+  }
+  .btn:hover {
+    background-color: var(--hover-color);
+  }
+  .content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    overflow: hidden;
+  }
+  iframe {
+    flex-grow: 1;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .support-page {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 1rem;
+  }
+  .gradient-text {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: -0.05em;
+    background-clip: text;
+    text-transform: uppercase;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, white, #a0a0a0);
+    margin-bottom: 1rem;
+  }
+  .support-text {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  .donate-button {
+        display: inline-block;
+        background-color: #ffcc00;
+        color: #333;
+        font-size: 1.25rem; /* 20px */
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 12px 24px;
+        border: 2px solid transparent;
+        border-radius: 9999px; /* Fully rounded */
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s, transform 0.3s;
+        background-clip: padding-box;
+    }
+
+    .donate-button:hover {
+        background-color: #e6b800;
+        color: #fff;
+        transform: scale(1.05);
+    }
+
+    .donate-button:active {
+        background-color: #d9a700;
+        color: #fff;
+        transform: scale(0.95);
+    }
+    
+    .logo {
+      width: 150px; /* Adjust size as needed */
+      margin-bottom: 20px; /* Space between logo and buttons */
+  }
