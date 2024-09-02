@@ -17,7 +17,7 @@ The **AI Side Panel Extension** for Chrome provides an easy and convenient way t
 
 ## Installation
 
-1. **Download the Extension**: Clone this repository or download the latest release from [GitHub Releases](https://github.com/yourusername/ai-side-panel-extension/releases).
+1. **Download the Extension**: Clone this repository or download the latest release from [GitHub Releases](https://github.com/creosB/AI-Side-Panel-Extension/releases/tag/release).
 2. **Load the Extension into Chrome**:
 
    - Open Chrome and navigate to `chrome://extensions/`.
