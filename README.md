@@ -7,12 +7,8 @@
 
 The **AI Side Panel Extension** for Chrome provides an easy and convenient way to access your favorite AI sites, such as Gemini and ChatGPT, directly from the Chrome side panel. With quick access via the extension icon or a customizable keyboard shortcut, this extension enhances your productivity and makes engaging with AI tools seamless.
 
-<a href="https://chromewebstore.google.com/detail/ai-side-panel/icapcpllhdnnpcmfdcgpnbgchfenmjmg">
-  <img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/chrome/chrome.svg" alt="Chrome" width="48">
-   <b> Download</b>
-</a>
 
- <br></br>
+[![Chrome](https://user-images.githubusercontent.com/53124886/111952712-34f12300-8aee-11eb-9fdd-ad579a1eb235.png)](https://chromewebstore.google.com/detail/ai-side-panel/icapcpllhdnnpcmfdcgpnbgchfenmjmg)
  
 [![sponsor](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/creos)
 
