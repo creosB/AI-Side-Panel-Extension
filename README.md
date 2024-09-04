@@ -1,7 +1,7 @@
 
 # AI Side Panel Extension
 
-[![Artists Company](https://raw.githubusercontent.com/creosB/presentation/main/background.png)](https://artistscompany.net/)
+![Artists Company](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/1.png)
 
 ## Overview
 
@@ -33,7 +33,7 @@ The **AI Side Panel Extension** for Chrome provides an easy and convenient way t
 ## Screenshots
 Gemini            |  Chatgpt
 :-------------------------:|:-------------------------:
-![Gemini](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/gemini.png) | ![Chatgpt](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/chatgpt.png)
+![Gemini](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/2.png) | ![Chatgpt](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/3.png)
 
 # License
 
@@ -52,3 +52,7 @@ This work is licensed under a
 ***
 
 Feel free to adjust any specifics to better match your extension’s functionality or your preferred contact details!
+
+<a href="https://artistscompany.net/">
+  <img src="https://raw.githubusercontent.com/creosB/presentation/main/background.png" alt="Artists Company" width="800">
+</a>
