@@ -1,119 +1,366 @@
 :root {
-    --bg-color: #1a1a1a;
-    --text-color: #e0e0e0;
-    --accent-color: #3a3a3a;
-    --hover-color: #4a4a4a;
-  }
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    font-family: "Arial", sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-  }
-  .toolbar {
-    background-color: var(--accent-color);
-    border-radius: 25px;
-    margin: 0.5rem;
-    padding: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .toolbar-section {
-    display: flex;
-    gap: 0.5rem;
-  }
-  .btn {
-    background-color: transparent;
-    color: var(--text-color);
-    border: none;
-    border-radius: 25px;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 0.9rem;
-  }
-  .btn:hover {
-    background-color: var(--hover-color);
-  }
-  .content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem;
-    overflow: hidden;
-  }
-  iframe {
-    flex-grow: 1;
-    width: 100%;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  .support-page {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    text-align: center;
-    padding: 1rem;
-  }
-  .gradient-text {
-    font-size: 2rem;
-    font-weight: bold;
-    letter-spacing: -0.05em;
-    background-clip: text;
-    text-transform: uppercase;
-    -webkit-background-clip: text;
-    color: transparent;
-    background-image: linear-gradient(to right, white, #a0a0a0);
-    margin-bottom: 1rem;
-  }
-  .support-text {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-  }
-  .donate-button {
-        display: inline-block;
-        background-color: #ffcc00;
-        color: #333;
-        font-size: 1.25rem; /* 20px */
-        font-weight: bold;
-        text-transform: uppercase;
-        padding: 12px 24px;
-        border: 2px solid transparent;
-        border-radius: 9999px; /* Fully rounded */
-        text-align: center;
-        cursor: pointer;
-        text-decoration: none;
-        transition: background-color 0.3s, color 0.3s, transform 0.3s;
-        background-clip: padding-box;
-    }
+  --bg-color: #0f0f0f;
+  --text-color: #ffffff;
+  --accent-color: #1e1e1e;
+  --hover-color: #2a2a2a;
+  --primary-color: #00ffaa;
+}
 
-    .donate-button:hover {
-        background-color: #e6b800;
-        color: #fff;
-        transform: scale(1.05);
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    .donate-button:active {
-        background-color: #d9a700;
-        color: #fff;
-        transform: scale(0.95);
-    }
-    
-    .logo {
-      width: 150px; /* Adjust size as needed */
-      margin-bottom: 20px; /* Space between logo and buttons */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.toolbar {
+  background-color: var(--accent-color);
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid var(--primary-color);
+}
+
+.btn {
+  background-color: transparent;
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.btn svg {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 0.25rem;
+}
+
+.btn:hover {
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+iframe {
+  flex-grow: 1;
+  width: 100%;
+  border: none;
+  background-color: var(--bg-color);
+}
+
+.support-page {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  height: 100%;
+  overflow-y: auto;
+  background-color: var(--bg-color);
+}
+
+.gradient-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, var(--primary-color), #00ffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.support-text {
+  font-size: 0.9rem;
+  color: #888;
+  max-width: 80%;
+}
+
+.logo {
+  width: 100px;
+  margin-bottom: 1rem;
+}
+
+.donate-button {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 9999px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.donate-button:hover {
+  background-color: #00cc88;
+  transform: scale(1.05);
+}
+
+.donate-button:active {
+  transform: scale(0.95);
+}
+
+.toggle-container {
+  width: 100%;
+  max-width: 300px;
+  background: var(--accent-color);
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 1px solid #333;
+  margin: 1rem 0;
+}
+
+.toggle-container h3 {
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+.toggle-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  justify-content: space-between;
+}
+
+.toggle-item span {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* Modern toggle switch style */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #444;
+  transition: .3s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+.buttons-container {
+  display: inline-flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.github-button {
+  background-color: #3b3b3b;
+  color: #fff;
+}
+
+.github-button:hover {
+  background-color: #575757;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.coffee-button {
+  background-color: #713f12;
+  color: #ffc107;
+}
+
+.coffee-button:hover {
+  background-color: #8a5018;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.action-button svg {
+  fill: currentColor;
+}
+
+.footer-text {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #999;
+}
+
+.footer-text .heart {
+  color: #ff4d4d;
+}
+
+.shortcut-container {
+  width: 100%;
+  max-width: 300px;
+  background: var(--accent-color);
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 1px solid #333;
+  margin: 1rem 0;
+}
+
+.shortcut-container h3 {
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  justify-content: space-between;
+}
+
+.shortcut-item span {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.shortcut-input-wrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#shortcut-input {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: var(--text-color);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  width: 150px;
+  cursor: pointer;
+}
+
+#shortcut-input.recording {
+  border-color: var(--primary-color);
+  background-color: #1a1a1a;
+  color: var(--primary-color);
+}
+
+.shortcut-button {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.shortcut-button:hover {
+  color: var(--text-color);
+  background: #2a2a2a;
+}
+
+.shortcut-info {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+.notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-color);
+  color: var(--bg-color);
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  z-index: 1000;
+  text-align: center;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, 100%);
+    opacity: 0;
   }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}

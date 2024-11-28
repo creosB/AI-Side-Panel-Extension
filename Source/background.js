@@ -49,3 +49,30 @@ function initiate () {
 };
 
 initiate();
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'updateShortcut') {
+    chrome.commands.update({
+      name: '_execute_action',
+      shortcut: request.shortcut
+    }, () => {
+      if (chrome.runtime.lastError) {
+        sendResponse({ success: false, error: chrome.runtime.lastError.message });
+      } else {
+        sendResponse({ success: true });
+      }
+    });
+    return true;
+  }
+});
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'getShortcut') {
+    chrome.commands.getAll((commands) => {
+      const command = commands.find(cmd => cmd.name === '_execute_action');
+      sendResponse({ shortcut: command ? command.shortcut : 'Alt+Q' });
+    });
+    return true;
+  }
+});
+
