@@ -16,7 +16,7 @@ The **AI Side Panel Extension** for Chrome provides an easy and convenient way t
 
 - **Side Panel Access**: Opens a sidebar in Chrome for quick access to AI sites.
 - **Customizable Shortcut**: Use the `ALT + Q` shortcut to toggle the side panel on and off.
-- **Easy Navigation**: Navigate to popular AI platforms like Gemini and ChatGPT without cluttering your main browser window.
+- **Easy Navigation**: Navigate to popular AI platforms like Gemini, ChatGPT, Claude, and Copilot without cluttering your main browser window.
 
 ## Installation
 
