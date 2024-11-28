@@ -1,7 +1,7 @@
 
 # AI Side Panel Extension
 
-![Artists Company](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/1.png)
+![Artists Company](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/1.png)
 
 ## Overview
 
