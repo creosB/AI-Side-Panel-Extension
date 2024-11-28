@@ -37,6 +37,8 @@ The **AI Side Panel Extension** for Chrome provides an easy and convenient way t
 Gemini            |  Chatgpt
 :-------------------------:|:-------------------------:
 ![Gemini](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/2.png) | ![Chatgpt](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/3.png)
+![Claude](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/4.png) | ![Copilot](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/5.png)
+![Settings](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/main/Images/6.png)
 
 # License
 
