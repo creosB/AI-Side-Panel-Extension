@@ -39,7 +39,8 @@
     "_execute_action": {
       "description": "Shortcut for execute extension",
       "suggested_key": {
-        "default": "Alt+Q"
+        "default": "Alt+Q",
+        "mac": "Command+Q"
       }
     }
   }

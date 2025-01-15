@@ -31,36 +31,162 @@ body {
 }
 
 .toolbar {
-  background-color: var(--accent-color);
-  padding: 0.5rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  gap: 4px;
+  padding: 0.5rem;
+  background-color: var(--accent-color);
   border-bottom: 1px solid var(--primary-color);
+  position: relative;
 }
 
+.toolbar::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--primary-color) 50%, 
+    transparent 100%
+  );
+  opacity: 0.6;
+}
+
+.toolbar .btn {
+  cursor: grab;
+  user-select: none;
+}
+
+.toolbar .btn.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
+
+.toolbar .btn.drag-over {
+  border-right: 2px solid var(--primary-color);
+}
+
+/* Smooth button transitions */
 .btn {
   background-color: transparent;
   color: var(--text-color);
   border: none;
   padding: 0.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 0.8rem;
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transform-origin: center;
+  will-change: transform, opacity;
+  transition: 
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+.btn:hover::after {
+  width: 100%;
+}
+
+.btn.active::after {
+  width: 100%;
 }
 
 .btn svg {
   width: 24px;
   height: 24px;
   margin-bottom: 0.25rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn:hover {
-  color: var(--primary-color);
+.btn:hover svg {
+  transform: translateY(-4px) scale(1.1);
+}
+
+/* Drag and drop animations */
+.btn.dragging {
+  opacity: 0.85;
+  cursor: grabbing;
+  transform: scale(1.05);
+  z-index: 100;
+  background-color: var(--hover-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: none; /* Disable transitions while dragging */
+}
+
+.btn.drag-over {
+  position: relative;
+  transform: scale(1.02);
+}
+
+.btn.drag-over::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 2px dashed var(--primary-color);
+  border-radius: 8px;
+  opacity: 0.6;
+  pointer-events: none;
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Hover effects (disabled during drag) */
+.btn:not(.dragging):hover {
   transform: translateY(-2px);
+  background-color: var(--hover-color);
+}
+
+/* Smooth reordering animation */
+.toolbar .btn {
+  transition: 
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Disable pointer events on icons during drag */
+.btn.dragging svg,
+.btn.dragging span {
+  pointer-events: none;
+}
+
+/* Pulse animation for drop target */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
 }
 
 .content {
@@ -70,12 +196,19 @@ body {
   overflow: hidden;
 }
 
+/* Frame transitions */
 iframe {
   flex-grow: 1;
   width: 100%;
   border: none;
   background-color: var(--bg-color);
+  transition: opacity 0.3s ease;
 }
+
+iframe.loading {
+  opacity: 0.5;
+}
+
 
 .support-page {
   display: none;
@@ -85,6 +218,18 @@ iframe {
   height: 100%;
   overflow-y: auto;
   background-color: var(--bg-color);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .gradient-text {
@@ -175,6 +320,7 @@ iframe {
   height: 0;
 }
 
+/* Toggle switch animations */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -183,8 +329,9 @@ iframe {
   right: 0;
   bottom: 0;
   background-color: #444;
-  transition: .3s;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 24px;
+  overflow: hidden;
 }
 
 .slider:before {
@@ -195,8 +342,9 @@ iframe {
   left: 3px;
   bottom: 3px;
   background-color: white;
-  transition: .3s;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 input:checked + .slider {
@@ -204,7 +352,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-  transform: translateX(22px);
+  transform: translateX(22px) scale(1.1);
 }
 
 .buttons-container {
