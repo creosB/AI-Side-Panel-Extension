@@ -16,9 +16,10 @@ The **AI Side Panel Extension** for Chrome provides an easy and convenient way t
 
 - **Instant AI Access:** Side panel integration for immediate access to AI tools while browsing.
 - **Split Screen Workflow:** Customizable split view for simultaneous browsing and AI interaction.
-- **Quick Toggle:**** One-click access via icon or ALT + Q shortcut.
-- **Minimal Interface:**** Clean, distraction-free design for focused AI interactions.
-- **Support for all popular AI services.****
+- **Quick Toggle:** One-click access via icon or ALT + Q shortcut.
+- **Minimal Interface:** Clean, distraction-free design for focused AI interactions.
+- **Support for all popular AI services.**
+- **Effortless drag and drop:** Easily customizable and highly interactive.
 
 ## Installation
 
@@ -41,8 +42,8 @@ Gemini            |  Chatgpt
 ![ChatGPT](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/2.png) | ![Gemini](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/3.png)
 Claude            |  Copilot
 ![Claude](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/4.png) | ![Copilot](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/5.png)
-Settings            
-![Settings](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/6.png)
+Split Screen            |  Settings       
+![SplitScreenView](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/7.png) | ![Settings](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/6.png)
 
 # License
 
