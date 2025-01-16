@@ -45,7 +45,7 @@ Claude            |  Copilot
 Split Screen            |  Settings       
 ![SplitScreenView](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/7.png) | ![Settings](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/6.png)
 
-# Video
+## Video
 [![Youtube](http://img.youtube.com/vi/IXg5vbPg-i0/0.jpg)](https://youtu.be/IXg5vbPg-i0)
 
 
