@@ -4,13 +4,9 @@
   "permissions": [
     "sidePanel",
     "activeTab",
-    "scripting",
-    "clipboardRead",
-    "clipboardWrite",
     "declarativeNetRequest",
     "declarativeNetRequestFeedback",
-    "commands",
-    "tabs"
+    "commands"
   ],
   "description": "Easily access AI sites via side panel",
   "version": "0.0.3",
