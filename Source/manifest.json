@@ -9,7 +9,7 @@
     "commands"
   ],
   "description": "Easily access AI sites via side panel",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "side_panel": {
     "default_path": "sidepanel.html"
   },

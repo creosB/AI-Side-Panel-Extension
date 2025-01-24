@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
       'gemini': '[data-url*="gemini.google.com"]',
       'claude': '[data-url*="claude.ai"]',
       'copilot': '[data-url*="copilot.microsoft.com"]',
+      'deepseek': '[data-url*="chat.deepseek.com"]',
       'split-view': '#split-view-btn'
     };
 
@@ -63,11 +64,11 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.toggle-item input[type="checkbox"]')
       ).filter(t => {
         const toggleService = t.id.replace('toggle-', '');
-        return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot'].includes(toggleService);
+        return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek'].includes(toggleService);
       }).length;
 
       // Prevent disabling last service
-      if (!this.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot'].includes(service)) {
+      if (!this.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek'].includes(service)) {
         this.checked = true;
         return;
       }
@@ -77,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'gemini': '[data-url*="gemini.google.com"]',
         'claude': '[data-url*="claude.ai"]',
         'copilot': '[data-url*="copilot.microsoft.com"]',
+        'deepseek': '[data-url*="chat.deepseek.com"]',
         'split-view': '#split-view-btn'
       }[service];
 
@@ -259,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
         closeButton.id = 'close-second-iframe';
         closeButton.className = 'close-button';
         closeButton.innerHTML = '✕';
-        closeButton.style.display = 'none'; 
+        closeButton.style.display = 'none';
         iframeContainer.appendChild(closeButton);
 
         // Position the close button
