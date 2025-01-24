@@ -1,0 +1,11 @@
+{
+    "settings": { "message": "设置" },
+    "shortcutLabel": { "message": "键盘快捷键" },
+    "footerText": { "message": "由 Creos 用 <span class=\"heart\">❤</span> 制作" },
+    "shortcutInfo": { "message": "点击设置图标在 Chrome 的键盘快捷键页面更改快捷键。<br> 推荐：ALT + Q / ⌘ + Q" },
+    "language": { "message": "语言" },
+    "toggleExtension": { "message": "扩展程序开/关" },
+    "splitView": { "message": "分屏视图" },
+    "customizeNavigation": { "message": "自定义导航" },
+    "appDescription": { "message": "通过侧边栏轻松访问 AI 网站" }
+} 

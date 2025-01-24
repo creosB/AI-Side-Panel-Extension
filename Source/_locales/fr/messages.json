@@ -1,0 +1,12 @@
+{
+    "extensionName": { "message": "Panneau Latéral IA" },
+    "settings": { "message": "Paramètres" },
+    "shortcutLabel": { "message": "Raccourci Clavier" },
+    "footerText": { "message": "Fait avec <span class=\"heart\">❤</span> par Creos" },
+    "shortcutInfo": { "message": "Cliquez sur l'icône des paramètres pour modifier le raccourci clavier dans la page des raccourcis Chrome. <br> Recommandé: ALT + Q / ⌘ + Q" },
+    "language": { "message": "Langue" },
+    "toggleExtension": { "message": "Extension Ouvrir/Fermer" },
+    "splitView": { "message": "Vue divisée" },
+    "customizeNavigation": { "message": "Personnalisation de la navigation" },
+    "appDescription": { "message": "Accès facile aux sites de IA via le panneau latéral" }
+} 

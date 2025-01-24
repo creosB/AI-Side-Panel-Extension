@@ -1,0 +1,11 @@
+{
+    "settings": { "message": "Настройки" },
+    "shortcutLabel": { "message": "Сочетание Клавиш" },
+    "footerText": { "message": "Сделано с <span class=\"heart\">❤</span> от Creos" },
+    "shortcutInfo": { "message": "Нажмите на значок настроек, чтобы изменить сочетание клавиш на странице сочетаний клавиш Chrome. <br> Рекомендуется: ALT + Q / ⌘ + Q" },
+    "language": { "message": "Язык" },
+    "toggleExtension": { "message": "Расширение Вкл/Выкл" },
+    "splitView": { "message": "Разделенный вид" },
+    "customizeNavigation": { "message": "Настройка навигации" },
+    "appDescription": { "message": "Легко доступ к сайтам AI через боковой панель" }
+}

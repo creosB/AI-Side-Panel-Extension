@@ -8,8 +8,8 @@
     "declarativeNetRequestFeedback",
     "commands"
   ],
-  "description": "Easily access AI sites via side panel",
-  "version": "0.0.6",
+  "description": "__MSG_appDescription__",
+  "version": "0.0.7",
   "side_panel": {
     "default_path": "sidepanel.html"
   },
@@ -25,7 +25,7 @@
   "web_accessible_resources": [
     {
       "matches": ["<all_urls>"],
-      "resources": ["sidepanel.html", "content.js"],
+      "resources": ["sidepanel.html"],
       "use_dynamic_url": true
     }
   ],
@@ -39,5 +39,6 @@
         "mac": "Command+Q"
       }
     }
-  }
+  },
+  "default_locale": "en"
 }

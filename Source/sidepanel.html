@@ -131,7 +131,7 @@
               d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4ZM4 6V18H11V6H4ZM20 18V6H13V18H20Z"
               fill="currentColor" />
           </svg>
-          <span>Split View</span>
+          <span data-i18n="splitView"></span>
         </button>
         <button class="btn settings-btn" id="support-btn">
           <svg
@@ -141,7 +141,7 @@
             <path
               d="M480-80q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q104-33 172-132t68-220v-189l-240-90-240 90v189q0 121 68 220t172 132Zm0-316Z" />
           </svg>
-          <span>Settings</span>
+          <span data-i18n="settings"></span>
         </button>
       </nav>
       <main class="content">
@@ -154,7 +154,7 @@
           <h1 class="gradient-text">AI Side Panel</h1>
           <img src="images/icon.png" alt="Logo" class="logo" />
           <div class="toggle-container">
-            <h3>Customize Navigation</h3>
+            <h3 data-i18n="customizeNavigation"></h3>
             <div class="toggle-item">
               <span>ChatGPT</span>
               <label class="switch">
@@ -191,7 +191,7 @@
               </label>
             </div>
             <div class="toggle-item">
-              <span>Split View</span>
+              <span data-i18n="splitView"></span>
               <label class="switch">
                 <input type="checkbox" id="toggle-split-view" checked>
                 <span class="slider"></span>
@@ -199,9 +199,9 @@
             </div>
           </div>
           <div class="shortcut-container">
-            <h3>Keyboard Shortcut</h3>
+            <h3 data-i18n="shortcutLabel"></h3>
             <div class="shortcut-item">
-              <span>Toggle Extension</span>
+              <span data-i18n="toggleExtension" style="margin-right: 10px"></span>
               <div class="shortcut-input-wrapper">
                 <input type="text" id="shortcut-input" value="Alt+Q" readonly>
                 <button id="change-shortcut" class="shortcut-button"
@@ -214,10 +214,28 @@
                 </button>
               </div>
             </div>
-            <p class="shortcut-info">Click the settings icon to change the
-              keyboard shortcut in Chrome's keyboard shortcuts page. <br>
-              Recommended: ALT + Q / ⌘ + Q</p>
+            <p class="shortcut-info" data-i18n="shortcutInfo"></p>
           </div>
+
+          <div class="shortcut-container">
+            <h3 data-i18n="language" data-i18n-fallback="Language"></h3>
+            <div class="select-wrapper">
+              <select id="language-select">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="ru">Русский</option>
+                <option value="zh_CN">中文</option>
+                <option value="tr">Türkçe</option>
+              </select>
+              <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24">
+                <path d="M7 10l5 5 5-5z" fill="currentColor" />
+              </svg>
+            </div>
+          </div>
+
           <div class="buttons-container">
             <a class="social-button" data-social="github"
               href="https://github.com/creosb" target="_blank"
@@ -277,10 +295,7 @@
             </a>
           </div>
           <div class="footer">
-
-            <p class="footer-text">
-              Made with <span class="heart">❤</span> by Creos
-            </p>
+            <p class="footer-text" data-i18n="footerText"></p>
           </div>
           <script src="sidepanel.js"></script>
         </div>
