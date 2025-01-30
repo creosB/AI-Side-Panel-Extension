@@ -9,7 +9,7 @@
     "commands"
   ],
   "description": "__MSG_appDescription__",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "side_panel": {
     "default_path": "sidepanel.html"
   },

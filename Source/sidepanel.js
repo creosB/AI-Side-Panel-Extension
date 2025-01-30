@@ -1,36 +1,63 @@
+function toggleLoadingState(show) {
+  const loadingSpinner = document.querySelector('.loading-spinner');
+  const iframe = document.getElementById('main-iframe');
+  loadingSpinner.style.display = show ? 'block' : 'none';
+  iframe.style.display = show ? 'none' : 'block';
+}
+
 function setLanguage() {
-  const languageSelect = document.getElementById('language-select');
-  const storedLanguage = localStorage.getItem('selectedLanguage');
-  const userLanguage = storedLanguage || languageSelect.value || navigator.language || navigator.userLanguage;
+  return new Promise((resolve) => {
+    const languageSelect = document.getElementById('language-select');
+    const storedLanguage = localStorage.getItem('selectedLanguage');
+    const userLanguage = storedLanguage || languageSelect.value || navigator.language || navigator.userLanguage;
 
-  // Set the dropdown to the stored language
-  if (storedLanguage) {
-    languageSelect.value = storedLanguage;
-  }
+    // Set the dropdown to the stored language
+    if (storedLanguage) {
+      languageSelect.value = storedLanguage;
+    }
 
-  // Load the appropriate language file
-  fetch(`_locales/${userLanguage}/messages.json`)
-    .then(response => response.json())
-    .then(messages => {
-      document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (messages[key]) {
-          element.innerHTML = messages[key].message;
-        }
+    // Load the appropriate language file
+    fetch(`_locales/${userLanguage}/messages.json`)
+      .then(response => response.json())
+      .then(messages => {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+          const key = element.getAttribute('data-i18n');
+          if (messages[key]) {
+            element.innerHTML = messages[key].message;
+          }
+        });
+        resolve(); // Resolve the promise after translations are done
+      })
+      .catch(error => {
+        console.error('Error loading language file:', error);
+        resolve(); // Resolve even on error to continue initialization
       });
-    })
-    .catch(error => console.error('Error loading language file:', error));
+  });
 }
 
 function loadInitialUrl() {
-  // Get the first visible button based on both order and visibility
+  const iframe = document.getElementById('main-iframe');
   const firstVisibleButton = document.querySelector('.btn[data-url]:not([style*="display: none"])');
+  const defaultUrl = 'https://chat.openai.com/';
+
+  // Show loading state immediately
+  toggleLoadingState(true);
+
+  // Set up load handler before setting src
+  const handleLoad = () => {
+    toggleLoadingState(false);
+    iframe.removeEventListener('load', handleLoad);
+  };
+
+  iframe.addEventListener('load', handleLoad);
+  
+  // Set the URL (either from visible button or default)
+  const url = firstVisibleButton ? firstVisibleButton.getAttribute('data-url') : defaultUrl;
+  iframe.src = url;
+
+  // Add active class to the first visible button if it exists
   if (firstVisibleButton) {
-    const url = firstVisibleButton.getAttribute('data-url');
-    iframe.src = url;
-    // Remove active class from all buttons
-    buttons.forEach(btn => btn.classList.remove('active'));
-    // Add active class to first visible button
+    document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
     firstVisibleButton.classList.add('active');
   }
 }
@@ -477,18 +504,75 @@ function initializeSplitView() {
   });
 }
 
+function initializeLoadingState() {
+  const loadingSpinner = document.querySelector('.loading-spinner');
+  const iframe = document.getElementById('main-iframe');
+  
+  if (!loadingSpinner || !iframe) return;
+  
+  // Show spinner and hide iframe immediately
+  toggleLoadingState(true);
+}
+
 function handleEvent() {
-  // First define global variables
+  // Initialize loading state first
+  initializeLoadingState();
+
+  // Define global variables
   window.buttons = document.querySelectorAll('.btn[data-url]');
-  window.iframe = document.querySelector('iframe');
+  window.iframe = document.getElementById('main-iframe');
   window.supportBtn = document.getElementById('support-btn');
   window.supportPage = document.getElementById('support-page');
 
-  // Call functions in the desired order
-  setLanguage();
-  loadInitialUrl();
+  // Add click handlers for buttons with loading state
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+      const url = this.getAttribute('data-url');
+      
+      // Show loading spinner and hide iframe
+      toggleLoadingState(true);
+
+      // Set up one-time load handler for this navigation
+      const handleLoad = () => {
+        toggleLoadingState(false);
+        iframe.removeEventListener('load', handleLoad);
+      };
+      
+      iframe.addEventListener('load', handleLoad);
+      
+      // Set new URL
+      iframe.src = url;
+      supportPage.style.display = 'none';
+
+      // Update active button state
+      buttons.forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Handle support button click with loading state
+  supportBtn.addEventListener('click', function() {
+    toggleLoadingState(false); // Hide spinner for support page
+    iframe.style.display = 'none';
+    supportPage.style.display = 'flex';
+
+    buttons.forEach(btn => btn.classList.remove('active'));
+    this.classList.add('active');
+  });
+
+  // Initialize other components
+  setLanguage()
+    .then(() => {
+      initializeToggles();
+      loadInitialUrl();
+    })
+    .catch(error => {
+      console.error('Error in initialization:', error);
+      initializeToggles();
+      loadInitialUrl();
+    });
+
   initializeDragAndDrop();
-  initializeToggles();
   initializeSplitView();
   initializeShortcutSettings();
 }
@@ -569,5 +653,4 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   handleEvent();
 });
-
 
