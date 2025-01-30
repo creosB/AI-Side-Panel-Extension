@@ -1,7 +1,7 @@
 
 # AI Side Panel Extension
 
-![Artists Company](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/1.png)
+![Artists Company](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/EN/EN_Marquee_Promo.png)
 
 ## Overview
 
@@ -37,13 +37,13 @@ The **AI Side Panel Extension** for Chrome provides an easy and convenient way t
    - Or use the keyboard shortcut `ALT + Q` to open/close the side panel.
 
 ## Screenshots
-Gemini            |  Chatgpt
+1          |  2
 :-------------------------:|:-------------------------:
-![ChatGPT](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/2.png) | ![Gemini](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/3.png)
-Claude            |  Copilot
-![Claude](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/4.png) | ![Copilot](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/5.png)
-Split Screen            |  Settings       
-![SplitScreenView](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/7.png) | ![Settings](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/6.png)
+![1](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/EN/EN_Screen1.png) | ![2](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/EN/EN_Screen2.png)
+3            |  4
+![3](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/EN/EN_Screen3.png) | ![4](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/EN/EN_Screen4.png)
+5           |         
+![5](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/EN/EN_Screen5.png) | 
 
 ## Video
 [![Youtube](http://img.youtube.com/vi/IXg5vbPg-i0/0.jpg)](https://youtu.be/IXg5vbPg-i0)
