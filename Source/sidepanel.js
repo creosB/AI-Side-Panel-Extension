@@ -38,7 +38,7 @@ function setLanguage() {
 function loadInitialUrl() {
   const iframe = document.getElementById('main-iframe');
   const firstVisibleButton = document.querySelector('.btn[data-url]:not([style*="display: none"])');
-  const defaultUrl = 'https://chat.openai.com/';
+  const defaultUrl = "chatgpt.com";
 
   // Show loading state immediately
   toggleLoadingState(true);
@@ -64,11 +64,12 @@ function loadInitialUrl() {
 
 function initializeToggles() {
   const toggles = {
-    'chatgpt': '[data-url*="chat.openai.com"]',
+    'chatgpt': '[data-url*="chatgpt.com"]',
     'gemini': '[data-url*="gemini.google.com"]',
     'claude': '[data-url*="claude.ai"]',
     'copilot': '[data-url*="copilot.microsoft.com"]',
     'deepseek': '[data-url*="chat.deepseek.com"]',
+    'grok': '[data-url*="grok.com"]',
     'split-view': '#split-view-btn'
   };
 
@@ -601,21 +602,22 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.toggle-item input[type="checkbox"]')
       ).filter(t => {
         const toggleService = t.id.replace('toggle-', '');
-        return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek'].includes(toggleService);
+        return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok'].includes(toggleService);
       }).length;
 
       // Prevent disabling last service
-      if (!this.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek'].includes(service)) {
+      if (!this.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok'].includes(service)) {
         this.checked = true;
         return;
       }
 
       const selector = {
-        'chatgpt': '[data-url*="chat.openai.com"]',
+        'chatgpt': '[data-url*="chatgpt.com"]',
         'gemini': '[data-url*="gemini.google.com"]',
         'claude': '[data-url*="claude.ai"]',
         'copilot': '[data-url*="copilot.microsoft.com"]',
         'deepseek': '[data-url*="chat.deepseek.com"]',
+        'grok': '[data-url*="grok.com"]',
         'split-view': '#split-view-btn'
       }[service];
 
