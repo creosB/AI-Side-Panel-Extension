@@ -70,13 +70,20 @@ function initializeToggles() {
     'copilot': '[data-url*="copilot.microsoft.com"]',
     'deepseek': '[data-url*="chat.deepseek.com"]',
     'grok': '[data-url*="grok.com"]',
+    'mistral': '[data-url*="chat.mistral.ai/chat"]',
+    'perplexity': '[data-url*="perplexity.ai"]',
     'split-view': '#split-view-btn'
   };
 
   Object.entries(toggles).forEach(([key, selector]) => {
-    const isVisible = localStorage.getItem(`show_${key}`) !== 'false';
     const toggle = document.getElementById(`toggle-${key}`);
     const button = document.querySelector(selector);
+    
+    // Get the stored value if it exists
+    const storedValue = localStorage.getItem(`show_${key}`);
+    
+    // Use stored value if it exists, otherwise use the checkbox's default checked state
+    const isVisible = storedValue !== null ? storedValue === 'true' : toggle?.checked || false;
 
     if (toggle) {
       toggle.checked = isVisible;
@@ -602,11 +609,11 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.toggle-item input[type="checkbox"]')
       ).filter(t => {
         const toggleService = t.id.replace('toggle-', '');
-        return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok'].includes(toggleService);
+        return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity'].includes(toggleService);
       }).length;
 
       // Prevent disabling last service
-      if (!this.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok'].includes(service)) {
+      if (!this.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity'].includes(service)) {
         this.checked = true;
         return;
       }
@@ -618,6 +625,8 @@ document.addEventListener('DOMContentLoaded', function () {
         'copilot': '[data-url*="copilot.microsoft.com"]',
         'deepseek': '[data-url*="chat.deepseek.com"]',
         'grok': '[data-url*="grok.com"]',
+        'mistral': '[data-url*="chat.mistral.ai/chat"]',
+        'perplexity': '[data-url*="perplexity.ai"]',
         'split-view': '#split-view-btn'
       }[service];
 
@@ -655,4 +664,3 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   handleEvent();
 });
-
