@@ -56,9 +56,22 @@
             style="flex:none;line-height:1; filter: brightness(0) invert(1); width: 20px; height: 20px;" />
           <span>Perplexity</span>
         </button>
+        <button class="btn" data-url="https://chat.qwen.ai/"
+          draggable="true">
+          <img src="logos/qwen.svg" alt="Qwen Icon" draggable="true"
+            style="flex:none;line-height:1; filter: brightness(0) invert(1); width: 20px; height: 20px;" />
+          <span>Qwen</span>
+        </button>
+        <button class="btn" data-url="https://github.com/copilot"
+          draggable="true">
+          <img src="logos/githubcopilot.svg" alt="Github Copilot Icon" draggable="true"
+            style="flex:none;line-height:1; filter: brightness(0) invert(1); width: 20px; height: 20px;" />
+          <span>Github Copilot</span>
+        </button>
         <button id="split-view-btn" class="btn" title="Split View"
           draggable="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" draggable="true"
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+            draggable="true"
             xmlns="http://www.w3.org/2000/svg">
             <path
               d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4ZM4 6V18H11V6H4ZM20 18V6H13V18H20Z"
@@ -142,6 +155,20 @@
               <span>Perplexity</span>
               <label class="switch">
                 <input type="checkbox" id="toggle-perplexity">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="toggle-item">
+              <span>Qwen</span>
+              <label class="switch">
+                <input type="checkbox" id="toggle-qwen">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="toggle-item">
+              <span>Github Copilot</span>
+              <label class="switch">
+                <input type="checkbox" id="toggle-githubcopilot">
                 <span class="slider"></span>
               </label>
             </div>
@@ -253,7 +280,7 @@
           <div class="footer">
             <p class="footer-text" data-i18n="footerText"></p>
           </div>
-          <script src="sidepanel.js"></script>       
+          <script src="sidepanel.js"></script>
         </div>
       </main>
     </div>

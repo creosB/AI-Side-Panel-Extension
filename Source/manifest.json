@@ -9,7 +9,7 @@
     "commands"
   ],
   "description": "__MSG_appDescription__",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "side_panel": {
     "default_path": "sidepanel.html"
   },
@@ -36,7 +36,7 @@
       "description": "Shortcut for execute extension",
       "suggested_key": {
         "default": "Alt+Q",
-        "mac": "Command+Q"
+        "mac": "Command+Shift+A"
       }
     }
   },

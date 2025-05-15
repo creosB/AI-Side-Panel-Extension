@@ -50,7 +50,7 @@ function loadInitialUrl() {
   };
 
   iframe.addEventListener('load', handleLoad);
-  
+
   // Set the URL (either from visible button or default)
   const url = firstVisibleButton ? firstVisibleButton.getAttribute('data-url') : defaultUrl;
   iframe.src = url;
@@ -72,16 +72,18 @@ function initializeToggles() {
     'grok': '[data-url*="grok.com"]',
     'mistral': '[data-url*="chat.mistral.ai/chat"]',
     'perplexity': '[data-url*="perplexity.ai"]',
+    'qwen': '[data-url*="chat.qwen.ai"]',
+    'githubcopilot': '[data-url*="github.com/copilot"]',
     'split-view': '#split-view-btn'
   };
 
   Object.entries(toggles).forEach(([key, selector]) => {
     const toggle = document.getElementById(`toggle-${key}`);
     const button = document.querySelector(selector);
-    
+
     // Get the stored value if it exists
     const storedValue = localStorage.getItem(`show_${key}`);
-    
+
     // Use stored value if it exists, otherwise use the checkbox's default checked state
     const isVisible = storedValue !== null ? storedValue === 'true' : toggle?.checked || false;
 
@@ -425,7 +427,7 @@ function initializeSplitView() {
       // Create second iframe with proper attributes and more secure sandbox
       const secondIframe = document.createElement('iframe');
       secondIframe.id = 'second-iframe';
- 
+
 
       // Create drop target first
       const dropTarget = document.createElement('div');
@@ -515,9 +517,9 @@ function initializeSplitView() {
 function initializeLoadingState() {
   const loadingSpinner = document.querySelector('.loading-spinner');
   const iframe = document.getElementById('main-iframe');
-  
+
   if (!loadingSpinner || !iframe) return;
-  
+
   // Show spinner and hide iframe immediately
   toggleLoadingState(true);
 }
@@ -534,9 +536,9 @@ function handleEvent() {
 
   // Add click handlers for buttons with loading state
   buttons.forEach(button => {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
       const url = this.getAttribute('data-url');
-      
+
       // Show loading spinner and hide iframe
       toggleLoadingState(true);
 
@@ -545,9 +547,9 @@ function handleEvent() {
         toggleLoadingState(false);
         iframe.removeEventListener('load', handleLoad);
       };
-      
+
       iframe.addEventListener('load', handleLoad);
-      
+
       // Set new URL
       iframe.src = url;
       supportPage.style.display = 'none';
@@ -559,7 +561,7 @@ function handleEvent() {
   });
 
   // Handle support button click with loading state
-  supportBtn.addEventListener('click', function() {
+  supportBtn.addEventListener('click', function () {
     toggleLoadingState(false); // Hide spinner for support page
     iframe.style.display = 'none';
     supportPage.style.display = 'flex';
@@ -609,11 +611,11 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.toggle-item input[type="checkbox"]')
       ).filter(t => {
         const toggleService = t.id.replace('toggle-', '');
-        return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity'].includes(toggleService);
+        return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'githubcopilot'].includes(toggleService);
       }).length;
 
       // Prevent disabling last service
-      if (!this.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity'].includes(service)) {
+      if (!this.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'githubcopilot'].includes(service)) {
         this.checked = true;
         return;
       }
@@ -627,6 +629,8 @@ document.addEventListener('DOMContentLoaded', function () {
         'grok': '[data-url*="grok.com"]',
         'mistral': '[data-url*="chat.mistral.ai/chat"]',
         'perplexity': '[data-url*="perplexity.ai"]',
+        'qwen': '[data-url*="chat.qwen.ai"]',
+        'githubcopilot': '[data-url*="github.com/copilot"]',
         'split-view': '#split-view-btn'
       }[service];
 

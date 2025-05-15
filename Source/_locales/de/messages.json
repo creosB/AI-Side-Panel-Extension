@@ -2,7 +2,7 @@
     "settings": { "message": "Einstellungen" },
     "shortcutLabel": { "message": "Tastenkombination" },
     "footerText": { "message": "Mit <span class=\"heart\">❤</span> erstellt von Creos" },
-    "shortcutInfo": { "message": "Klicken Sie auf das Einstellungssymbol, um die Tastenkombination auf der Chrome-Tastenkombinationsseite zu ändern. <br> Empfohlen: ALT + Q / ⌘ + Q" },
+    "shortcutInfo": { "message": "Klicken Sie auf das Einstellungssymbol, um die Tastenkombination auf der Chrome-Tastenkombinationsseite zu ändern. <br> Empfohlen: ALT + Q / ⌘ + Shift + Q" },
     "language": { "message": "Sprache" },
     "toggleExtension": { "message": "Erweiterung Öffnen/Schließen" },
     "splitView": { "message": "Geteilte Ansicht" },

@@ -2,7 +2,7 @@
     "settings": { "message": "Ayarlar" },
     "shortcutLabel": { "message": "Klavye Kısayolu" },
     "footerText": { "message": "Creos tarafından <span class=\"heart\">❤</span> ile yapıldı" },
-    "shortcutInfo": { "message": "Klavye kısayolunu Chrome'un kısayol tuşları sayfasında değiştirmek için ayarlar simgesine tıklayın.<br>Önerilen: ALT + Q / ⌘ + Q" },
+    "shortcutInfo": { "message": "Klavye kısayolunu Chrome'un kısayol tuşları sayfasında değiştirmek için ayarlar simgesine tıklayın.<br>Önerilen: ALT + Q / ⌘ + Shift + Q" },
     "language": { "message": "Dil" },
     "toggleExtension": { "message": "Uzantıyı Aç/Kapat" },
     "splitView": { "message": "Bölünmüş Görünüm" },

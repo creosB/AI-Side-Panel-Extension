@@ -5,7 +5,7 @@
     "message": "Made with <span class=\"heart\">❤</span> by Creos"
   },
   "shortcutInfo": {
-    "message": "Click the settings icon to change the keyboard shortcut in Chrome's keyboard shortcuts page. <br> Recommended: ALT + Q / ⌘ + Q"
+    "message": "Click the settings icon to change the keyboard shortcut in Chrome's keyboard shortcuts page. <br> Recommended: ALT + Q / ⌘ + Shift + Q"
   },
   "language": { "message": "Language" },
   "toggleExtension": { "message": "Extension Open/Close" },

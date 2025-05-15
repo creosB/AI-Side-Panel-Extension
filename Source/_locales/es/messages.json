@@ -2,7 +2,7 @@
     "settings": { "message": "Configuración" },
     "shortcutLabel": { "message": "Atajo de Teclado" },
     "footerText": { "message": "Hecho con <span class=\"heart\">❤</span> por Creos" },
-    "shortcutInfo": { "message": "Haga clic en el icono de configuración para cambiar el atajo de teclado en la página de atajos de Chrome. <br> Recomendado: ALT + Q / ⌘ + Q" },
+    "shortcutInfo": { "message": "Haga clic en el icono de configuración para cambiar el atajo de teclado en la página de atajos de Chrome. <br> Recomendado: ALT + Q / ⌘ + Shift + Q" },
     "language": { "message": "Idioma" },
     "toggleExtension": { "message": "Extensión Abrir/Cerrar" },
     "splitView": { "message": "Vista dividida" },
