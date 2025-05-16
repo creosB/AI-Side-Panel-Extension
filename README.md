@@ -5,7 +5,7 @@
 
 ## Overview
 
-The **AI Side Panel Extension** for Chrome provides an easy and convenient way to access your favorite AI sites, such as Gemini, ChatGPT, Claude, Copilot, DeepSeek, Grok, Mistral, and Perplexity directly from the Chrome side panel. With quick access via the extension icon or a customizable keyboard shortcut, this extension enhances your productivity and makes engaging with AI tools seamless.
+The **AI Side Panel Extension** for Chrome provides an easy and convenient way to access your favorite AI sites, such as Gemini, ChatGPT, Claude, Copilot, DeepSeek, Grok, Mistral, Qwen, Github Copilot and Perplexity directly from the Chrome side panel. With quick access via the extension icon or a customizable keyboard shortcut, this extension enhances your productivity and makes engaging with AI tools seamless.
 
 
 [![Chrome](https://raw.githubusercontent.com/creosB/creosB/refs/heads/main/assets/Chrome%20Web%20Store.svg)](https://chromewebstore.google.com/detail/ai-side-panel/icapcpllhdnnpcmfdcgpnbgchfenmjmg)
