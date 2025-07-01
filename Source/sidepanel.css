@@ -779,3 +779,20 @@ select option:checked {
     transform: rotate(360deg);
   }
 }
+
+/* Test star icon for update verification */
+.test-star {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  z-index: 1001;
+  cursor: pointer;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+}
+
+.test-star:hover {
+  transform: translateX(-50%) scale(1.1);
+}
