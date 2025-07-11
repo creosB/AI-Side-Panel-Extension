@@ -13,5 +13,10 @@
     "add": { "message": "Ajouter" },
     "deleteConfirmation": {
         "message": "Êtes-vous sûr de vouloir supprimer \"$1\"?"
-    }
+    },
+    "supportTitle": { "message": "Nous Avons Besoin de Votre Soutien" },
+    "supportDescription": {
+        "message": "Créé avec ❤️ et d'innombrables heures de dévouement. Votre soutien nous aide à continuer à créer des outils incroyables pour tous."
+    },
+    "supportButton": { "message": "Offrez-moi un Café" }
 }

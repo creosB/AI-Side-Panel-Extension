@@ -16,11 +16,14 @@
 /* 5. UI components */
 @import './styles/components.css';
 
-/* 6. Split view functionality */
+/* 6. Support message component */
+@import './styles/support-message.css';
+
+/* 7. Split view functionality */
 @import './styles/splitview.css';
 
-/* 7. Animations */
+/* 8. Animations */
 @import './styles/animations.css';
 
-/* 8. Accessibility (should be last to override if needed) */
+/* 9. Accessibility (should be last to override if needed) */
 @import './styles/accessibility.css';

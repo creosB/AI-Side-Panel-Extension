@@ -12,5 +12,10 @@
     "add": { "message": "添加" },
     "deleteConfirmation": {
         "message": "您确定要删除 \"$1\" 吗？"
-    }
+    },
+    "supportTitle": { "message": "我们需要您的支持" },
+    "supportDescription": {
+        "message": "用 ❤️ 和无数小时的专注创造。您的支持帮助我们继续为每个人构建令人惊叹的工具。"
+    },
+    "supportButton": { "message": "请我喝咖啡" }
 }

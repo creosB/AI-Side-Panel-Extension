@@ -12,5 +12,10 @@
     "add": { "message": "Ekle" },
     "deleteConfirmation": {
         "message": "\"$1\" öğesini silmek istediğinizden emin misiniz?"
-    }
+    },
+    "supportTitle": { "message": "Desteğinize İhtiyacımız Var" },
+    "supportDescription": {
+        "message": "❤️ ve sayısız saatlik özveri ile yaratıldı. Desteğiniz, herkes için harika araçlar oluşturmaya devam etmemize yardımcı oluyor."
+    },
+    "supportButton": { "message": "Bana Kahve Ismarla" }
 }

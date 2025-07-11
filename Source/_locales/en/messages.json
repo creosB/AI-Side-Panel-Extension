@@ -18,5 +18,10 @@
   "add": { "message": "Add" },
   "deleteConfirmation": {
     "message": "Are you sure you want to delete \"$1\"?"
-  }
+  },
+  "supportTitle": { "message": "We Need Your Support" },
+  "supportDescription": {
+    "message": "Created with ❤️ and countless hours of dedication. Your support helps us continue building amazing tools for everyone."
+  },
+  "supportButton": { "message": "Buy Me a Coffee" }
 }

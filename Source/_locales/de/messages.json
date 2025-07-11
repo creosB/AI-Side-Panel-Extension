@@ -12,5 +12,10 @@
     "add": { "message": "Hinzufügen" },
     "deleteConfirmation": {
         "message": "Möchten Sie \"$1\" wirklich löschen?"
-    }
+    },
+    "supportTitle": { "message": "Wir Brauchen Ihre Unterstützung" },
+    "supportDescription": {
+        "message": "Mit ❤️ und unzähligen Stunden Hingabe erstellt. Ihre Unterstützung hilft uns dabei, weiterhin fantastische Tools für alle zu entwickeln."
+    },
+    "supportButton": { "message": "Kaufen Sie mir einen Kaffee" }
 }
