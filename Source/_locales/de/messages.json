@@ -7,5 +7,10 @@
     "toggleExtension": { "message": "Erweiterung Öffnen/Schließen" },
     "splitView": { "message": "Geteilte Ansicht" },
     "customizeNavigation": { "message": "Navigation anpassen" },
-    "appDescription": { "message": "Einfach AI-Sites über den Seitenbereich zugänglich machen" }
-} 
+    "appDescription": { "message": "Greifen Sie einfach über das Seitenpanel auf KI-Websites zu" },
+    "customLinks": { "message": "Benutzerdefinierte Links" },
+    "add": { "message": "Hinzufügen" },
+    "deleteConfirmation": {
+        "message": "Möchten Sie \"$1\" wirklich löschen?"
+    }
+}

@@ -13,5 +13,10 @@
   "customizeNavigation": { "message": "Customize Navigation" },
   "appDescription": {
     "message": "Easily access AI sites via side panel"
+  },
+  "customLinks": { "message": "Custom Links" },
+  "add": { "message": "Add" },
+  "deleteConfirmation": {
+    "message": "Are you sure you want to delete \"$1\"?"
   }
 }

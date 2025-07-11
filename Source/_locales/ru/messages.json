@@ -7,5 +7,10 @@
     "toggleExtension": { "message": "Расширение Вкл/Выкл" },
     "splitView": { "message": "Разделенный вид" },
     "customizeNavigation": { "message": "Настройка навигации" },
-    "appDescription": { "message": "Легко доступ к сайтам AI через боковой панель" }
+    "appDescription": { "message": "Легкий доступ к сайтам с искусственным интеллектом через боковую панель" },
+    "customLinks": { "message": "Пользовательские ссылки" },
+    "add": { "message": "Добавить" },
+    "deleteConfirmation": {
+        "message": "Вы уверены, что хотите удалить \"$1\"?"
+    }
 }

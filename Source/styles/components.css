@@ -1,0 +1,247 @@
+/* UI Components - Premium Animation System */
+.support-page {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  background-color: var(--bg-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  opacity: 1;
+  transform: translateY(0);
+  transition: 
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.support-page.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ensure all text elements in support page are visible */
+.support-page * {
+  color: var(--text-color);
+}
+
+.support-page h1,
+.support-page h2,
+.support-page h3,
+.support-page span,
+.support-page p,
+.support-page div {
+  color: var(--text-color) !important;
+}
+
+.gradient-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, var(--primary-color), #00ffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  animation: breathe calc(var(--slow-duration) * 2 * var(--motion-duration-multiplier)) var(--ease-in-out-quart) infinite;
+}
+
+.logo {
+  width: 100px;
+  margin-bottom: 1rem;
+  transition: transform calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring);
+}
+
+.logo:hover {
+  transform: scale(calc(1 + 0.05 * var(--motion-scale))) rotate(calc(1deg * var(--motion-scale)));
+}
+
+.toggle-container,
+.custom-links-container,
+.shortcut-container {
+  width: 100%;
+  max-width: 300px;
+  background: var(--accent-color);
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 1px solid #333;
+  margin: 1rem 0;
+  transition: 
+    transform calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    border-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.toggle-container:hover,
+.custom-links-container:hover,
+.shortcut-container:hover {
+  transform: translateY(calc(-2px * var(--motion-scale)));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.toggle-container h3,
+.custom-links-container h3,
+.shortcut-container h3 {
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+  text-align: left;
+  transition: color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+#custom-links-list .toggle-item {
+  animation: smooth-fade-in calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring);
+  transform-origin: top;
+}
+
+.custom-link-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle-item,
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  justify-content: space-between;
+  border-radius: 6px;
+  transition: 
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo);
+}
+
+.toggle-item:hover,
+.shortcut-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: translateX(calc(2px * var(--motion-scale)));
+}
+
+.toggle-item span,
+.shortcut-item span {
+  color: #ccc;
+  font-size: 0.9rem;
+  transition: color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+/* Modern toggle switch style with premium animations */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Toggle switch animations */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #444;
+  transition: 
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.slider:hover {
+  box-shadow: 0 0 12px rgba(0, 255, 170, 0.3);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 
+    transform calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+  box-shadow: 0 0 16px rgba(0, 255, 170, 0.4);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.shortcut-info {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.5rem;
+  text-align: left;
+  transition: color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-color);
+  color: var(--bg-color);
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  z-index: 1000;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 255, 170, 0.3);
+  animation: smooth-slide-up calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring);
+}
+
+.footer-text {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #999;
+  transition: color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.footer-text .heart {
+  color: #ff4d4d;
+  animation: subtle-bounce calc(var(--slow-duration) * 2 * var(--motion-duration-multiplier)) var(--ease-in-out-quart) infinite;
+}
+
+/* Premium Loading spinner */
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  z-index: 1000;
+}
+
+.loading-spinner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+  border-top-color: var(--primary-color);
+  animation: smooth-spin calc(var(--slow-duration) * 2 * var(--motion-duration-multiplier)) var(--ease-in-out-quart) infinite;
+  box-shadow: 0 0 12px rgba(0, 255, 170, 0.3);
+}

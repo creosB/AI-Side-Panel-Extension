@@ -1,0 +1,68 @@
+/* CSS Custom Properties and Base Styles */
+:root {
+  --bg-color: #0f0f0f;
+  --text-color: #ffffff;
+  --accent-color: #1e1e1e;
+  --hover-color: #2a2a2a;
+  --primary-color: #00ffaa;
+  
+  /* Animation System - Premium Timing */
+  --spring-duration: 280ms;
+  --quick-duration: 150ms;
+  --standard-duration: 200ms;
+  --slow-duration: 350ms;
+  
+  /* Premium Easing Curves */
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+  --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
+  
+  /* Scroll Enhancement Variables */
+  --scroll-momentum: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --scroll-snap: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-scale: 0;
+    --motion-duration-multiplier: 0.5;
+    --spring-duration: 150ms;
+    --quick-duration: 100ms;
+    --standard-duration: 120ms;
+    --slow-duration: 200ms;
+    --ease-spring: ease-out;
+    --ease-out-quart: ease-out;
+    --ease-out-expo: ease-out;
+    --ease-out-back: ease-out;
+    --ease-in-out-quart: ease-out;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}

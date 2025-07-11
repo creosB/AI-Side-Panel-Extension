@@ -1,0 +1,196 @@
+/* Split View Layout and Resizer - Premium Animation System */
+.content.split-view {
+  flex-direction: row;
+  padding: 10px;
+  gap: 6px;
+}
+
+.content.split-view #main-iframe {
+  width: 50%;
+  height: 100% !important;
+  transition: 
+    width calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring),
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.content.split-view #second-iframe {
+  width: 50%;
+  height: 100% !important;
+  transition: 
+    width calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring),
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+#drop-target {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-color);
+  border: 2px dashed rgba(0, 255, 170, 0.2);
+  border-radius: 12px;
+  gap: 16px;
+  transition: 
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    border-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+#drop-target svg {
+  width: 32px;
+  height: 32px;
+  color: #00ff9d;
+  opacity: 0.8;
+  transition: 
+    transform calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring),
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.drop-target-text {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: 
+    color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo);
+}
+
+.drop-target-subtext {
+  color: #666;
+  font-size: 0.9rem;
+  transition: 
+    color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo);
+}
+
+#drop-target:hover,
+#drop-target.drag-over {
+  background: rgba(0, 255, 170, 0.05);
+  border-color: var(--primary-color);
+  transform: scale(calc(1 + 0.005 * var(--motion-scale)));
+  box-shadow: 
+    0 0 24px rgba(0, 255, 170, 0.3),
+    inset 0 0 24px rgba(0, 255, 170, 0.1);
+}
+
+#drop-target:hover svg,
+#drop-target.drag-over svg {
+  transform: scale(calc(1 + 0.1 * var(--motion-scale))) translateY(calc(-2px * var(--motion-scale)));
+  opacity: 1;
+}
+
+#drop-target:hover .drop-target-text,
+#drop-target.drag-over .drop-target-text {
+  color: var(--primary-color);
+  transform: translateY(calc(-1px * var(--motion-scale)));
+}
+
+#drop-target:hover .drop-target-subtext,
+#drop-target.drag-over .drop-target-subtext {
+  color: #999;
+  transform: translateY(calc(-1px * var(--motion-scale)));
+}
+
+.resizer {
+  width: 6px;
+  height: 100%;
+  background-color: var(--accent-color);
+  position: relative;
+  cursor: col-resize;
+  transition: 
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo);
+  z-index: 10;
+  margin: 0 -3px;
+  border-radius: 3px;
+}
+
+/* Resizer handle with premium animations */
+.resizer::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 80px;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  opacity: 0.5;
+  transition: 
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    width calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo),
+    height calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+/* Active resizer states */
+.resizer:hover::before,
+.resizer.resizing::before {
+  opacity: 1;
+  width: 3px;
+  height: 90px;
+  box-shadow: 0 0 12px rgba(0, 255, 170, 0.4);
+}
+
+/* Resizer hover effect */
+.resizer:hover {
+  background-color: var(--hover-color);
+  transform: scaleX(calc(1 + 0.3 * var(--motion-scale)));
+}
+
+/* Split view container focus states */
+.content.split-view:focus-within .resizer::before {
+  opacity: 0.6;
+}
+
+/* Premium Resizing state */
+.content.split-view.resizing {
+  cursor: col-resize;
+  user-select: none;
+}
+
+.content.split-view.resizing iframe {
+  pointer-events: none;
+  will-change: width;
+  transition: none !important;
+  filter: blur(calc(0.5px * var(--motion-scale)));
+}
+
+.content.split-view.resizing .resizer {
+  background-color: var(--hover-color);
+  box-shadow: 0 0 16px rgba(0, 255, 170, 0.3);
+}
+
+/* Enhanced animations for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #drop-target:hover,
+  #drop-target.drag-over {
+    transform: none;
+  }
+  
+  #drop-target:hover svg,
+  #drop-target.drag-over svg {
+    transform: none;
+  }
+  
+  #drop-target:hover .drop-target-text,
+  #drop-target.drag-over .drop-target-text,
+  #drop-target:hover .drop-target-subtext,
+  #drop-target.drag-over .drop-target-subtext {
+    transform: none;
+  }
+  
+  .resizer:hover {
+    transform: none;
+  }
+  
+  .content.split-view.resizing iframe {
+    filter: none;
+  }
+}

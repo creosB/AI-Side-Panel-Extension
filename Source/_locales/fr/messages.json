@@ -8,5 +8,10 @@
     "toggleExtension": { "message": "Extension Ouvrir/Fermer" },
     "splitView": { "message": "Vue divisée" },
     "customizeNavigation": { "message": "Personnalisation de la navigation" },
-    "appDescription": { "message": "Accès facile aux sites de IA via le panneau latéral" }
-} 
+    "appDescription": { "message": "Accédez facilement aux sites d'IA via le panneau latéral" },
+    "customLinks": { "message": "Liens Personnalisés" },
+    "add": { "message": "Ajouter" },
+    "deleteConfirmation": {
+        "message": "Êtes-vous sûr de vouloir supprimer \"$1\"?"
+    }
+}

@@ -1,0 +1,164 @@
+/* Form Elements - Premium Animation System */
+#custom-link-input,
+#shortcut-input {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: var(--text-color);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: 
+    border-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+#custom-link-input {
+  flex-grow: 1;
+}
+
+#custom-link-input:focus,
+#shortcut-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: #1a1a1a;
+  transform: translateY(calc(-1px * var(--motion-scale)));
+  box-shadow: 
+    0 0 0 2px rgba(0, 255, 170, 0.2),
+    0 4px 12px rgba(0, 255, 170, 0.15);
+}
+
+#custom-link-input:hover,
+#shortcut-input:hover {
+  border-color: #666;
+  transform: translateY(calc(-0.5px * var(--motion-scale)));
+}
+
+#shortcut-input {
+  width: 150px;
+  cursor: pointer;
+}
+
+#shortcut-input.recording {
+  border-color: var(--primary-color);
+  background-color: #1a1a1a;
+  color: var(--primary-color);
+  box-shadow: 0 0 12px rgba(0, 255, 170, 0.3);
+  animation: breathe calc(var(--slow-duration) * var(--motion-duration-multiplier)) var(--ease-in-out-quart) infinite;
+}
+
+.add-link-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.shortcut-input-wrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Premium Language Selector */
+.select-wrapper {
+  position: relative;
+  width: 140px;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  color: #666;
+  transition: 
+    transform calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-back),
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+select {
+  width: 100%;
+  padding: 10px 36px 10px 16px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--accent-color);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    border-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+select:hover {
+  background: var(--hover-color);
+  border-color: rgba(0, 255, 170, 0.3);
+  transform: translateY(calc(-0.5px * var(--motion-scale)));
+  box-shadow: 0 4px 12px rgba(0, 255, 170, 0.15);
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: var(--hover-color);
+  transform: translateY(calc(-1px * var(--motion-scale)));
+  box-shadow: 
+    0 0 0 2px rgba(0, 255, 170, 0.2),
+    0 4px 16px rgba(0, 255, 170, 0.2);
+}
+
+select:hover + .select-arrow {
+  opacity: 1;
+  transform: translateY(-50%) scale(calc(1 + 0.1 * var(--motion-scale)));
+}
+
+select:focus + .select-arrow {
+  opacity: 1;
+  transform: translateY(-50%) rotate(calc(180deg * var(--motion-scale))) scale(calc(1 + 0.1 * var(--motion-scale)));
+}
+
+select option {
+  background: var(--bg-color);
+  color: var(--text-color);
+  padding: 12px;
+  font-size: 0.9rem;
+  border: none;
+  transition: 
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+select option:checked {
+  background: linear-gradient(45deg, var(--primary-color), rgba(0, 255, 170, 0.5));
+  color: var(--bg-color);
+  font-weight: 600;
+}
+
+/* Enhanced form animations for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #custom-link-input:focus,
+  #shortcut-input:focus,
+  select:focus {
+    transform: none;
+  }
+  
+  #shortcut-input.recording {
+    animation: none;
+    box-shadow: 0 0 0 2px var(--primary-color);
+  }
+  
+  select:hover + .select-arrow,
+  select:focus + .select-arrow {
+    transform: translateY(-50%);
+  }
+}

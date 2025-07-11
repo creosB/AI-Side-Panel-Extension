@@ -1,0 +1,218 @@
+/* Layout Components - Premium Animation System */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  padding: 0.5rem;
+  background-color: var(--accent-color);
+  border-bottom: 1px solid var(--primary-color);
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  transition: 
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo);
+}
+
+.toolbar::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--primary-color) 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  transition: opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.toolbar:hover::after {
+  opacity: 1;
+}
+
+.toolbar:hover .toolbar-border {
+  opacity: 1;
+  transform: scaleY(1.5);
+}
+
+.toolbar .btn {
+  cursor: grab;
+  user-select: none;
+}
+
+.toolbar .btn.dragging {
+  opacity: 0.88;
+  cursor: grabbing;
+  transform: scale(calc(1 + 0.02 * var(--motion-scale))) 
+             translateY(calc(-4px * var(--motion-scale)));
+  z-index: 100;
+  background-color: var(--hover-color);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.toolbar .btn.drag-over {
+  border-right: 2px solid var(--primary-color);
+  transform: scale(calc(1 + 0.01 * var(--motion-scale)));
+  background-color: rgba(0, 255, 170, 0.1);
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+}
+
+.content iframe {
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  transition: 
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+/* Premium Frame transitions */
+iframe {
+  flex-grow: 1;
+  width: 100%;
+  border: 0;
+  background-color: var(--bg-color);
+  transition: 
+    opacity calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo),
+    transform calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+iframe.loading {
+  opacity: 0.6;
+  transform: scale(0.998);
+}
+
+/* Ensure proper iframe sizing when not in split view */
+#main-iframe {
+  width: 100%;
+  height: 100%;
+  transition: 
+    width calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring),
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+/* Hide scrollbar for all browsers */
+.toolbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Premium scroll indicators and feedback */
+.toolbar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: linear-gradient(
+    to right,
+    var(--accent-color) 0%,
+    transparent 100%
+  );
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.toolbar.scroll-left::before {
+  opacity: 0.8;
+}
+
+.toolbar::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: linear-gradient(
+    to left,
+    var(--accent-color) 0%,
+    transparent 100%
+  );
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.toolbar.scroll-right::after {
+  opacity: 0.8;
+}
+
+/* Premium scroll progress indicator */
+.toolbar-scroll-indicator {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color) 0%,
+    rgba(0, 255, 170, 0.6) 50%,
+    var(--primary-color) 100%
+  );
+  border-radius: 1px;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: 
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring);
+}
+
+.toolbar.scrolling .toolbar-scroll-indicator {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Enhanced gradient border */
+.toolbar-border {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--primary-color) 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  transition: 
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier))
+}

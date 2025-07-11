@@ -7,5 +7,10 @@
     "toggleExtension": { "message": "Uzantıyı Aç/Kapat" },
     "splitView": { "message": "Bölünmüş Görünüm" },
     "customizeNavigation": { "message": "Navigasyon Özelleştirme" },
-    "appDescription": { "message": "AI sitelerine kolayca erişmek için yan panel" }
-} 
+    "appDescription": { "message": "AI sitelerine kolayca erişmek için yan panel" },
+    "customLinks": { "message": "Özel Bağlantılar" },
+    "add": { "message": "Ekle" },
+    "deleteConfirmation": {
+        "message": "\"$1\" öğesini silmek istediğinizden emin misiniz?"
+    }
+}

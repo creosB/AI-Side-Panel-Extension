@@ -1,0 +1,405 @@
+/* Button Styles and Interactions - Premium Animation System */
+.btn {
+  background-color: transparent;
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transform-origin: center;
+  will-change: transform, opacity;
+  border-radius: 8px;
+  min-width: 60px;
+  max-width: 80px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: 
+    transform calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: 
+    width calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring),
+    transform calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring);
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
+.btn:hover::after {
+  width: 100%;
+}
+
+.btn.active::after {
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+}
+
+.btn svg {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 0.25rem;
+  transition: 
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo);
+}
+
+.btn img {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 0.25rem;
+  flex-shrink: 0;
+  transition: 
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo);
+}
+
+.btn span {
+  font-size: 0.7rem;
+  line-height: 1.2;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 2px;
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+.btn:hover svg {
+  transform: translateY(calc(-2px * var(--motion-scale))) scale(calc(1 + 0.05 * var(--motion-scale)));
+}
+
+.btn:hover img {
+  transform: translateY(calc(-2px * var(--motion-scale))) scale(calc(1 + 0.05 * var(--motion-scale)));
+}
+
+.btn:active svg {
+  transform: translateY(calc(-1px * var(--motion-scale))) scale(calc(1 + 0.02 * var(--motion-scale)));
+}
+
+.btn:active img {
+  transform: translateY(calc(-1px * var(--motion-scale))) scale(calc(1 + 0.02 * var(--motion-scale)));
+}
+
+/* Enhanced Drag and Drop Animations */
+.btn.dragging {
+  opacity: 0.88;
+  cursor: grabbing;
+  transform: scale(calc(1 + 0.02 * var(--motion-scale))) 
+             translateY(calc(-4px * var(--motion-scale)));
+  z-index: 100;
+  background-color: var(--hover-color);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: none; /* Disable transitions while dragging */
+  border-radius: 12px;
+}
+
+.btn.drag-over {
+  position: relative;
+  transform: scale(calc(1 + 0.01 * var(--motion-scale)));
+  transition: transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-spring);
+}
+
+.btn.drag-over::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border: 2px dashed var(--primary-color);
+  border-radius: 12px;
+  opacity: 0.7;
+  pointer-events: none;
+  animation: glow-pulse calc(var(--slow-duration) * 3 * var(--motion-duration-multiplier)) var(--ease-in-out-quart) infinite;
+}
+
+/* Hover effects (disabled during drag) */
+.btn:not(.dragging):hover {
+  transform: translateY(calc(-1px * var(--motion-scale))) scale(calc(1 + 0.01 * var(--motion-scale)));
+  background-color: var(--hover-color);
+  box-shadow: 0 4px 16px rgba(0, 255, 170, 0.15);
+}
+
+.btn:not(.dragging):active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: calc(var(--quick-duration) * 0.5 * var(--motion-duration-multiplier));
+}
+
+/* Smooth reordering animation */
+.toolbar .btn {
+  transition: 
+    transform calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring),
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+/* Disable pointer events on icons during drag */
+.btn.dragging svg,
+.btn.dragging span {
+  pointer-events: none;
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-color);
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.9);
+  transition: 
+    opacity calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo),
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo),
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+/* Only show on parent hover */
+*:hover > .close-button {
+  opacity: 0.7;
+  transform: scale(1);
+}
+
+.close-button:hover {
+  opacity: 1;
+  background-color: var(--hover-color);
+  transform: scale(1.1);
+}
+
+.close-button:active {
+  transform: scale(0.95);
+  transition-duration: calc(var(--quick-duration) * 0.5 * var(--motion-duration-multiplier));
+}
+
+#support-btn:disabled,
+#split-view-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.social-button {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  border: none;
+  background: linear-gradient(120deg, #833ab4, #fd1d1d, #fcb045);
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  transition: 
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-back),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.icon {
+  color: white;
+  width: 30px;
+  height: 30px;
+  z-index: 9;
+  transition: transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo);
+}
+
+.social-button[data-social="github"] {
+  background: black;
+}
+
+.social-button[data-social="x"] {
+  background: #000000;
+}
+
+.social-button[data-social="youtube"] {
+  background: rgb(255, 33, 33);
+}
+
+.social-button[data-social="buymecoffee"] {
+  background: #0d0c22;
+}
+
+.social-button:hover {
+  transform: translateY(calc(-2px * var(--motion-scale))) scale(calc(1 + 0.05 * var(--motion-scale)));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.social-button:hover .icon {
+  transform: scale(calc(1 + 0.1 * var(--motion-scale)));
+}
+
+.social-button:active {
+  transform: scale(0.95);
+  transition-duration: calc(var(--quick-duration) * 0.5 * var(--motion-duration-multiplier));
+}
+
+.social-button::before {
+  content: "";
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  background-color: #212121;
+  border-radius: 50px;
+  z-index: -1;
+  border: 0px solid rgba(255, 255, 255, 0.411);
+  transition: 
+    width calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring),
+    height calc(var(--spring-duration) * var(--motion-duration-multiplier)) var(--ease-spring),
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.social-button:hover::before {
+  width: 0px;
+  height: 0px;
+  opacity: 0;
+}
+
+.buttons-container {
+  display: inline-flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#add-link-btn {
+  background: var(--primary-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: 
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+#add-link-btn:hover {
+  background: #00e699;
+  transform: translateY(calc(-1px * var(--motion-scale))) scale(calc(1 + 0.02 * var(--motion-scale)));
+  box-shadow: 0 4px 16px rgba(0, 230, 153, 0.3);
+}
+
+#add-link-btn:active {
+  transform: scale(0.98);
+  transition-duration: calc(var(--quick-duration) * 0.5 * var(--motion-duration-multiplier));
+}
+
+.delete-link-btn {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: 
+    color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo);
+}
+
+.delete-link-btn:hover {
+  color: #ff4d4d;
+  background: #2a2a2a;
+  transform: scale(calc(1 + 0.05 * var(--motion-scale)));
+}
+
+.delete-link-btn:active {
+  transform: scale(0.95);
+}
+
+.shortcut-button {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: 
+    color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo);
+}
+
+.shortcut-button:hover {
+  color: var(--text-color);
+  background: #2a2a2a;
+  transform: scale(calc(1 + 0.05 * var(--motion-scale)));
+}
+
+.shortcut-button:active {
+  transform: scale(0.95);
+}
+
+/* Custom buttons container alignment */
+#custom-buttons-container {
+  display: contents; /* Makes container transparent to flex layout */
+}
+
+#custom-buttons-container .btn {
+  /* Inherit all button styles but ensure consistent sizing */
+  min-width: 60px;
+  max-width: 80px;
+}
+
+/* Premium scroll-aware button animations */
+.toolbar.scrolling .btn {
+  transition: 
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo),
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.toolbar.scrolling .btn:not(:hover) {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* Enhanced button focus for keyboard navigation */
+.btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  z-index: 20;
+  background-color: rgba(0, 255, 170, 0.05);
+}
+
+.btn:focus-visible::after {
+  width: 100%;
+  background: var(--primary-color);
+  animation: indicator-pulse 1s var(--ease-in-out-quart) infinite;
+}

@@ -1,0 +1,26 @@
+/* Main Sidepanel Styles - Modular CSS Import */
+/* Import all style modules in proper order */
+
+/* 1. Variables and base styles first */
+@import './styles/variables.css';
+
+/* 2. Layout components */
+@import './styles/layout.css';
+
+/* 3. Button styles */
+@import './styles/buttons.css';
+
+/* 4. Form elements */
+@import './styles/forms.css';
+
+/* 5. UI components */
+@import './styles/components.css';
+
+/* 6. Split view functionality */
+@import './styles/splitview.css';
+
+/* 7. Animations */
+@import './styles/animations.css';
+
+/* 8. Accessibility (should be last to override if needed) */
+@import './styles/accessibility.css';

@@ -1,0 +1,98 @@
+/* Accessibility: Premium Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  /* Global motion reduction using CSS custom properties */
+  :root {
+    --motion-scale: 0;
+    --motion-duration-multiplier: 0.3;
+    --spring-duration: 100ms;
+    --quick-duration: 80ms;
+    --standard-duration: 100ms;
+    --slow-duration: 150ms;
+    --ease-spring: ease-out;
+    --ease-out-quart: ease-out;
+    --ease-out-expo: ease-out;
+    --ease-out-back: ease-out;
+    --ease-in-out-quart: ease-out;
+  }
+
+  /* Preserve essential focus indicators and state changes */
+  *:focus {
+    transition: 
+      outline-color 100ms ease-out,
+      box-shadow 100ms ease-out,
+      border-color 100ms ease-out !important;
+  }
+
+  /* Keep functional opacity changes for loading states */
+  iframe.loading,
+  .loading-spinner,
+  .notification {
+    transition: opacity 150ms ease-out !important;
+  }
+
+  /* Ensure toggle switches remain functional */
+  .slider:before {
+    transition: transform 200ms ease-out !important;
+  }
+
+  /* Maintain essential hover feedback with minimal motion */
+  .btn:hover,
+  .social-button:hover,
+  #add-link-btn:hover,
+  .delete-link-btn:hover,
+  .shortcut-button:hover {
+    transition: 
+      background-color 150ms ease-out,
+      color 150ms ease-out,
+      opacity 150ms ease-out !important;
+  }
+
+  /* Preserve focus accessibility */
+  select:focus,
+  #custom-link-input:focus,
+  #shortcut-input:focus {
+    transition: 
+      border-color 150ms ease-out,
+      box-shadow 150ms ease-out !important;
+  }
+
+  /* Maintain resizer functionality */
+  .resizer,
+  .resizer::before {
+    transition: 
+      background-color 150ms ease-out,
+      opacity 150ms ease-out !important;
+  }
+
+  /* Keep split-view layout transitions functional */
+  .content.split-view #main-iframe,
+  .content.split-view #second-iframe {
+    transition: width 200ms ease-out !important;
+  }
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+  :root {
+    --accent-color: #000000;
+    --hover-color: #333333;
+    --primary-color: #00ff00;
+  }
+
+  .btn::after {
+    background: currentColor;
+  }
+
+  .slider {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced transparency for better visibility */
+@media (prefers-contrast: high) {
+  .btn.dragging,
+  #drop-target,
+  .notification {
+    opacity: 1 !important;
+  }
+}
