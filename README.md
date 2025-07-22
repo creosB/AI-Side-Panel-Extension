@@ -20,6 +20,7 @@ The **AI Side Panel Extension** for Chrome provides an easy and convenient way t
 - **Minimal Interface:** Clean, distraction-free design for focused AI interactions.
 - **Support for all popular AI services.**
 - **Effortless drag and drop:** Easily customizable and highly interactive.
+- **Custom Service Support:** You can add any service via the settings menu. Simply copy the site URL.
 
 ## Installation
 
