@@ -6,7 +6,6 @@ export const githubReadmeExtractor = {
   keywords: ['github', 'readme', 'documentation', 'repository', 'docs'],
   
   extract: () => {
-    console.log('Using GitHub README extractor');
     let title = '';
     let content = '';
     
@@ -125,8 +124,8 @@ export const githubReadmeExtractor = {
     }
     
     return { 
-      title: title || 'GitHub Repository', 
-      content: content || 'No README content found' 
+      title: title || chrome.i18n.getMessage('extractionGitHubRepoTitle'), 
+      content: content || chrome.i18n.getMessage('extractionNoContentGitHubReadme') 
     };
   }
 };
@@ -139,7 +138,6 @@ export const githubCodeExtractor = {
   keywords: ['github', 'code', 'programming', 'source', 'technical'],
   
   extract: () => {
-    console.log('Using GitHub Code extractor');
     let title = '';
     let content = '';
     
@@ -152,7 +150,7 @@ export const githubCodeExtractor = {
     } else if (repoNameEl) {
       title = repoNameEl.textContent.trim();
     } else {
-      title = 'GitHub Code';
+      title = chrome.i18n.getMessage('extractionGitHubCodeTitle');
     }
     
     // Extract code from the new GitHub interface
@@ -237,7 +235,7 @@ export const githubCodeExtractor = {
     
     return { 
       title, 
-      content: content || 'No code content found on this page' 
+      content: content || chrome.i18n.getMessage('extractionNoContentGitHubCode') 
     };
   }
 };

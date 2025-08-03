@@ -35,7 +35,6 @@ class SidePanelApp {
   }
 
   async initialize() {
-    console.log('Starting application initialization...');
     
     try {
       // Initialize loading state first
@@ -43,7 +42,6 @@ class SidePanelApp {
 
       // Initialize language and then render components
       await this.settingsManager.setLanguage();
-      console.log('Language initialized, starting custom links initialization...');
       
       // Render custom links first
       this.customLinkManager.renderCustomLinks();
@@ -60,7 +58,6 @@ class SidePanelApp {
       // Initialize support message after everything else is ready
       this.supportMessage.init();
       
-      console.log('Application initialization completed successfully');
       
     } catch (error) {
       console.error('Error in initialization:', error);
@@ -72,7 +69,6 @@ class SidePanelApp {
       this.splitViewManager.initialize();
       this.supportMessage.init();
       
-      console.log('Application initialization completed with errors');
     }
   }
 }

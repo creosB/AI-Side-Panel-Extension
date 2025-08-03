@@ -1,27 +1,149 @@
 {
-  "settings": { "message": "Settings" },
-  "shortcutLabel": { "message": "Keyboard Shortcut" },
+  "settings": {
+    "message": "Settings"
+  },
+  "shortcutLabel": {
+    "message": "Keyboard Shortcut"
+  },
   "footerText": {
     "message": "Made with <span class=\"heart\">❤</span> by Creos"
   },
   "shortcutInfo": {
     "message": "Click the settings icon to change the keyboard shortcut in Chrome's keyboard shortcuts page. <br> Recommended: ALT + Q / ⌘ + Shift + Q"
   },
-  "language": { "message": "Language" },
-  "toggleExtension": { "message": "Extension Open/Close" },
-  "splitView": { "message": "Split View" },
-  "customizeNavigation": { "message": "Customize Navigation" },
+  "language": {
+    "message": "Language"
+  },
+  "toggleExtension": {
+    "message": "Extension Open/Close"
+  },
+  "splitView": {
+    "message": "Split View"
+  },
+  "customizeNavigation": {
+    "message": "Customize Navigation"
+  },
   "appDescription": {
     "message": "Easily access AI sites via side panel"
   },
-  "customLinks": { "message": "Custom Links" },
-  "add": { "message": "Add" },
+  "customLinks": {
+    "message": "Custom Links"
+  },
+  "add": {
+    "message": "Add"
+  },
   "deleteConfirmation": {
     "message": "Are you sure you want to delete \"$1\"?"
   },
-  "supportTitle": { "message": "We Need Your Support" },
+  "supportTitle": {
+    "message": "We Need Your Support"
+  },
   "supportDescription": {
     "message": "Created with ❤️ and countless hours of dedication. Your support helps us continue building amazing tools for everyone."
   },
-  "supportButton": { "message": "Buy Me a Coffee" }
+  "supportButton": {
+    "message": "Buy Me a Coffee"
+  },
+  "extractButton": {
+    "message": "Extract"
+  },
+  "extractButtonTitle": {
+    "message": "Extract and copy content from current page"
+  },
+  "extractButtonExtracting": {
+    "message": "Extracting..."
+  },
+  "extractButtonExtractingTitle": {
+    "message": "Extracting content..."
+  },
+  "extractButtonExtractingAriaLabel": {
+    "message": "Extracting content, please wait..."
+  },
+  "extractionModalTitle": {
+    "message": "Choose Extraction Method"
+  },
+  "extractionModalClose": {
+    "message": "Close"
+  },
+  "extractionSearchPlaceholder": {
+    "message": "Search extractors..."
+  },
+  "extractionSuccessMessage": {
+    "message": "$1 content copied to clipboard!"
+  },
+  "extractionErrorGeneric": {
+    "message": "An error occurred during extraction"
+  },
+  "extractionErrorNoTab": {
+    "message": "No active tab found"
+  },
+  "extractionErrorClipboard": {
+    "message": "Failed to copy to clipboard"
+  },
+  "extractionErrorPermission": {
+    "message": "Permission denied to access page"
+  },
+  "extractionErrorFailed": {
+    "message": "Failed to extract content"
+  },
+  "extractionNoContent": {
+    "message": "No readable content could be extracted from this page."
+  },
+  "extractionNoContentReddit": {
+    "message": "No content could be extracted from this Reddit post."
+  },
+  "extractionNoContentNews": {
+    "message": "No content could be extracted from this news article."
+  },
+  "extractionNoContentLinkedIn": {
+    "message": "No LinkedIn post found on this page."
+  },
+  "extractionNoContentLinkedInPost": {
+    "message": "No content could be extracted from this LinkedIn post."
+  },
+  "extractionNoContentGitHubReadme": {
+    "message": "No README content found"
+  },
+  "extractionNoContentGitHubCode": {
+    "message": "No code content found on this page"
+  },
+  "extractionFallbackTitle": {
+    "message": "Extracted Content"
+  },
+  "extractionTwitterTitle": {
+    "message": "Tweet"
+  },
+  "extractionRedditTitle": {
+    "message": "Reddit Post"
+  },
+  "extractionNewsTitle": {
+    "message": "News Article"
+  },
+  "extractionLinkedInTitle": {
+    "message": "LinkedIn Post"
+  },
+  "extractionLinkedInTitleBy": {
+    "message": "LinkedIn Post by $1"
+  },
+  "extractionGitHubRepoTitle": {
+    "message": "GitHub Repository"
+  },
+  "extractionGitHubCodeTitle": {
+    "message": "GitHub Code"
+  },
+  "extractionEngagementLabel": {
+    "message": "Engagement"
+  },
+  "extractionPostedLabel": {
+    "message": "Posted"
+  },
+  "extractionTopCommentsLabel": {
+    "message": "Top Comments"
+  },
+  "extractionMediumTitle": {
+    "message": "Medium Article"
+  },
+  "extractionTechCrunchTitle": {
+    "message": "TechCrunch Article"
+  }
 }

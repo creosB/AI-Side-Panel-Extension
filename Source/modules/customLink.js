@@ -57,7 +57,6 @@ export class CustomLinkManager {
     try {
       const stored = localStorage.getItem('customLinks');
       if (!stored) {
-        console.log('No custom links found in localStorage');
         return [];
       }
       
@@ -82,11 +81,9 @@ export class CustomLinkManager {
       });
       
       if (validLinks.length !== links.length) {
-        console.log(`Filtered ${links.length - validLinks.length} invalid links`);
         this.saveCustomLinks(validLinks); // Save the cleaned list
       }
       
-      console.log('Retrieved custom links:', validLinks);
       return validLinks;
     } catch (error) {
       console.error('Error parsing custom links from localStorage:', error);
@@ -102,7 +99,6 @@ export class CustomLinkManager {
         return;
       }
       
-      console.log('Saving custom links:', links);
       localStorage.setItem('customLinks', JSON.stringify(links));
     } catch (error) {
       console.error('Error saving custom links to localStorage:', error);
@@ -123,7 +119,6 @@ export class CustomLinkManager {
     customButtonsContainer.innerHTML = '';
 
     const customLinks = this.getCustomLinks();
-    console.log('Rendering custom links:', customLinks);
 
     customLinks.forEach(link => {
       // Ensure link has required properties
@@ -170,7 +165,6 @@ export class CustomLinkManager {
       });
     }
     
-    console.log('Custom links rendered successfully');
   }
 
   addCustomLink(url) {
@@ -221,7 +215,6 @@ export class CustomLinkManager {
         enabled: true
       };
       
-      console.log('Adding custom link:', newLink);
       
       links.push(newLink);
       this.saveCustomLinks(links);
@@ -241,12 +234,9 @@ export class CustomLinkManager {
   }
 
   deleteCustomLink(id) {
-    console.log('Deleting custom link with id:', id);
     let links = this.getCustomLinks();
     const linkToDelete = links.find(link => link.id == id); // Use loose equality to handle string/number conversion
     
-    console.log('Link to delete:', linkToDelete);
-    console.log('All links before deletion:', links);
     
     if (!linkToDelete) {
       console.warn(`Custom link with id ${id} not found`);
@@ -259,7 +249,6 @@ export class CustomLinkManager {
       links = links.filter(link => link.id != id); // Use loose equality to handle string/number conversion
       this.saveCustomLinks(links);
       
-      console.log('Links after deletion:', links);
       
       // Remove from localStorage toggles
       localStorage.removeItem(`show_custom-${id}`);
@@ -268,15 +257,12 @@ export class CustomLinkManager {
       const toolbarButton = document.querySelector(`[data-custom-id="${id}"]`);
       if (toolbarButton) {
         toolbarButton.remove();
-        console.log('Removed button from toolbar');
       }
       
       // Update button order to remove deleted link
       if (window.saveManager && linkToDelete) {
         const savedOrder = window.saveManager.getButtonOrder();
-        console.log('Button order before deletion:', savedOrder);
         const updatedOrder = savedOrder.filter((url) => url !== linkToDelete.url);
-        console.log('Button order after deletion:', updatedOrder);
         window.saveManager.saveButtonOrder(updatedOrder);
       }
       
@@ -458,7 +444,6 @@ export class CustomLinkManager {
   }
 
   toggleCustomLink(id, enabled) {
-    console.log(`Toggling custom link ${id} to ${enabled}`);
     const links = this.getCustomLinks();
     const link = links.find(link => link.id == id); // Use loose equality
     
@@ -472,7 +457,6 @@ export class CustomLinkManager {
         localStorage.setItem(`show_custom-${id}`, enabled.toString());
       }
       
-      console.log(`Custom link ${id} toggled to ${enabled}`);
       
       // Update button visibility
       const button = document.querySelector(`[data-url="${link.url}"]`);

@@ -6,7 +6,6 @@ export const generalExtractor = {
   keywords: ['general', 'article', 'blog', 'news', 'content'],
   
   extract: () => {
-    console.log('Using general extractor');
     let title = document.title || 'Extracted Content';
     
     // Find main content area

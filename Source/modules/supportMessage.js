@@ -30,7 +30,6 @@ class SupportMessage {
         this.startHeartbeatAnimation();
         this.isInitialized = true;
 
-        console.log('💝 Support message initialized with love!');
     }
 
     setupEventListeners() {
@@ -224,7 +223,6 @@ class SupportMessage {
 
     trackDonationClick() {
         // Optional: Add analytics tracking here
-        console.log('💝 Thank you for considering a donation!');
         
         // Could integrate with analytics services:
         // gtag('event', 'donation_click', { 'source': 'support_message' });

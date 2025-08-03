@@ -7,7 +7,6 @@ export class SaveManager {
   saveButtonOrder(order) {
     try {
       localStorage.setItem('buttonOrder', JSON.stringify(order));
-      console.log('Button order saved:', order);
     } catch (error) {
       console.error('Error saving button order:', error);
     }
@@ -27,7 +26,6 @@ export class SaveManager {
         const order = JSON.parse(savedOrder);
         const foundButtons = [];
         
-        console.log('Restoring button order:', order);
         
         order.forEach((url, index) => {
           let btn;
@@ -49,28 +47,22 @@ export class SaveManager {
             foundButtons.push(btn);
             // Append to end, which maintains the order
             toolbar.appendChild(btn);
-            console.log(`Moved button ${index + 1}/${order.length}: ${url}`);
           } else if (btn && foundButtons.includes(btn)) {
-            console.log(`Button already positioned: ${url}`);
           } else {
-            console.log(`Button not found or not in toolbar: ${url}`);
           }
         });
         
-        console.log(`Restored order for ${foundButtons.length} buttons out of ${order.length} in saved order`);
       } catch (error) {
         console.error('Error restoring button order:', error);
         localStorage.removeItem('buttonOrder');
       }
     } else {
-      console.log('No saved button order found');
     }
   }
 
   saveToggleState(service, enabled) {
     try {
       localStorage.setItem(`show_${service}`, enabled.toString());
-      console.log(`Toggle state saved: ${service} = ${enabled}`);
     } catch (error) {
       console.error(`Error saving toggle state for ${service}:`, error);
     }
@@ -89,7 +81,6 @@ export class SaveManager {
   saveLanguagePreference(language) {
     try {
       localStorage.setItem('selectedLanguage', language);
-      console.log('Language preference saved:', language);
     } catch (error) {
       console.error('Error saving language preference:', error);
     }
@@ -118,7 +109,6 @@ export class SaveManager {
       }
       
       keysToRemove.forEach(key => localStorage.removeItem(key));
-      console.log('All application data cleared');
     } catch (error) {
       console.error('Error clearing application data:', error);
     }
@@ -141,7 +131,6 @@ export class SaveManager {
       link.download = 'ai-sidepanel-settings.json';
       link.click();
       
-      console.log('Settings exported successfully');
     } catch (error) {
       console.error('Error exporting settings:', error);
     }
@@ -173,7 +162,6 @@ export class SaveManager {
         });
       }
       
-      console.log('Settings imported successfully');
       return true;
     } catch (error) {
       console.error('Error importing settings:', error);

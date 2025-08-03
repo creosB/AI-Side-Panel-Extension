@@ -6,7 +6,6 @@ export const redditExtractor = {
   keywords: ['reddit', 'post', 'discussion', 'forum', 'comments'],
   
   extract: () => {
-    console.log('Using Reddit extractor');
     let title = '';
     let content = '';
     
@@ -138,7 +137,7 @@ export const redditExtractor = {
       }
       
       if (topComments.length > 0) {
-        content = `Top Comments:\n\n${topComments.join('\n\n---\n\n')}`;
+        content = `${chrome.i18n.getMessage('extractionTopCommentsLabel')}:\n\n${topComments.join('\n\n---\n\n')}`;
       }
     }
     
@@ -164,7 +163,7 @@ export const redditExtractor = {
     }
     
     return { 
-      title: title || 'Reddit Post', 
+      title: title || chrome.i18n.getMessage('extractionRedditTitle'), 
       content 
     };
   }

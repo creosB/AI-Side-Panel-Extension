@@ -6,7 +6,6 @@ export const mediumExtractor = {
   keywords: ['medium', 'article', 'story', 'blog'],
   
   extract: () => {
-    console.log('Using Medium extractor');
     let title = '';
     let content = '';
     

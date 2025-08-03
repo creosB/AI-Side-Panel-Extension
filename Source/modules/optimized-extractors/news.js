@@ -7,7 +7,6 @@ export const newsExtractor = {
   keywords: ['news', 'article', 'bbc', 'nyt', 'cnn', 'journalism', 'newspaper'],
   
   extract: () => {
-    console.log('Using News extractor');
     let title = '';
     let content = '';
     
@@ -140,8 +139,8 @@ export const newsExtractor = {
     }
     
     return { 
-      title: title || 'News Article', 
-      content: content || 'No content could be extracted from this news article.' 
+      title: title || chrome.i18n.getMessage('extractionNewsTitle'), 
+      content: content || chrome.i18n.getMessage('extractionNoContentNews') 
     };
   }
 };

@@ -72,12 +72,18 @@ export class SettingsManager {
       fetch(`_locales/${userLanguage}/messages.json`)
         .then(response => response.json())
         .then(messages => {
+          // Store globally for extractor
+          window._i18nMessages = messages;
           document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
             if (messages[key]) {
               element.innerHTML = messages[key].message;
             }
           });
+          // Update content extractor language if it exists
+          if (window.contentExtractorManager) {
+            window.contentExtractorManager.updateLanguage(messages);
+          }
           resolve(); // Resolve the promise after translations are done
         })
         .catch(error => {
@@ -105,7 +111,6 @@ export class SettingsManager {
   handleToggleChange(toggle) {
     const service = toggle.id.replace('toggle-', '');
 
-    console.log(`Toggle changed: ${service}, checked: ${toggle.checked}`);
 
     // Handle custom links
     if (service.startsWith('custom-')) {
@@ -193,7 +198,6 @@ export class SettingsManager {
       }
     });
 
-    console.log('Initializing toggles for:', Object.keys(toggles));
 
     Object.entries(toggles).forEach(([key, selector]) => {
       const toggle = document.getElementById(`toggle-${key}`);
@@ -218,7 +222,6 @@ export class SettingsManager {
             customLinksUpdated = true;
           }
           
-          console.log(`Custom link ${customId}: stored=${storedValue}, enabled=${customLink.enabled}, visible=${isVisible}`);
         } else {
           isVisible = false; // Link not found
           console.warn(`Custom link not found for key: ${key}`);
@@ -236,7 +239,6 @@ export class SettingsManager {
 
       if (button) {
         button.style.display = isVisible ? 'flex' : 'none';
-        console.log(`Button ${key}: visibility set to ${isVisible ? 'visible' : 'hidden'}`);
       } else if (key.startsWith('custom-')) {
         console.warn(`Custom button not found for ${key}, selector: ${selector}`);
       }
@@ -244,7 +246,6 @@ export class SettingsManager {
     
     // Save updated custom links if any were modified
     if (customLinksUpdated && window.customLinkManager) {
-      console.log('Saving updated custom links');
       window.customLinkManager.saveCustomLinks(customLinks);
     }
     

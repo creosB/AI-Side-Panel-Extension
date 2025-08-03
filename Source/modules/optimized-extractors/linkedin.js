@@ -6,7 +6,6 @@ export const linkedinExtractor = {
   keywords: ['linkedin', 'professional', 'post', 'business', 'networking'],
   
   extract: () => {
-    console.log('Using LinkedIn extractor');
     let title = '';
     let content = '';
     
@@ -34,7 +33,7 @@ export const linkedinExtractor = {
     }
     
     if (!targetPost) {
-      return { title: 'LinkedIn Post', content: 'No LinkedIn post found on this page.' };
+      return { title: chrome.i18n.getMessage('extractionLinkedInTitle'), content: chrome.i18n.getMessage('extractionNoContentLinkedIn') };
     }
     
     // Extract author information for the title
@@ -46,12 +45,12 @@ export const linkedinExtractor = {
     
     // Create title from author info
     if (authorName) {
-      title = `LinkedIn Post by ${authorName}`;
+      title = chrome.i18n.getMessage('extractionLinkedInTitleBy', [authorName]);
       if (authorRole && authorRole.length < 100) {
         title += ` (${authorRole})`;
       }
     } else {
-      title = 'LinkedIn Post';
+      title = chrome.i18n.getMessage('extractionLinkedInTitle');
     }
     
     // Extract the main post content
@@ -111,7 +110,7 @@ export const linkedinExtractor = {
     
     // Add metrics to content if available
     if (metrics.length > 0 && content) {
-      content += `\n\n---\nEngagement: ${metrics.join(' • ')}`;
+      content += `\n\n---\n${chrome.i18n.getMessage('extractionEngagementLabel')}: ${metrics.join(' • ')}`;
     }
     
     // Extract timestamp
@@ -119,13 +118,13 @@ export const linkedinExtractor = {
     if (timeElement) {
       const timeText = timeElement.textContent.trim();
       if (timeText && content) {
-        content += `\nPosted: ${timeText}`;
+        content += `\n${chrome.i18n.getMessage('extractionPostedLabel')}: ${timeText}`;
       }
     }
     
     return { 
       title, 
-      content: content || 'No content could be extracted from this LinkedIn post.' 
+      content: content || chrome.i18n.getMessage('extractionNoContentLinkedInPost') 
     };
   }
 };

@@ -6,7 +6,6 @@ export const twitterExtractor = {
   keywords: ['twitter', 'x', 'tweet', 'social'],
   
   extract: () => {
-    console.log('Using Twitter extractor');
     let title = '';
     let content = '';
     

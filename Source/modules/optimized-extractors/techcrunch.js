@@ -6,7 +6,6 @@ export const techcrunchExtractor = {
   keywords: ['techcrunch', 'tech', 'news', 'article', 'startup'],
   
   extract: () => {
-    console.log('Using TechCrunch extractor');
     let title = '';
     let content = '';
     

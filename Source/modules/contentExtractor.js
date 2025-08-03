@@ -5,7 +5,7 @@ export class ContentExtractorManager {
   constructor() {
     this.isExtracting = false;
     this.feedbackTimeout = null;
-    console.log('ContentExtractorManager initialized');
+    this.translations = {};
     this.init();
   }
 
@@ -13,6 +13,47 @@ export class ContentExtractorManager {
     this.addExtractorButton();
     this.initializeEventHandlers();
     this.initializeToggleState();
+    this.updateLanguage(); // Ensure localization on init
+  }
+  updateLanguage(translations) {
+    // Accept translations object, or fetch from global if not provided
+    if (translations) {
+      this.translations = translations;
+    } else if (window._i18nMessages) {
+      this.translations = window._i18nMessages;
+    }
+
+    // Update extractor button text
+    const btn = document.getElementById('content-extractor-btn');
+    if (btn) {
+      const span = btn.querySelector('span');
+      if (span) {
+        span.textContent = this._t('extractButton') || 'Extract';
+      }
+      btn.title = this._t('extractButtonTitle') || 'Extract and copy content from current page';
+      btn.setAttribute('aria-label', btn.title);
+    }
+
+    // Update modal if open
+    const modal = document.getElementById('extraction-options-modal');
+    if (modal) {
+      const header = modal.querySelector('.extraction-modal-header h3');
+      if (header) header.textContent = this._t('extractionModalTitle') || 'Choose Extraction Method';
+      const searchInput = modal.querySelector('#extraction-search');
+      if (searchInput) searchInput.placeholder = this._t('extractionSearchPlaceholder') || 'Search extractors...';
+    }
+  }
+
+  _t(key, ...args) {
+    // Helper to get translation string and replace $1, $2, ...
+    if (this.translations && this.translations[key]) {
+      let msg = this.translations[key].message;
+      args.forEach((val, idx) => {
+        msg = msg.replace(new RegExp(`\\$${idx+1}`, 'g'), val);
+      });
+      return msg;
+    }
+    return null;
   }
 
   initializeToggleState() {
@@ -55,7 +96,6 @@ export class ContentExtractorManager {
 
     // Insert before the support button
     toolbar.insertBefore(extractorBtn, supportBtn);
-    console.log('Content extractor button added to toolbar');
 
     // Add keyboard support
     extractorBtn.addEventListener('keydown', (e) => {
@@ -101,12 +141,12 @@ export class ContentExtractorManager {
     modal.innerHTML = `
       <div class="extraction-modal-content">
         <div class="extraction-modal-header">
-          <h3>Choose Extraction Method</h3>
-          <button class="extraction-modal-close" aria-label="Close">&times;</button>
+          <h3>${this._t('extractionModalTitle') || 'Choose Extraction Method'}</h3>
+          <button class="extraction-modal-close" aria-label="${this._t('extractionModalClose') || 'Close'}">&times;</button>
         </div>
         <div class="extraction-modal-body">
           <div class="extraction-search-container">
-            <input type="text" id="extraction-search" placeholder="Search extractors..." class="extraction-search-input">
+            <input type="text" id="extraction-search" placeholder="${this._t('extractionSearchPlaceholder') || 'Search extractors...'}" class="extraction-search-input">
             <svg class="extraction-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
             </svg>
@@ -220,23 +260,25 @@ export class ContentExtractorManager {
       if (result.success) {
         await this.copyToClipboard(result.formattedOutput);
         this.showSuccessState();
-        this.showFeedback('success', `${type.charAt(0).toUpperCase() + type.slice(1)} content copied to clipboard!`);
+        // Use dynamic translation for success message
+        const successMsg = this._t('extractionSuccessMessage', type.charAt(0).toUpperCase() + type.slice(1)) || `${type.charAt(0).toUpperCase() + type.slice(1)} content copied to clipboard!`;
+        this.showFeedback('success', successMsg);
       } else {
-        this.showFeedback('error', result.error || 'Failed to extract content');
+        const errorMsg = result.error || this._t('extractionErrorFailed') || 'Failed to extract content';
+        this.showFeedback('error', errorMsg);
       }
     } catch (error) {
       console.error('Content extraction error:', error);
 
       // Provide more specific error messages
-      let errorMessage = 'An error occurred during extraction';
+      let errorMessage = this._t('extractionErrorGeneric') || 'An error occurred during extraction';
       if (error.message.includes('No active tab')) {
-        errorMessage = 'No active tab found';
+        errorMessage = this._t('extractionErrorNoTab') || 'No active tab found';
       } else if (error.message.includes('clipboard')) {
-        errorMessage = 'Failed to copy to clipboard';
+        errorMessage = this._t('extractionErrorClipboard') || 'Failed to copy to clipboard';
       } else if (error.message.includes('permission')) {
-        errorMessage = 'Permission denied to access page';
+        errorMessage = this._t('extractionErrorPermission') || 'Permission denied to access page';
       }
-
       this.showFeedback('error', errorMessage);
     } finally {
       this.isExtracting = false;
@@ -253,20 +295,17 @@ export class ContentExtractorManager {
         throw new Error('No active tab found');
       }
 
-      console.log('Extracting content from active tab:', activeTab.url);
 
       // Inject content script to extract content from the active tab
       const results = await chrome.scripting.executeScript({
         target: { tabId: activeTab.id },
         args: [extractionType],
         function: (extractionType) => {
-          console.log('Content extraction script started on:', window.location.href, 'Type:', extractionType);
 
           // Import extractors dynamically in the content script
           const extractorMap = {
             twitter: {
               extract: () => {
-                console.log('Using Twitter extractor');
                 let title = '';
                 let content = '';
 
@@ -298,7 +337,6 @@ export class ContentExtractorManager {
 
             reddit: {
               extract: () => {
-                console.log('Using Reddit extractor');
                 let title = '';
                 let content = '';
 
@@ -438,7 +476,6 @@ export class ContentExtractorManager {
 
             news: {
               extract: () => {
-                console.log('Using News extractor');
                 let title = '';
                 let content = '';
 
@@ -525,7 +562,6 @@ export class ContentExtractorManager {
 
             linkedin: {
               extract: () => {
-                console.log('Using LinkedIn extractor');
                 let title = '';
                 let content = '';
 
@@ -647,7 +683,6 @@ export class ContentExtractorManager {
 
             'github-readme': {
               extract: () => {
-                console.log('Using GitHub README extractor');
                 let title = '';
                 let content = '';
 
@@ -727,7 +762,6 @@ export class ContentExtractorManager {
 
             'github-code': {
               extract: () => {
-                console.log('Using GitHub Code extractor');
                 let title = '';
                 let content = '';
 
@@ -794,7 +828,6 @@ export class ContentExtractorManager {
 
             techcrunch: {
               extract: () => {
-                console.log('Using TechCrunch extractor');
                 let title = '';
                 let content = '';
 
@@ -850,7 +883,6 @@ export class ContentExtractorManager {
 
             general: {
               extract: () => {
-                console.log('Using general extractor');
                 let title = document.title || 'Extracted Content';
 
                 // Find main content area
@@ -908,7 +940,6 @@ export class ContentExtractorManager {
               url: window.location.href
             };
 
-            console.log('Extraction successful:', result);
             return result;
 
           } catch (error) {
@@ -924,7 +955,6 @@ export class ContentExtractorManager {
         }
       });
 
-      console.log('Script execution results:', results);
 
       if (!results || results.length === 0) {
         throw new Error('Script injection failed - no results array returned. This might be due to permission issues or the page blocking script injection.');
@@ -1060,7 +1090,6 @@ Try refreshing the page and trying again.`,
       // First try the modern Clipboard API
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
-        console.log('Content copied using Clipboard API');
       } else {
         // Fallback using the proven document.execCommand approach
         const tempTextarea = document.createElement('textarea');
@@ -1080,7 +1109,6 @@ Try refreshing the page and trying again.`,
           if (!successful) {
             throw new Error('Copy command failed');
           }
-          console.log('Content copied using execCommand fallback');
         } finally {
           // Always remove the temporary textarea
           document.body.removeChild(tempTextarea);
@@ -1106,9 +1134,11 @@ Try refreshing the page and trying again.`,
       }
 
       const span = btn.querySelector('span');
-      if (span) {
-        span.textContent = 'Extracting...';
-      }
+    if (span) {
+      span.textContent = this._t('extractButtonExtracting') || 'Extracting...';
+    }
+    btn.title = this._t('extractButtonExtractingTitle') || 'Extracting content...';
+    btn.setAttribute('aria-label', this._t('extractButtonExtractingAriaLabel') || 'Extracting content, please wait...');
     }
   }
 
@@ -1126,9 +1156,11 @@ Try refreshing the page and trying again.`,
       }
 
       const span = btn.querySelector('span');
-      if (span) {
-        span.textContent = 'Extract';
-      }
+    if (span) {
+      span.textContent = this._t('extractButton') || 'Extract';
+    }
+    btn.title = this._t('extractButtonTitle') || 'Extract and copy content from current page';
+    btn.setAttribute('aria-label', btn.title);
     }
   }
 
@@ -1136,8 +1168,6 @@ Try refreshing the page and trying again.`,
     const btn = document.getElementById('content-extractor-btn');
     if (btn) {
       btn.classList.add('success');
-
-      // Remove success state after animation
       setTimeout(() => {
         btn.classList.remove('success');
       }, 1000);
@@ -1170,14 +1200,14 @@ Try refreshing the page and trying again.`,
     const btn = document.getElementById('content-extractor-btn');
     if (btn) {
       if (type === 'success') {
-        btn.setAttribute('aria-label', 'Content extracted successfully and copied to clipboard');
+        btn.setAttribute('aria-label', this._t('extractionSuccessMessage', '') || 'Content extracted successfully and copied to clipboard');
       } else if (type === 'error') {
-        btn.setAttribute('aria-label', 'Content extraction failed. Try again.');
+        btn.setAttribute('aria-label', this._t('extractionErrorFailed') || 'Content extraction failed. Try again.');
       }
 
       // Reset aria-label after a delay
       setTimeout(() => {
-        btn.setAttribute('aria-label', 'Extract and copy content from current page');
+        btn.setAttribute('aria-label', this._t('extractButtonTitle') || 'Extract and copy content from current page');
       }, 5000);
     }
 
