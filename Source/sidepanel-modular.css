@@ -22,8 +22,11 @@
 /* 7. Split view functionality */
 @import './styles/splitview.css';
 
-/* 8. Animations */
+/* 8. Content extractor functionality */
+@import './styles/content-extractor.css';
+
+/* 9. Animations */
 @import './styles/animations.css';
 
-/* 9. Accessibility (should be last to override if needed) */
+/* 10. Accessibility (should be last to override if needed) */
 @import './styles/accessibility.css';

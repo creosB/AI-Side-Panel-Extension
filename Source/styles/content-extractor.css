@@ -1,0 +1,487 @@
+/* Content Extractor Styles */
+
+/* Content extractor button inherits from base button styles */
+#content-extractor-btn {
+  /* Button already inherits all styles from .btn class */
+}
+
+#content-extractor-btn.loading svg {
+  animation: spin 1s linear infinite;
+}
+
+/* Feedback notification styles */
+.content-extractor-feedback {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  z-index: 1000;
+  display: none;
+  max-width: 300px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: 
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
+    transform calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+.content-extractor-feedback.success {
+  background: rgba(0, 255, 170, 0.1);
+  color: var(--primary-color);
+  border-color: rgba(0, 255, 170, 0.3);
+  animation: slideInSuccess calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-back) forwards;
+}
+
+.content-extractor-feedback.error {
+  background: rgba(255, 77, 77, 0.1);
+  color: #ff4d4d;
+  border-color: rgba(255, 77, 77, 0.3);
+  animation: slideInError calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-back) forwards;
+}
+
+/* Spin animation for loading state */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Success feedback animation */
+@keyframes slideInSuccess {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Error feedback animation */
+@keyframes slideInError {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  60% {
+    transform: translateY(2px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Loading state for button */
+#content-extractor-btn.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+#content-extractor-btn.loading:hover {
+  transform: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* Ensure button is properly sized and positioned */
+#content-extractor-btn svg {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 0.25rem;
+}
+
+#content-extractor-btn span {
+  font-size: 0.7rem;
+  line-height: 1.2;
+}
+
+/* Accessibility improvements */
+#content-extractor-btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .content-extractor-feedback.success {
+    background: #00ff00;
+    color: #000000;
+  }
+  
+  .content-extractor-feedback.error {
+    background: #ff0000;
+    color: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  #content-extractor-btn.loading svg {
+    animation: none;
+  }
+  
+  .content-extractor-feedback {
+    transition: none;
+    animation: none;
+  }
+  
+  .content-extractor-feedback.success,
+  .content-extractor-feedback.error {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .content-extractor-feedback {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+    font-size: 0.8rem;
+    padding: 10px 12px;
+  }
+}
+
+/* Focus improvements for better keyboard navigation */
+#content-extractor-btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 255, 170, 0.2);
+}
+
+/* Enhanced loading state */
+#content-extractor-btn.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+#content-extractor-btn.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 170, 0.2), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Success state animation */
+#content-extractor-btn.success {
+  background-color: rgba(0, 255, 170, 0.1);
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+#content-extractor-btn.success svg {
+  color: var(--primary-color);
+}
+
+/* Extraction Options Modal */
+.extraction-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.extraction-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.extraction-modal-content {
+  background: var(--bg-color);
+  border-radius: 16px;
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.extraction-modal.show .extraction-modal-content {
+  transform: scale(1) translateY(0);
+}
+
+.extraction-modal-header {
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.extraction-modal-header h3 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.extraction-modal-close {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.extraction-modal-close:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.extraction-modal-body {
+  padding: 16px 24px 24px;
+}
+
+.extraction-options {
+  display: grid;
+  gap: 12px;
+}
+
+.extraction-option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.extraction-option:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 255, 170, 0.1);
+}
+
+.extraction-option-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.extraction-option-content {
+  flex: 1;
+}
+
+.extraction-option-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 4px;
+}
+
+.extraction-option-desc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.4;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .extraction-modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .extraction-modal-header {
+    padding: 20px 20px 12px;
+  }
+  
+  .extraction-modal-body {
+    padding: 12px 20px 20px;
+  }
+  
+  .extraction-option {
+    padding: 14px;
+    gap: 12px;
+  }
+  
+  .extraction-option-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .extraction-option-title {
+    font-size: 0.95rem;
+  }
+  
+  .extraction-option-desc {
+    font-size: 0.8rem;
+  }
+}
+
+/* Search container */
+.extraction-search-container {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.extraction-search-input {
+  width: 100%;
+  padding: 12px 16px 12px 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.extraction-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(0, 255, 170, 0.1);
+}
+
+.extraction-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.extraction-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+
+/* Settings section */
+.extraction-settings {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.extraction-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.extraction-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.extraction-checkbox-custom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.extraction-checkbox input[type="checkbox"]:checked + .extraction-checkbox-custom {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.extraction-checkbox input[type="checkbox"]:checked + .extraction-checkbox-custom::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid var(--bg-color);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.extraction-checkbox-label {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.extraction-checkbox:hover .extraction-checkbox-custom {
+  border-color: var(--primary-color);
+  background: rgba(0, 255, 170, 0.1);
+}
+
+/* Scrollable options list */
+.extraction-options {
+  max-height: 400px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.extraction-options::-webkit-scrollbar {
+  width: 6px;
+}
+
+.extraction-options::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.extraction-options::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.extraction-options::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

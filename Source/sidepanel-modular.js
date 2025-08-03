@@ -4,6 +4,7 @@ import { SettingsManager } from './modules/settings.js';
 import { NavBarManager } from './modules/navBar.js';
 import { SaveManager } from './modules/saveManager.js';
 import { CustomLinkManager } from './modules/customLink.js';
+import { ContentExtractorManager } from './modules/contentExtractor.js';
 import SupportMessage from './modules/supportMessage.js';
 
 class SidePanelApp {
@@ -14,6 +15,7 @@ class SidePanelApp {
     this.settingsManager = new SettingsManager();
     this.navBarManager = new NavBarManager();
     this.splitViewManager = new SplitViewManager();
+    this.contentExtractorManager = new ContentExtractorManager();
     this.supportMessage = new SupportMessage();
 
     // Make managers globally available for cross-module communication
@@ -22,6 +24,7 @@ class SidePanelApp {
     window.settingsManager = this.settingsManager;
     window.navBarManager = this.navBarManager;
     window.splitViewManager = this.splitViewManager;
+    window.contentExtractorManager = this.contentExtractorManager;
     window.supportMessage = this.supportMessage;
 
     // Define global variables for compatibility

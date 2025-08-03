@@ -154,7 +154,8 @@ export class SettingsManager {
       'perplexity': '[data-url*="perplexity.ai"]',
       'qwen': '[data-url*="chat.qwen.ai"]',
       'githubcopilot': '[data-url*="github.com/copilot"]',
-      'split-view': '#split-view-btn'
+      'split-view': '#split-view-btn',
+      'content-extractor': '#content-extractor-btn'
     };
     
     const selector = selectors[service];
@@ -178,7 +179,8 @@ export class SettingsManager {
       'perplexity': '[data-url*="perplexity.ai"]',
       'qwen': '[data-url*="chat.qwen.ai"]',
       'githubcopilot': '[data-url*="github.com/copilot"]',
-      'split-view': '#split-view-btn'
+      'split-view': '#split-view-btn',
+      'content-extractor': '#content-extractor-btn'
     };
     
     // Add custom links to the toggles object - now they should exist in DOM
@@ -225,7 +227,7 @@ export class SettingsManager {
         // Use stored value if it exists, otherwise use the checkbox's default checked state
         // For built-in services, default to true if no toggle exists
         isVisible = storedValue !== null ? storedValue === 'true' : 
-                         (toggle?.checked ?? (key !== 'split-view'));
+                         (toggle?.checked ?? true);
       }
 
       if (toggle) {
