@@ -6,6 +6,7 @@
     "language": { "message": "Idioma" },
     "toggleExtension": { "message": "Extensión Abrir/Cerrar" },
     "splitView": { "message": "Vista dividida" },
+    "scrollbarAlwaysVisible": { "message": "Barra de desplazamiento siempre visible" },
     "customizeNavigation": { "message": "Personalización de la navegación" },
     "appDescription": { "message": "Acceso fácil a sitios de IA a través del panel lateral" },
     "customLinks": { "message": "Enlaces Personalizados" },

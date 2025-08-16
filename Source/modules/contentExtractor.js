@@ -94,8 +94,8 @@ export class ContentExtractorManager {
       <span>Extract</span>
     `;
 
-    // Insert before the support button
-    toolbar.insertBefore(extractorBtn, supportBtn);
+    // Append to the end of toolbar (order will be restored later)
+    toolbar.appendChild(extractorBtn);
 
     // Add keyboard support
     extractorBtn.addEventListener('keydown', (e) => {

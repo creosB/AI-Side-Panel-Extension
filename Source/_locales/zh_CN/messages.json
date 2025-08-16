@@ -6,6 +6,7 @@
     "language": { "message": "语言" },
     "toggleExtension": { "message": "扩展程序开/关" },
     "splitView": { "message": "分屏视图" },
+    "scrollbarAlwaysVisible": { "message": "滚动条始终可见" },
     "customizeNavigation": { "message": "自定义导航" },
     "appDescription": { "message": "通过侧边栏轻松访问AI网站" },
     "customLinks": { "message": "自定义链接" },

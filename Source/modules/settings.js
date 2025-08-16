@@ -160,8 +160,16 @@ export class SettingsManager {
       'qwen': '[data-url*="chat.qwen.ai"]',
       'githubcopilot': '[data-url*="github.com/copilot"]',
       'split-view': '#split-view-btn',
-      'content-extractor': '#content-extractor-btn'
+      'content-extractor': '#content-extractor-btn',
+      'scrollbar-always-visible': null // Special case - doesn't toggle a button
     };
+    
+    // Handle scrollbar visibility setting
+    if (service === 'scrollbar-always-visible') {
+      this.handleScrollbarVisibilitySetting(toggle.checked);
+      localStorage.setItem(`show_${service}`, toggle.checked.toString());
+      return;
+    }
     
     const selector = selectors[service];
     const button = document.querySelector(selector);
@@ -169,6 +177,25 @@ export class SettingsManager {
     if (button) {
       button.style.display = toggle.checked ? 'flex' : 'none';
       localStorage.setItem(`show_${service}`, toggle.checked.toString());
+    }
+  }
+
+  handleScrollbarVisibilitySetting(alwaysVisible) {
+    const toolbar = document.getElementById('toolbar');
+    if (!toolbar) {
+      console.error('Toolbar not found for scrollbar visibility setting');
+      return;
+    }
+
+    if (alwaysVisible) {
+      toolbar.classList.remove('scrollbar-hover-only');
+    } else {
+      toolbar.classList.add('scrollbar-hover-only');
+    }
+
+    // Notify navBar manager if it exists
+    if (window.navBarManager && window.navBarManager.updateScrollbarVisibility) {
+      window.navBarManager.updateScrollbarVisibility(alwaysVisible);
     }
   }
 
@@ -185,7 +212,8 @@ export class SettingsManager {
       'qwen': '[data-url*="chat.qwen.ai"]',
       'githubcopilot': '[data-url*="github.com/copilot"]',
       'split-view': '#split-view-btn',
-      'content-extractor': '#content-extractor-btn'
+      'content-extractor': '#content-extractor-btn',
+      'scrollbar-always-visible': null // Special case - doesn't toggle a button
     };
     
     // Add custom links to the toggles object - now they should exist in DOM
@@ -201,7 +229,7 @@ export class SettingsManager {
 
     Object.entries(toggles).forEach(([key, selector]) => {
       const toggle = document.getElementById(`toggle-${key}`);
-      const button = document.querySelector(selector);
+      const button = selector ? document.querySelector(selector) : null;
 
       // Get the stored value if it exists
       const storedValue = localStorage.getItem(`show_${key}`);
@@ -226,6 +254,9 @@ export class SettingsManager {
           isVisible = false; // Link not found
           console.warn(`Custom link not found for key: ${key}`);
         }
+      } else if (key === 'scrollbar-always-visible') {
+        // Handle scrollbar visibility setting
+        isVisible = storedValue !== null ? storedValue === 'true' : true; // Default to always visible
       } else {
         // Use stored value if it exists, otherwise use the checkbox's default checked state
         // For built-in services, default to true if no toggle exists
@@ -239,6 +270,9 @@ export class SettingsManager {
 
       if (button) {
         button.style.display = isVisible ? 'flex' : 'none';
+      } else if (key === 'scrollbar-always-visible') {
+        // Apply scrollbar visibility setting
+        this.handleScrollbarVisibilitySetting(isVisible);
       } else if (key.startsWith('custom-')) {
         console.warn(`Custom button not found for ${key}, selector: ${selector}`);
       }

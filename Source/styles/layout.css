@@ -18,14 +18,15 @@
   overflow-y: hidden;
   flex-wrap: nowrap;
   scroll-behavior: smooth;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: thin; /* Firefox - show thin scrollbar */
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent; /* Firefox scrollbar colors */
   transition: 
     background-color calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
     box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart),
     transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-expo);
 }
 
+/* Main toolbar border */
 .toolbar::after {
   content: "";
   position: absolute;
@@ -45,6 +46,74 @@
 
 .toolbar:hover::after {
   opacity: 1;
+}
+
+/* Scroll indicators using dedicated elements */
+.toolbar-scroll-fade-left {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 6px; /* Account for 6px scrollbar */
+  width: 24px;
+  background: linear-gradient(
+    to right,
+    var(--accent-color) 0%,
+    rgba(15, 15, 15, 0.9) 40%,
+    transparent 100%
+  );
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.toolbar-scroll-fade-right {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 6px; /* Account for 6px scrollbar */
+  width: 24px;
+  background: linear-gradient(
+    to left,
+    var(--accent-color) 0%,
+    rgba(15, 15, 15, 0.9) 40%,
+    transparent 100%
+  );
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.toolbar.scroll-left .toolbar-scroll-fade-left {
+  opacity: 1;
+}
+
+.toolbar.scroll-right .toolbar-scroll-fade-right {
+  opacity: 1;
+}
+
+/* Adjust fade overlays to account for thinner scrollbar */
+.toolbar-scroll-fade-left,
+.toolbar-scroll-fade-right {
+  bottom: 6px; /* Account for 6px scrollbar height */
+}
+
+/* Adjust fade overlays for hover-only mode */
+.toolbar.scrollbar-hover-only .toolbar-scroll-fade-left,
+.toolbar.scrollbar-hover-only .toolbar-scroll-fade-right {
+  bottom: 0; /* No scrollbar space needed when hidden */
+  transition: bottom calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.toolbar.scrollbar-hover-only:hover .toolbar-scroll-fade-left,
+.toolbar.scrollbar-hover-only:focus-within .toolbar-scroll-fade-left,
+.toolbar.scrollbar-hover-only:hover .toolbar-scroll-fade-right,
+.toolbar.scrollbar-hover-only:focus-within .toolbar-scroll-fade-right {
+  bottom: 6px; /* Account for scrollbar when visible */
+  transition-delay: 100ms;
 }
 
 .toolbar:hover .toolbar-border {
@@ -123,55 +192,88 @@ iframe.loading {
     opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
 }
 
-/* Hide scrollbar for all browsers */
+/* Custom macOS-like scrollbar for Webkit browsers */
 .toolbar::-webkit-scrollbar {
-  display: none;
+  height: 6px; /* Thin, elegant scrollbar */
 }
 
-/* Premium scroll indicators and feedback */
-.toolbar::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 20px;
-  background: linear-gradient(
-    to right,
-    var(--accent-color) 0%,
-    transparent 100%
-  );
+.toolbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 3px;
+  margin: 0 8px; /* Add margin to track for better aesthetics */
+}
+
+.toolbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  transition: all calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+  min-width: 20px; /* Minimum thumb size for better usability */
+}
+
+.toolbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scaleY(1.2); /* Subtle growth on hover */
+}
+
+.toolbar::-webkit-scrollbar-thumb:active {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scaleY(1.1);
+}
+
+/* Enhanced scrollbar track for depth */
+.toolbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 3px;
+  margin: 0 8px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover-only scrollbar mode */
+.toolbar.scrollbar-hover-only::-webkit-scrollbar {
+  height: 0;
+  transition: height calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.toolbar.scrollbar-hover-only:hover::-webkit-scrollbar,
+.toolbar.scrollbar-hover-only:focus-within::-webkit-scrollbar {
+  height: 6px;
+  transition-delay: 100ms; /* Small delay for smoother experience */
+}
+
+.toolbar.scrollbar-hover-only::-webkit-scrollbar-track {
   opacity: 0;
-  z-index: 10;
-  pointer-events: none;
   transition: opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
 }
 
-.toolbar.scroll-left::before {
-  opacity: 0.8;
+.toolbar.scrollbar-hover-only:hover::-webkit-scrollbar-track,
+.toolbar.scrollbar-hover-only:focus-within::-webkit-scrollbar-track {
+  opacity: 1;
+  transition-delay: 100ms;
 }
 
-.toolbar::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 20px;
-  background: linear-gradient(
-    to left,
-    var(--accent-color) 0%,
-    transparent 100%
-  );
+.toolbar.scrollbar-hover-only::-webkit-scrollbar-thumb {
   opacity: 0;
-  z-index: 10;
-  pointer-events: none;
-  transition: opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+  transition: all calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
 }
 
-.toolbar.scroll-right::after {
-  opacity: 0.8;
+.toolbar.scrollbar-hover-only:hover::-webkit-scrollbar-thumb,
+.toolbar.scrollbar-hover-only:focus-within::-webkit-scrollbar-thumb {
+  opacity: 1;
+  transition-delay: 100ms;
 }
+
+/* Firefox hover-only mode */
+.toolbar.scrollbar-hover-only {
+  scrollbar-width: none;
+  transition: scrollbar-width calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.toolbar.scrollbar-hover-only:hover,
+.toolbar.scrollbar-hover-only:focus-within {
+  scrollbar-width: thin;
+}
+
+
 
 /* Premium scroll progress indicator */
 .toolbar-scroll-indicator {
@@ -214,5 +316,61 @@ iframe.loading {
   );
   opacity: 0.6;
   transition: 
-    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier))
+    opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
 }
+
+/* Scroll hint animation for first load */
+@keyframes scroll-hint {
+  0% {
+    opacity: 0;
+    transform: translateX(-8px) scale(0.95);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(8px) scale(0.95);
+  }
+}
+
+@keyframes scroll-hint-glow {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(0, 255, 170, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(0, 255, 170, 0.6), 0 0 12px rgba(0, 255, 170, 0.3);
+  }
+}
+
+.toolbar-scroll-hint {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 20px;
+  opacity: 0;
+  z-index: 15;
+  pointer-events: none;
+  animation: scroll-hint 3s ease-in-out 1s 2; /* Play 2 times with 1s delay */
+}
+
+.toolbar-scroll-hint::before {
+  content: "⇄";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--primary-color);
+  animation: scroll-hint-glow 1.5s ease-in-out infinite;
+}
+
+/* Hide hint after user interacts */
+.toolbar.user-interacted .toolbar-scroll-hint {
+  display: none;
+}
+

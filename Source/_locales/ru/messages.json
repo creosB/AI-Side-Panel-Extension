@@ -6,6 +6,7 @@
     "language": { "message": "Язык" },
     "toggleExtension": { "message": "Расширение Вкл/Выкл" },
     "splitView": { "message": "Разделенный вид" },
+    "scrollbarAlwaysVisible": { "message": "Полоса прокрутки всегда видима" },
     "customizeNavigation": { "message": "Настройка навигации" },
     "appDescription": { "message": "Легкий доступ к сайтам с искусственным интеллектом через боковую панель" },
     "customLinks": { "message": "Пользовательские ссылки" },

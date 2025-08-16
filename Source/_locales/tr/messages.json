@@ -6,6 +6,7 @@
     "language": { "message": "Dil" },
     "toggleExtension": { "message": "Uzantıyı Aç/Kapat" },
     "splitView": { "message": "Bölünmüş Görünüm" },
+    "scrollbarAlwaysVisible": { "message": "Kaydırma çubuğu her zaman görünür" },
     "customizeNavigation": { "message": "Navigasyon Özelleştirme" },
     "appDescription": { "message": "AI sitelerine kolayca erişmek için yan panel" },
     "customLinks": { "message": "Özel Bağlantılar" },

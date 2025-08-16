@@ -2,6 +2,8 @@
 export class NavBarManager {
   constructor() {
     this.init();
+    // Make this instance globally available
+    window.navBarManager = this;
   }
 
   init() {
@@ -220,11 +222,14 @@ export class NavBarManager {
       }
 
       // Modified save order logic to include split-view-btn and custom links
-      const newOrder = [...toolbar.querySelectorAll('.btn')].map(btn => {
-        if (btn.id === 'support-btn') return 'support';
-        if (btn.id === 'split-view-btn') return 'split-view';
-        return btn.getAttribute('data-url');
-      });
+      const newOrder = [...toolbar.querySelectorAll('.btn')]
+        .map(btn => {
+          if (btn.id === 'support-btn') return 'support';
+          if (btn.id === 'split-view-btn') return 'split-view';
+          if (btn.id === 'content-extractor-btn') return 'content-extractor';
+          return btn.getAttribute('data-url');
+        })
+        .filter(url => url !== null && url !== undefined && url !== ''); // Filter out null/undefined/empty values
       
       if (window.saveManager) {
         window.saveManager.saveButtonOrder(newOrder);
@@ -251,22 +256,47 @@ export class NavBarManager {
       return;
     }
 
-    // Create scroll indicator element
+    // Create scroll indicator elements
     const scrollIndicator = document.createElement('div');
     scrollIndicator.className = 'toolbar-scroll-indicator';
     toolbar.appendChild(scrollIndicator);
+
+    // Create fade overlay elements for better scroll indication
+    const leftFade = document.createElement('div');
+    leftFade.className = 'toolbar-scroll-fade-left';
+    toolbar.appendChild(leftFade);
+
+    const rightFade = document.createElement('div');
+    rightFade.className = 'toolbar-scroll-fade-right';
+    toolbar.appendChild(rightFade);
 
     // Create enhanced border element
     const borderElement = document.createElement('div');
     borderElement.className = 'toolbar-border';
     toolbar.appendChild(borderElement);
 
+    // Create scroll hint element
+    const scrollHint = document.createElement('div');
+    scrollHint.className = 'toolbar-scroll-hint';
+    toolbar.appendChild(scrollHint);
+
     let scrollTimeout;
     let isScrolling = false;
     let rafId;
+    let userHasInteracted = false;
+
+    // Function to hide hint after user interaction
+    const hideScrollHint = () => {
+      if (!userHasInteracted) {
+        userHasInteracted = true;
+        toolbar.classList.add('user-interacted');
+      }
+    };
 
     // Enhanced scroll event handler with premium feedback
     const handleScroll = () => {
+      hideScrollHint(); // Hide hint on first scroll
+      
       if (!isScrolling) {
         isScrolling = true;
         toolbar.classList.add('scrolling');
@@ -296,23 +326,40 @@ export class NavBarManager {
     // Passive scroll listener for better performance
     toolbar.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Wheel event for enhanced scroll feedback and horizontal scrolling
+    // Enhanced wheel event for smooth horizontal scrolling
     toolbar.addEventListener('wheel', (e) => {
-      // Prevent vertical scrolling and enable horizontal scrolling
+      hideScrollHint(); // Hide hint on wheel interaction
+      
+      // Check if it's a horizontal scroll or if we should convert vertical to horizontal
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        // Already horizontal scroll, let it happen naturally
+        return;
+      }
+      
+      // Convert vertical wheel to horizontal scroll for better UX
       e.preventDefault();
       
-      // Convert vertical wheel to horizontal scroll
-      const scrollAmount = e.deltaY * 2; // Increase sensitivity
+      // More responsive scrolling with adaptive sensitivity
+      const sensitivity = e.ctrlKey ? 0.5 : 1.2; // Slower when Ctrl is held for precision
+      const scrollAmount = e.deltaY * sensitivity;
+      
+      // Check for bounds to provide gentle bounce feedback
+      const currentScroll = toolbar.scrollLeft;
+      const maxScroll = toolbar.scrollWidth - toolbar.clientWidth;
+      
+      if ((currentScroll <= 0 && scrollAmount < 0) || 
+          (currentScroll >= maxScroll && scrollAmount > 0)) {
+        // At bounds - provide subtle bounce feedback
+        toolbar.style.transform = `translateX(${scrollAmount > 0 ? -2 : 2}px)`;
+        requestAnimationFrame(() => {
+          toolbar.style.transform = '';
+        });
+        return;
+      }
+      
       toolbar.scrollBy({
         left: scrollAmount,
-        behavior: 'smooth'
-      });
-      
-      // Add subtle visual feedback during wheel scroll
-      toolbar.style.transform = `translateY(${Math.sin(Date.now() * 0.01) * 0.5}px)`;
-      
-      requestAnimationFrame(() => {
-        toolbar.style.transform = '';
+        behavior: 'auto' // Immediate response for better feel
       });
     });
 
@@ -322,6 +369,7 @@ export class NavBarManager {
     let lastTouchTime = 0;
 
     toolbar.addEventListener('touchstart', (e) => {
+      hideScrollHint(); // Hide hint on touch interaction
       touchStartX = e.touches[0].clientX;
       lastTouchTime = Date.now();
       touchVelocity = 0;
@@ -345,14 +393,22 @@ export class NavBarManager {
       if (Math.abs(touchVelocity) > 0.5) {
         const momentum = touchVelocity * 300;
         toolbar.scrollBy({
-          left: momentum,
+          left: -momentum, // Negative for natural touch direction
           behavior: 'smooth'
         });
       }
     }, { passive: true });
 
-    // Initial indicator state
+    // Initial indicator state and show hint if scrollable
     this.updateScrollIndicators(toolbar);
+    
+    // Show scroll hint if toolbar is scrollable (after a short delay for better UX)
+    setTimeout(() => {
+      const isScrollable = toolbar.scrollWidth > toolbar.clientWidth;
+      if (isScrollable && !userHasInteracted) {
+        scrollHint.style.opacity = '1';
+      }
+    }, 500);
     
     // Update indicators when toolbar content changes
     const observer = new MutationObserver(() => {
@@ -371,6 +427,8 @@ export class NavBarManager {
     toolbar.addEventListener('keydown', (e) => {
       const activeButton = document.activeElement;
       if (!activeButton || !activeButton.classList.contains('btn')) return;
+
+      hideScrollHint(); // Hide hint on keyboard interaction
 
       const buttons = [...toolbar.querySelectorAll('.btn:not([style*="display: none"])')];
       const currentIndex = buttons.indexOf(activeButton);
@@ -434,6 +492,25 @@ export class NavBarManager {
     toolbar.scrollBy({
       left: offset,
       behavior: 'smooth'
+    });
+  }
+
+  updateScrollbarVisibility(alwaysVisible) {
+    const toolbar = document.getElementById('toolbar');
+    if (!toolbar) {
+      console.error('Toolbar not found for scrollbar visibility update');
+      return;
+    }
+
+    if (alwaysVisible) {
+      toolbar.classList.remove('scrollbar-hover-only');
+    } else {
+      toolbar.classList.add('scrollbar-hover-only');
+    }
+
+    // Update scroll indicators to account for potential scrollbar position changes
+    requestAnimationFrame(() => {
+      this.updateScrollIndicators(toolbar);
     });
   }
 }

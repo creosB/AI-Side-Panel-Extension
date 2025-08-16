@@ -6,6 +6,7 @@
     "language": { "message": "Sprache" },
     "toggleExtension": { "message": "Erweiterung Öffnen/Schließen" },
     "splitView": { "message": "Geteilte Ansicht" },
+    "scrollbarAlwaysVisible": { "message": "Scrollleiste immer sichtbar" },
     "customizeNavigation": { "message": "Navigation anpassen" },
     "appDescription": { "message": "Greifen Sie einfach über das Seitenpanel auf KI-Websites zu" },
     "customLinks": { "message": "Benutzerdefinierte Links" },

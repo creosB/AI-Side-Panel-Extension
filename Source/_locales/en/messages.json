@@ -20,6 +20,9 @@
   "splitView": {
     "message": "Split View"
   },
+  "scrollbarAlwaysVisible": {
+    "message": "Scrollbar Always Visible"
+  },
   "customizeNavigation": {
     "message": "Customize Navigation"
   },

@@ -6,7 +6,11 @@ export class SaveManager {
 
   saveButtonOrder(order) {
     try {
-      localStorage.setItem('buttonOrder', JSON.stringify(order));
+      // Filter out null/undefined/empty values before saving
+      const cleanOrder = Array.isArray(order) 
+        ? order.filter(url => url !== null && url !== undefined && url !== '')
+        : [];
+      localStorage.setItem('buttonOrder', JSON.stringify(cleanOrder));
     } catch (error) {
       console.error('Error saving button order:', error);
     }
@@ -24,15 +28,34 @@ export class SaveManager {
     if (savedOrder) {
       try {
         const order = JSON.parse(savedOrder);
+        
+        // Ensure order is an array
+        if (!Array.isArray(order)) {
+          console.warn('Button order data is not an array, clearing saved data');
+          localStorage.removeItem('buttonOrder');
+          return;
+        }
+        
         const foundButtons = [];
         
+        // Clean the order array by removing null/undefined/empty values
+        const cleanedOrder = order.filter(url => url !== null && url !== undefined && url !== '' && typeof url === 'string');
         
-        order.forEach((url, index) => {
+        // If we cleaned some items, save the cleaned version
+        if (cleanedOrder.length !== order.length) {
+          console.log('Cleaning null values from saved button order');
+          localStorage.setItem('buttonOrder', JSON.stringify(cleanedOrder));
+        }
+        
+        cleanedOrder.forEach((url, index) => {
+          
           let btn;
           if (url === 'support') {
             btn = document.getElementById('support-btn');
           } else if (url === 'split-view') {
             btn = document.getElementById('split-view-btn');
+          } else if (url === 'content-extractor') {
+            btn = document.getElementById('content-extractor-btn');
           } else {
             // Try to find button by exact URL match first (for custom links and built-in services)
             btn = document.querySelector(`[data-url="${url}"]`);
