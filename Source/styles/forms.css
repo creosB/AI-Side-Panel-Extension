@@ -25,8 +25,8 @@
   background-color: #1a1a1a;
   transform: translateY(calc(-1px * var(--motion-scale)));
   box-shadow: 
-    0 0 0 2px rgba(0, 255, 170, 0.2),
-    0 4px 12px rgba(0, 255, 170, 0.15);
+    0 0 0 2px color-mix(in srgb, var(--primary-color) 30%, transparent),
+    0 4px 12px color-mix(in srgb, var(--primary-color) 18%, transparent);
 }
 
 #custom-link-input:hover,
@@ -74,7 +74,7 @@
   width: 20px;
   height: 20px;
   pointer-events: none;
-  color: #666;
+  color: var(--text-color);
   transition: 
     transform calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-back),
     opacity calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
@@ -86,7 +86,7 @@ select {
   appearance: none;
   -webkit-appearance: none;
   background: var(--accent-color);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
   color: var(--text-color);
   font-size: 0.9rem;
@@ -102,9 +102,9 @@ select {
 
 select:hover {
   background: var(--hover-color);
-  border-color: rgba(0, 255, 170, 0.3);
+  border-color: color-mix(in srgb, var(--primary-color) 40%, transparent);
   transform: translateY(calc(-0.5px * var(--motion-scale)));
-  box-shadow: 0 4px 12px rgba(0, 255, 170, 0.15);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary-color) 18%, transparent);
 }
 
 select:focus {
@@ -113,8 +113,8 @@ select:focus {
   background: var(--hover-color);
   transform: translateY(calc(-1px * var(--motion-scale)));
   box-shadow: 
-    0 0 0 2px rgba(0, 255, 170, 0.2),
-    0 4px 16px rgba(0, 255, 170, 0.2);
+  0 0 0 2px color-mix(in srgb, var(--primary-color) 30%, transparent),
+  0 4px 16px color-mix(in srgb, var(--primary-color) 20%, transparent);
 }
 
 select:hover + .select-arrow {
@@ -139,9 +139,17 @@ select option {
 }
 
 select option:checked {
-  background: linear-gradient(45deg, var(--primary-color), rgba(0, 255, 170, 0.5));
-  color: var(--bg-color);
+  background: linear-gradient(45deg, var(--primary-color), rgba(0, 255, 170, 0.35));
+  color: #0b0b0b; /* on-primary readable */
   font-weight: 600;
+}
+
+/* Keyboard accessibility: clear focus for select and inputs */
+select:focus-visible,
+#custom-link-input:focus-visible,
+#shortcut-input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 45%, transparent);
 }
 
 /* Enhanced form animations for reduced motion */

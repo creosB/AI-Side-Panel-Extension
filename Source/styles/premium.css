@@ -48,7 +48,7 @@
   font-size: 1.4rem;
   font-weight: 700;
   margin: 0;
-  background: linear-gradient(135deg, #ffffff, #00ffaa);
+  background: linear-gradient(135deg, #ffffff, var(--primary-color));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -101,7 +101,7 @@
 .premium-input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(0, 255, 170, 0.15);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 25%, transparent);
 }
 
 .premium-status {
@@ -140,8 +140,8 @@
 }
 
 .premium-btn.primary {
-  background: linear-gradient(135deg, #00ffaa, #00d4aa);
-  color: #000;
+  background: linear-gradient(135deg, var(--primary-color), color-mix(in srgb, var(--primary-color) 75%, white));
+  color: #0b0b0b;
 }
 
 .premium-btn.secondary {
@@ -152,6 +152,13 @@
 
 .premium-btn:hover { transform: translateY(-1px) scale(1.01); }
 .premium-btn:active { transform: scale(0.98); }
+
+/* Focus-visible ring for modal buttons */
+.premium-btn:focus-visible,
+.premium-close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 40%, transparent);
+}
 
 .premium-close {
   position: absolute;

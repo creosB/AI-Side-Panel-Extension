@@ -1,0 +1,71 @@
+/* Glassmorphism / Frosted-Glass Theme */
+
+:root[data-theme='glass'] {
+  --bg-color: #0d0f14;
+  --text-color: #e9eef7;
+  --accent-color: rgba(255, 255, 255, 0.06);
+  --hover-color: rgba(255, 255, 255, 0.12);
+  --primary-color: #70b8ff;
+}
+
+/* Vibrant backdrop with gradients */
+[data-theme='glass'] body {
+  background:
+    radial-gradient(60% 40% at 80% 20%, rgba(148, 233, 255, 0.18), transparent 70%),
+    radial-gradient(40% 50% at 10% 80%, rgba(255, 170, 212, 0.15), transparent 70%),
+    linear-gradient(180deg, #0b0e12 0%, #0d1117 100%);
+}
+
+/* Frosted containers */
+[data-theme='glass'] .toolbar,
+[data-theme='glass'] .support-message-card,
+[data-theme='glass'] .btn,
+[data-theme='glass'] .add-link-form,
+[data-theme='glass'] .select-wrapper,
+[data-theme='glass'] .toggle-item {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(2, 8, 23, 0.35);
+}
+
+[data-theme='glass'] .btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Ensure text legibility on glass */
+[data-theme='glass'] .support-message-card,
+[data-theme='glass'] .add-link-form,
+[data-theme='glass'] .select-wrapper,
+[data-theme='glass'] .toggle-item {
+  color: #f4f8ff;
+}
+
+/* WCAG hint: enforce solid chips behind tiny text if needed */
+[data-theme='glass'] .premium-badge { background: rgba(13,17,23,0.75); }
+[data-theme='glass'] .slider { background-color: rgba(255,255,255,0.2); }
+[data-theme='glass'] input:checked + .slider { background-color: var(--primary-color); box-shadow: 0 0 16px color-mix(in srgb, var(--primary-color) 35%, transparent); }
+[data-theme='glass'] .premium-modal { background: linear-gradient(135deg, rgba(13,15,20,0.78), rgba(20,24,32,0.78)); border-color: rgba(255,255,255,0.12); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+[data-theme='glass'] .premium-modal-title { background: linear-gradient(135deg, #fff, var(--primary-color)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Focus-visible ring for glass components */
+[data-theme='glass'] .btn:focus-visible,
+[data-theme='glass'] select:focus-visible,
+[data-theme='glass'] input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 35%, transparent);
+}
+
+/* Fallback if backdrop-filter unsupported */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  [data-theme='glass'] .toolbar,
+  [data-theme='glass'] .support-message-card,
+  [data-theme='glass'] .btn,
+  [data-theme='glass'] .add-link-form,
+  [data-theme='glass'] .select-wrapper,
+  [data-theme='glass'] .toggle-item {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.18);
+  }
+}

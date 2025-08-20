@@ -82,6 +82,17 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Premium-gated theme section (support legacy and new id) */
+#theme-section.gated,
+#theme-settings-section.gated {
+  opacity: 0.7;
+}
+
+#theme-section.gated select,
+#theme-settings-section.gated select {
+  cursor: not-allowed;
+}
+
 .toggle-container h3,
 .custom-links-container h3,
 .shortcut-container h3 {
@@ -179,12 +190,18 @@
 
 input:checked + .slider {
   background-color: var(--primary-color);
-  box-shadow: 0 0 16px rgba(0, 255, 170, 0.4);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--primary-color) 40%, transparent);
 }
 
 input:checked + .slider:before {
   transform: translateX(22px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Keyboard focus ring for toggles */
+.switch input:focus-visible + .slider {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 45%, transparent);
 }
 
 .shortcut-info {

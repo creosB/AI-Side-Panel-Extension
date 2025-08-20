@@ -52,5 +52,15 @@
     "extractionPostedLabel": { "message": "Gepostet" },
     "extractionTopCommentsLabel": { "message": "Top-Kommentare" },
     "extractionMediumTitle": { "message": "Medium-Artikel" },
-    "extractionTechCrunchTitle": { "message": "TechCrunch-Artikel" }
+    "extractionTechCrunchTitle": { "message": "TechCrunch-Artikel" },
+    "themeLabel": { "message": "Thema" },
+    "themeDefault": { "message": "Standard" },
+    "themeSynthwave": { "message": "Synthwave" },
+    "themeGlassmorphism": { "message": "Glasmorphismus" },
+    "themeBrutalism": { "message": "Neo‑Brutalismus" },
+    "themeNeoNoir": { "message": "Neo Noir Dunkel" },
+    "themeNeoAnime": { "message": "Neo‑Anime" },
+    "themeSavedInfo": { "message": "Ihre Auswahl wird gespeichert." },
+    "synthOptions": { "message": "Synthwave‑Optionen" },
+    "synthDimGlowLabel": { "message": "Neon‑Glow dimmen (reizarm)" }
 }

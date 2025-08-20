@@ -148,5 +148,15 @@
   },
   "extractionTechCrunchTitle": {
     "message": "TechCrunch Article"
-  }
+  },
+  "themeLabel": { "message": "Theme" },
+  "themeDefault": { "message": "Default" },
+  "themeSynthwave": { "message": "Synthwave" },
+  "themeGlassmorphism": { "message": "Glassmorphism" },
+  "themeBrutalism": { "message": "Neo‑Brutalism" },
+  "themeNeoNoir": { "message": "Neo Noir Dark" },
+  "themeNeoAnime": { "message": "Neo‑Anime" },
+  "themeSavedInfo": { "message": "Your choice is saved for next time." },
+  "synthOptions": { "message": "Synthwave Options" },
+  "synthDimGlowLabel": { "message": "Dim neon glow (low stimulus)" }
 }

@@ -1,0 +1,90 @@
+/* Synthwave-Futuristic Theme */
+
+:root[data-theme='synthwave'] {
+  --bg-color: #0a0014; /* deep purple-black */
+  --text-color: #f9f7ff;
+  --accent-color: #140022;
+  --hover-color: #1f0040;
+  --primary-color: #ff00e6; /* neon magenta */
+  --synth-secondary: #00ffaa; /* neon teal */
+}
+
+/* Neon gradient horizon background */
+[data-theme='synthwave'] body {
+  background: radial-gradient(1200px 600px at 50% 120%, rgba(255, 0, 230, 0.12), transparent 60%),
+              radial-gradient(800px 400px at 50% -20%, rgba(0, 255, 170, 0.08), transparent 60%),
+              linear-gradient(180deg, #05000b 0%, #0a0014 35%, #110022 100%);
+}
+
+/* Optional grid horizon accent (pure CSS, performant) */
+[data-theme='synthwave'] .content::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  height: 40%;
+  bottom: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to top, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 40px 1px, 1px 40px;
+  mask-image: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
+  pointer-events: none;
+}
+
+/* Subtle neon glow accents */
+[data-theme='synthwave'] .toolbar,
+[data-theme='synthwave'] .support-message-card {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary-color) 18%, transparent), 0 10px 30px color-mix(in srgb, var(--primary-color) 12%, transparent), 0 0 40px color-mix(in srgb, var(--synth-secondary) 10%, transparent);
+}
+
+[data-theme='synthwave'] .btn:hover {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary-color) 25%, transparent), 0 6px 16px color-mix(in srgb, var(--primary-color) 15%, transparent), 0 0 16px color-mix(in srgb, var(--synth-secondary) 15%, transparent);
+}
+
+/* Gradient text flair when available */
+[data-theme='synthwave'] .gradient-text {
+  background-image: linear-gradient(90deg, var(--primary-color), var(--synth-secondary), #7c4dff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Themed focus ring for keyboard users */
+[data-theme='synthwave'] .btn:focus-visible,
+[data-theme='synthwave'] select:focus-visible,
+[data-theme='synthwave'] input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 45%, transparent);
+}
+
+/* Respect reduced motion and provide low-stimulus hover */
+@media (prefers-reduced-motion: reduce) {
+  [data-theme='synthwave'] .btn:hover {
+    box-shadow: 0 0 0 1px rgba(255, 0, 230, 0.25);
+  }
+}
+
+/* High-contrast neon under hover for toolbar divider */
+[data-theme='synthwave'] .toolbar::after,
+[data-theme='synthwave'] .toolbar-border {
+  background: linear-gradient(90deg, transparent, var(--primary-color) 50%, transparent);
+}
+
+/* Toggle and modal adjustments (Synthwave) */
+[data-theme='synthwave'] .slider { background-color: #3a0a5a; }
+[data-theme='synthwave'] input:checked + .slider { background-color: var(--primary-color); box-shadow: 0 0 16px color-mix(in srgb, var(--primary-color) 45%, transparent); }
+[data-theme='synthwave'] .premium-modal { border-color: color-mix(in srgb, var(--primary-color) 25%, transparent); box-shadow: 0 20px 60px color-mix(in srgb, var(--primary-color) 20%, rgba(0,0,0,0.5)); }
+[data-theme='synthwave'] .premium-modal-title { background: linear-gradient(135deg, #fff, var(--primary-color)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Dim mode: soften neon glows and grid */
+:root[data-theme='synthwave'][data-synthwave-dim='true'] .toolbar,
+:root[data-theme='synthwave'][data-synthwave-dim='true'] .support-message-card,
+:root[data-theme='synthwave'][data-synthwave-dim='true'] .btn:hover,
+:root[data-theme='synthwave'][data-synthwave-dim='true'] .premium-modal {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary-color) 12%, transparent), 0 6px 18px color-mix(in srgb, var(--primary-color) 8%, transparent) !important;
+}
+
+:root[data-theme='synthwave'][data-synthwave-dim='true'] .content::before {
+  opacity: 0.35;
+}

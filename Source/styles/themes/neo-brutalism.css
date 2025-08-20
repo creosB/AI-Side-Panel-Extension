@@ -1,0 +1,105 @@
+/* Neo‑Brutalism Theme (Dark) — muted gold accents */
+
+:root[data-theme='brutal'] {
+  --bg-color: #131417;            /* slightly lighter graphite */
+  --text-color: #faf4ea;          /* warm light */
+  --accent-color: #1a1c21;        /* panel blocks */
+  --hover-color: #20232a;         /* hover blocks */
+  /* Muted gold for a premium, clean feeling */
+  --primary-color: #bfa66a;       /* muted gold */
+  --primary-color-rgb: 191,166,106; /* for rgba fallbacks */
+}
+
+/* Flat slabs, chunky shadows, hard borders */
+[data-theme='brutal'] body {
+  background: #0f1012;
+}
+
+[data-theme='brutal'] .toolbar {
+  background: #17181c;
+  border-bottom: 3px solid var(--primary-color);
+  box-shadow: 10px 10px 0 #000;
+}
+
+[data-theme='brutal'] .btn {
+  border: 3px solid var(--primary-color);
+  border-radius: 10px;
+  background: #17181c;
+  color: #f7f2e7;
+  box-shadow: 6px 6px 0 #000;
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out, background-color 200ms ease-out, color 200ms ease-out;
+}
+
+[data-theme='brutal'] .btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 #000;
+}
+
+[data-theme='brutal'] .support-message-card {
+  border: 3px solid var(--primary-color);
+  background: #17181c;
+  color: #f7f2e7;
+  box-shadow: 12px 12px 0 #000;
+}
+[data-theme='brutal'] .slider {
+  background-color: #25272e;
+  border: 2px solid var(--primary-color);
+  height: 24px;
+  position: relative;
+  border-radius: 6px;
+}
+[data-theme='brutal'] .switch { height: 26px; }
+
+/* make pseudo-element explicit and positioned for wide browser support */
+[data-theme='brutal'] .slider:before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background: #f7f2e7;
+  border-radius: 50%;
+  transition: transform 200ms ease-out, left 200ms ease-out, background-color 200ms ease-out;
+}
+
+[data-theme='brutal'] input:checked + .slider:before { transform: translateX(22px); }
+[data-theme='brutal'] input:checked + .slider {
+  background-color: var(--primary-color);
+  /* color-mix isn't fully supported in all browsers; use a translucent shadow fallback */
+  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.18);
+}
+[data-theme='brutal'] .premium-modal { border: 3px solid var(--primary-color); background: #17181c; box-shadow: 14px 14px 0 #000; }
+[data-theme='brutal'] .premium-modal-title {
+  background: linear-gradient(135deg, #fff, var(--primary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* fallback for browsers that don't support background-clip:text */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Controls are obvious and high-contrast */
+[data-theme='brutal'] .switch .slider { border: 3px solid var(--primary-color); background:#24262c; }
+[data-theme='brutal'] .select-wrapper select { border: 3px solid var(--primary-color); background:#17181c; color:#f7f2e7; box-shadow: 6px 6px 0 #000; }
+
+/* Keep logos legible on dark blocks */
+[data-theme='brutal'] .btn img,
+[data-theme='brutal'] .btn svg,
+[data-theme='brutal'] .btn span {
+  filter: none; /* avoid accidental double inversion */
+  color: #f7f2e7;
+}
+
+/* Accessibility: reduced motion keeps brutal feel without jumps */
+@media (prefers-reduced-motion: reduce) {
+  /* Reduce or remove non-essential motion */
+  [data-theme='brutal'] .btn:hover { transform: none; }
+  [data-theme='brutal'] .btn,
+  [data-theme='brutal'] .slider:before,
+  [data-theme='brutal'] input:checked + .slider {
+    transition: none !important;
+    animation: none !important;
+  }
+}

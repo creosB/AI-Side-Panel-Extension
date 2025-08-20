@@ -8,6 +8,7 @@ export class SettingsManager {
     this.initializeShortcutSettings();
     this.initializeLanguageSettings();
     this.initializeToggleHandlers();
+  this.initializeThemeSettings();
   }
 
   initializeShortcutSettings() {
@@ -55,6 +56,138 @@ export class SettingsManager {
         this.setLanguage();
       });
     }
+  }
+
+  initializeThemeSettings() {
+    const themeSelect = document.getElementById('theme-select');
+    // Support both new and legacy ids for the theme section container
+    const themeSection = document.getElementById('theme-settings-section') || document.getElementById('theme-section');
+    const root = document.documentElement; // :root
+
+    // Apply stored theme on load
+    const storedTheme = localStorage.getItem('selectedTheme') || 'default';
+    this.applyTheme(root, storedTheme);
+    if (themeSelect) themeSelect.value = storedTheme;
+
+  // Initialize Synthwave dim toggle visibility and state
+  this.updateSynthwaveOptionsVisibility(storedTheme);
+  this.initializeSynthwaveDim(root);
+
+    if (themeSelect) {
+      // Gate by premium: disable until premium is active
+      const applyPremiumGate = (isPremium) => {
+        themeSelect.disabled = !isPremium;
+        themeSection?.classList.toggle('gated', !isPremium);
+
+        // When gated, clicking anywhere in the theme section (except enabled elements) opens the premium modal
+        const openPremium = (ev) => {
+          // Avoid double-firing from select change handler; only trigger for clicks/key on the container
+          if (ev) ev.preventDefault();
+          if (window.premiumManager?.open) window.premiumManager.open();
+        };
+
+        // Clean previous listeners to avoid duplicates
+        if (this._themeGateCleanup) {
+          this._themeGateCleanup();
+          this._themeGateCleanup = null;
+        }
+
+        if (!isPremium && themeSection) {
+          // Pointer interactions
+          const clickHandler = (e) => {
+            // If the select is disabled, any click within the section should open the modal
+            // But ignore clicks on interactive elements that aren't the select wrapper
+            openPremium(e);
+          };
+          themeSection.addEventListener('click', clickHandler);
+
+          // Keyboard accessibility: Enter/Space when focusing the section
+          themeSection.setAttribute('tabindex', '0');
+          const keyHandler = (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              openPremium(e);
+            }
+          };
+          themeSection.addEventListener('keydown', keyHandler);
+
+          // Store cleanup
+          this._themeGateCleanup = () => {
+            themeSection.removeEventListener('click', clickHandler);
+            themeSection.removeEventListener('keydown', keyHandler);
+            themeSection.removeAttribute('tabindex');
+          };
+        }
+      };
+
+      // Initial state from background (if available)
+      try {
+        chrome.runtime.sendMessage({ type: 'GET_PREMIUM_STATUS' }, (bg) => {
+          applyPremiumGate(bg?.isPremium === true);
+        });
+      } catch (_) {}
+
+      // React to runtime port updates (if PremiumManager connected)
+      try {
+        if (!this._premiumPort) {
+          this._premiumPort = chrome.runtime.connect({ name: 'premium-status' });
+          this._premiumPort.onMessage.addListener((msg) => {
+            if (msg?.type === 'PREMIUM_STATUS_UPDATED') {
+              applyPremiumGate(msg?.isPremium === true);
+            }
+          });
+        }
+      } catch (_) {}
+
+  themeSelect.addEventListener('change', () => {
+        if (themeSelect.disabled) {
+          // Optional: nudge user to premium modal
+          if (window.premiumManager?.open) window.premiumManager.open();
+          return;
+        }
+        const value = themeSelect.value;
+        localStorage.setItem('selectedTheme', value);
+        this.applyTheme(root, value);
+        this.updateSynthwaveOptionsVisibility(value);
+      });
+    }
+  }
+
+  applyTheme(root, theme) {
+    if (!root) return;
+    if (theme === 'default') {
+      root.removeAttribute('data-theme');
+    } else {
+      root.setAttribute('data-theme', theme);
+    }
+  }
+
+  initializeSynthwaveDim(root) {
+    const dimToggle = document.getElementById('toggle-synthwave-dim');
+    if (!dimToggle) return;
+    const stored = localStorage.getItem('synthwaveDim') === 'true';
+    dimToggle.checked = stored;
+    this.applySynthwaveDim(root, stored);
+
+    dimToggle.addEventListener('change', () => {
+      const enabled = dimToggle.checked;
+      localStorage.setItem('synthwaveDim', String(enabled));
+      this.applySynthwaveDim(root, enabled);
+    });
+  }
+
+  applySynthwaveDim(root, enabled) {
+    if (!root) return;
+    if (enabled) {
+      root.setAttribute('data-synthwave-dim', 'true');
+    } else {
+      root.removeAttribute('data-synthwave-dim');
+    }
+  }
+
+  updateSynthwaveOptionsVisibility(theme) {
+    const container = document.getElementById('synthwave-dim-container');
+    if (!container) return;
+    container.style.display = theme === 'synthwave' ? '' : 'none';
   }
 
   setLanguage() {

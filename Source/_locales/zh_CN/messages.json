@@ -52,5 +52,15 @@
     "extractionPostedLabel": { "message": "发布时间" },
     "extractionTopCommentsLabel": { "message": "热门评论" },
     "extractionMediumTitle": { "message": "Medium文章" },
-    "extractionTechCrunchTitle": { "message": "TechCrunch文章" }
+    "extractionTechCrunchTitle": { "message": "TechCrunch文章" },
+    "themeLabel": { "message": "主题" },
+    "themeDefault": { "message": "默认" },
+    "themeSynthwave": { "message": "合成波 / 复古" },
+    "themeGlassmorphism": { "message": "玻璃拟态" },
+    "themeBrutalism": { "message": "新野兽派" },
+    "themeNeoNoir": { "message": "新黑色（深色）" },
+    "themeNeoAnime": { "message": "新动漫风" },
+    "themeSavedInfo": { "message": "你的选择会被保存。" },
+    "synthOptions": { "message": "合成波选项" },
+    "synthDimGlowLabel": { "message": "降低霓虹光（低刺激）" }
 }

@@ -1,0 +1,45 @@
+/* Neo Noir Dark Theme */
+
+:root[data-theme='neo-noir'] {
+  --bg-color: #0b0b0e; /* deep near-black */
+  --text-color: #e6e6ef;
+  --accent-color: #12121a; /* dark panel */
+  --hover-color: #181826;
+  --primary-color: #7a4dff; /* subtle purple */
+}
+
+[data-theme='neo-noir'] body {
+  background: radial-gradient(1000px 500px at 20% 0%, rgba(122, 77, 255, 0.12), transparent 60%),
+              radial-gradient(800px 600px at 100% 100%, rgba(0, 190, 220, 0.08), transparent 60%),
+              #0b0b0e;
+}
+
+/* Cinematic soft light */
+[data-theme='neo-noir'] .toolbar,
+[data-theme='neo-noir'] .support-message-card {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary-color) 16%, transparent), 0 24px 48px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+[data-theme='neo-noir'] .btn:hover {
+  background-color: #1a1a28;
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--primary-color) 18%, transparent);
+}
+
+[data-theme='neo-noir'] .gradient-text {
+  background-image: linear-gradient(90deg, #7a4dff, #00bedc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+[data-theme='neo-noir'] .slider { background-color: #242436; }
+[data-theme='neo-noir'] input:checked + .slider { background-color: var(--primary-color); box-shadow: 0 0 16px color-mix(in srgb, var(--primary-color) 35%, transparent); }
+[data-theme='neo-noir'] .premium-modal { border-color: color-mix(in srgb, var(--primary-color) 20%, transparent); box-shadow: 0 30px 70px rgba(0,0,0,0.65); }
+[data-theme='neo-noir'] .premium-modal-title { background: linear-gradient(135deg, #fff, var(--primary-color)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Keyboard focus ring */
+[data-theme='neo-noir'] .btn:focus-visible,
+[data-theme='neo-noir'] select:focus-visible,
+[data-theme='neo-noir'] input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 40%, transparent);
+}

@@ -1,0 +1,52 @@
+/* Anime / Neo-Anime Theme */
+
+:root[data-theme='neo-anime'] {
+  --bg-color: #0c0d10;
+  --text-color: #fefbff;
+  --accent-color: #13151c;
+  --hover-color: #1a1d27;
+  --primary-color: #ff6bd6; /* kawaii pink */
+}
+
+/* Illustrated feeling with soft glows */
+[data-theme='neo-anime'] body {
+  background:
+    radial-gradient(70% 50% at 10% 20%, rgba(255, 107, 214, 0.18), transparent 70%),
+    radial-gradient(50% 30% at 90% 10%, rgba(120, 202, 255, 0.16), transparent 70%),
+    linear-gradient(180deg, #0b0c11 0%, #0c0d10 100%);
+}
+
+/* Speech-bubble accents */
+[data-theme='neo-anime'] .btn {
+  border-radius: 14px 14px 16px 14px;
+  position: relative;
+}
+
+[data-theme='neo-anime'] .btn:hover::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-color) 35%, transparent), 0 10px 24px color-mix(in srgb, var(--primary-color) 18%, transparent);
+}
+
+/* Expressive badges */
+[data-theme='neo-anime'] .premium-badge { background: #ff6bd6; color: #1a1d27; }
+[data-theme='neo-anime'] .support-heart-icon { color: #ff6bd6; }
+[data-theme='neo-anime'] .slider { background-color: #242636; }
+[data-theme='neo-anime'] input:checked + .slider { background-color: var(--primary-color); box-shadow: 0 0 16px color-mix(in srgb, var(--primary-color) 40%, transparent); }
+[data-theme='neo-anime'] .premium-modal { border-color: color-mix(in srgb, var(--primary-color) 20%, transparent); box-shadow: 0 20px 60px rgba(0,0,0,0.55); }
+[data-theme='neo-anime'] .premium-modal-title { background: linear-gradient(135deg, #fff, var(--primary-color)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Focus-visible ring */
+[data-theme='neo-anime'] .btn:focus-visible,
+[data-theme='neo-anime'] select:focus-visible,
+[data-theme='neo-anime'] input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 45%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme='neo-anime'] .btn:hover::after { box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-color) 35%, transparent); }
+}

@@ -52,5 +52,15 @@
     "extractionPostedLabel": { "message": "Gönderildi" },
     "extractionTopCommentsLabel": { "message": "En İyi Yorumlar" },
     "extractionMediumTitle": { "message": "Medium Makalesi" },
-    "extractionTechCrunchTitle": { "message": "TechCrunch Makalesi" }
+    "extractionTechCrunchTitle": { "message": "TechCrunch Makalesi" },
+    "themeLabel": { "message": "Tema" },
+    "themeDefault": { "message": "Varsayılan" },
+    "themeSynthwave": { "message": "Synthwave" },
+    "themeGlassmorphism": { "message": "Glassmorphism" },
+    "themeBrutalism": { "message": "Neo‑Brütalizm" },
+    "themeNeoNoir": { "message": "Neo Noir Koyu" },
+    "themeNeoAnime": { "message": "Neo‑Anime" },
+    "themeSavedInfo": { "message": "Seçiminiz kaydedilir." },
+    "synthOptions": { "message": "Synthwave Seçenekleri" },
+    "synthDimGlowLabel": { "message": "Neon parlamayı kıs (düşük uyarım)" }
 }

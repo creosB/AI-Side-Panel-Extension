@@ -33,3 +33,10 @@
 
 /* 11. Premium modal styles */
 @import './styles/premium.css';
+
+/* 12. Themes (loaded after base to override vars and subtle accents) */
+@import './styles/themes/synthwave.css';
+@import './styles/themes/glassmorphism.css';
+@import './styles/themes/neo-brutalism.css';
+@import './styles/themes/neo-noir.css';
+@import './styles/themes/neo-anime.css';

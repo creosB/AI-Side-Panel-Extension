@@ -234,7 +234,7 @@
             </div>
             <div id="custom-links-list"></div>
           </div>
-          <div class="shortcut-container">
+          <div class="shortcut-container" id="theme-section">
             <h3 data-i18n="shortcutLabel"></h3>
             <div class="shortcut-item">
               <span data-i18n="toggleExtension"
@@ -270,6 +270,35 @@
                 viewBox="0 0 24 24">
                 <path d="M7 10l5 5 5-5z" fill="currentColor" />
               </svg>
+            </div>
+          </div>
+
+          <div class="shortcut-container" id="theme-settings-section">
+            <h3 data-i18n="themeLabel">Theme</h3>
+            <div class="select-wrapper">
+              <select id="theme-select" aria-label="Theme">
+                <option value="default" data-i18n="themeDefault">Default</option>
+                <option value="synthwave" data-i18n="themeSynthwave">Synthwave</option>
+                <option value="glass" data-i18n="themeGlassmorphism">Glassmorphism</option>
+                <option value="brutal" data-i18n="themeBrutalism">Neo‑Brutalism</option>
+                <option value="neo-noir" data-i18n="themeNeoNoir">Neo Noir Dark</option>
+                <option value="neo-anime" data-i18n="themeNeoAnime">Neo‑Anime</option>
+              </select>
+              <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M7 10l5 5 5-5z" fill="currentColor" />
+              </svg>
+            </div>
+            <p class="shortcut-info" data-i18n="themeSavedInfo" style="opacity:.8;font-size:.85rem">Your choice is saved for next time.</p>
+          </div>
+
+          <div class="toggle-container" id="synthwave-dim-container" style="display:none;">
+            <h3 data-i18n="synthOptions">Synthwave Options</h3>
+            <div class="toggle-item">
+              <span data-i18n="synthDimGlowLabel">Dim neon glow (low stimulus)</span>
+              <label class="switch">
+                <input type="checkbox" id="toggle-synthwave-dim">
+                <span class="slider"></span>
+              </label>
             </div>
           </div>
 

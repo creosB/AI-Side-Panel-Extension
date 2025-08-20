@@ -135,7 +135,7 @@
 .btn:not(.dragging):hover {
   transform: translateY(calc(-1px * var(--motion-scale))) scale(calc(1 + 0.01 * var(--motion-scale)));
   background-color: var(--hover-color);
-  box-shadow: 0 4px 16px rgba(0, 255, 170, 0.15);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary-color) 18%, transparent);
 }
 
 .btn:not(.dragging):active {
@@ -333,9 +333,9 @@
 }
 
 #add-link-btn:hover {
-  background: #00e699;
+  background: color-mix(in srgb, var(--primary-color) 85%, white 15%);
   transform: translateY(calc(-1px * var(--motion-scale))) scale(calc(1 + 0.02 * var(--motion-scale)));
-  box-shadow: 0 4px 16px rgba(0, 230, 153, 0.3);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary-color) 30%, transparent);
 }
 
 #add-link-btn:active {
@@ -389,6 +389,17 @@
   color: var(--text-color);
   background: #2a2a2a;
   transform: scale(calc(1 + 0.05 * var(--motion-scale)));
+}
+
+/* Keyboard accessibility: clear focus for buttons */
+.btn:focus-visible,
+#add-link-btn:focus-visible,
+.delete-link-btn:focus-visible,
+.shortcut-button:focus-visible,
+.social-button:focus-visible,
+.premium-social-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 45%, transparent);
 }
 
 .shortcut-button:active {

@@ -52,5 +52,15 @@
     "extractionPostedLabel": { "message": "Опубликовано" },
     "extractionTopCommentsLabel": { "message": "Топ Комментарии" },
     "extractionMediumTitle": { "message": "Статья Medium" },
-    "extractionTechCrunchTitle": { "message": "Статья TechCrunch" }
+    "extractionTechCrunchTitle": { "message": "Статья TechCrunch" },
+    "themeLabel": { "message": "Тема" },
+    "themeDefault": { "message": "По умолчанию" },
+    "themeSynthwave": { "message": "Synthwave / Ретро" },
+    "themeGlassmorphism": { "message": "Глассморфизм" },
+    "themeBrutalism": { "message": "Нео‑Брутализм" },
+    "themeNeoNoir": { "message": "Нео Нуар (тёмная)" },
+    "themeNeoAnime": { "message": "Нео‑Аниме" },
+    "themeSavedInfo": { "message": "Ваш выбор будет сохранён." },
+    "synthOptions": { "message": "Опции Synthwave" },
+    "synthDimGlowLabel": { "message": "Понизить неоновое свечение (низкая стимуляция)" }
 }
