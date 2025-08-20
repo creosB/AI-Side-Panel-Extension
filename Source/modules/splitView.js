@@ -151,6 +151,27 @@ export class SplitViewManager {
       // exit split view mode
       this.splitView = false;
       iframeContainer.classList.remove('split-view');
+
+      // Re-enable support/settings button and any navbar controls that were disabled
+      try {
+        const supportBtn = document.getElementById('support-btn');
+        const splitViewBtn = document.getElementById('split-view-btn');
+        if (supportBtn) {
+          supportBtn.disabled = false;
+          supportBtn.title = '';
+        }
+        if (splitViewBtn) {
+          // Ensure split view button is in a consistent state (not toggled)
+          splitViewBtn.disabled = false;
+          splitViewBtn.title = 'Split View';
+        }
+
+        // If settings manager exposed controls, notify it to update UI (non-fatal)
+        if (window.settingsManager && typeof window.settingsManager.updateControlStates === 'function') {
+          window.settingsManager.updateControlStates();
+        }
+      } catch (e) {
+      }
     });
   }
 
