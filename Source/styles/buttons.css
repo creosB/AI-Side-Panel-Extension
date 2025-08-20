@@ -238,13 +238,43 @@
   background: #000000;
 }
 
+/* Premium social button variant */
+.premium-social-button {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  border: none;
+  background: linear-gradient(120deg, #f39c12, #f1c40f);
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  transition: 
+    transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-back),
+    box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.premium-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--primary-color, #ff6b6b);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  display: none; /* shown only when premium */
+}
+
 .social-button[data-social="youtube"] {
   background: rgb(255, 33, 33);
 }
 
-.social-button[data-social="buymecoffee"] {
-  background: #0d0c22;
-}
 
 .social-button:hover {
   transform: translateY(calc(-2px * var(--motion-scale))) scale(calc(1 + 0.05 * var(--motion-scale)));

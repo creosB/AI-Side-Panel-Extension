@@ -15,9 +15,10 @@ class SupportMessage {
         // Avoid double initialization
         if (this.isInitialized) return;
 
-        this.container = document.querySelector('.support-message-container');
-        this.card = document.querySelector('.support-message-card');
-        this.button = document.querySelector('.support-cta-button');
+    this.container = document.querySelector('.support-message-container');
+    this.card = document.querySelector('.support-message-card');
+    // Prefer new premium button ID, fallback to new class
+    this.button = document.getElementById('premium-cta-button') || document.querySelector('.premium-cta-button');
         
         if (!this.container || !this.card || !this.button) {
             // Elements might not be ready yet, retry after a short delay
@@ -85,9 +86,11 @@ class SupportMessage {
         // Track the donation click (optional analytics)
         this.trackDonationClick();
         
-        // Proceed with navigation after animation
+        // Proceed with opening premium modal after animation.
+        // Emit a custom event so the premium module handles the modal/checkout flow.
         setTimeout(() => {
-            window.open(this.button.href, '_blank', 'noopener,noreferrer');
+            const ev = new CustomEvent('openPremiumModal', { detail: { source: 'supportMessage' } });
+            window.dispatchEvent(ev);
         }, 300);
     }
 

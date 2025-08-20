@@ -96,7 +96,7 @@
   color: #ff6b6b;
 }
 
-.support-cta-button {
+.premium-cta-button {
   position: relative;
   display: inline-block;
   text-decoration: none;
@@ -141,7 +141,7 @@
   transition: left 600ms var(--ease-out-expo);
 }
 
-.support-cta-button:hover {
+.premium-cta-button:hover {
   transform: translateY(-2px) scale(1.05);
   box-shadow: 
     0 12px 30px rgba(0, 255, 170, 0.3),
@@ -149,15 +149,15 @@
   background: linear-gradient(135deg, #00ffaa, #00e6bb);
 }
 
-.support-cta-button:hover .coffee-icon {
+.premium-cta-button:hover .coffee-icon {
   transform: rotate(-10deg) scale(1.1);
 }
 
-.support-cta-button:hover .button-shimmer {
+.premium-cta-button:hover .button-shimmer {
   left: 100%;
 }
 
-.support-cta-button:active {
+.premium-cta-button:active {
   transform: translateY(-1px) scale(1.02);
 }
 
@@ -198,7 +198,7 @@
 
 /* Fallback for animation issues */
 .support-description,
-.support-cta-button {
+.premium-cta-button {
   opacity: 1 !important;
 }
 
@@ -209,7 +209,7 @@
     animation: fade-up 600ms var(--ease-out-quart) 600ms both;
   }
   
-  .support-cta-button {
+  .premium-cta-button {
     opacity: 1;
     animation: slide-up 700ms var(--ease-out-back) 800ms both;
   }
@@ -311,7 +311,7 @@
     animation: none;
   }
   
-  .support-cta-button {
+  .premium-cta-button {
     opacity: 1;
     animation: none;
   }
@@ -329,7 +329,7 @@
     transform: none;
   }
   
-  .support-cta-button:hover {
+  .premium-cta-button:hover {
     transform: none;
   }
 }
@@ -346,7 +346,7 @@
     color: var(--text-color) !important;
   }
   
-  .support-cta-button {
+  .premium-cta-button {
     background: var(--text-color);
     color: var(--bg-color) !important;
     border: 2px solid var(--text-color);

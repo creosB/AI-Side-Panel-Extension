@@ -30,3 +30,6 @@
 
 /* 10. Accessibility (should be last to override if needed) */
 @import './styles/accessibility.css';
+
+/* 11. Premium modal styles */
+@import './styles/premium.css';

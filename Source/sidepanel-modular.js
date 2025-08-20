@@ -6,6 +6,7 @@ import { SaveManager } from './modules/saveManager.js';
 import { CustomLinkManager } from './modules/customLink.js';
 import { ContentExtractorManager } from './modules/contentExtractor.js';
 import SupportMessage from './modules/supportMessage.js';
+import PremiumManager from './modules/premium.js';
 
 class SidePanelApp {
   constructor() {
@@ -17,6 +18,7 @@ class SidePanelApp {
     this.splitViewManager = new SplitViewManager();
     this.contentExtractorManager = new ContentExtractorManager();
     this.supportMessage = new SupportMessage();
+  this.premiumManager = new PremiumManager();
 
     // Make managers globally available for cross-module communication
     window.saveManager = this.saveManager;
@@ -26,6 +28,7 @@ class SidePanelApp {
     window.splitViewManager = this.splitViewManager;
     window.contentExtractorManager = this.contentExtractorManager;
     window.supportMessage = this.supportMessage;
+  window.premiumManager = this.premiumManager;
 
     // Define global variables for compatibility
     window.buttons = document.querySelectorAll('.btn[data-url]');
@@ -57,6 +60,8 @@ class SidePanelApp {
       
       // Initialize support message after everything else is ready
       this.supportMessage.init();
+  // Initialize premium
+  this.premiumManager.init();
       
       
     } catch (error) {
@@ -68,6 +73,7 @@ class SidePanelApp {
       this.navBarManager.loadInitialUrl();
       this.splitViewManager.initialize();
       this.supportMessage.init();
+  this.premiumManager.init();
       
     }
   }

@@ -1,0 +1,181 @@
+/* Premium Modal Styles - consistent with existing design system */
+
+.premium-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none; /* toggled via .is-open */
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.premium-modal-overlay.is-open {
+  display: flex;
+}
+
+.premium-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  animation: fade-in var(--standard-duration) var(--ease-out-quart);
+}
+
+.premium-modal {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 16px;
+  background: linear-gradient(135deg,
+    rgba(10, 10, 10, 0.92) 0%,
+    rgba(20, 20, 20, 0.92) 50%,
+    rgba(30, 30, 30, 0.92) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transform: translateY(6px) scale(0.98);
+  opacity: 0;
+  animation: modal-in var(--spring-duration) var(--ease-spring) forwards;
+}
+
+.premium-modal-header {
+  padding: 20px 24px 0 24px;
+}
+
+.premium-modal-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff, #00ffaa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.premium-modal-subtitle {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.premium-modal-body {
+  padding: 20px 24px 24px 24px;
+}
+
+.premium-features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 12px 0 16px 0;
+}
+
+.premium-feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+}
+
+.premium-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.premium-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-color);
+  transition: border-color var(--standard-duration) var(--ease-out-quart),
+    box-shadow var(--standard-duration) var(--ease-out-quart);
+}
+
+.premium-input::placeholder { color: rgba(255, 255, 255, 0.6); }
+
+.premium-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 255, 170, 0.15);
+}
+
+.premium-status {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  padding: 10px 12px;
+  border-radius: 10px;
+  display: none; /* toggled when has text */
+}
+
+.premium-status.show { display: block; }
+.premium-status.success { color: #8ef0c9; background: rgba(0, 255, 170, 0.12); }
+.premium-status.error { color: #ff8080; background: rgba(255, 64, 64, 0.12); }
+.premium-status.info { color: #ffe08a; background: rgba(255, 200, 64, 0.12); }
+
+.premium-actions {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.premium-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform var(--quick-duration) var(--ease-out-expo),
+    box-shadow var(--standard-duration) var(--ease-out-quart),
+    background-color var(--standard-duration) var(--ease-out-quart);
+}
+
+.premium-btn.primary {
+  background: linear-gradient(135deg, #00ffaa, #00d4aa);
+  color: #000;
+}
+
+.premium-btn.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-color);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.premium-btn:hover { transform: translateY(-1px) scale(1.01); }
+.premium-btn:active { transform: scale(0.98); }
+
+.premium-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: var(--text-color);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.premium-close:hover { background: rgba(255, 255, 255, 0.06); }
+
+@keyframes modal-in {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
