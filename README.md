@@ -48,7 +48,7 @@ The **AI Side Panel Extension** for Chrome provides an easy and convenient way t
 ![5](https://raw.githubusercontent.com/creosB/AI-Side-Panel-Extension/refs/heads/main/Images/EN/EN_Screen5.png) | 
 
 ## Video
-[![Youtube](http://img.youtube.com/vi/IXg5vbPg-i0/0.jpg)](https://youtu.be/IXg5vbPg-i0)
+[![Youtube](http://img.youtube.com/vi/IXg5vbPg-i0/0.jpg)](https://youtu.be/XgjswBi9eyU)
 
 
 # License
