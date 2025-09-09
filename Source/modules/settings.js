@@ -9,6 +9,7 @@ export class SettingsManager {
     this.initializeLanguageSettings();
     this.initializeToggleHandlers();
   this.initializeThemeSettings();
+  this.initializeRememberLastModelSetting();
   }
 
   initializeShortcutSettings() {
@@ -250,10 +251,30 @@ export class SettingsManager {
         this.handleToggleChange(e.target);
       }
     });
+
+  // Initialize remember-last-model toggle state immediately after handlers are set
+  this.initializeRememberLastModelSetting();
+  }
+
+  initializeRememberLastModelSetting() {
+    const toggle = document.getElementById('toggle-remember-last-model');
+    if (!toggle) return;
+    // Default ON if not set
+  const stored = localStorage.getItem('rememberLastModel');
+  toggle.checked = stored === 'true';
+    toggle.addEventListener('change', () => {
+      localStorage.setItem('rememberLastModel', String(toggle.checked));
+    });
   }
 
   handleToggleChange(toggle) {
     const service = toggle.id.replace('toggle-', '');
+
+    // Special case: Remember last selected model (no button to show/hide)
+    if (service === 'remember-last-model') {
+      localStorage.setItem('rememberLastModel', String(toggle.checked));
+      return;
+    }
 
 
     // Handle custom links
@@ -267,11 +288,11 @@ export class SettingsManager {
       document.querySelectorAll('.toggle-item input[type="checkbox"]')
     ).filter(t => {
       const toggleService = t.id.replace('toggle-', '');
-      return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'githubcopilot'].includes(toggleService);
+      return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'kimi', 'githubcopilot'].includes(toggleService);
     }).length;
 
     // Prevent disabling last service
-    if (!toggle.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'githubcopilot'].includes(service)) {
+  if (!toggle.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'kimi', 'githubcopilot'].includes(service)) {
       toggle.checked = true;
       return;
     }
@@ -293,6 +314,7 @@ export class SettingsManager {
 
   handleBuiltInServiceToggle(toggle, service) {
     const selectors = {
+  'remember-last-model': null,
       'chatgpt': '[data-url*="chatgpt.com"]',
       'gemini': '[data-url*="gemini.google.com"]',
       'claude': '[data-url*="claude.ai"]',
@@ -302,6 +324,7 @@ export class SettingsManager {
       'mistral': '[data-url*="chat.mistral.ai/chat"]',
       'perplexity': '[data-url*="perplexity.ai"]',
       'qwen': '[data-url*="chat.qwen.ai"]',
+      'kimi': '[data-url*="kimi.com"]',
       'githubcopilot': '[data-url*="github.com/copilot"]',
       'split-view': '#split-view-btn',
       'content-extractor': '#content-extractor-btn',
@@ -315,12 +338,15 @@ export class SettingsManager {
       return;
     }
     
-    const selector = selectors[service];
-    const button = document.querySelector(selector);
+  const selector = selectors[service];
+  const button = selector ? document.querySelector(selector) : null;
     
     if (button) {
       button.style.display = toggle.checked ? 'flex' : 'none';
       localStorage.setItem(`show_${service}`, toggle.checked.toString());
+    } else if (service === 'remember-last-model') {
+      // Already handled above, but keep storage consistent if called directly
+      localStorage.setItem('rememberLastModel', toggle.checked.toString());
     }
   }
 
@@ -345,6 +371,7 @@ export class SettingsManager {
 
   initializeToggles() {
     const toggles = {
+      'remember-last-model': null,
       'chatgpt': '[data-url*="chatgpt.com"]',
       'gemini': '[data-url*="gemini.google.com"]',
       'claude': '[data-url*="claude.ai"]',
@@ -354,10 +381,11 @@ export class SettingsManager {
       'mistral': '[data-url*="chat.mistral.ai/chat"]',
       'perplexity': '[data-url*="perplexity.ai"]',
       'qwen': '[data-url*="chat.qwen.ai"]',
+      'kimi': '[data-url*="kimi.com"]',
       'githubcopilot': '[data-url*="github.com/copilot"]',
       'split-view': '#split-view-btn',
       'content-extractor': '#content-extractor-btn',
-      'scrollbar-always-visible': null // Special case - doesn't toggle a button
+  'scrollbar-always-visible': null // Special case - doesn't toggle a button
     };
     
     // Add custom links to the toggles object - now they should exist in DOM
@@ -401,6 +429,10 @@ export class SettingsManager {
       } else if (key === 'scrollbar-always-visible') {
         // Handle scrollbar visibility setting
         isVisible = storedValue !== null ? storedValue === 'true' : true; // Default to always visible
+      } else if (key === 'remember-last-model') {
+        // Remember last model setting (stored under different key, default true)
+        const rlm = localStorage.getItem('rememberLastModel');
+        isVisible = rlm !== 'false';
       } else {
         // Use stored value if it exists, otherwise use the checkbox's default checked state
         // For built-in services, default to true if no toggle exists
@@ -417,6 +449,10 @@ export class SettingsManager {
       } else if (key === 'scrollbar-always-visible') {
         // Apply scrollbar visibility setting
         this.handleScrollbarVisibilitySetting(isVisible);
+      } else if (key === 'remember-last-model') {
+        // Sync UI state with storage
+        const rlmToggle = document.getElementById('toggle-remember-last-model');
+        if (rlmToggle) rlmToggle.checked = isVisible;
       } else if (key.startsWith('custom-')) {
         console.warn(`Custom button not found for ${key}, selector: ${selector}`);
       }

@@ -16,6 +16,26 @@ export class SaveManager {
     }
   }
 
+  // Persist last selected model URL for optional restore on next open
+  saveLastSelectedModel(url) {
+    try {
+      if (typeof url === 'string' && url.trim()) {
+        localStorage.setItem('lastSelectedModelUrl', url);
+      }
+    } catch (error) {
+      console.error('Error saving last selected model:', error);
+    }
+  }
+
+  getLastSelectedModel() {
+    try {
+      return localStorage.getItem('lastSelectedModelUrl');
+    } catch (error) {
+      console.error('Error getting last selected model:', error);
+      return null;
+    }
+  }
+
   restoreButtonOrder() {
     const toolbar = document.getElementById('toolbar');
     const savedOrder = localStorage.getItem('buttonOrder');

@@ -9,6 +9,7 @@
     "splitView": { "message": "Vue divisée" },
     "scrollbarAlwaysVisible": { "message": "Barre de défilement toujours visible" },
     "customizeNavigation": { "message": "Personnalisation de la navigation" },
+    "rememberLastModel": { "message": "Se souvenir du dernier modèle sélectionné" },
     "appDescription": { "message": "Accédez facilement aux sites d'IA via le panneau latéral" },
     "customLinks": { "message": "Liens Personnalisés" },
     "add": { "message": "Ajouter" },

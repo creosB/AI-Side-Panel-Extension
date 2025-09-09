@@ -11,7 +11,7 @@
     "storage"
   ],
   "description": "__MSG_appDescription__",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "side_panel": {
     "default_path": "sidepanel.html"
   },

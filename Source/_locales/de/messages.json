@@ -8,6 +8,7 @@
     "splitView": { "message": "Geteilte Ansicht" },
     "scrollbarAlwaysVisible": { "message": "Scrollleiste immer sichtbar" },
     "customizeNavigation": { "message": "Navigation anpassen" },
+    "rememberLastModel": { "message": "Zuletzt ausgewähltes Modell merken" },
     "appDescription": { "message": "Greifen Sie einfach über das Seitenpanel auf KI-Websites zu" },
     "customLinks": { "message": "Benutzerdefinierte Links" },
     "add": { "message": "Hinzufügen" },

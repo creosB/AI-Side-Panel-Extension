@@ -8,6 +8,7 @@
     "splitView": { "message": "Разделенный вид" },
     "scrollbarAlwaysVisible": { "message": "Полоса прокрутки всегда видима" },
     "customizeNavigation": { "message": "Настройка навигации" },
+    "rememberLastModel": { "message": "Запоминать последний выбранный модель" },
     "appDescription": { "message": "Легкий доступ к сайтам с искусственным интеллектом через боковую панель" },
     "customLinks": { "message": "Пользовательские ссылки" },
     "add": { "message": "Добавить" },

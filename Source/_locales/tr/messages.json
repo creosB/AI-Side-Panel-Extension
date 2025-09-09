@@ -8,6 +8,7 @@
     "splitView": { "message": "Bölünmüş Görünüm" },
     "scrollbarAlwaysVisible": { "message": "Kaydırma çubuğu her zaman görünür" },
     "customizeNavigation": { "message": "Navigasyon Özelleştirme" },
+    "rememberLastModel": { "message": "Son seçilen modeli hatırla" },
     "appDescription": { "message": "AI sitelerine kolayca erişmek için yan panel" },
     "customLinks": { "message": "Özel Bağlantılar" },
     "add": { "message": "Ekle" },

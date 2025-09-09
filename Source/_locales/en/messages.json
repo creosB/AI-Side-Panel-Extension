@@ -26,6 +26,9 @@
   "customizeNavigation": {
     "message": "Customize Navigation"
   },
+  "rememberLastModel": {
+    "message": "Remember last selected model"
+  },
   "appDescription": {
     "message": "Easily access AI sites via side panel"
   },

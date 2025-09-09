@@ -77,7 +77,7 @@ export class NavBarManager {
       this._switchCommitTimer = null;
       this._pendingTarget = null;
     }
-    const url = button.getAttribute('data-url');
+  const url = button.getAttribute('data-url');
 
     // Update split view button state
     splitViewBtn.disabled = false;
@@ -108,6 +108,11 @@ export class NavBarManager {
     // Update active button state
     toolbar.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
+
+    // Persist last selected model (URL) for optional restore
+    try {
+      window.saveManager?.saveLastSelectedModel(url);
+    } catch { }
 
     // After switching, try to focus the search box inside the destination site
     this.focusSearchInIframe(iframe, url);
@@ -159,7 +164,7 @@ export class NavBarManager {
 
   loadInitialUrl() {
     const iframe = document.getElementById('main-iframe');
-    const firstVisibleButton = document.querySelector('.btn[data-url]:not([style*="display: none"])');
+  const firstVisibleButton = document.querySelector('.btn[data-url]:not([style*="display: none"])');
     const defaultUrl = "https://chatgpt.com/";
 
     if (!iframe) {
@@ -178,14 +183,34 @@ export class NavBarManager {
 
     iframe.addEventListener('load', handleLoad);
 
-    // Set the URL (either from visible button or default)
-    const url = firstVisibleButton ? firstVisibleButton.getAttribute('data-url') : defaultUrl;
+    // Determine initial URL based on settings: remember last model if enabled
+    let url = defaultUrl;
+    try {
+      const remember = localStorage.getItem('rememberLastModel') === 'true'; // default false
+      const last = remember ? window.saveManager?.getLastSelectedModel?.() : null;
+      if (remember && last) {
+        // Ensure the button for the last URL is currently visible/enabled
+        const matchBtn = document.querySelector(`.btn[data-url="${last}"]`);
+        const isVisible = matchBtn && getComputedStyle(matchBtn).display !== 'none';
+        if (isVisible) {
+          url = last;
+        } else if (firstVisibleButton) {
+          url = firstVisibleButton.getAttribute('data-url');
+        }
+      } else if (firstVisibleButton) {
+        url = firstVisibleButton.getAttribute('data-url');
+      }
+    } catch {
+      url = firstVisibleButton ? firstVisibleButton.getAttribute('data-url') : defaultUrl;
+    }
     iframe.src = url;
 
     // Add active class to the first visible button if it exists
-    if (firstVisibleButton) {
+    // Set active class to the button matching the chosen URL
+  const activeBtn = document.querySelector(`.btn[data-url="${url}"]`) || firstVisibleButton;
+    if (activeBtn) {
       document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
-      firstVisibleButton.classList.add('active');
+      activeBtn.classList.add('active');
     }
   }
 
@@ -625,6 +650,7 @@ export class NavBarManager {
           const splitViewBtn = document.getElementById('split-view-btn');
           const supportBtn = document.getElementById('support-btn');
           this.handleServiceButtonClick(btn, iframe, supportPage, splitViewBtn, supportBtn, toolbar);
+          try { window.saveManager?.saveLastSelectedModel(btn.getAttribute('data-url')); } catch {}
         }
       }, this._shortcutNavDelay);
     }
