@@ -63,4 +63,11 @@
     "themeSavedInfo": { "message": "Seçiminiz kaydedilir." },
     "synthOptions": { "message": "Synthwave Seçenekleri" },
     "synthDimGlowLabel": { "message": "Neon parlamayı kıs (düşük uyarım)" }
+    ,
+    "modelShortcutsLabel": { "message": "Model Kısayolları" },
+    "switchNext": { "message": "Sonraki model" },
+    "switchPrev": { "message": "Önceki model" },
+    "shortcutsManage": { "message": "Kısayolları yönet" },
+    "shortcutsNote": { "message": "Kısayollar tarayıcı tarafından yönetilir. Bir kombinasyon sistem veya tarayıcı tuşlarıyla çakışırsa başka birini seçin." },
+    "notSet": { "message": "Ayarlanmadı" }
 }

@@ -63,4 +63,11 @@
     "themeSavedInfo": { "message": "你的选择会被保存。" },
     "synthOptions": { "message": "合成波选项" },
     "synthDimGlowLabel": { "message": "降低霓虹光（低刺激）" }
+    ,
+    "modelShortcutsLabel": { "message": "模型快捷键" },
+    "switchNext": { "message": "下一个模型" },
+    "switchPrev": { "message": "上一个模型" },
+    "shortcutsManage": { "message": "管理快捷键" },
+    "shortcutsNote": { "message": "快捷键由浏览器管理。如果组合与系统或浏览器按键冲突，请选择其他组合。" },
+    "notSet": { "message": "未设置" }
 }

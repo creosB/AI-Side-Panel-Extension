@@ -234,49 +234,66 @@
             </div>
             <div id="custom-links-list"></div>
           </div>
-          <div class="shortcut-container" id="theme-section">
-            <h3 data-i18n="shortcutLabel"></h3>
+          <!-- Unified Keyboard Shortcuts Section -->
+          <div class="shortcut-container" id="shortcut-section">
+            <div class="shortcut-header" style="display:flex;align-items:center;justify-content:space-between">
+              <h3 data-i18n="shortcutLabel" style="margin:0"></h3>
+              <button id="manage-shortcuts-all" class="shortcut-button" title="Manage shortcuts" aria-label="Manage shortcuts" style="margin-left:12px">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c-.59-.24-1.13-.56-1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.03-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+                </svg>
+              </button>
+            </div>
             <div class="shortcut-item">
-              <span data-i18n="toggleExtension"
-                style="margin-right: 10px"></span>
+              <span data-i18n="toggleExtension" style="margin-right: 10px"></span>
               <div class="shortcut-input-wrapper">
-                <input type="text" id="shortcut-input" value="Alt+Q" readonly>
-                <button id="change-shortcut" class="shortcut-button"
-                  title="Change shortcut">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                    viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                      d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.03-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
-                  </svg>
-                </button>
+                <input type="text" id="shortcut-input" class="shortcut-input" value="Alt+Q" readonly>
               </div>
             </div>
+
+            <!-- Model switching shortcuts (read-only, managed in browser) -->
+            <div class="shortcut-item">
+              <span data-i18n="switchNext" style="margin-right: 10px">Next model</span>
+              <div class="shortcut-input-wrapper">
+                <input type="text" id="shortcut-next-input" class="shortcut-input" value="Alt+Shift+N" readonly>
+              </div>
+            </div>
+            <div class="shortcut-item">
+              <span data-i18n="switchPrev" style="margin-right: 10px">Previous model</span>
+              <div class="shortcut-input-wrapper">
+                <input type="text" id="shortcut-prev-input" class="shortcut-input" value="Alt+Shift+P" readonly>
+              </div>
+            </div>
+
+            <!-- manage button moved to header -->
             <p class="shortcut-info" data-i18n="shortcutInfo"></p>
+            <p class="shortcut-info" data-i18n="shortcutsNote" style="opacity:.8;font-size:.85rem">Shortcuts are managed by your browser. If a combo conflicts with system or browser keys, pick another.</p>
           </div>
 
-          <div class="shortcut-container">
-            <h3 data-i18n="language" data-i18n-fallback="Language"></h3>
+          <!-- Language Section -->
+          <div class="toggle-container" id="language-section">
+            <h3 data-i18n="language"></h3>
             <div class="select-wrapper">
               <select id="language-select">
                 <option value="en">English</option>
+                <option value="de">Deutsch</option>
                 <option value="es">Español</option>
                 <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
                 <option value="ru">Русский</option>
-                <option value="zh_CN">中文</option>
                 <option value="tr">Türkçe</option>
+                <option value="zh_CN">中文</option>
               </select>
-              <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24">
+              <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M7 10l5 5 5-5z" fill="currentColor" />
               </svg>
             </div>
           </div>
 
-          <div class="shortcut-container" id="theme-settings-section">
+          <!-- Theme Section (Premium-gated) -->
+          <div class="toggle-container" id="theme-settings-section">
             <h3 data-i18n="themeLabel">Theme</h3>
             <div class="select-wrapper">
-              <select id="theme-select" aria-label="Theme">
+              <select id="theme-select">
                 <option value="default" data-i18n="themeDefault">Default</option>
                 <option value="synthwave" data-i18n="themeSynthwave">Synthwave</option>
                 <option value="glass" data-i18n="themeGlassmorphism">Glassmorphism</option>

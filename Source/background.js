@@ -252,3 +252,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
   }
 });
+
+// Global keyboard command handling: route to side panel
+try {
+  chrome.commands.onCommand.addListener(async (command) => {
+    if (command !== 'next_ai_model' && command !== 'previous_ai_model') return;
+    // Broadcast to any side panel instance; sidepanel listens and acts
+    chrome.runtime.sendMessage({ type: 'AI_MODEL_SWITCH', direction: command === 'next_ai_model' ? 'next' : 'prev' });
+  });
+} catch (_) {}

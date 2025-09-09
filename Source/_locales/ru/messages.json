@@ -63,4 +63,11 @@
     "themeSavedInfo": { "message": "Ваш выбор будет сохранён." },
     "synthOptions": { "message": "Опции Synthwave" },
     "synthDimGlowLabel": { "message": "Понизить неоновое свечение (низкая стимуляция)" }
+    ,
+    "modelShortcutsLabel": { "message": "Горячие клавиши моделей" },
+    "switchNext": { "message": "Следующая модель" },
+    "switchPrev": { "message": "Предыдущая модель" },
+    "shortcutsManage": { "message": "Управление горячими клавишами" },
+    "shortcutsNote": { "message": "Горячие клавиши управляются вашим браузером. Если сочетание конфликтует с системными или браузерными клавишами, выберите другое." },
+    "notSet": { "message": "Не задано" }
 }

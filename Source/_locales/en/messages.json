@@ -9,7 +9,7 @@
     "message": "Made with <span class=\"heart\">❤</span> by Creos"
   },
   "shortcutInfo": {
-    "message": "Click the settings icon to change the keyboard shortcut in Chrome's keyboard shortcuts page. <br> Recommended: ALT + Q / ⌘ + Shift + Q"
+  "message": "Click the settings icon to change keyboard shortcuts in Chrome's shortcuts page. <br> Open/Close: Alt+Q / ⌘+Shift+A &nbsp;•&nbsp; Next model: Alt+Shift+N &nbsp;•&nbsp; Previous model: Alt+Shift+P"
   },
   "language": {
     "message": "Language"
@@ -159,4 +159,11 @@
   "themeSavedInfo": { "message": "Your choice is saved for next time." },
   "synthOptions": { "message": "Synthwave Options" },
   "synthDimGlowLabel": { "message": "Dim neon glow (low stimulus)" }
+  ,
+  "modelShortcutsLabel": { "message": "Model Shortcuts" },
+  "switchNext": { "message": "Next model" },
+  "switchPrev": { "message": "Previous model" },
+  "shortcutsManage": { "message": "Manage shortcuts" },
+  "shortcutsNote": { "message": "Shortcuts are managed by your browser. If a combo conflicts with system or browser keys, pick another." },
+  "notSet": { "message": "Not set" }
 }

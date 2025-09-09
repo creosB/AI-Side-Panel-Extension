@@ -64,4 +64,11 @@
     "themeSavedInfo": { "message": "Votre choix sera enregistré." },
     "synthOptions": { "message": "Options Synthwave" },
     "synthDimGlowLabel": { "message": "Atténuer l'éclat néon (faible stimulation)" }
+    ,
+    "modelShortcutsLabel": { "message": "Raccourcis du modèle" },
+    "switchNext": { "message": "Modèle suivant" },
+    "switchPrev": { "message": "Modèle précédent" },
+    "shortcutsManage": { "message": "Gérer les raccourcis" },
+    "shortcutsNote": { "message": "Les raccourcis sont gérés par votre navigateur. Si une combinaison entre en conflit avec des touches système ou du navigateur, choisissez-en une autre." },
+    "notSet": { "message": "Non défini" }
 }

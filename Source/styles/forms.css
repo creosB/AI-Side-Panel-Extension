@@ -1,6 +1,7 @@
 /* Form Elements - Premium Animation System */
 #custom-link-input,
-#shortcut-input {
+#shortcut-input,
+.shortcut-input {
   background: #2a2a2a;
   border: 1px solid #444;
   color: var(--text-color);
@@ -19,7 +20,8 @@
 }
 
 #custom-link-input:focus,
-#shortcut-input:focus {
+#shortcut-input:focus,
+.shortcut-input:focus {
   outline: none;
   border-color: var(--primary-color);
   background-color: #1a1a1a;
@@ -30,17 +32,20 @@
 }
 
 #custom-link-input:hover,
-#shortcut-input:hover {
+#shortcut-input:hover,
+.shortcut-input:hover {
   border-color: #666;
   transform: translateY(calc(-0.5px * var(--motion-scale)));
 }
 
-#shortcut-input {
+#shortcut-input,
+.shortcut-input {
   width: 150px;
   cursor: pointer;
 }
 
-#shortcut-input.recording {
+#shortcut-input.recording,
+.shortcut-input.recording {
   border-color: var(--primary-color);
   background-color: #1a1a1a;
   color: var(--primary-color);
@@ -147,7 +152,8 @@ select option:checked {
 /* Keyboard accessibility: clear focus for select and inputs */
 select:focus-visible,
 #custom-link-input:focus-visible,
-#shortcut-input:focus-visible {
+#shortcut-input:focus-visible,
+.shortcut-input:focus-visible {
   outline: none;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 45%, transparent);
 }
@@ -156,11 +162,13 @@ select:focus-visible,
 @media (prefers-reduced-motion: reduce) {
   #custom-link-input:focus,
   #shortcut-input:focus,
+  .shortcut-input:focus,
   select:focus {
     transform: none;
   }
   
-  #shortcut-input.recording {
+  #shortcut-input.recording,
+  .shortcut-input.recording {
     animation: none;
     box-shadow: 0 0 0 2px var(--primary-color);
   }

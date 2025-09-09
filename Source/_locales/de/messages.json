@@ -63,4 +63,11 @@
     "themeSavedInfo": { "message": "Ihre Auswahl wird gespeichert." },
     "synthOptions": { "message": "Synthwave‑Optionen" },
     "synthDimGlowLabel": { "message": "Neon‑Glow dimmen (reizarm)" }
+    ,
+    "modelShortcutsLabel": { "message": "Modell‑Tastenkombinationen" },
+    "switchNext": { "message": "Nächstes Modell" },
+    "switchPrev": { "message": "Vorheriges Modell" },
+    "shortcutsManage": { "message": "Tastenkombinationen verwalten" },
+    "shortcutsNote": { "message": "Tastenkombinationen werden vom Browser verwaltet. Wenn eine Kombination mit System- oder Browser-Tasten kollidiert, wählen Sie eine andere." },
+    "notSet": { "message": "Nicht festgelegt" }
 }

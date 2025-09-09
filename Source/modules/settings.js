@@ -12,18 +12,20 @@ export class SettingsManager {
   }
 
   initializeShortcutSettings() {
-    const changeShortcutBtn = document.getElementById('change-shortcut');
+  const manageAllBtn = document.getElementById('manage-shortcuts-all');
+  const nextInput = document.getElementById('shortcut-next-input');
+  const prevInput = document.getElementById('shortcut-prev-input');
 
-    if (!changeShortcutBtn) {
-      console.error('Change shortcut button not found');
+    if (!manageAllBtn) {
+      console.error('Manage shortcuts button not found');
       return;
     }
 
-    changeShortcutBtn.addEventListener('click', () => {
+    const openShortcutsPage = () => {
       // Create a notification to guide users
       const notification = document.createElement('div');
       notification.className = 'notification';
-      notification.textContent = 'Look for "AI Side Panel" to change the shortcut.';
+      notification.textContent = 'Find "AI Side Panel" to change shortcuts.';
       document.body.appendChild(notification);
 
       // Remove notification after 3 seconds
@@ -32,17 +34,26 @@ export class SettingsManager {
       }, 3000);
 
       // Open Chrome's keyboard shortcuts page
-      chrome.tabs.create({
-        url: 'chrome://extensions/shortcuts'
-      });
-    });
+      // Detect Chromium-based browser for proper URL; fallback to Chrome
+      let url = 'chrome://extensions/shortcuts';
+      try {
+        // Edge uses edge://extensions/shortcuts
+        const ua = navigator.userAgent.toLowerCase();
+        if (ua.includes('edg/')) url = 'edge://extensions/shortcuts';
+      } catch {}
+      chrome.tabs.create({ url });
+    };
 
-    // Get current shortcut from commands API
+      manageAllBtn?.addEventListener('click', openShortcutsPage);    // Get current shortcut from commands API
     chrome.commands.getAll((commands) => {
-      const command = commands.find(cmd => cmd.name === '_execute_action');
-      if (command && command.shortcut) {
-        document.getElementById('shortcut-input').value = command.shortcut;
-      }
+      const get = (name) => commands.find((c) => c.name === name);
+      const openCmd = get('_execute_action');
+      const nextCmd = get('next_ai_model');
+      const prevCmd = get('previous_ai_model');
+      const openInput = document.getElementById('shortcut-input');
+      if (openCmd?.shortcut && openInput) openInput.value = openCmd.shortcut;
+        if (nextInput) nextInput.value = nextCmd?.shortcut || this._t?.('notSet') || 'Not set';
+        if (prevInput) prevInput.value = prevCmd?.shortcut || this._t?.('notSet') || 'Not set';
     });
   }
 

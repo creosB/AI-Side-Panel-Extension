@@ -4,6 +4,10 @@ export class NavBarManager {
     this.init();
     // Make this instance globally available
     window.navBarManager = this;
+  // Debounced commit delay for shortcut-based model switching (ms)
+  this._shortcutNavDelay = 450;
+  this._switchCommitTimer = null;
+  this._pendingTarget = null;
   }
 
   init() {
@@ -29,7 +33,7 @@ export class NavBarManager {
     toolbar.addEventListener('click', (e) => {
       const button = e.target.closest('.btn[data-url]');
       const supportButton = e.target.closest('#support-btn');
-      
+
       if (button && button.hasAttribute('data-url')) {
         this.handleServiceButtonClick(button, iframe, supportPage, splitViewBtn, supportBtn, toolbar);
       } else if (supportButton) {
@@ -37,22 +41,55 @@ export class NavBarManager {
       }
       // Note: Split view button handler is in the split view module
     });
+
+  // Runtime message handling is centralized in sidepanel-modular.js
+
+    // In-panel fallback shortcuts (only when global commands are unassigned)
+    let fallbackEnabled = false;
+    try {
+      chrome.commands.getAll((cmds) => {
+        const find = (n) => cmds.find((c) => c.name === n);
+        const next = find('next_ai_model');
+        const prev = find('previous_ai_model');
+        fallbackEnabled = !(next?.shortcut) || !(prev?.shortcut);
+      });
+    } catch { }
+
+    document.addEventListener('keydown', (e) => {
+      if (!fallbackEnabled) return;
+      // Avoid when typing in inputs/selects/textareas or with modifiers like Ctrl in text fields
+      const tag = (document.activeElement?.tagName || '').toLowerCase();
+      const isTyping = tag === 'input' || tag === 'textarea' || tag === 'select' || document.activeElement?.isContentEditable;
+      if (isTyping) return;
+
+      // Use Alt+[ or Alt+] as low-conflict fallback keys
+      const altOnly = e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey;
+      if (!altOnly) return;
+      if (e.key === ']') { e.preventDefault(); this.switchModel(1); }
+      if (e.key === '[') { e.preventDefault(); this.switchModel(-1); }
+    });
   }
 
   handleServiceButtonClick(button, iframe, supportPage, splitViewBtn, supportBtn, toolbar) {
+    // If there is a pending delayed switch (from shortcuts), cancel it and commit now via this click
+    if (this._switchCommitTimer) {
+      clearTimeout(this._switchCommitTimer);
+      this._switchCommitTimer = null;
+      this._pendingTarget = null;
+    }
     const url = button.getAttribute('data-url');
-    
+
     // Update split view button state
     splitViewBtn.disabled = false;
     splitViewBtn.title = '';
     supportBtn.classList.remove('active');
-    
+
     // Hide support page smoothly
     supportPage.classList.remove('active');
     setTimeout(() => {
       supportPage.style.display = 'none';
     }, 200);
-    
+
     // Show loading spinner and hide iframe
     this.toggleLoadingState(true);
 
@@ -71,13 +108,22 @@ export class NavBarManager {
     // Update active button state
     toolbar.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
+
+    // After switching, try to focus the search box inside the destination site
+    this.focusSearchInIframe(iframe, url);
   }
 
   handleSupportButtonClick(iframe, supportPage, toolbar, supportButton) {
+    // Cancel any pending delayed navigation when opening support
+    if (this._switchCommitTimer) {
+      clearTimeout(this._switchCommitTimer);
+      this._switchCommitTimer = null;
+      this._pendingTarget = null;
+    }
     // Handle support button click
     this.toggleLoadingState(false); // Hide spinner for support page
     iframe.style.display = 'none';
-    
+
     // Show support page with smooth animation
     supportPage.style.display = 'flex';
     requestAnimationFrame(() => {
@@ -104,7 +150,7 @@ export class NavBarManager {
   toggleLoadingState(show) {
     const loadingSpinner = document.querySelector('.loading-spinner');
     const iframe = document.getElementById('main-iframe');
-    
+
     if (loadingSpinner && iframe) {
       loadingSpinner.style.display = show ? 'block' : 'none';
       iframe.style.display = show ? 'none' : 'block';
@@ -230,7 +276,7 @@ export class NavBarManager {
           return btn.getAttribute('data-url');
         })
         .filter(url => url !== null && url !== undefined && url !== ''); // Filter out null/undefined/empty values
-      
+
       if (window.saveManager) {
         window.saveManager.saveButtonOrder(newOrder);
       } else {
@@ -296,11 +342,11 @@ export class NavBarManager {
     // Enhanced scroll event handler with premium feedback
     const handleScroll = () => {
       hideScrollHint(); // Hide hint on first scroll
-      
+
       if (!isScrolling) {
         isScrolling = true;
         toolbar.classList.add('scrolling');
-        
+
         // Cancel any existing RAF
         if (rafId) {
           cancelAnimationFrame(rafId);
@@ -309,10 +355,10 @@ export class NavBarManager {
 
       // Update scroll indicators
       this.updateScrollIndicators(toolbar);
-      
+
       // Clear existing timeout
       clearTimeout(scrollTimeout);
-      
+
       // Set timeout to end scrolling state
       scrollTimeout = setTimeout(() => {
         isScrolling = false;
@@ -329,26 +375,26 @@ export class NavBarManager {
     // Enhanced wheel event for smooth horizontal scrolling
     toolbar.addEventListener('wheel', (e) => {
       hideScrollHint(); // Hide hint on wheel interaction
-      
+
       // Check if it's a horizontal scroll or if we should convert vertical to horizontal
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
         // Already horizontal scroll, let it happen naturally
         return;
       }
-      
+
       // Convert vertical wheel to horizontal scroll for better UX
       e.preventDefault();
-      
+
       // More responsive scrolling with adaptive sensitivity
       const sensitivity = e.ctrlKey ? 0.5 : 1.2; // Slower when Ctrl is held for precision
       const scrollAmount = e.deltaY * sensitivity;
-      
+
       // Check for bounds to provide gentle bounce feedback
       const currentScroll = toolbar.scrollLeft;
       const maxScroll = toolbar.scrollWidth - toolbar.clientWidth;
-      
-      if ((currentScroll <= 0 && scrollAmount < 0) || 
-          (currentScroll >= maxScroll && scrollAmount > 0)) {
+
+      if ((currentScroll <= 0 && scrollAmount < 0) ||
+        (currentScroll >= maxScroll && scrollAmount > 0)) {
         // At bounds - provide subtle bounce feedback
         toolbar.style.transform = `translateX(${scrollAmount > 0 ? -2 : 2}px)`;
         requestAnimationFrame(() => {
@@ -356,7 +402,7 @@ export class NavBarManager {
         });
         return;
       }
-      
+
       toolbar.scrollBy({
         left: scrollAmount,
         behavior: 'auto' // Immediate response for better feel
@@ -379,11 +425,11 @@ export class NavBarManager {
       const currentTime = Date.now();
       const deltaTime = currentTime - lastTouchTime;
       const deltaX = e.touches[0].clientX - touchStartX;
-      
+
       if (deltaTime > 0) {
         touchVelocity = deltaX / deltaTime;
       }
-      
+
       lastTouchTime = currentTime;
       touchStartX = e.touches[0].clientX;
     }, { passive: true });
@@ -401,7 +447,7 @@ export class NavBarManager {
 
     // Initial indicator state and show hint if scrollable
     this.updateScrollIndicators(toolbar);
-    
+
     // Show scroll hint if toolbar is scrollable (after a short delay for better UX)
     setTimeout(() => {
       const isScrollable = toolbar.scrollWidth > toolbar.clientWidth;
@@ -409,15 +455,15 @@ export class NavBarManager {
         scrollHint.style.opacity = '1';
       }
     }, 500);
-    
+
     // Update indicators when toolbar content changes
     const observer = new MutationObserver(() => {
       // Small delay to allow layout to settle
       setTimeout(() => this.updateScrollIndicators(toolbar), 100);
     });
-    
-    observer.observe(toolbar, { 
-      childList: true, 
+
+    observer.observe(toolbar, {
+      childList: true,
       subtree: true,
       attributes: true,
       attributeFilter: ['style']
@@ -476,7 +522,7 @@ export class NavBarManager {
       const progress = scrollLeft / maxScroll;
       const indicatorWidth = (clientWidth / scrollWidth) * 100;
       const indicatorLeft = progress * (100 - indicatorWidth);
-      
+
       indicator.style.width = `${indicatorWidth}%`;
       indicator.style.left = `${indicatorLeft}%`;
     }
@@ -488,7 +534,7 @@ export class NavBarManager {
     const buttonCenter = buttonRect.left + buttonRect.width / 2;
     const toolbarCenter = toolbarRect.left + toolbarRect.width / 2;
     const offset = buttonCenter - toolbarCenter;
-    
+
     toolbar.scrollBy({
       left: offset,
       behavior: 'smooth'
@@ -512,5 +558,98 @@ export class NavBarManager {
     requestAnimationFrame(() => {
       this.updateScrollIndicators(toolbar);
     });
+  }
+
+  // Switch to next/previous visible model button (excluding non-model controls)
+  switchModel(direction = 1) {
+    const toolbar = document.getElementById('toolbar');
+    if (!toolbar) return;
+
+    // Helper function to check if button is actually visible
+    const isVisible = (btn) => {
+      if (!btn) return false;
+      const style = btn.style.display;
+      const computed = getComputedStyle(btn).display;
+      return style !== 'none' && computed !== 'none';
+    };
+
+    // Get candidates in current DOM order (which reflects drag-and-drop changes)
+    let candidates = [...toolbar.querySelectorAll('.btn[data-url]')].filter(isVisible);
+
+    if (candidates.length === 0) return;
+
+    const active = toolbar.querySelector('.btn.active');
+    let idx = candidates.indexOf(active); // -1 if none
+
+    // If active class is out of sync, derive current index from iframe URL host
+    const iframeForIndex = document.getElementById('main-iframe');
+    if (idx === -1 && iframeForIndex && iframeForIndex.src) {
+      try {
+        const currentHost = new URL(iframeForIndex.src).hostname;
+        idx = candidates.findIndex((btn) => {
+          try {
+            const candUrl = btn.getAttribute('data-url');
+            if (!candUrl) return false;
+            const candHost = new URL(candUrl).hostname;
+            return currentHost === candHost || iframeForIndex.src.includes(candHost);
+          } catch { return false; }
+        });
+      } catch { }
+    }
+
+    idx = (idx + direction + candidates.length) % candidates.length;
+    const target = candidates[idx];
+
+    if (target) {
+      // Visually update navbar immediately (do NOT change iframe yet)
+      toolbar.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+      target.classList.add('active');
+
+      // Smooth scroll selected into view
+      this.smoothScrollToButton(toolbar, target);
+
+      // Set pending target and debounce the actual navigation
+      this._pendingTarget = target;
+      if (this._switchCommitTimer) {
+        clearTimeout(this._switchCommitTimer);
+        this._switchCommitTimer = null;
+      }
+
+      this._switchCommitTimer = setTimeout(() => {
+        const btn = this._pendingTarget;
+        this._switchCommitTimer = null;
+        // Commit: now navigate iframe using existing click handler logic
+        if (btn && document.body.contains(btn)) {
+          const iframe = document.getElementById('main-iframe');
+          const supportPage = document.getElementById('support-page');
+          const splitViewBtn = document.getElementById('split-view-btn');
+          const supportBtn = document.getElementById('support-btn');
+          this.handleServiceButtonClick(btn, iframe, supportPage, splitViewBtn, supportBtn, toolbar);
+        }
+      }, this._shortcutNavDelay);
+    }
+  }
+
+  // Best-effort focus of search input in known providers inside iframe
+  focusSearchInIframe(iframe, url) {
+    if (!iframe) return;
+    // Delay a bit to allow navigation to occur; further attempts will run on iframe load
+    const attempt = () => {
+      try {
+        // Best-effort: focus the frame so typing goes into the site
+        iframe.focus();
+        iframe.contentWindow?.focus();
+        // Additionally, send a generic postMessage that some sites might handle (safe no-op otherwise)
+        iframe.contentWindow?.postMessage({ type: 'AI_SIDE_PANEL_FOCUS_SEARCH' }, '*');
+      } catch { }
+    };
+    setTimeout(attempt, 300);
+
+    // Also set up a one-time listener to try again after load spinner hides
+    const onLoad = () => {
+      attempt();
+      iframe.removeEventListener('load', onLoad);
+    };
+    iframe.addEventListener('load', onLoad, { once: true });
   }
 }

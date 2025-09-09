@@ -11,7 +11,7 @@
     "storage"
   ],
   "description": "__MSG_appDescription__",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "side_panel": {
     "default_path": "sidepanel.html"
   },
@@ -46,6 +46,18 @@
       "suggested_key": {
         "default": "Alt+Q",
         "mac": "Command+Shift+A"
+      }
+    },
+    "next_ai_model": {
+      "description": "Switch to next AI model",
+      "suggested_key": {
+        "default": "Alt+Shift+N"
+      }
+    },
+    "previous_ai_model": {
+      "description": "Switch to previous AI model",
+      "suggested_key": {
+        "default": "Alt+Shift+P"
       }
     }
   },

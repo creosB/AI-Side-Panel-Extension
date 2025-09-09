@@ -83,6 +83,15 @@ class SidePanelApp {
 document.addEventListener('DOMContentLoaded', async () => {
   const app = new SidePanelApp();
   await app.initialize();
+
+  // Route background command messages at app level as a backup
+  try {
+    chrome.runtime.onMessage.addListener((msg) => {
+      if (msg && msg.type === 'AI_MODEL_SWITCH') {
+        window.navBarManager?.switchModel(msg.direction === 'prev' ? -1 : 1);
+      }
+    });
+  } catch (_) {}
 });
 
 // Legacy compatibility - expose functions that might be called externally
