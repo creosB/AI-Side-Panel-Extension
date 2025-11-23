@@ -8,14 +8,14 @@ export class SettingsManager {
     this.initializeShortcutSettings();
     this.initializeLanguageSettings();
     this.initializeToggleHandlers();
-  this.initializeThemeSettings();
-  this.initializeRememberLastModelSetting();
+    this.initializeThemeSettings();
+    this.initializeRememberLastModelSetting();
   }
 
   initializeShortcutSettings() {
-  const manageAllBtn = document.getElementById('manage-shortcuts-all');
-  const nextInput = document.getElementById('shortcut-next-input');
-  const prevInput = document.getElementById('shortcut-prev-input');
+    const manageAllBtn = document.getElementById('manage-shortcuts-all');
+    const nextInput = document.getElementById('shortcut-next-input');
+    const prevInput = document.getElementById('shortcut-prev-input');
 
     if (!manageAllBtn) {
       console.error('Manage shortcuts button not found');
@@ -41,11 +41,11 @@ export class SettingsManager {
         // Edge uses edge://extensions/shortcuts
         const ua = navigator.userAgent.toLowerCase();
         if (ua.includes('edg/')) url = 'edge://extensions/shortcuts';
-      } catch {}
+      } catch { }
       chrome.tabs.create({ url });
     };
 
-      manageAllBtn?.addEventListener('click', openShortcutsPage);    // Get current shortcut from commands API
+    manageAllBtn?.addEventListener('click', openShortcutsPage);    // Get current shortcut from commands API
     chrome.commands.getAll((commands) => {
       const get = (name) => commands.find((c) => c.name === name);
       const openCmd = get('_execute_action');
@@ -53,8 +53,8 @@ export class SettingsManager {
       const prevCmd = get('previous_ai_model');
       const openInput = document.getElementById('shortcut-input');
       if (openCmd?.shortcut && openInput) openInput.value = openCmd.shortcut;
-        if (nextInput) nextInput.value = nextCmd?.shortcut || this._t?.('notSet') || 'Not set';
-        if (prevInput) prevInput.value = prevCmd?.shortcut || this._t?.('notSet') || 'Not set';
+      if (nextInput) nextInput.value = nextCmd?.shortcut || this._t?.('notSet') || 'Not set';
+      if (prevInput) prevInput.value = prevCmd?.shortcut || this._t?.('notSet') || 'Not set';
     });
   }
 
@@ -81,9 +81,9 @@ export class SettingsManager {
     this.applyTheme(root, storedTheme);
     if (themeSelect) themeSelect.value = storedTheme;
 
-  // Initialize Synthwave dim toggle visibility and state
-  this.updateSynthwaveOptionsVisibility(storedTheme);
-  this.initializeSynthwaveDim(root);
+    // Initialize Synthwave dim toggle visibility and state
+    this.updateSynthwaveOptionsVisibility(storedTheme);
+    this.initializeSynthwaveDim(root);
 
     if (themeSelect) {
       // Gate by premium: disable until premium is active
@@ -136,7 +136,7 @@ export class SettingsManager {
         chrome.runtime.sendMessage({ type: 'GET_PREMIUM_STATUS' }, (bg) => {
           applyPremiumGate(bg?.isPremium === true);
         });
-      } catch (_) {}
+      } catch (_) { }
 
       // React to runtime port updates (if PremiumManager connected)
       try {
@@ -148,9 +148,9 @@ export class SettingsManager {
             }
           });
         }
-      } catch (_) {}
+      } catch (_) { }
 
-  themeSelect.addEventListener('change', () => {
+      themeSelect.addEventListener('change', () => {
         if (themeSelect.disabled) {
           // Optional: nudge user to premium modal
           if (window.premiumManager?.open) window.premiumManager.open();
@@ -252,16 +252,16 @@ export class SettingsManager {
       }
     });
 
-  // Initialize remember-last-model toggle state immediately after handlers are set
-  this.initializeRememberLastModelSetting();
+    // Initialize remember-last-model toggle state immediately after handlers are set
+    this.initializeRememberLastModelSetting();
   }
 
   initializeRememberLastModelSetting() {
     const toggle = document.getElementById('toggle-remember-last-model');
     if (!toggle) return;
     // Default ON if not set
-  const stored = localStorage.getItem('rememberLastModel');
-  toggle.checked = stored === 'true';
+    const stored = localStorage.getItem('rememberLastModel');
+    toggle.checked = stored === 'true';
     toggle.addEventListener('change', () => {
       localStorage.setItem('rememberLastModel', String(toggle.checked));
     });
@@ -288,11 +288,11 @@ export class SettingsManager {
       document.querySelectorAll('.toggle-item input[type="checkbox"]')
     ).filter(t => {
       const toggleService = t.id.replace('toggle-', '');
-      return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'kimi', 'githubcopilot'].includes(toggleService);
+      return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'kimi', 'githubcopilot', 'zai'].includes(toggleService);
     }).length;
 
     // Prevent disabling last service
-  if (!toggle.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'kimi', 'githubcopilot'].includes(service)) {
+    if (!toggle.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'kimi', 'githubcopilot', 'zai'].includes(service)) {
       toggle.checked = true;
       return;
     }
@@ -303,7 +303,7 @@ export class SettingsManager {
 
   handleCustomLinkToggle(toggle, service) {
     const customId = service.replace('custom-', '');
-    
+
     // Import custom link functions - these will be provided by the custom link module
     if (window.customLinkManager) {
       window.customLinkManager.toggleCustomLink(customId, toggle.checked);
@@ -314,7 +314,7 @@ export class SettingsManager {
 
   handleBuiltInServiceToggle(toggle, service) {
     const selectors = {
-  'remember-last-model': null,
+      'remember-last-model': null,
       'chatgpt': '[data-url*="chatgpt.com"]',
       'gemini': '[data-url*="gemini.google.com"]',
       'claude': '[data-url*="claude.ai"]',
@@ -326,21 +326,22 @@ export class SettingsManager {
       'qwen': '[data-url*="chat.qwen.ai"]',
       'kimi': '[data-url*="kimi.com"]',
       'githubcopilot': '[data-url*="github.com/copilot"]',
+      'zai': '[data-url*="chat.z.ai"]',
       'split-view': '#split-view-btn',
       'content-extractor': '#content-extractor-btn',
       'scrollbar-always-visible': null // Special case - doesn't toggle a button
     };
-    
+
     // Handle scrollbar visibility setting
     if (service === 'scrollbar-always-visible') {
       this.handleScrollbarVisibilitySetting(toggle.checked);
       localStorage.setItem(`show_${service}`, toggle.checked.toString());
       return;
     }
-    
-  const selector = selectors[service];
-  const button = selector ? document.querySelector(selector) : null;
-    
+
+    const selector = selectors[service];
+    const button = selector ? document.querySelector(selector) : null;
+
     if (button) {
       button.style.display = toggle.checked ? 'flex' : 'none';
       localStorage.setItem(`show_${service}`, toggle.checked.toString());
@@ -383,15 +384,16 @@ export class SettingsManager {
       'qwen': '[data-url*="chat.qwen.ai"]',
       'kimi': '[data-url*="kimi.com"]',
       'githubcopilot': '[data-url*="github.com/copilot"]',
+      'zai': '[data-url*="chat.z.ai"]',
       'split-view': '#split-view-btn',
       'content-extractor': '#content-extractor-btn',
-  'scrollbar-always-visible': null // Special case - doesn't toggle a button
+      'scrollbar-always-visible': null // Special case - doesn't toggle a button
     };
-    
+
     // Add custom links to the toggles object - now they should exist in DOM
     const customLinks = window.customLinkManager ? window.customLinkManager.getCustomLinks() : [];
     let customLinksUpdated = false;
-    
+
     customLinks.forEach(link => {
       if (link.id && link.url) {
         toggles[`custom-${link.id}`] = `[data-url="${link.url}"]`;
@@ -411,17 +413,17 @@ export class SettingsManager {
       if (key.startsWith('custom-')) {
         const customId = key.replace('custom-', '');
         const customLink = customLinks.find(link => link.id.toString() === customId);
-        
+
         if (customLink) {
           // Priority: localStorage > link.enabled > default true
           isVisible = storedValue !== null ? storedValue === 'true' : (customLink.enabled !== false);
-          
+
           // Sync the link object with the final state
           if (customLink.enabled !== isVisible) {
             customLink.enabled = isVisible;
             customLinksUpdated = true;
           }
-          
+
         } else {
           isVisible = false; // Link not found
           console.warn(`Custom link not found for key: ${key}`);
@@ -436,8 +438,8 @@ export class SettingsManager {
       } else {
         // Use stored value if it exists, otherwise use the checkbox's default checked state
         // For built-in services, default to true if no toggle exists
-        isVisible = storedValue !== null ? storedValue === 'true' : 
-                         (toggle?.checked ?? true);
+        isVisible = storedValue !== null ? storedValue === 'true' :
+          (toggle?.checked ?? true);
       }
 
       if (toggle) {
@@ -457,12 +459,12 @@ export class SettingsManager {
         console.warn(`Custom button not found for ${key}, selector: ${selector}`);
       }
     });
-    
+
     // Save updated custom links if any were modified
     if (customLinksUpdated && window.customLinkManager) {
       window.customLinkManager.saveCustomLinks(customLinks);
     }
-    
+
     // Restore button order after toggles are set
     if (window.saveManager) {
       window.saveManager.restoreButtonOrder();
