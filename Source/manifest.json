@@ -63,18 +63,7 @@
                 "images/icon16.png",
                 "images/icon32.png",
                 "images/icon48.png",
-                "images/icon128.png",
-                "neural-nav/index.js",
-                "neural-nav/fallback-loader.js",
-                "neural-nav/core/config.js",
-                "neural-nav/core/controller.js",
-                "neural-nav/ui/neural-nav-ui.js",
-                "neural-nav/providers/registry.js",
-                "neural-nav/providers/chatgpt.js",
-                "neural-nav/providers/gemini.js",
-                "neural-nav/providers/claude.js",
-                "neural-nav/utils/dom.js",
-                "neural-nav/utils/helpers.js"
+                "images/icon128.png"
             ],
             "use_dynamic_url": true
         }
