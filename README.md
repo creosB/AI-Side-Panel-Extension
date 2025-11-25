@@ -22,6 +22,7 @@ The **AI Side Panel Extension** for Chrome provides an easy and convenient way t
 - **Effortless drag and drop:** Easily customizable and highly interactive.
 - **Custom Service Support:** You can add any service via the settings menu. Simply copy the site URL.
 - **Smart content extraction** that automatically cleans and formats text from news articles, code repositories, and social posts for AI analysis.
+- **Prompt History:** It enables quick navigation through previous messages in the chat window, supports all major AI services, and is completely optional.
 
 ## Installation
 
