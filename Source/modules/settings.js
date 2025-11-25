@@ -51,10 +51,13 @@ export class SettingsManager {
       const openCmd = get('_execute_action');
       const nextCmd = get('next_ai_model');
       const prevCmd = get('previous_ai_model');
+      const neuralNavCmd = get('toggle_neural_nav');
       const openInput = document.getElementById('shortcut-input');
       if (openCmd?.shortcut && openInput) openInput.value = openCmd.shortcut;
       if (nextInput) nextInput.value = nextCmd?.shortcut || this._t?.('notSet') || 'Not set';
       if (prevInput) prevInput.value = prevCmd?.shortcut || this._t?.('notSet') || 'Not set';
+      const neuralNavInput = document.getElementById('shortcut-neural-nav-input');
+      if (neuralNavInput) neuralNavInput.value = neuralNavCmd?.shortcut || 'Ctrl+.';
     });
   }
 
@@ -276,6 +279,16 @@ export class SettingsManager {
       return;
     }
 
+    // Prompt history viewer (loads/unloads neural-nav-bundle.js)
+    if (service === 'prompt-history-viewer') {
+      if (toggle.checked) {
+        this.loadNeuralNavBundle();
+      } else {
+        this.unloadNeuralNavBundle();
+      }
+      chrome.storage.local.set({ 'promptHistoryViewerEnabled': toggle.checked });
+      return;
+    }
 
     // Handle custom links
     if (service.startsWith('custom-')) {
@@ -370,7 +383,17 @@ export class SettingsManager {
     }
   }
 
-  initializeToggles() {
+  async initializeToggles() {
+    // Handle prompt history viewer setting separately since it uses chrome.storage
+    const phvResult = await new Promise(resolve => chrome.storage.local.get(['promptHistoryViewerEnabled'], resolve));
+    const phvEnabled = phvResult.promptHistoryViewerEnabled !== false;
+    const phvToggle = document.getElementById('toggle-prompt-history-viewer');
+    if (phvToggle) phvToggle.checked = phvEnabled;
+    if (phvEnabled) {
+      this.loadNeuralNavBundle();
+    } else {
+      this.unloadNeuralNavBundle();
+    }
     const toggles = {
       'remember-last-model': null,
       'chatgpt': '[data-url*="chatgpt.com"]',
@@ -469,5 +492,14 @@ export class SettingsManager {
     if (window.saveManager) {
       window.saveManager.restoreButtonOrder();
     }
+  }
+
+  loadNeuralNavBundle() {
+    // For content scripts, we can't dynamically load/unload, so store the setting
+    chrome.storage.local.set({ 'promptHistoryViewerEnabled': true });
+  }
+
+  unloadNeuralNavBundle() {
+    chrome.storage.local.set({ 'promptHistoryViewerEnabled': false });
   }
 }

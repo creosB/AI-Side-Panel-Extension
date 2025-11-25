@@ -1,74 +1,266 @@
 {
-    "settings": { "message": "设置" },
-    "shortcutLabel": { "message": "键盘快捷键" },
-    "footerText": { "message": "由 Creos 用 <span class=\"heart\">❤</span> 制作" },
-    "shortcutInfo": { "message": "点击设置图标在 Chrome 的键盘快捷键页面更改快捷键。<br> 推荐：ALT + Q / ⌘ + Shift + Q" },
-    "language": { "message": "语言" },
-    "toggleExtension": { "message": "扩展程序开/关" },
-    "splitView": { "message": "分屏视图" },
-    "scrollbarAlwaysVisible": { "message": "滚动条始终可见" },
-    "customizeNavigation": { "message": "自定义导航" },
-    "rememberLastModel": { "message": "记住上次选择的模型" },
-    "appDescription": { "message": "通过侧边栏轻松访问AI网站" },
-    "customLinks": { "message": "自定义链接" },
-    "add": { "message": "添加" },
+    "settings": {
+        "message": "设置"
+    },
+    "shortcutLabel": {
+        "message": "键盘快捷键"
+    },
+    "footerText": {
+        "message": "由 Creos 用 <span class=\"heart\">❤</span> 制作"
+    },
+    "shortcutInfo": {
+        "message": "点击设置图标在 Chrome 的键盘快捷键页面更改快捷键。<br> 推荐：ALT + Q / ⌘ + Shift + Q"
+    },
+    "language": {
+        "message": "语言"
+    },
+    "toggleExtension": {
+        "message": "扩展程序开/关"
+    },
+    "splitView": {
+        "message": "分屏视图"
+    },
+    "scrollbarAlwaysVisible": {
+        "message": "滚动条始终可见"
+    },
+    "customizeNavigation": {
+        "message": "自定义导航"
+    },
+    "rememberLastModel": {
+        "message": "记住上次选择的模型"
+    },
+    "appDescription": {
+        "message": "通过侧边栏轻松访问AI网站"
+    },
+    "customLinks": {
+        "message": "自定义链接"
+    },
+    "add": {
+        "message": "添加"
+    },
     "deleteConfirmation": {
         "message": "您确定要删除 \"$1\" 吗？"
     },
-    "supportTitle": { "message": "我们需要您的支持" },
+    "supportTitle": {
+        "message": "我们需要您的支持"
+    },
     "supportDescription": {
         "message": "用 ❤️ 和无数小时的专注创造。您的支持帮助我们继续为每个人构建令人惊叹的工具。"
     },
-    "supportButton": { "message": "请我喝咖啡" },
-    "extractButton": { "message": "提取" },
-    "extractButtonTitle": { "message": "从当前页面提取并复制内容" },
-    "extractButtonExtracting": { "message": "提取中..." },
-    "extractButtonExtractingTitle": { "message": "正在提取内容..." },
-    "extractButtonExtractingAriaLabel": { "message": "正在提取内容，请稍候..." },
-    "extractionModalTitle": { "message": "选择提取方法" },
-    "extractionModalClose": { "message": "关闭" },
-    "extractionSearchPlaceholder": { "message": "搜索提取器..." },
-    "extractionSuccessMessage": { "message": "$1内容已复制到剪贴板！" },
-    "extractionErrorGeneric": { "message": "提取过程中发生错误" },
-    "extractionErrorNoTab": { "message": "未找到活动标签页" },
-    "extractionErrorClipboard": { "message": "复制到剪贴板失败" },
-    "extractionErrorPermission": { "message": "访问页面权限被拒绝" },
-    "extractionErrorFailed": { "message": "提取内容失败" },
-    "extractionNoContent": { "message": "无法从此页面提取可读内容。" },
-    "extractionNoContentReddit": { "message": "无法从此Reddit帖子提取内容。" },
-    "extractionNoContentNews": { "message": "无法从此新闻文章提取内容。" },
-    "extractionNoContentLinkedIn": { "message": "在此页面未找到LinkedIn帖子。" },
-    "extractionNoContentLinkedInPost": { "message": "无法从此LinkedIn帖子提取内容。" },
-    "extractionNoContentGitHubReadme": { "message": "未找到README内容" },
-    "extractionNoContentGitHubCode": { "message": "在此页面未找到代码内容" },
-    "extractionFallbackTitle": { "message": "提取的内容" },
-    "extractionTwitterTitle": { "message": "推文" },
-    "extractionRedditTitle": { "message": "Reddit帖子" },
-    "extractionNewsTitle": { "message": "新闻文章" },
-    "extractionLinkedInTitle": { "message": "LinkedIn帖子" },
-    "extractionLinkedInTitleBy": { "message": "$1的LinkedIn帖子" },
-    "extractionGitHubRepoTitle": { "message": "GitHub仓库" },
-    "extractionGitHubCodeTitle": { "message": "GitHub代码" },
-    "extractionEngagementLabel": { "message": "互动" },
-    "extractionPostedLabel": { "message": "发布时间" },
-    "extractionTopCommentsLabel": { "message": "热门评论" },
-    "extractionMediumTitle": { "message": "Medium文章" },
-    "extractionTechCrunchTitle": { "message": "TechCrunch文章" },
-    "themeLabel": { "message": "主题" },
-    "themeDefault": { "message": "默认" },
-    "themeSynthwave": { "message": "合成波 / 复古" },
-    "themeGlassmorphism": { "message": "玻璃拟态" },
-    "themeBrutalism": { "message": "新野兽派" },
-    "themeNeoNoir": { "message": "新黑色（深色）" },
-    "themeNeoAnime": { "message": "新动漫风" },
-    "themeSavedInfo": { "message": "你的选择会被保存。" },
-    "synthOptions": { "message": "合成波选项" },
-    "synthDimGlowLabel": { "message": "降低霓虹光（低刺激）" }
-    ,
-    "modelShortcutsLabel": { "message": "模型快捷键" },
-    "switchNext": { "message": "下一个模型" },
-    "switchPrev": { "message": "上一个模型" },
-    "shortcutsManage": { "message": "管理快捷键" },
-    "shortcutsNote": { "message": "快捷键由浏览器管理。如果组合与系统或浏览器按键冲突，请选择其他组合。" },
-    "notSet": { "message": "未设置" }
+    "supportButton": {
+        "message": "请我喝咖啡"
+    },
+    "extractButton": {
+        "message": "提取"
+    },
+    "extractButtonTitle": {
+        "message": "从当前页面提取并复制内容"
+    },
+    "extractButtonExtracting": {
+        "message": "提取中..."
+    },
+    "extractButtonExtractingTitle": {
+        "message": "正在提取内容..."
+    },
+    "extractButtonExtractingAriaLabel": {
+        "message": "正在提取内容，请稍候..."
+    },
+    "extractionModalTitle": {
+        "message": "选择提取方法"
+    },
+    "extractionModalClose": {
+        "message": "关闭"
+    },
+    "extractionSearchPlaceholder": {
+        "message": "搜索提取器..."
+    },
+    "extractionSuccessMessage": {
+        "message": "$1内容已复制到剪贴板！"
+    },
+    "extractionErrorGeneric": {
+        "message": "提取过程中发生错误"
+    },
+    "extractionErrorNoTab": {
+        "message": "未找到活动标签页"
+    },
+    "extractionErrorClipboard": {
+        "message": "复制到剪贴板失败"
+    },
+    "extractionErrorPermission": {
+        "message": "访问页面权限被拒绝"
+    },
+    "extractionErrorFailed": {
+        "message": "提取内容失败"
+    },
+    "extractionNoContent": {
+        "message": "无法从此页面提取可读内容。"
+    },
+    "extractionNoContentReddit": {
+        "message": "无法从此Reddit帖子提取内容。"
+    },
+    "extractionNoContentNews": {
+        "message": "无法从此新闻文章提取内容。"
+    },
+    "extractionNoContentLinkedIn": {
+        "message": "在此页面未找到LinkedIn帖子。"
+    },
+    "extractionNoContentLinkedInPost": {
+        "message": "无法从此LinkedIn帖子提取内容。"
+    },
+    "extractionNoContentGitHubReadme": {
+        "message": "未找到README内容"
+    },
+    "extractionNoContentGitHubCode": {
+        "message": "在此页面未找到代码内容"
+    },
+    "extractionFallbackTitle": {
+        "message": "提取的内容"
+    },
+    "extractionTwitterTitle": {
+        "message": "推文"
+    },
+    "extractionRedditTitle": {
+        "message": "Reddit帖子"
+    },
+    "extractionNewsTitle": {
+        "message": "新闻文章"
+    },
+    "extractionLinkedInTitle": {
+        "message": "LinkedIn帖子"
+    },
+    "extractionLinkedInTitleBy": {
+        "message": "$1的LinkedIn帖子"
+    },
+    "extractionGitHubRepoTitle": {
+        "message": "GitHub仓库"
+    },
+    "extractionGitHubCodeTitle": {
+        "message": "GitHub代码"
+    },
+    "extractionEngagementLabel": {
+        "message": "互动"
+    },
+    "extractionPostedLabel": {
+        "message": "发布时间"
+    },
+    "extractionTopCommentsLabel": {
+        "message": "热门评论"
+    },
+    "extractionMediumTitle": {
+        "message": "Medium文章"
+    },
+    "extractionTechCrunchTitle": {
+        "message": "TechCrunch文章"
+    },
+    "themeLabel": {
+        "message": "主题"
+    },
+    "themeDefault": {
+        "message": "默认"
+    },
+    "themeSynthwave": {
+        "message": "合成波 / 复古"
+    },
+    "themeGlassmorphism": {
+        "message": "玻璃拟态"
+    },
+    "themeBrutalism": {
+        "message": "新野兽派"
+    },
+    "themeNeoNoir": {
+        "message": "新黑色（深色）"
+    },
+    "themeNeoAnime": {
+        "message": "新动漫风"
+    },
+    "themeSavedInfo": {
+        "message": "你的选择会被保存。"
+    },
+    "synthOptions": {
+        "message": "合成波选项"
+    },
+    "synthDimGlowLabel": {
+        "message": "降低霓虹光（低刺激）"
+    },
+    "modelShortcutsLabel": {
+        "message": "模型快捷键"
+    },
+    "switchNext": {
+        "message": "下一个模型"
+    },
+    "switchPrev": {
+        "message": "上一个模型"
+    },
+    "shortcutsManage": {
+        "message": "管理快捷键"
+    },
+    "shortcutsNote": {
+        "message": "快捷键由浏览器管理。如果组合与系统或浏览器按键冲突，请选择其他组合。"
+    },
+    "notSet": {
+        "message": "未设置"
+    },
+    "promptHistoryViewer": {
+        "message": "提示历史查看器"
+    },
+    "neuralNavToggleTitle": {
+        "message": "切换提示历史 (Cmd/Ctrl + .)"
+    },
+    "neuralNavToggleAriaLabel": {
+        "message": "切换导航面板"
+    },
+    "neuralNavTabPrompts": {
+        "message": "提示词"
+    },
+    "neuralNavTabAll": {
+        "message": "全部"
+    },
+    "neuralNavSearchPlaceholder": {
+        "message": "筛选..."
+    },
+    "neuralNavSearchAriaLabel": {
+        "message": "筛选对话"
+    },
+    "neuralNavEmptyNoResults": {
+        "message": "未找到结果"
+    },
+    "neuralNavEmptyNoItems": {
+        "message": "暂无内容显示"
+    },
+    "neuralNavProviderChatGPT": {
+        "message": "ChatGPT"
+    },
+    "neuralNavProviderGemini": {
+        "message": "Gemini"
+    },
+    "neuralNavProviderClaude": {
+        "message": "Claude"
+    },
+    "neuralNavProviderQwen": {
+        "message": "通义千问"
+    },
+    "neuralNavProviderCopilot": {
+        "message": "Copilot"
+    },
+    "neuralNavProviderKimi": {
+        "message": "Kimi"
+    },
+    "neuralNavProviderZai": {
+        "message": "Z.ai"
+    },
+    "neuralNavProviderDeepSeek": {
+        "message": "DeepSeek"
+    },
+    "neuralNavAlreadyLoaded": {
+        "message": "Prompt History: 已加载，跳过初始化"
+    },
+    "neuralNavDisabledByUser": {
+        "message": "Prompt History: 用户设置已禁用"
+    },
+    "neuralNavNoProvider": {
+        "message": "Prompt History: 未检测到支持的提供商"
+    },
+    "toggleNeuralNav": {
+        "message": "切换提示历史"
+    }
 }

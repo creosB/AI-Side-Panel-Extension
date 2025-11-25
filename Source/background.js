@@ -256,8 +256,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 // Global keyboard command handling: route to side panel
 try {
   chrome.commands.onCommand.addListener(async (command) => {
-    if (command !== 'next_ai_model' && command !== 'previous_ai_model') return;
-    // Broadcast to any side panel instance; sidepanel listens and acts
-    chrome.runtime.sendMessage({ type: 'AI_MODEL_SWITCH', direction: command === 'next_ai_model' ? 'next' : 'prev' });
+    if (command === 'next_ai_model' || command === 'previous_ai_model') {
+      // Broadcast to any side panel instance; sidepanel listens and acts
+      chrome.runtime.sendMessage({ type: 'AI_MODEL_SWITCH', direction: command === 'next_ai_model' ? 'next' : 'prev' });
+    } else if (command === 'toggle_neural_nav') {
+      // Send to active tab's content script
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (tabs[0]) {
+          chrome.tabs.sendMessage(tabs[0].id, { type: 'TOGGLE_NEURAL_NAV' });
+        }
+      });
+    }
   });
 } catch (_) {}

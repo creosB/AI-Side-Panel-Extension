@@ -1,75 +1,269 @@
 {
-    "extensionName": { "message": "Panneau Latéral IA" },
-    "settings": { "message": "Paramètres" },
-    "shortcutLabel": { "message": "Raccourci Clavier" },
-    "footerText": { "message": "Fait avec <span class=\"heart\">❤</span> par Creos" },
-    "shortcutInfo": { "message": "Cliquez sur l'icône des paramètres pour modifier le raccourci clavier dans la page des raccourcis Chrome. <br> Recommandé: ALT + Q / ⌘ + Shift + Q" },
-    "language": { "message": "Langue" },
-    "toggleExtension": { "message": "Extension Ouvrir/Fermer" },
-    "splitView": { "message": "Vue divisée" },
-    "scrollbarAlwaysVisible": { "message": "Barre de défilement toujours visible" },
-    "customizeNavigation": { "message": "Personnalisation de la navigation" },
-    "rememberLastModel": { "message": "Se souvenir du dernier modèle sélectionné" },
-    "appDescription": { "message": "Accédez facilement aux sites d'IA via le panneau latéral" },
-    "customLinks": { "message": "Liens Personnalisés" },
-    "add": { "message": "Ajouter" },
+    "extensionName": {
+        "message": "Panneau Latéral IA"
+    },
+    "settings": {
+        "message": "Paramètres"
+    },
+    "shortcutLabel": {
+        "message": "Raccourci Clavier"
+    },
+    "footerText": {
+        "message": "Fait avec <span class=\"heart\">❤</span> par Creos"
+    },
+    "shortcutInfo": {
+        "message": "Cliquez sur l'icône des paramètres pour modifier le raccourci clavier dans la page des raccourcis Chrome. <br> Recommandé: ALT + Q / ⌘ + Shift + Q"
+    },
+    "language": {
+        "message": "Langue"
+    },
+    "toggleExtension": {
+        "message": "Extension Ouvrir/Fermer"
+    },
+    "splitView": {
+        "message": "Vue divisée"
+    },
+    "scrollbarAlwaysVisible": {
+        "message": "Barre de défilement toujours visible"
+    },
+    "customizeNavigation": {
+        "message": "Personnalisation de la navigation"
+    },
+    "rememberLastModel": {
+        "message": "Se souvenir du dernier modèle sélectionné"
+    },
+    "appDescription": {
+        "message": "Accédez facilement aux sites d'IA via le panneau latéral"
+    },
+    "customLinks": {
+        "message": "Liens Personnalisés"
+    },
+    "add": {
+        "message": "Ajouter"
+    },
     "deleteConfirmation": {
         "message": "Êtes-vous sûr de vouloir supprimer \"$1\"?"
     },
-    "supportTitle": { "message": "Nous Avons Besoin de Votre Soutien" },
+    "supportTitle": {
+        "message": "Nous Avons Besoin de Votre Soutien"
+    },
     "supportDescription": {
         "message": "Créé avec ❤️ et d'innombrables heures de dévouement. Votre soutien nous aide à continuer à créer des outils incroyables pour tous."
     },
-    "supportButton": { "message": "Offrez-moi un Café" },
-    "extractButton": { "message": "Extraire" },
-    "extractButtonTitle": { "message": "Extraire et copier le contenu de la page actuelle" },
-    "extractButtonExtracting": { "message": "Extraction..." },
-    "extractButtonExtractingTitle": { "message": "Extraction du contenu..." },
-    "extractButtonExtractingAriaLabel": { "message": "Extraction du contenu, veuillez patienter..." },
-    "extractionModalTitle": { "message": "Choisir la Méthode d'Extraction" },
-    "extractionModalClose": { "message": "Fermer" },
-    "extractionSearchPlaceholder": { "message": "Rechercher des extracteurs..." },
-    "extractionSuccessMessage": { "message": "Contenu $1 copié dans le presse-papiers !" },
-    "extractionErrorGeneric": { "message": "Une erreur s'est produite lors de l'extraction" },
-    "extractionErrorNoTab": { "message": "Aucun onglet actif trouvé" },
-    "extractionErrorClipboard": { "message": "Échec de la copie dans le presse-papiers" },
-    "extractionErrorPermission": { "message": "Permission refusée pour accéder à la page" },
-    "extractionErrorFailed": { "message": "Échec de l'extraction du contenu" },
-    "extractionNoContent": { "message": "Aucun contenu lisible n'a pu être extrait de cette page." },
-    "extractionNoContentReddit": { "message": "Aucun contenu n'a pu être extrait de ce post Reddit." },
-    "extractionNoContentNews": { "message": "Aucun contenu n'a pu être extrait de cet article de presse." },
-    "extractionNoContentLinkedIn": { "message": "Aucun post LinkedIn trouvé sur cette page." },
-    "extractionNoContentLinkedInPost": { "message": "Aucun contenu n'a pu être extrait de ce post LinkedIn." },
-    "extractionNoContentGitHubReadme": { "message": "Aucun contenu README trouvé" },
-    "extractionNoContentGitHubCode": { "message": "Aucun contenu de code trouvé sur cette page" },
-    "extractionFallbackTitle": { "message": "Contenu Extrait" },
-    "extractionTwitterTitle": { "message": "Tweet" },
-    "extractionRedditTitle": { "message": "Post Reddit" },
-    "extractionNewsTitle": { "message": "Article de Presse" },
-    "extractionLinkedInTitle": { "message": "Post LinkedIn" },
-    "extractionLinkedInTitleBy": { "message": "Post LinkedIn par $1" },
-    "extractionGitHubRepoTitle": { "message": "Dépôt GitHub" },
-    "extractionGitHubCodeTitle": { "message": "Code GitHub" },
-    "extractionEngagementLabel": { "message": "Engagement" },
-    "extractionPostedLabel": { "message": "Publié" },
-    "extractionTopCommentsLabel": { "message": "Commentaires Principaux" },
-    "extractionMediumTitle": { "message": "Article Medium" },
-    "extractionTechCrunchTitle": { "message": "Article TechCrunch" },
-    "themeLabel": { "message": "Thème" },
-    "themeDefault": { "message": "Par défaut" },
-    "themeSynthwave": { "message": "Synthwave / Rétro" },
-    "themeGlassmorphism": { "message": "Verre (Glassmorphism)" },
-    "themeBrutalism": { "message": "Néo‑Brutalisme" },
-    "themeNeoNoir": { "message": "Néo‑Noir (sombre)" },
-    "themeNeoAnime": { "message": "Néo‑Anime" },
-    "themeSavedInfo": { "message": "Votre choix sera enregistré." },
-    "synthOptions": { "message": "Options Synthwave" },
-    "synthDimGlowLabel": { "message": "Atténuer l'éclat néon (faible stimulation)" }
-    ,
-    "modelShortcutsLabel": { "message": "Raccourcis du modèle" },
-    "switchNext": { "message": "Modèle suivant" },
-    "switchPrev": { "message": "Modèle précédent" },
-    "shortcutsManage": { "message": "Gérer les raccourcis" },
-    "shortcutsNote": { "message": "Les raccourcis sont gérés par votre navigateur. Si une combinaison entre en conflit avec des touches système ou du navigateur, choisissez-en une autre." },
-    "notSet": { "message": "Non défini" }
+    "supportButton": {
+        "message": "Offrez-moi un Café"
+    },
+    "extractButton": {
+        "message": "Extraire"
+    },
+    "extractButtonTitle": {
+        "message": "Extraire et copier le contenu de la page actuelle"
+    },
+    "extractButtonExtracting": {
+        "message": "Extraction..."
+    },
+    "extractButtonExtractingTitle": {
+        "message": "Extraction du contenu..."
+    },
+    "extractButtonExtractingAriaLabel": {
+        "message": "Extraction du contenu, veuillez patienter..."
+    },
+    "extractionModalTitle": {
+        "message": "Choisir la Méthode d'Extraction"
+    },
+    "extractionModalClose": {
+        "message": "Fermer"
+    },
+    "extractionSearchPlaceholder": {
+        "message": "Rechercher des extracteurs..."
+    },
+    "extractionSuccessMessage": {
+        "message": "Contenu $1 copié dans le presse-papiers !"
+    },
+    "extractionErrorGeneric": {
+        "message": "Une erreur s'est produite lors de l'extraction"
+    },
+    "extractionErrorNoTab": {
+        "message": "Aucun onglet actif trouvé"
+    },
+    "extractionErrorClipboard": {
+        "message": "Échec de la copie dans le presse-papiers"
+    },
+    "extractionErrorPermission": {
+        "message": "Permission refusée pour accéder à la page"
+    },
+    "extractionErrorFailed": {
+        "message": "Échec de l'extraction du contenu"
+    },
+    "extractionNoContent": {
+        "message": "Aucun contenu lisible n'a pu être extrait de cette page."
+    },
+    "extractionNoContentReddit": {
+        "message": "Aucun contenu n'a pu être extrait de ce post Reddit."
+    },
+    "extractionNoContentNews": {
+        "message": "Aucun contenu n'a pu être extrait de cet article de presse."
+    },
+    "extractionNoContentLinkedIn": {
+        "message": "Aucun post LinkedIn trouvé sur cette page."
+    },
+    "extractionNoContentLinkedInPost": {
+        "message": "Aucun contenu n'a pu être extrait de ce post LinkedIn."
+    },
+    "extractionNoContentGitHubReadme": {
+        "message": "Aucun contenu README trouvé"
+    },
+    "extractionNoContentGitHubCode": {
+        "message": "Aucun contenu de code trouvé sur cette page"
+    },
+    "extractionFallbackTitle": {
+        "message": "Contenu Extrait"
+    },
+    "extractionTwitterTitle": {
+        "message": "Tweet"
+    },
+    "extractionRedditTitle": {
+        "message": "Post Reddit"
+    },
+    "extractionNewsTitle": {
+        "message": "Article de Presse"
+    },
+    "extractionLinkedInTitle": {
+        "message": "Post LinkedIn"
+    },
+    "extractionLinkedInTitleBy": {
+        "message": "Post LinkedIn par $1"
+    },
+    "extractionGitHubRepoTitle": {
+        "message": "Dépôt GitHub"
+    },
+    "extractionGitHubCodeTitle": {
+        "message": "Code GitHub"
+    },
+    "extractionEngagementLabel": {
+        "message": "Engagement"
+    },
+    "extractionPostedLabel": {
+        "message": "Publié"
+    },
+    "extractionTopCommentsLabel": {
+        "message": "Commentaires Principaux"
+    },
+    "extractionMediumTitle": {
+        "message": "Article Medium"
+    },
+    "extractionTechCrunchTitle": {
+        "message": "Article TechCrunch"
+    },
+    "themeLabel": {
+        "message": "Thème"
+    },
+    "themeDefault": {
+        "message": "Par défaut"
+    },
+    "themeSynthwave": {
+        "message": "Synthwave / Rétro"
+    },
+    "themeGlassmorphism": {
+        "message": "Verre (Glassmorphism)"
+    },
+    "themeBrutalism": {
+        "message": "Néo‑Brutalisme"
+    },
+    "themeNeoNoir": {
+        "message": "Néo‑Noir (sombre)"
+    },
+    "themeNeoAnime": {
+        "message": "Néo‑Anime"
+    },
+    "themeSavedInfo": {
+        "message": "Votre choix sera enregistré."
+    },
+    "synthOptions": {
+        "message": "Options Synthwave"
+    },
+    "synthDimGlowLabel": {
+        "message": "Atténuer l'éclat néon (faible stimulation)"
+    },
+    "modelShortcutsLabel": {
+        "message": "Raccourcis du modèle"
+    },
+    "switchNext": {
+        "message": "Modèle suivant"
+    },
+    "switchPrev": {
+        "message": "Modèle précédent"
+    },
+    "shortcutsManage": {
+        "message": "Gérer les raccourcis"
+    },
+    "shortcutsNote": {
+        "message": "Les raccourcis sont gérés par votre navigateur. Si une combinaison entre en conflit avec des touches système ou du navigateur, choisissez-en une autre."
+    },
+    "notSet": {
+        "message": "Non défini"
+    },
+    "promptHistoryViewer": {
+        "message": "Visionneuse d'historique des prompts"
+    },
+    "neuralNavToggleTitle": {
+        "message": "Basculer Prompt History (Cmd/Ctrl + .)"
+    },
+    "neuralNavToggleAriaLabel": {
+        "message": "Basculer le panneau de navigation"
+    },
+    "neuralNavTabPrompts": {
+        "message": "Prompts"
+    },
+    "neuralNavTabAll": {
+        "message": "Tous"
+    },
+    "neuralNavSearchPlaceholder": {
+        "message": "Filtrer..."
+    },
+    "neuralNavSearchAriaLabel": {
+        "message": "Filtrer la conversation"
+    },
+    "neuralNavEmptyNoResults": {
+        "message": "Aucun résultat trouvé"
+    },
+    "neuralNavEmptyNoItems": {
+        "message": "Aucun élément à afficher"
+    },
+    "neuralNavProviderChatGPT": {
+        "message": "ChatGPT"
+    },
+    "neuralNavProviderGemini": {
+        "message": "Gemini"
+    },
+    "neuralNavProviderClaude": {
+        "message": "Claude"
+    },
+    "neuralNavProviderQwen": {
+        "message": "Qwen"
+    },
+    "neuralNavProviderCopilot": {
+        "message": "Copilot"
+    },
+    "neuralNavProviderKimi": {
+        "message": "Kimi"
+    },
+    "neuralNavProviderZai": {
+        "message": "Z.ai"
+    },
+    "neuralNavProviderDeepSeek": {
+        "message": "DeepSeek"
+    },
+    "neuralNavAlreadyLoaded": {
+        "message": "Prompt History: Déjà chargé, ignore"
+    },
+    "neuralNavDisabledByUser": {
+        "message": "Prompt History: Désactivé par paramètre utilisateur"
+    },
+    "neuralNavNoProvider": {
+        "message": "Prompt History: Aucun fournisseur supporté détecté"
+    },
+    "toggleNeuralNav": {
+        "message": "Activer/Désactiver l'historique des invites"
+    }
 }

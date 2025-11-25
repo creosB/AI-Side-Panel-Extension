@@ -50,7 +50,7 @@ class SidePanelApp {
       this.customLinkManager.renderCustomLinks();
       
       // Then initialize toggles (now custom links exist in DOM)
-      this.settingsManager.initializeToggles();
+      await this.settingsManager.initializeToggles();
       
       // Load initial URL
       this.navBarManager.loadInitialUrl();
@@ -69,7 +69,7 @@ class SidePanelApp {
       
       // Fallback initialization
       this.customLinkManager.renderCustomLinks();
-      this.settingsManager.initializeToggles();
+      await this.settingsManager.initializeToggles();
       this.navBarManager.loadInitialUrl();
       this.splitViewManager.initialize();
       this.supportMessage.init();

@@ -1,65 +1,114 @@
 {
-  "manifest_version": 3,
-  "name": "AI Side Panel",
-  "permissions": [
-    "sidePanel",
-    "activeTab",
-    "scripting",
-    "declarativeNetRequest",
-    "declarativeNetRequestFeedback",
-    "commands",
-    "storage"
-  ],
-  "description": "__MSG_appDescription__",
-  "version": "0.2.5",
-  "side_panel": {
-    "default_path": "sidepanel.html"
-  },
-  "icons": {
-    "128": "images/icon128.png",
-    "48": "images/icon48.png",
-    "32": "images/icon32.png",
-    "16": "images/icon16.png"
-  },
-  "background": {
-  "service_worker": "background.js",
-  "type": "module"
-  },
-  "web_accessible_resources": [
-    {
-      "matches": [
+    "manifest_version": 3,
+    "name": "AI Side Panel",
+    "permissions": [
+        "sidePanel",
+        "activeTab",
+        "scripting",
+        "declarativeNetRequest",
+        "declarativeNetRequestFeedback",
+        "commands",
+        "storage"
+    ],
+    "description": "__MSG_appDescription__",
+    "version": "1.0.0",
+    "side_panel": {
+        "default_path": "sidepanel.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://chatgpt.com/*",
+                "*://chat.openai.com/*",
+                "*://gemini.google.com/*",
+                "*://claude.ai/*",
+                "*://chat.qwen.ai/*",
+                "*://qwen.ai/*",
+                "*://chat.z.ai/*",
+                "*://z.ai/*",
+                "*://copilot.microsoft.com/*",
+                "*://www.bing.com/chat*",
+                "*://kimi.com/*",
+                "*://www.kimi.com/*",
+                "*://x.ai/*",
+                "*://chat.deepseek.com/*"
+            ],
+            "js": [
+                "modules/neural-nav/neural-nav-bundle.js"
+            ],
+            "css": [
+                "styles/nav-styles.css"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "icons": {
+        "128": "images/icon128.png",
+        "48": "images/icon48.png",
+        "32": "images/icon32.png",
+        "16": "images/icon16.png"
+    },
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "web_accessible_resources": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "resources": [
+                "sidepanel.html",
+                "nav-styles.css",
+                "images/icon16.png",
+                "images/icon32.png",
+                "images/icon48.png",
+                "images/icon128.png",
+                "neural-nav/index.js",
+                "neural-nav/fallback-loader.js",
+                "neural-nav/core/config.js",
+                "neural-nav/core/controller.js",
+                "neural-nav/ui/neural-nav-ui.js",
+                "neural-nav/providers/registry.js",
+                "neural-nav/providers/chatgpt.js",
+                "neural-nav/providers/gemini.js",
+                "neural-nav/providers/claude.js",
+                "neural-nav/utils/dom.js",
+                "neural-nav/utils/helpers.js"
+            ],
+            "use_dynamic_url": true
+        }
+    ],
+    "host_permissions": [
         "<all_urls>"
-      ],
-      "resources": [
-        "sidepanel.html"
-      ],
-      "use_dynamic_url": true
-    }
-  ],
-  "host_permissions": [
-    "<all_urls>"
-  ],
-  "action": {},
-  "commands": {
-    "_execute_action": {
-      "description": "Shortcut for execute extension",
-      "suggested_key": {
-        "default": "Alt+Q",
-        "mac": "Command+Shift+A"
-      }
+    ],
+    "action": {},
+    "commands": {
+        "_execute_action": {
+            "description": "Shortcut for execute extension",
+            "suggested_key": {
+                "default": "Alt+Q",
+                "mac": "Command+Shift+A"
+            }
+        },
+        "next_ai_model": {
+            "description": "Switch to next AI model",
+            "suggested_key": {
+                "default": "Alt+Shift+N"
+            }
+        },
+        "previous_ai_model": {
+            "description": "Switch to previous AI model",
+            "suggested_key": {
+                "default": "Alt+Shift+P"
+            }
+        },
+        "toggle_neural_nav": {
+            "description": "Toggle Neural Nav panel",
+            "suggested_key": {
+                "default": "Ctrl+Period"
+            }
+        }
     },
-    "next_ai_model": {
-      "description": "Switch to next AI model",
-      "suggested_key": {
-        "default": "Alt+Shift+N"
-      }
-    },
-    "previous_ai_model": {
-      "description": "Switch to previous AI model",
-      "suggested_key": {
-        "default": "Alt+Shift+P"
-      }
-    }
-  },
-  "default_locale": "en"
+    "default_locale": "en"
 }

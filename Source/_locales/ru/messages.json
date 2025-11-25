@@ -1,74 +1,266 @@
 {
-    "settings": { "message": "Настройки" },
-    "shortcutLabel": { "message": "Сочетание Клавиш" },
-    "footerText": { "message": "Сделано с <span class=\"heart\">❤</span> от Creos" },
-    "shortcutInfo": { "message": "Нажмите на значок настроек, чтобы изменить сочетание клавиш на странице сочетаний клавиш Chrome. <br> Рекомендуется: ALT + Q / ⌘ + Shift + Q" },
-    "language": { "message": "Язык" },
-    "toggleExtension": { "message": "Расширение Вкл/Выкл" },
-    "splitView": { "message": "Разделенный вид" },
-    "scrollbarAlwaysVisible": { "message": "Полоса прокрутки всегда видима" },
-    "customizeNavigation": { "message": "Настройка навигации" },
-    "rememberLastModel": { "message": "Запоминать последний выбранный модель" },
-    "appDescription": { "message": "Легкий доступ к сайтам с искусственным интеллектом через боковую панель" },
-    "customLinks": { "message": "Пользовательские ссылки" },
-    "add": { "message": "Добавить" },
+    "settings": {
+        "message": "Настройки"
+    },
+    "shortcutLabel": {
+        "message": "Сочетание Клавиш"
+    },
+    "footerText": {
+        "message": "Сделано с <span class=\"heart\">❤</span> от Creos"
+    },
+    "shortcutInfo": {
+        "message": "Нажмите на значок настроек, чтобы изменить сочетание клавиш на странице сочетаний клавиш Chrome. <br> Рекомендуется: ALT + Q / ⌘ + Shift + Q"
+    },
+    "language": {
+        "message": "Язык"
+    },
+    "toggleExtension": {
+        "message": "Расширение Вкл/Выкл"
+    },
+    "splitView": {
+        "message": "Разделенный вид"
+    },
+    "scrollbarAlwaysVisible": {
+        "message": "Полоса прокрутки всегда видима"
+    },
+    "customizeNavigation": {
+        "message": "Настройка навигации"
+    },
+    "rememberLastModel": {
+        "message": "Запоминать последний выбранный модель"
+    },
+    "appDescription": {
+        "message": "Легкий доступ к сайтам с искусственным интеллектом через боковую панель"
+    },
+    "customLinks": {
+        "message": "Пользовательские ссылки"
+    },
+    "add": {
+        "message": "Добавить"
+    },
     "deleteConfirmation": {
         "message": "Вы уверены, что хотите удалить \"$1\"?"
     },
-    "supportTitle": { "message": "Нам Нужна Ваша Поддержка" },
+    "supportTitle": {
+        "message": "Нам Нужна Ваша Поддержка"
+    },
     "supportDescription": {
         "message": "Создано с ❤️ и бесчисленными часами преданности. Ваша поддержка помогает нам продолжать создавать удивительные инструменты для всех."
     },
-    "supportButton": { "message": "Купить Мне Кофе" },
-    "extractButton": { "message": "Извлечь" },
-    "extractButtonTitle": { "message": "Извлечь и скопировать содержимое с текущей страницы" },
-    "extractButtonExtracting": { "message": "Извлечение..." },
-    "extractButtonExtractingTitle": { "message": "Извлечение содержимого..." },
-    "extractButtonExtractingAriaLabel": { "message": "Извлечение содержимого, пожалуйста подождите..." },
-    "extractionModalTitle": { "message": "Выберите Метод Извлечения" },
-    "extractionModalClose": { "message": "Закрыть" },
-    "extractionSearchPlaceholder": { "message": "Поиск экстракторов..." },
-    "extractionSuccessMessage": { "message": "Содержимое $1 скопировано в буфер обмена!" },
-    "extractionErrorGeneric": { "message": "Произошла ошибка при извлечении" },
-    "extractionErrorNoTab": { "message": "Активная вкладка не найдена" },
-    "extractionErrorClipboard": { "message": "Ошибка копирования в буфер обмена" },
-    "extractionErrorPermission": { "message": "Доступ к странице запрещен" },
-    "extractionErrorFailed": { "message": "Ошибка извлечения содержимого" },
-    "extractionNoContent": { "message": "Не удалось извлечь читаемое содержимое с этой страницы." },
-    "extractionNoContentReddit": { "message": "Не удалось извлечь содержимое из этого поста Reddit." },
-    "extractionNoContentNews": { "message": "Не удалось извлечь содержимое из этой новостной статьи." },
-    "extractionNoContentLinkedIn": { "message": "Пост LinkedIn не найден на этой странице." },
-    "extractionNoContentLinkedInPost": { "message": "Не удалось извлечь содержимое из этого поста LinkedIn." },
-    "extractionNoContentGitHubReadme": { "message": "Содержимое README не найдено" },
-    "extractionNoContentGitHubCode": { "message": "Содержимое кода не найдено на этой странице" },
-    "extractionFallbackTitle": { "message": "Извлеченное Содержимое" },
-    "extractionTwitterTitle": { "message": "Твит" },
-    "extractionRedditTitle": { "message": "Пост Reddit" },
-    "extractionNewsTitle": { "message": "Новостная Статья" },
-    "extractionLinkedInTitle": { "message": "Пост LinkedIn" },
-    "extractionLinkedInTitleBy": { "message": "Пост LinkedIn от $1" },
-    "extractionGitHubRepoTitle": { "message": "Репозиторий GitHub" },
-    "extractionGitHubCodeTitle": { "message": "Код GitHub" },
-    "extractionEngagementLabel": { "message": "Вовлеченность" },
-    "extractionPostedLabel": { "message": "Опубликовано" },
-    "extractionTopCommentsLabel": { "message": "Топ Комментарии" },
-    "extractionMediumTitle": { "message": "Статья Medium" },
-    "extractionTechCrunchTitle": { "message": "Статья TechCrunch" },
-    "themeLabel": { "message": "Тема" },
-    "themeDefault": { "message": "По умолчанию" },
-    "themeSynthwave": { "message": "Synthwave / Ретро" },
-    "themeGlassmorphism": { "message": "Глассморфизм" },
-    "themeBrutalism": { "message": "Нео‑Брутализм" },
-    "themeNeoNoir": { "message": "Нео Нуар (тёмная)" },
-    "themeNeoAnime": { "message": "Нео‑Аниме" },
-    "themeSavedInfo": { "message": "Ваш выбор будет сохранён." },
-    "synthOptions": { "message": "Опции Synthwave" },
-    "synthDimGlowLabel": { "message": "Понизить неоновое свечение (низкая стимуляция)" }
-    ,
-    "modelShortcutsLabel": { "message": "Горячие клавиши моделей" },
-    "switchNext": { "message": "Следующая модель" },
-    "switchPrev": { "message": "Предыдущая модель" },
-    "shortcutsManage": { "message": "Управление горячими клавишами" },
-    "shortcutsNote": { "message": "Горячие клавиши управляются вашим браузером. Если сочетание конфликтует с системными или браузерными клавишами, выберите другое." },
-    "notSet": { "message": "Не задано" }
+    "supportButton": {
+        "message": "Купить Мне Кофе"
+    },
+    "extractButton": {
+        "message": "Извлечь"
+    },
+    "extractButtonTitle": {
+        "message": "Извлечь и скопировать содержимое с текущей страницы"
+    },
+    "extractButtonExtracting": {
+        "message": "Извлечение..."
+    },
+    "extractButtonExtractingTitle": {
+        "message": "Извлечение содержимого..."
+    },
+    "extractButtonExtractingAriaLabel": {
+        "message": "Извлечение содержимого, пожалуйста подождите..."
+    },
+    "extractionModalTitle": {
+        "message": "Выберите Метод Извлечения"
+    },
+    "extractionModalClose": {
+        "message": "Закрыть"
+    },
+    "extractionSearchPlaceholder": {
+        "message": "Поиск экстракторов..."
+    },
+    "extractionSuccessMessage": {
+        "message": "Содержимое $1 скопировано в буфер обмена!"
+    },
+    "extractionErrorGeneric": {
+        "message": "Произошла ошибка при извлечении"
+    },
+    "extractionErrorNoTab": {
+        "message": "Активная вкладка не найдена"
+    },
+    "extractionErrorClipboard": {
+        "message": "Ошибка копирования в буфер обмена"
+    },
+    "extractionErrorPermission": {
+        "message": "Доступ к странице запрещен"
+    },
+    "extractionErrorFailed": {
+        "message": "Ошибка извлечения содержимого"
+    },
+    "extractionNoContent": {
+        "message": "Не удалось извлечь читаемое содержимое с этой страницы."
+    },
+    "extractionNoContentReddit": {
+        "message": "Не удалось извлечь содержимое из этого поста Reddit."
+    },
+    "extractionNoContentNews": {
+        "message": "Не удалось извлечь содержимое из этой новостной статьи."
+    },
+    "extractionNoContentLinkedIn": {
+        "message": "Пост LinkedIn не найден на этой странице."
+    },
+    "extractionNoContentLinkedInPost": {
+        "message": "Не удалось извлечь содержимое из этого поста LinkedIn."
+    },
+    "extractionNoContentGitHubReadme": {
+        "message": "Содержимое README не найдено"
+    },
+    "extractionNoContentGitHubCode": {
+        "message": "Содержимое кода не найдено на этой странице"
+    },
+    "extractionFallbackTitle": {
+        "message": "Извлеченное Содержимое"
+    },
+    "extractionTwitterTitle": {
+        "message": "Твит"
+    },
+    "extractionRedditTitle": {
+        "message": "Пост Reddit"
+    },
+    "extractionNewsTitle": {
+        "message": "Новостная Статья"
+    },
+    "extractionLinkedInTitle": {
+        "message": "Пост LinkedIn"
+    },
+    "extractionLinkedInTitleBy": {
+        "message": "Пост LinkedIn от $1"
+    },
+    "extractionGitHubRepoTitle": {
+        "message": "Репозиторий GitHub"
+    },
+    "extractionGitHubCodeTitle": {
+        "message": "Код GitHub"
+    },
+    "extractionEngagementLabel": {
+        "message": "Вовлеченность"
+    },
+    "extractionPostedLabel": {
+        "message": "Опубликовано"
+    },
+    "extractionTopCommentsLabel": {
+        "message": "Топ Комментарии"
+    },
+    "extractionMediumTitle": {
+        "message": "Статья Medium"
+    },
+    "extractionTechCrunchTitle": {
+        "message": "Статья TechCrunch"
+    },
+    "themeLabel": {
+        "message": "Тема"
+    },
+    "themeDefault": {
+        "message": "По умолчанию"
+    },
+    "themeSynthwave": {
+        "message": "Synthwave / Ретро"
+    },
+    "themeGlassmorphism": {
+        "message": "Глассморфизм"
+    },
+    "themeBrutalism": {
+        "message": "Нео‑Брутализм"
+    },
+    "themeNeoNoir": {
+        "message": "Нео Нуар (тёмная)"
+    },
+    "themeNeoAnime": {
+        "message": "Нео‑Аниме"
+    },
+    "themeSavedInfo": {
+        "message": "Ваш выбор будет сохранён."
+    },
+    "synthOptions": {
+        "message": "Опции Synthwave"
+    },
+    "synthDimGlowLabel": {
+        "message": "Понизить неоновое свечение (низкая стимуляция)"
+    },
+    "modelShortcutsLabel": {
+        "message": "Горячие клавиши моделей"
+    },
+    "switchNext": {
+        "message": "Следующая модель"
+    },
+    "switchPrev": {
+        "message": "Предыдущая модель"
+    },
+    "shortcutsManage": {
+        "message": "Управление горячими клавишами"
+    },
+    "shortcutsNote": {
+        "message": "Горячие клавиши управляются вашим браузером. Если сочетание конфликтует с системными или браузерными клавишами, выберите другое."
+    },
+    "notSet": {
+        "message": "Не задано"
+    },
+    "promptHistoryViewer": {
+        "message": "Просмотр истории промтов"
+    },
+    "neuralNavToggleTitle": {
+        "message": "Переключить Prompt History (Cmd/Ctrl + .)"
+    },
+    "neuralNavToggleAriaLabel": {
+        "message": "Переключить панель навигации"
+    },
+    "neuralNavTabPrompts": {
+        "message": "Промты"
+    },
+    "neuralNavTabAll": {
+        "message": "Все"
+    },
+    "neuralNavSearchPlaceholder": {
+        "message": "Фильтр..."
+    },
+    "neuralNavSearchAriaLabel": {
+        "message": "Фильтровать диалог"
+    },
+    "neuralNavEmptyNoResults": {
+        "message": "Результаты не найдены"
+    },
+    "neuralNavEmptyNoItems": {
+        "message": "Нет элементов для отображения"
+    },
+    "neuralNavProviderChatGPT": {
+        "message": "ChatGPT"
+    },
+    "neuralNavProviderGemini": {
+        "message": "Gemini"
+    },
+    "neuralNavProviderClaude": {
+        "message": "Claude"
+    },
+    "neuralNavProviderQwen": {
+        "message": "Qwen"
+    },
+    "neuralNavProviderCopilot": {
+        "message": "Copilot"
+    },
+    "neuralNavProviderKimi": {
+        "message": "Kimi"
+    },
+    "neuralNavProviderZai": {
+        "message": "Z.ai"
+    },
+    "neuralNavProviderDeepSeek": {
+        "message": "DeepSeek"
+    },
+    "neuralNavAlreadyLoaded": {
+        "message": "Prompt History: Уже загружено, пропускаю"
+    },
+    "neuralNavDisabledByUser": {
+        "message": "Prompt History: Отключено пользователем"
+    },
+    "neuralNavNoProvider": {
+        "message": "Prompt History: Не обнаружен поддерживаемый провайдер"
+    },
+    "toggleNeuralNav": {
+        "message": "Переключить историю промптов"
+    }
 }

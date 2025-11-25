@@ -9,7 +9,7 @@
     "message": "Made with <span class=\"heart\">❤</span> by Creos"
   },
   "shortcutInfo": {
-  "message": "Click the settings icon to change keyboard shortcuts in Chrome's shortcuts page. <br> Open/Close: Alt+Q / ⌘+Shift+A &nbsp;•&nbsp; Next model: Alt+Shift+N &nbsp;•&nbsp; Previous model: Alt+Shift+P"
+    "message": "Click the settings icon to change keyboard shortcuts in Chrome's shortcuts page. <br> Open/Close: Alt+Q / ⌘+Shift+A &nbsp;•&nbsp; Next model: Alt+Shift+N &nbsp;•&nbsp; Previous model: Alt+Shift+P"
   },
   "language": {
     "message": "Language"
@@ -152,21 +152,115 @@
   "extractionTechCrunchTitle": {
     "message": "TechCrunch Article"
   },
-  "themeLabel": { "message": "Theme" },
-  "themeDefault": { "message": "Default" },
-  "themeSynthwave": { "message": "Synthwave" },
-  "themeGlassmorphism": { "message": "Glassmorphism" },
-  "themeBrutalism": { "message": "Neo‑Brutalism" },
-  "themeNeoNoir": { "message": "Neo Noir Dark" },
-  "themeNeoAnime": { "message": "Neo‑Anime" },
-  "themeSavedInfo": { "message": "Your choice is saved for next time." },
-  "synthOptions": { "message": "Synthwave Options" },
-  "synthDimGlowLabel": { "message": "Dim neon glow (low stimulus)" }
-  ,
-  "modelShortcutsLabel": { "message": "Model Shortcuts" },
-  "switchNext": { "message": "Next model" },
-  "switchPrev": { "message": "Previous model" },
-  "shortcutsManage": { "message": "Manage shortcuts" },
-  "shortcutsNote": { "message": "Shortcuts are managed by your browser. If a combo conflicts with system or browser keys, pick another." },
-  "notSet": { "message": "Not set" }
+  "themeLabel": {
+    "message": "Theme"
+  },
+  "themeDefault": {
+    "message": "Default"
+  },
+  "themeSynthwave": {
+    "message": "Synthwave"
+  },
+  "themeGlassmorphism": {
+    "message": "Glassmorphism"
+  },
+  "themeBrutalism": {
+    "message": "Neo‑Brutalism"
+  },
+  "themeNeoNoir": {
+    "message": "Neo Noir Dark"
+  },
+  "themeNeoAnime": {
+    "message": "Neo‑Anime"
+  },
+  "themeSavedInfo": {
+    "message": "Your choice is saved for next time."
+  },
+  "synthOptions": {
+    "message": "Synthwave Options"
+  },
+  "synthDimGlowLabel": {
+    "message": "Dim neon glow (low stimulus)"
+  },
+  "modelShortcutsLabel": {
+    "message": "Model Shortcuts"
+  },
+  "switchNext": {
+    "message": "Next model"
+  },
+  "switchPrev": {
+    "message": "Previous model"
+  },
+  "toggleNeuralNav": {
+    "message": "Toggle Prompt History"
+  },
+  "shortcutsManage": {
+    "message": "Manage shortcuts"
+  },
+  "shortcutsNote": {
+    "message": "Shortcuts are managed by your browser. If a combo conflicts with system or browser keys, pick another."
+  },
+  "notSet": {
+    "message": "Not set"
+  },
+  "promptHistoryViewer": {
+    "message": "Prompt History Viewer"
+  },
+  "neuralNavToggleTitle": {
+    "message": "Toggle Prompt History (Cmd/Ctrl + .)"
+  },
+  "neuralNavToggleAriaLabel": {
+    "message": "Toggle navigation panel"
+  },
+  "neuralNavTabPrompts": {
+    "message": "Prompts"
+  },
+  "neuralNavTabAll": {
+    "message": "All"
+  },
+  "neuralNavSearchPlaceholder": {
+    "message": "Filter..."
+  },
+  "neuralNavSearchAriaLabel": {
+    "message": "Filter conversation"
+  },
+  "neuralNavEmptyNoResults": {
+    "message": "No results found"
+  },
+  "neuralNavEmptyNoItems": {
+    "message": "No items to display"
+  },
+  "neuralNavProviderChatGPT": {
+    "message": "ChatGPT"
+  },
+  "neuralNavProviderGemini": {
+    "message": "Gemini"
+  },
+  "neuralNavProviderClaude": {
+    "message": "Claude"
+  },
+  "neuralNavProviderQwen": {
+    "message": "Qwen"
+  },
+  "neuralNavProviderCopilot": {
+    "message": "Copilot"
+  },
+  "neuralNavProviderKimi": {
+    "message": "Kimi"
+  },
+  "neuralNavProviderZai": {
+    "message": "Z.ai"
+  },
+  "neuralNavProviderDeepSeek": {
+    "message": "DeepSeek"
+  },
+  "neuralNavAlreadyLoaded": {
+    "message": "Prompt History: Already loaded, skipping"
+  },
+  "neuralNavDisabledByUser": {
+    "message": "Prompt History: Disabled by user setting"
+  },
+  "neuralNavNoProvider": {
+    "message": "Prompt History: No supported provider detected"
+  }
 }

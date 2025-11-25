@@ -1,74 +1,266 @@
 {
-    "settings": { "message": "Ayarlar" },
-    "shortcutLabel": { "message": "Klavye Kısayolu" },
-    "footerText": { "message": "Creos tarafından <span class=\"heart\">❤</span> ile yapıldı" },
-    "shortcutInfo": { "message": "Klavye kısayolunu Chrome'un kısayol tuşları sayfasında değiştirmek için ayarlar simgesine tıklayın.<br>Önerilen: ALT + Q / ⌘ + Shift + Q" },
-    "language": { "message": "Dil" },
-    "toggleExtension": { "message": "Uzantıyı Aç/Kapat" },
-    "splitView": { "message": "Bölünmüş Görünüm" },
-    "scrollbarAlwaysVisible": { "message": "Kaydırma çubuğu her zaman görünür" },
-    "customizeNavigation": { "message": "Navigasyon Özelleştirme" },
-    "rememberLastModel": { "message": "Son seçilen modeli hatırla" },
-    "appDescription": { "message": "AI sitelerine kolayca erişmek için yan panel" },
-    "customLinks": { "message": "Özel Bağlantılar" },
-    "add": { "message": "Ekle" },
+    "settings": {
+        "message": "Ayarlar"
+    },
+    "shortcutLabel": {
+        "message": "Klavye Kısayolu"
+    },
+    "footerText": {
+        "message": "Creos tarafından <span class=\"heart\">❤</span> ile yapıldı"
+    },
+    "shortcutInfo": {
+        "message": "Klavye kısayolunu Chrome'un kısayol tuşları sayfasında değiştirmek için ayarlar simgesine tıklayın.<br>Önerilen: ALT + Q / ⌘ + Shift + Q"
+    },
+    "language": {
+        "message": "Dil"
+    },
+    "toggleExtension": {
+        "message": "Uzantıyı Aç/Kapat"
+    },
+    "splitView": {
+        "message": "Bölünmüş Görünüm"
+    },
+    "scrollbarAlwaysVisible": {
+        "message": "Kaydırma çubuğu her zaman görünür"
+    },
+    "customizeNavigation": {
+        "message": "Navigasyon Özelleştirme"
+    },
+    "rememberLastModel": {
+        "message": "Son seçilen modeli hatırla"
+    },
+    "appDescription": {
+        "message": "AI sitelerine kolayca erişmek için yan panel"
+    },
+    "customLinks": {
+        "message": "Özel Bağlantılar"
+    },
+    "add": {
+        "message": "Ekle"
+    },
     "deleteConfirmation": {
         "message": "\"$1\" öğesini silmek istediğinizden emin misiniz?"
     },
-    "supportTitle": { "message": "Desteğinize İhtiyacımız Var" },
+    "supportTitle": {
+        "message": "Desteğinize İhtiyacımız Var"
+    },
     "supportDescription": {
         "message": "❤️ ve sayısız saatlik özveri ile yaratıldı. Desteğiniz, herkes için harika araçlar oluşturmaya devam etmemize yardımcı oluyor."
     },
-    "supportButton": { "message": "Bana Kahve Ismarla" },
-    "extractButton": { "message": "Çıkart" },
-    "extractButtonTitle": { "message": "Mevcut sayfadan içerik çıkart ve kopyala" },
-    "extractButtonExtracting": { "message": "Çıkartılıyor..." },
-    "extractButtonExtractingTitle": { "message": "İçerik çıkartılıyor..." },
-    "extractButtonExtractingAriaLabel": { "message": "İçerik çıkartılıyor, lütfen bekleyin..." },
-    "extractionModalTitle": { "message": "Çıkarma Yöntemini Seçin" },
-    "extractionModalClose": { "message": "Kapat" },
-    "extractionSearchPlaceholder": { "message": "Çıkarıcıları ara..." },
-    "extractionSuccessMessage": { "message": "$1 içeriği panoya kopyalandı!" },
-    "extractionErrorGeneric": { "message": "Çıkarma sırasında bir hata oluştu" },
-    "extractionErrorNoTab": { "message": "Aktif sekme bulunamadı" },
-    "extractionErrorClipboard": { "message": "Panoya kopyalama başarısız" },
-    "extractionErrorPermission": { "message": "Sayfaya erişim izni reddedildi" },
-    "extractionErrorFailed": { "message": "İçerik çıkarma başarısız" },
-    "extractionNoContent": { "message": "Bu sayfadan okunabilir içerik çıkarılamadı." },
-    "extractionNoContentReddit": { "message": "Bu Reddit gönderisinden içerik çıkarılamadı." },
-    "extractionNoContentNews": { "message": "Bu haber makalesinden içerik çıkarılamadı." },
-    "extractionNoContentLinkedIn": { "message": "Bu sayfada LinkedIn gönderisi bulunamadı." },
-    "extractionNoContentLinkedInPost": { "message": "Bu LinkedIn gönderisinden içerik çıkarılamadı." },
-    "extractionNoContentGitHubReadme": { "message": "README içeriği bulunamadı" },
-    "extractionNoContentGitHubCode": { "message": "Bu sayfada kod içeriği bulunamadı" },
-    "extractionFallbackTitle": { "message": "Çıkarılan İçerik" },
-    "extractionTwitterTitle": { "message": "Tweet" },
-    "extractionRedditTitle": { "message": "Reddit Gönderisi" },
-    "extractionNewsTitle": { "message": "Haber Makalesi" },
-    "extractionLinkedInTitle": { "message": "LinkedIn Gönderisi" },
-    "extractionLinkedInTitleBy": { "message": "$1 tarafından LinkedIn Gönderisi" },
-    "extractionGitHubRepoTitle": { "message": "GitHub Deposu" },
-    "extractionGitHubCodeTitle": { "message": "GitHub Kodu" },
-    "extractionEngagementLabel": { "message": "Etkileşim" },
-    "extractionPostedLabel": { "message": "Gönderildi" },
-    "extractionTopCommentsLabel": { "message": "En İyi Yorumlar" },
-    "extractionMediumTitle": { "message": "Medium Makalesi" },
-    "extractionTechCrunchTitle": { "message": "TechCrunch Makalesi" },
-    "themeLabel": { "message": "Tema" },
-    "themeDefault": { "message": "Varsayılan" },
-    "themeSynthwave": { "message": "Synthwave" },
-    "themeGlassmorphism": { "message": "Glassmorphism" },
-    "themeBrutalism": { "message": "Neo‑Brütalizm" },
-    "themeNeoNoir": { "message": "Neo Noir Koyu" },
-    "themeNeoAnime": { "message": "Neo‑Anime" },
-    "themeSavedInfo": { "message": "Seçiminiz kaydedilir." },
-    "synthOptions": { "message": "Synthwave Seçenekleri" },
-    "synthDimGlowLabel": { "message": "Neon parlamayı kıs (düşük uyarım)" }
-    ,
-    "modelShortcutsLabel": { "message": "Model Kısayolları" },
-    "switchNext": { "message": "Sonraki model" },
-    "switchPrev": { "message": "Önceki model" },
-    "shortcutsManage": { "message": "Kısayolları yönet" },
-    "shortcutsNote": { "message": "Kısayollar tarayıcı tarafından yönetilir. Bir kombinasyon sistem veya tarayıcı tuşlarıyla çakışırsa başka birini seçin." },
-    "notSet": { "message": "Ayarlanmadı" }
+    "supportButton": {
+        "message": "Bana Kahve Ismarla"
+    },
+    "extractButton": {
+        "message": "Çıkart"
+    },
+    "extractButtonTitle": {
+        "message": "Mevcut sayfadan içerik çıkart ve kopyala"
+    },
+    "extractButtonExtracting": {
+        "message": "Çıkartılıyor..."
+    },
+    "extractButtonExtractingTitle": {
+        "message": "İçerik çıkartılıyor..."
+    },
+    "extractButtonExtractingAriaLabel": {
+        "message": "İçerik çıkartılıyor, lütfen bekleyin..."
+    },
+    "extractionModalTitle": {
+        "message": "Çıkarma Yöntemini Seçin"
+    },
+    "extractionModalClose": {
+        "message": "Kapat"
+    },
+    "extractionSearchPlaceholder": {
+        "message": "Çıkarıcıları ara..."
+    },
+    "extractionSuccessMessage": {
+        "message": "$1 içeriği panoya kopyalandı!"
+    },
+    "extractionErrorGeneric": {
+        "message": "Çıkarma sırasında bir hata oluştu"
+    },
+    "extractionErrorNoTab": {
+        "message": "Aktif sekme bulunamadı"
+    },
+    "extractionErrorClipboard": {
+        "message": "Panoya kopyalama başarısız"
+    },
+    "extractionErrorPermission": {
+        "message": "Sayfaya erişim izni reddedildi"
+    },
+    "extractionErrorFailed": {
+        "message": "İçerik çıkarma başarısız"
+    },
+    "extractionNoContent": {
+        "message": "Bu sayfadan okunabilir içerik çıkarılamadı."
+    },
+    "extractionNoContentReddit": {
+        "message": "Bu Reddit gönderisinden içerik çıkarılamadı."
+    },
+    "extractionNoContentNews": {
+        "message": "Bu haber makalesinden içerik çıkarılamadı."
+    },
+    "extractionNoContentLinkedIn": {
+        "message": "Bu sayfada LinkedIn gönderisi bulunamadı."
+    },
+    "extractionNoContentLinkedInPost": {
+        "message": "Bu LinkedIn gönderisinden içerik çıkarılamadı."
+    },
+    "extractionNoContentGitHubReadme": {
+        "message": "README içeriği bulunamadı"
+    },
+    "extractionNoContentGitHubCode": {
+        "message": "Bu sayfada kod içeriği bulunamadı"
+    },
+    "extractionFallbackTitle": {
+        "message": "Çıkarılan İçerik"
+    },
+    "extractionTwitterTitle": {
+        "message": "Tweet"
+    },
+    "extractionRedditTitle": {
+        "message": "Reddit Gönderisi"
+    },
+    "extractionNewsTitle": {
+        "message": "Haber Makalesi"
+    },
+    "extractionLinkedInTitle": {
+        "message": "LinkedIn Gönderisi"
+    },
+    "extractionLinkedInTitleBy": {
+        "message": "$1 tarafından LinkedIn Gönderisi"
+    },
+    "extractionGitHubRepoTitle": {
+        "message": "GitHub Deposu"
+    },
+    "extractionGitHubCodeTitle": {
+        "message": "GitHub Kodu"
+    },
+    "extractionEngagementLabel": {
+        "message": "Etkileşim"
+    },
+    "extractionPostedLabel": {
+        "message": "Gönderildi"
+    },
+    "extractionTopCommentsLabel": {
+        "message": "En İyi Yorumlar"
+    },
+    "extractionMediumTitle": {
+        "message": "Medium Makalesi"
+    },
+    "extractionTechCrunchTitle": {
+        "message": "TechCrunch Makalesi"
+    },
+    "themeLabel": {
+        "message": "Tema"
+    },
+    "themeDefault": {
+        "message": "Varsayılan"
+    },
+    "themeSynthwave": {
+        "message": "Synthwave"
+    },
+    "themeGlassmorphism": {
+        "message": "Glassmorphism"
+    },
+    "themeBrutalism": {
+        "message": "Neo‑Brütalizm"
+    },
+    "themeNeoNoir": {
+        "message": "Neo Noir Koyu"
+    },
+    "themeNeoAnime": {
+        "message": "Neo‑Anime"
+    },
+    "themeSavedInfo": {
+        "message": "Seçiminiz kaydedilir."
+    },
+    "synthOptions": {
+        "message": "Synthwave Seçenekleri"
+    },
+    "synthDimGlowLabel": {
+        "message": "Neon parlamayı kıs (düşük uyarım)"
+    },
+    "modelShortcutsLabel": {
+        "message": "Model Kısayolları"
+    },
+    "switchNext": {
+        "message": "Sonraki model"
+    },
+    "switchPrev": {
+        "message": "Önceki model"
+    },
+    "shortcutsManage": {
+        "message": "Kısayolları yönet"
+    },
+    "shortcutsNote": {
+        "message": "Kısayollar tarayıcı tarafından yönetilir. Bir kombinasyon sistem veya tarayıcı tuşlarıyla çakışırsa başka birini seçin."
+    },
+    "notSet": {
+        "message": "Ayarlanmadı"
+    },
+    "promptHistoryViewer": {
+        "message": "Prompt Geçmişi Görüntüleyici"
+    },
+    "neuralNavToggleTitle": {
+        "message": "Prompt History'yi Aç/Kapat (Cmd/Ctrl + .)"
+    },
+    "neuralNavToggleAriaLabel": {
+        "message": "Gezinme panelini aç/kapat"
+    },
+    "neuralNavTabPrompts": {
+        "message": "Prompt'lar"
+    },
+    "neuralNavTabAll": {
+        "message": "Tümü"
+    },
+    "neuralNavSearchPlaceholder": {
+        "message": "Filtrele..."
+    },
+    "neuralNavSearchAriaLabel": {
+        "message": "Konuşmayı filtrele"
+    },
+    "neuralNavEmptyNoResults": {
+        "message": "Sonuç bulunamadı"
+    },
+    "neuralNavEmptyNoItems": {
+        "message": "Gösterilecek öğe yok"
+    },
+    "neuralNavProviderChatGPT": {
+        "message": "ChatGPT"
+    },
+    "neuralNavProviderGemini": {
+        "message": "Gemini"
+    },
+    "neuralNavProviderClaude": {
+        "message": "Claude"
+    },
+    "neuralNavProviderQwen": {
+        "message": "Qwen"
+    },
+    "neuralNavProviderCopilot": {
+        "message": "Copilot"
+    },
+    "neuralNavProviderKimi": {
+        "message": "Kimi"
+    },
+    "neuralNavProviderZai": {
+        "message": "Z.ai"
+    },
+    "neuralNavProviderDeepSeek": {
+        "message": "DeepSeek"
+    },
+    "neuralNavAlreadyLoaded": {
+        "message": "Prompt History: Zaten yüklü, atlanıyor"
+    },
+    "neuralNavDisabledByUser": {
+        "message": "Prompt History: Kullanıcı ayarıyla devre dışı"
+    },
+    "neuralNavNoProvider": {
+        "message": "Prompt History: Desteklenen sağlayıcı tespit edilmedi"
+    },
+    "toggleNeuralNav": {
+        "message": "İstem Geçmişini Aç/Kapat"
+    }
 }
