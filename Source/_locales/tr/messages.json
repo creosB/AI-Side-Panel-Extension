@@ -38,6 +38,9 @@
     "add": {
         "message": "Ekle"
     },
+    "delete": {
+        "message": "Sil"
+    },
     "deleteConfirmation": {
         "message": "\"$1\" öğesini silmek istediğinizden emin misiniz?"
     },
@@ -262,5 +265,47 @@
     },
     "toggleNeuralNav": {
         "message": "İstem Geçmişini Aç/Kapat"
+    },
+    "customServiceTitle": {
+        "message": "Özel Servis"
+    },
+    "customServiceHelper": {
+        "message": "Seçili metne sağ tıkla → Servis → Eylem."
+    },
+    "customServiceDefaultLabel": {
+        "message": "Varsayılan servis"
+    },
+    "customServiceBaseUrlLabel": {
+        "message": "Özel Servis temel URL'si"
+    },
+    "customServiceBaseUrlHelper": {
+        "message": "Servis \"Özel URL\" olarak ayarlandığında kullanılır."
+    },
+    "customServiceBaseUrlPlaceholder": {
+        "message": "https://example.com/?q="
+    },
+    "customServiceBaseUrlInvalid": {
+        "message": "Geçersiz URL (http:// veya https:// ile başlamalı)"
+    },
+    "customServiceOpenModeLabel": {
+        "message": "Yan panelde aç (yeni sekme yerine)"
+    },
+    "customServiceEnabledServicesLabel": {
+        "message": "Etkin servisler"
+    },
+    "customServiceActionsLabel": {
+        "message": "Eylemler ve şablonlar"
+    },
+    "customServiceActionsHelper": {
+        "message": "Seçili metnin yerinde {text} kullanın. Kaldırılırsa otomatik olarak geri yükleriz."
+    },
+    "customServiceActionNamePlaceholder": {
+        "message": "Eylem adı (örn., İspanyolcaya çevir)"
+    },
+    "customServiceActionInstructionPlaceholder": {
+        "message": "Talimat (isteğe bağlı). {text} otomatik olarak eklenir."
+    },
+    "customServiceAddActionButton": {
+        "message": "Eylem ekle"
     }
 }

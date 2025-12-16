@@ -86,10 +86,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Route background command messages at app level as a backup
   try {
-    chrome.runtime.onMessage.addListener((msg) => {
+    chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       if (msg && msg.type === 'AI_MODEL_SWITCH') {
         window.navBarManager?.switchModel(msg.direction === 'prev' ? -1 : 1);
+      } else if (msg && msg.type === 'OPEN_CUSTOM_SERVICE') {
+        window.navBarManager?.openCustomServiceUrl(msg.payload || {});
       }
+      sendResponse?.({ ok: true });
+    });
+  } catch (_) {}
+
+  // Consume any pending custom service request that was queued while the panel was closed
+  try {
+    chrome.storage.local.get(['pendingCustomService'], (res) => {
+      const pending = res?.pendingCustomService;
+      if (pending?.url) {
+        window.navBarManager?.openCustomServiceUrl(pending);
+      }
+      chrome.storage.local.remove('pendingCustomService');
     });
   } catch (_) {}
 });

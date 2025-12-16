@@ -41,6 +41,9 @@
     "add": {
         "message": "Ajouter"
     },
+    "delete": {
+        "message": "Supprimer"
+    },
     "deleteConfirmation": {
         "message": "Êtes-vous sûr de vouloir supprimer \"$1\"?"
     },
@@ -265,5 +268,47 @@
     },
     "toggleNeuralNav": {
         "message": "Activer/Désactiver l'historique des invites"
+    },
+    "customServiceTitle": {
+        "message": "Service personnalisé"
+    },
+    "customServiceHelper": {
+        "message": "Clic droit sur le texte sélectionné → Service → Action."
+    },
+    "customServiceDefaultLabel": {
+        "message": "Service par défaut"
+    },
+    "customServiceBaseUrlLabel": {
+        "message": "URL de base du service personnalisé"
+    },
+    "customServiceBaseUrlHelper": {
+        "message": "Utilisé lorsque le service est défini sur \"URL personnalisée\"."
+    },
+    "customServiceBaseUrlPlaceholder": {
+        "message": "https://example.com/?q="
+    },
+    "customServiceBaseUrlInvalid": {
+        "message": "URL invalide (doit commencer par http:// ou https://)"
+    },
+    "customServiceOpenModeLabel": {
+        "message": "Ouvrir dans le panneau latéral (au lieu d'un nouvel onglet)"
+    },
+    "customServiceEnabledServicesLabel": {
+        "message": "Services activés"
+    },
+    "customServiceActionsLabel": {
+        "message": "Actions et modèles"
+    },
+    "customServiceActionsHelper": {
+        "message": "Utilisez {text} là où le texte sélectionné doit apparaître. Nous le restaurerons automatiquement s'il est supprimé."
+    },
+    "customServiceActionNamePlaceholder": {
+        "message": "Nom de l'action (ex. Traduire en espagnol)"
+    },
+    "customServiceActionInstructionPlaceholder": {
+        "message": "Instruction (optionnel). {text} est ajouté automatiquement."
+    },
+    "customServiceAddActionButton": {
+        "message": "Ajouter une action"
     }
 }

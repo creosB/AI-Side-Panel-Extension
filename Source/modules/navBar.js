@@ -1,4 +1,6 @@
 // Navigation Bar Module
+import { SERVICE_PRESETS } from './customServiceConfig.js';
+
 export class NavBarManager {
   constructor() {
     this.init();
@@ -116,6 +118,67 @@ export class NavBarManager {
 
     // After switching, try to focus the search box inside the destination site
     this.focusSearchInIframe(iframe, url);
+  }
+
+  openCustomServiceUrl(payload = {}) {
+    const { url, serviceId, actionId } = payload;
+    const iframe = document.getElementById('main-iframe');
+    const supportPage = document.getElementById('support-page');
+    const splitViewBtn = document.getElementById('split-view-btn');
+    const supportBtn = document.getElementById('support-btn');
+    const toolbar = document.getElementById('toolbar');
+
+    if (!url || !iframe || !supportPage || !splitViewBtn || !supportBtn || !toolbar) {
+      return;
+    }
+
+    // Reset support view state
+    splitViewBtn.disabled = false;
+    splitViewBtn.title = '';
+    supportBtn.classList.remove('active');
+    supportPage.classList.remove('active');
+    setTimeout(() => {
+      supportPage.style.display = 'none';
+    }, 200);
+
+    // Show loading spinner and set iframe src
+    this.toggleLoadingState(true);
+    const fallbackTimer = setTimeout(() => {
+      // If a provider blocks iframe embedding, offer a graceful escape hatch
+      this.toggleLoadingState(false);
+      try {
+        chrome.runtime.sendMessage({ type: 'CUSTOM_SERVICE_FALLBACK_TAB', payload: { url } });
+      } catch { }
+    }, 4500);
+    const handleLoad = () => {
+      this.toggleLoadingState(false);
+      clearTimeout(fallbackTimer);
+      iframe.removeEventListener('load', handleLoad);
+    };
+    iframe.addEventListener('load', handleLoad);
+
+    iframe.src = url;
+    iframe.dataset.customServiceId = serviceId || '';
+    iframe.dataset.customActionId = actionId || '';
+
+    // Try to keep toolbar state in sync by marking the matching service button active
+    toolbar.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+    const selector = this.getButtonSelectorForService(serviceId);
+    if (selector) {
+      const btn = toolbar.querySelector(selector);
+      if (btn) {
+        btn.classList.add('active');
+        this.smoothScrollToButton(toolbar, btn);
+      }
+    }
+
+    this.focusSearchInIframe(iframe, url);
+  }
+
+  getButtonSelectorForService(serviceId) {
+    if (!serviceId) return null;
+    const match = SERVICE_PRESETS.find((svc) => svc.id === serviceId && svc.buttonSelector);
+    return match?.buttonSelector || null;
   }
 
   handleSupportButtonClick(iframe, supportPage, toolbar, supportButton) {

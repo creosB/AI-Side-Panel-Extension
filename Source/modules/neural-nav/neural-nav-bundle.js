@@ -9,7 +9,11 @@
 
     // Prevent double loading
     if (window.__NeuralNavLoaded) {
-        console.log(chrome.i18n.getMessage('neuralNavAlreadyLoaded'));
+        try {
+            console.log(chrome.i18n.getMessage('neuralNavAlreadyLoaded'));
+        } catch (_) {
+            console.log('Prompt History: Already loaded, skipping');
+        }
         return;
     }
     window.__NeuralNavLoaded = true;
@@ -38,6 +42,45 @@
     // ============================================
     // UTILITIES
     // ============================================
+    function isExtensionContextInvalidated(error) {
+        try {
+            const parts = [];
+            try { if (error?.message) parts.push(String(error.message)); } catch (_) { }
+            try { if (error?.stack) parts.push(String(error.stack)); } catch (_) { }
+            try { parts.push(String(error)); } catch (_) { }
+            const haystack = parts.filter(Boolean).join('\n');
+            return /Extension context invalidated/i.test(haystack)
+                || /The message port closed before a response was received/i.test(haystack)
+                || /Receiving end does not exist/i.test(haystack);
+        } catch (_) {
+            return false;
+        }
+    }
+
+    function safeI18n(key, fallback) {
+        try {
+            return chrome?.i18n?.getMessage(key) || fallback || key;
+        } catch (_) {
+            return fallback || key;
+        }
+    }
+
+    function isRuntimeAlive() {
+        try {
+            return !!(chrome?.runtime?.id);
+        } catch (_) {
+            return false;
+        }
+    }
+
+    function safeRuntimeGetURL(path) {
+        try {
+            return chrome?.runtime?.getURL(path) || '';
+        } catch (_) {
+            return '';
+        }
+    }
+
     function debounce(fn, delay) {
         let timer = null;
         const debounced = function (...args) {
@@ -447,14 +490,14 @@
             this.panel.innerHTML = `
                 <div class="nn-header">
                     <div class="nn-tabs" role="tablist">
-                        <button class="nn-tab" data-view="prompts" role="tab" aria-selected="false">${chrome.i18n.getMessage('neuralNavTabPrompts')}</button>
-                        <button class="nn-tab active" data-view="all" role="tab" aria-selected="true">${chrome.i18n.getMessage('neuralNavTabAll')}</button>
+                        <button class="nn-tab" data-view="prompts" role="tab" aria-selected="false">${safeI18n('neuralNavTabPrompts', 'Prompts')}</button>
+                        <button class="nn-tab active" data-view="all" role="tab" aria-selected="true">${safeI18n('neuralNavTabAll', 'All')}</button>
                     </div>
                 </div>
                 <div class="nn-controls">
                     <div class="nn-search-wrap">
                         <div class="nn-search-icon" aria-hidden="true">${ICONS.search}</div>
-                        <input type="text" class="nn-search-input" placeholder="${chrome.i18n.getMessage('neuralNavSearchPlaceholder')}" aria-label="${chrome.i18n.getMessage('neuralNavSearchAriaLabel')}" autocomplete="off" spellcheck="false" />
+                        <input type="text" class="nn-search-input" placeholder="${safeI18n('neuralNavSearchPlaceholder', 'Filter...')}" aria-label="${safeI18n('neuralNavSearchAriaLabel', 'Filter conversation')}" autocomplete="off" spellcheck="false" />
                     </div>
                 </div>
                 <div class="nn-content" role="list" aria-live="polite"></div>
@@ -465,12 +508,12 @@
             // Create the toggle button (will be injected into platform UI)
             this.toggleBtn = document.createElement('button');
             this.toggleBtn.className = 'nn-toggle-inline'; // Start with inline style
-            this.toggleBtn.title = chrome.i18n.getMessage('neuralNavToggleTitle');
-            this.toggleBtn.setAttribute('aria-label', chrome.i18n.getMessage('neuralNavToggleAriaLabel'));
+            this.toggleBtn.title = safeI18n('neuralNavToggleTitle', 'Toggle Prompt History (Cmd/Ctrl + .)');
+            this.toggleBtn.setAttribute('aria-label', safeI18n('neuralNavToggleAriaLabel', 'Toggle navigation panel'));
 
             // Use extension logo instead of menu icon
             const logoImg = document.createElement('img');
-            logoImg.src = chrome.runtime.getURL('images/icon32.png');
+            logoImg.src = safeRuntimeGetURL('images/icon32.png');
             logoImg.alt = 'NeuralNav';
             logoImg.style.cssText = 'width: 20px; height: 20px; object-fit: contain;';
             this.toggleBtn.appendChild(logoImg);
@@ -592,7 +635,7 @@
             const filtered = this.filterItems(items, view, search);
 
             if (filtered.length === 0) {
-                this.contentContainer.innerHTML = `<div class="nn-empty">${search ? chrome.i18n.getMessage('neuralNavEmptyNoResults') : chrome.i18n.getMessage('neuralNavEmptyNoItems')}</div>`;
+                this.contentContainer.innerHTML = `<div class="nn-empty">${search ? safeI18n('neuralNavEmptyNoResults', 'No results found') : safeI18n('neuralNavEmptyNoItems', 'No items to display')}</div>`;
                 return;
             }
 
@@ -708,6 +751,10 @@
 
         init() {
             try {
+                if (!isRuntimeAlive()) {
+                    this._disabled = true;
+                    return;
+                }
                 this.ui.mount();
                 this.setupObservers();
                 this.setupKeyboardShortcuts();
@@ -715,7 +762,9 @@
                 setTimeout(() => this.scan(), CONFIG.INITIAL_SCAN_DELAY);
                 console.log(`Prompt History: Initialized for ${this.provider.name}`);
             } catch (error) {
-                console.error('Prompt History: Initialization failed:', error);
+                if (!isExtensionContextInvalidated(error)) {
+                    console.error('Prompt History: Initialization failed:', error);
+                }
             }
         }
 
@@ -767,11 +816,42 @@
                     this.toggle();
                 }
             };
-            chrome.runtime.onMessage.addListener(this.boundHandlers.message);
+            try {
+                chrome.runtime.onMessage.addListener(this.boundHandlers.message);
+            } catch (_) {
+                // Extension context may be invalidated (e.g., during extension reload). Safe no-op.
+            }
+        }
+
+        teardown() {
+            try { this.scanDebounced?.cancel?.(); } catch (_) { }
+            try { this.observer?.disconnect(); } catch (_) { }
+            try { this.intersectionObserver?.disconnect(); } catch (_) { }
+            try {
+                const target = this.scrollTarget === document.body ? window : this.scrollTarget;
+                if (this.boundHandlers.scroll && target) {
+                    target.removeEventListener('scroll', this.boundHandlers.scroll);
+                }
+            } catch (_) { }
+            try {
+                if (this.boundHandlers.keydown) {
+                    document.removeEventListener('keydown', this.boundHandlers.keydown);
+                }
+            } catch (_) { }
+            try {
+                if (this.boundHandlers.message && chrome?.runtime?.onMessage?.removeListener) {
+                    chrome.runtime.onMessage.removeListener(this.boundHandlers.message);
+                }
+            } catch (_) { }
         }
 
         scan() {
             try {
+                if (this._disabled || !isRuntimeAlive()) {
+                    this._disabled = true;
+                    this.teardown();
+                    return [];
+                }
                 const rawItems = this.provider.getItems(document);
                 const items = rawItems.map((item, i) => {
                     const id = `nav-item-${i}`;
@@ -787,6 +867,11 @@
                 this.setState({ items });
                 return items;
             } catch (error) {
+                if (isExtensionContextInvalidated(error)) {
+                    this._disabled = true;
+                    this.teardown();
+                    return [];
+                }
                 console.error('Prompt History: Scan error:', error);
                 return [];
             }
@@ -794,7 +879,18 @@
 
         setState(newState, shouldRender = true) {
             this.state = { ...this.state, ...newState };
-            if (shouldRender) this.ui.render(this.state);
+            if (shouldRender) {
+                try {
+                    this.ui.render(this.state);
+                } catch (error) {
+                    if (isExtensionContextInvalidated(error) || !isRuntimeAlive()) {
+                        this._disabled = true;
+                        this.teardown();
+                        return;
+                    }
+                    console.error('Prompt History: Render error:', error);
+                }
+            }
         }
 
         toggle(force) {
@@ -833,18 +929,27 @@
     // INITIALIZE
     // ============================================
     function initialize() {
-        chrome.storage.local.get(['promptHistoryViewerEnabled'], (result) => {
-            if (result.promptHistoryViewerEnabled === false) {
-                console.log(chrome.i18n.getMessage('neuralNavDisabledByUser'));
-                return;
-            }
+        const start = () => {
             const provider = detectProvider();
             if (!provider) {
-                console.log(chrome.i18n.getMessage('neuralNavNoProvider'));
+                console.log(safeI18n('neuralNavNoProvider', 'Prompt History: No supported provider detected'));
                 return;
             }
             new NeuralNav(provider);
-        });
+        };
+
+        try {
+            chrome.storage.local.get(['promptHistoryViewerEnabled'], (result) => {
+                if (result.promptHistoryViewerEnabled === false) {
+                    console.log(safeI18n('neuralNavDisabledByUser', 'Prompt History: Disabled by user setting'));
+                    return;
+                }
+                start();
+            });
+        } catch (error) {
+            if (isExtensionContextInvalidated(error)) return;
+            start();
+        }
     }
 
     if (document.readyState === 'loading') {

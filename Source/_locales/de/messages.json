@@ -38,6 +38,9 @@
     "add": {
         "message": "Hinzufügen"
     },
+    "delete": {
+        "message": "Löschen"
+    },
     "deleteConfirmation": {
         "message": "Möchten Sie \"$1\" wirklich löschen?"
     },
@@ -262,5 +265,47 @@
     },
     "toggleNeuralNav": {
     "message": "Prompt-Verlauf umschalten"
-  }
+  },
+    "customServiceTitle": {
+        "message": "Benutzerdefinierter Dienst"
+    },
+    "customServiceHelper": {
+        "message": "Rechtsklick auf markierten Text → Dienst → Aktion."
+    },
+    "customServiceDefaultLabel": {
+        "message": "Standarddienst"
+    },
+    "customServiceBaseUrlLabel": {
+        "message": "Basis-URL des benutzerdefinierten Dienstes"
+    },
+    "customServiceBaseUrlHelper": {
+        "message": "Wird verwendet, wenn der Dienst auf \"Benutzerdefinierte URL\" gesetzt ist."
+    },
+    "customServiceBaseUrlPlaceholder": {
+        "message": "https://example.com/?q="
+    },
+    "customServiceBaseUrlInvalid": {
+        "message": "Ungültige URL (muss mit http:// oder https:// beginnen)"
+    },
+    "customServiceOpenModeLabel": {
+        "message": "Im Seitenpanel öffnen (statt neuem Tab)"
+    },
+    "customServiceEnabledServicesLabel": {
+        "message": "Aktivierte Dienste"
+    },
+    "customServiceActionsLabel": {
+        "message": "Aktionen & Vorlagen"
+    },
+    "customServiceActionsHelper": {
+        "message": "Verwende {text} an der Stelle des markierten Textes. Wir stellen es automatisch wieder her, falls es entfernt wird."
+    },
+    "customServiceActionNamePlaceholder": {
+        "message": "Aktionsname (z. B. Ins Spanische übersetzen)"
+    },
+    "customServiceActionInstructionPlaceholder": {
+        "message": "Anweisung (optional). {text} wird automatisch hinzugefügt."
+    },
+    "customServiceAddActionButton": {
+        "message": "Aktion hinzufügen"
+    }
 }

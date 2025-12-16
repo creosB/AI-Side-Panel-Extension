@@ -38,6 +38,9 @@
   "add": {
     "message": "Add"
   },
+  "delete": {
+    "message": "Delete"
+  },
   "deleteConfirmation": {
     "message": "Are you sure you want to delete \"$1\"?"
   },
@@ -262,5 +265,47 @@
   },
   "neuralNavNoProvider": {
     "message": "Prompt History: No supported provider detected"
+  },
+  "customServiceTitle": {
+    "message": "Custom Service"
+  },
+  "customServiceHelper": {
+    "message": "Right-click selected text → Service → Action."
+  },
+  "customServiceDefaultLabel": {
+    "message": "Default service"
+  },
+  "customServiceBaseUrlLabel": {
+    "message": "Custom Service base URL"
+  },
+  "customServiceBaseUrlHelper": {
+    "message": "Used when the service is set to \"Custom URL\"."
+  },
+  "customServiceBaseUrlPlaceholder": {
+    "message": "https://example.com/?q="
+  },
+  "customServiceBaseUrlInvalid": {
+    "message": "Invalid URL (must start with http:// or https://)"
+  },
+  "customServiceOpenModeLabel": {
+    "message": "Open in side panel (instead of new tab)"
+  },
+  "customServiceEnabledServicesLabel": {
+    "message": "Enabled services"
+  },
+  "customServiceActionsLabel": {
+    "message": "Actions & templates"
+  },
+  "customServiceActionsHelper": {
+    "message": "Use {text} where selected text goes. We’ll auto-restore it if removed."
+  },
+  "customServiceActionNamePlaceholder": {
+    "message": "Action name (e.g., Translate to Spanish)"
+  },
+  "customServiceActionInstructionPlaceholder": {
+    "message": "Instruction (optional). {text} is added automatically."
+  },
+  "customServiceAddActionButton": {
+    "message": "Add action"
   }
 }

@@ -38,6 +38,9 @@
     "add": {
         "message": "添加"
     },
+    "delete": {
+        "message": "删除"
+    },
     "deleteConfirmation": {
         "message": "您确定要删除 \"$1\" 吗？"
     },
@@ -262,5 +265,47 @@
     },
     "toggleNeuralNav": {
         "message": "切换提示历史"
+    },
+    "customServiceTitle": {
+        "message": "自定义服务"
+    },
+    "customServiceHelper": {
+        "message": "右键所选文本 → 服务 → 操作。"
+    },
+    "customServiceDefaultLabel": {
+        "message": "默认服务"
+    },
+    "customServiceBaseUrlLabel": {
+        "message": "自定义服务基础 URL"
+    },
+    "customServiceBaseUrlHelper": {
+        "message": "当服务设置为\"自定义 URL\"时使用。"
+    },
+    "customServiceBaseUrlPlaceholder": {
+        "message": "https://example.com/?q="
+    },
+    "customServiceBaseUrlInvalid": {
+        "message": "URL 无效（必须以 http:// 或 https:// 开头）"
+    },
+    "customServiceOpenModeLabel": {
+        "message": "在侧边栏中打开（而不是新标签页）"
+    },
+    "customServiceEnabledServicesLabel": {
+        "message": "已启用的服务"
+    },
+    "customServiceActionsLabel": {
+        "message": "操作和模板"
+    },
+    "customServiceActionsHelper": {
+        "message": "在需要放入所选文本的位置使用 {text}。如果被移除，我们会自动恢复。"
+    },
+    "customServiceActionNamePlaceholder": {
+        "message": "操作名称（例如：翻译成西班牙语）"
+    },
+    "customServiceActionInstructionPlaceholder": {
+        "message": "指令（可选）。{text} 会自动添加。"
+    },
+    "customServiceAddActionButton": {
+        "message": "添加操作"
     }
 }

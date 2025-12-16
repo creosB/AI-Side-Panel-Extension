@@ -5,13 +5,15 @@
         "sidePanel",
         "activeTab",
         "scripting",
+        "contextMenus",
+        "tabs",
         "declarativeNetRequest",
         "declarativeNetRequestFeedback",
         "commands",
         "storage"
     ],
     "description": "__MSG_appDescription__",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "side_panel": {
         "default_path": "sidepanel.html"
     },

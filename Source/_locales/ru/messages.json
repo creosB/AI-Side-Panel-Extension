@@ -38,6 +38,9 @@
     "add": {
         "message": "Добавить"
     },
+    "delete": {
+        "message": "Удалить"
+    },
     "deleteConfirmation": {
         "message": "Вы уверены, что хотите удалить \"$1\"?"
     },
@@ -262,5 +265,47 @@
     },
     "toggleNeuralNav": {
         "message": "Переключить историю промптов"
+    },
+    "customServiceTitle": {
+        "message": "Пользовательский сервис"
+    },
+    "customServiceHelper": {
+        "message": "Нажмите правой кнопкой по выделенному тексту → Сервис → Действие."
+    },
+    "customServiceDefaultLabel": {
+        "message": "Сервис по умолчанию"
+    },
+    "customServiceBaseUrlLabel": {
+        "message": "Базовый URL пользовательского сервиса"
+    },
+    "customServiceBaseUrlHelper": {
+        "message": "Используется, когда сервис установлен на \"Пользовательский URL\"."
+    },
+    "customServiceBaseUrlPlaceholder": {
+        "message": "https://example.com/?q="
+    },
+    "customServiceBaseUrlInvalid": {
+        "message": "Неверный URL (должен начинаться с http:// или https://)"
+    },
+    "customServiceOpenModeLabel": {
+        "message": "Открывать в боковой панели (вместо новой вкладки)"
+    },
+    "customServiceEnabledServicesLabel": {
+        "message": "Включенные сервисы"
+    },
+    "customServiceActionsLabel": {
+        "message": "Действия и шаблоны"
+    },
+    "customServiceActionsHelper": {
+        "message": "Используйте {text} там, где должен быть выделенный текст. Мы автоматически восстановим его, если удалить."
+    },
+    "customServiceActionNamePlaceholder": {
+        "message": "Название действия (например, Перевести на испанский)"
+    },
+    "customServiceActionInstructionPlaceholder": {
+        "message": "Инструкция (необязательно). {text} добавляется автоматически."
+    },
+    "customServiceAddActionButton": {
+        "message": "Добавить действие"
     }
 }
