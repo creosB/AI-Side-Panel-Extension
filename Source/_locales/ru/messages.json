@@ -307,5 +307,74 @@
     },
     "customServiceAddActionButton": {
         "message": "Добавить действие"
+    },
+    "conversationHubToggle": {
+        "message": "Центр диалогов"
+    },
+    "conversationHubPremiumDescription": {
+        "message": "Центр диалогов позволяет просматривать и искать все ваши AI-диалоги в одном месте. Это премиум-функция для поддержки разработки."
+    },
+    "conversationHubOpenMode": {
+        "message": "Открывать диалоги в новой вкладке"
+    },
+    "conversationHubTitle": {
+        "message": "Диалоги"
+    },
+    "conversationHubSubtitle": {
+        "message": "Все платформы — один список."
+    },
+    "conversationHubButton": {
+        "message": "Диалоги"
+    },
+    "conversationHubButtonTitle": {
+        "message": "Диалоги"
+    },
+    "conversationHubSearchPlaceholder": {
+        "message": "Поиск диалогов"
+    },
+    "conversationHubSync": {
+        "message": "Синхронизировать"
+    },
+    "conversationHubEmpty": {
+        "message": "Пока нет диалогов."
+    },
+    "conversationHubReady": {
+        "message": "Готово к синхронизации."
+    },
+    "conversationHubAllServices": {
+        "message": "Все сервисы"
+    },
+    "conversationHubClear": {
+        "message": "Очистить историю"
+    },
+    "conversationHubExport": {
+        "message": "Экспортировать диалоги"
+    },
+    "conversationHubExportMd": {
+        "message": "Экспорт в Markdown"
+    },
+    "conversationHubExportJs": {
+        "message": "Экспорт в JSON"
+    },
+    "conversationHubClearConfirm": {
+        "message": "Вы уверены, что хотите очистить все кэшированные диалоги? Это не удалит диалоги в самих сервисах."
+    },
+    "exportTitle": {
+        "message": "Экспортировать диалоги"
+    },
+    "exportFormat": {
+        "message": "Формат"
+    },
+    "exportService": {
+        "message": "Сервис"
+    },
+    "exportCancel": {
+        "message": "Отмена"
+    },
+    "exportConfirm": {
+        "message": "Экспорт"
+    },
+    "clearConfirm": {
+        "message": "Очистить всё"
     }
 }

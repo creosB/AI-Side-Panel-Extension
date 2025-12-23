@@ -70,6 +70,7 @@ export class ContentExtractorManager {
 
   addExtractorButton() {
     const toolbar = document.getElementById('toolbar');
+    const splitViewBtn = document.getElementById('split-view-btn');
     const supportBtn = document.getElementById('support-btn');
 
     if (!toolbar || !supportBtn) {
@@ -94,8 +95,12 @@ export class ContentExtractorManager {
       <span>Extract</span>
     `;
 
-    // Append to the end of toolbar (order will be restored later)
-    toolbar.appendChild(extractorBtn);
+    // Insert before split view button to keep system buttons at the end
+    if (splitViewBtn) {
+      toolbar.insertBefore(extractorBtn, splitViewBtn);
+    } else {
+      toolbar.insertBefore(extractorBtn, supportBtn);
+    }
 
     // Add keyboard support
     extractorBtn.addEventListener('keydown', (e) => {

@@ -7,6 +7,7 @@ import { CustomLinkManager } from './modules/customLink.js';
 import { ContentExtractorManager } from './modules/contentExtractor.js';
 import SupportMessage from './modules/supportMessage.js';
 import PremiumManager from './modules/premium.js';
+import { ConversationHubManager } from './modules/conversationHub.js';
 
 class SidePanelApp {
   constructor() {
@@ -17,6 +18,7 @@ class SidePanelApp {
     this.navBarManager = new NavBarManager();
     this.splitViewManager = new SplitViewManager();
     this.contentExtractorManager = new ContentExtractorManager();
+    this.conversationHubManager = new ConversationHubManager();
     this.supportMessage = new SupportMessage();
   this.premiumManager = new PremiumManager();
 
@@ -27,6 +29,7 @@ class SidePanelApp {
     window.navBarManager = this.navBarManager;
     window.splitViewManager = this.splitViewManager;
     window.contentExtractorManager = this.contentExtractorManager;
+    window.conversationHubManager = this.conversationHubManager;
     window.supportMessage = this.supportMessage;
   window.premiumManager = this.premiumManager;
 

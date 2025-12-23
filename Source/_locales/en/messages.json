@@ -307,5 +307,74 @@
   },
   "customServiceAddActionButton": {
     "message": "Add action"
+  },
+  "conversationHubToggle": {
+    "message": "Conversation Hub"
+  },
+  "conversationHubPremiumDescription": {
+    "message": "The Conversation Hub allows you to see and search all your AI conversations in one place. This is a premium feature to support the development."
+  },
+  "conversationHubOpenMode": {
+    "message": "Open conversations in new tab"
+  },
+  "conversationHubTitle": {
+    "message": "Conversations"
+  },
+  "conversationHubSubtitle": {
+    "message": "All platforms, one list."
+  },
+  "conversationHubButton": {
+    "message": "Conversations"
+  },
+  "conversationHubButtonTitle": {
+    "message": "Conversations"
+  },
+  "conversationHubSearchPlaceholder": {
+    "message": "Search conversations"
+  },
+  "conversationHubSync": {
+    "message": "Sync"
+  },
+  "conversationHubEmpty": {
+    "message": "No conversations yet."
+  },
+  "conversationHubReady": {
+    "message": "Ready to sync."
+  },
+  "conversationHubAllServices": {
+    "message": "All services"
+  },
+  "conversationHubClear": {
+    "message": "Clear History"
+  },
+  "conversationHubExport": {
+    "message": "Export Conversations"
+  },
+  "conversationHubExportMd": {
+    "message": "Export as Markdown"
+  },
+  "conversationHubExportJs": {
+    "message": "Export as JSON"
+  },
+  "conversationHubClearConfirm": {
+    "message": "Are you sure you want to clear all cached conversations? This will not delete conversations on the actual services."
+  },
+  "exportTitle": {
+    "message": "Export Conversations"
+  },
+  "exportFormat": {
+    "message": "Format"
+  },
+  "exportService": {
+    "message": "Service"
+  },
+  "exportCancel": {
+    "message": "Cancel"
+  },
+  "exportConfirm": {
+    "message": "Export"
+  },
+  "clearConfirm": {
+    "message": "Clear All"
   }
 }

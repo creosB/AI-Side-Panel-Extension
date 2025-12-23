@@ -12,6 +12,8 @@ export const SERVICE_PRESETS = [
   { id: 'copilot', label: 'Copilot', baseUrl: 'https://copilot.microsoft.com/?q=', buttonSelector: '[data-url*="copilot.microsoft.com"]' },
   { id: 'grok-deepsearch', label: 'Grok Deep Search', baseUrl: 'https://grok.com/chat?reasoningMode=deepsearch&q=', buttonSelector: '[data-url*="grok.com"]' },
   { id: 'grok-think', label: 'Grok Think', baseUrl: 'https://grok.com/chat?reasoningMode=think&q=', buttonSelector: '[data-url*="grok.com"]' },
+  { id: 'notebooklm', label: 'NotebookLM', baseUrl: 'https://notebooklm.google.com/', buttonSelector: '[data-url*="notebooklm.google.com"]' },
+  { id: 'aistudio', label: 'AI Studio', baseUrl: 'https://aistudio.google.com/app/library', buttonSelector: '[data-url*="aistudio.google.com"]' },
   { id: 'custom', label: 'Custom URL', baseUrl: null, buttonSelector: null }
 ];
 

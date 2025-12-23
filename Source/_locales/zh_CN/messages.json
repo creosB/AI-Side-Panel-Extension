@@ -307,5 +307,74 @@
     },
     "customServiceAddActionButton": {
         "message": "添加操作"
+    },
+    "conversationHubToggle": {
+        "message": "对话中心"
+    },
+    "conversationHubPremiumDescription": {
+        "message": "对话中心可让你在一个地方查看并搜索所有 AI 对话。这是一项高级功能，用于支持持续开发。"
+    },
+    "conversationHubOpenMode": {
+        "message": "在新标签页中打开对话"
+    },
+    "conversationHubTitle": {
+        "message": "对话"
+    },
+    "conversationHubSubtitle": {
+        "message": "所有平台，一个列表。"
+    },
+    "conversationHubButton": {
+        "message": "对话"
+    },
+    "conversationHubButtonTitle": {
+        "message": "对话"
+    },
+    "conversationHubSearchPlaceholder": {
+        "message": "搜索对话"
+    },
+    "conversationHubSync": {
+        "message": "同步"
+    },
+    "conversationHubEmpty": {
+        "message": "暂无对话。"
+    },
+    "conversationHubReady": {
+        "message": "准备同步。"
+    },
+    "conversationHubAllServices": {
+        "message": "所有服务"
+    },
+    "conversationHubClear": {
+        "message": "清除历史记录"
+    },
+    "conversationHubExport": {
+        "message": "导出对话"
+    },
+    "conversationHubExportMd": {
+        "message": "导出为 Markdown"
+    },
+    "conversationHubExportJs": {
+        "message": "导出为 JSON"
+    },
+    "conversationHubClearConfirm": {
+        "message": "确定要清除所有缓存的对话吗？这不会删除实际服务上的对话。"
+    },
+    "exportTitle": {
+        "message": "导出对话"
+    },
+    "exportFormat": {
+        "message": "格式"
+    },
+    "exportService": {
+        "message": "服务"
+    },
+    "exportCancel": {
+        "message": "取消"
+    },
+    "exportConfirm": {
+        "message": "导出"
+    },
+    "clearConfirm": {
+        "message": "全部清除"
     }
 }

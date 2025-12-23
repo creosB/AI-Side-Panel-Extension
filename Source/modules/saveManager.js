@@ -76,6 +76,8 @@ export class SaveManager {
             btn = document.getElementById('split-view-btn');
           } else if (url === 'content-extractor') {
             btn = document.getElementById('content-extractor-btn');
+          } else if (url === 'conversation-hub') {
+            btn = document.getElementById('conversation-hub-btn');
           } else {
             // Try to find button by exact URL match first (for custom links and built-in services)
             btn = document.querySelector(`[data-url="${url}"]`);

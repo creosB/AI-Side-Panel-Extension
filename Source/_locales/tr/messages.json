@@ -307,5 +307,74 @@
     },
     "customServiceAddActionButton": {
         "message": "Eylem ekle"
+    },
+    "conversationHubToggle": {
+        "message": "Konuşma Merkezi"
+    },
+    "conversationHubPremiumDescription": {
+        "message": "Konuşma Merkezi, tüm yapay zekâ sohbetlerinizi tek bir yerde görmenizi ve aramanızı sağlar. Geliştirmeyi desteklemek için bu bir premium özelliktir."
+    },
+    "conversationHubOpenMode": {
+        "message": "Konuşmaları yeni sekmede aç"
+    },
+    "conversationHubTitle": {
+        "message": "Konuşmalar"
+    },
+    "conversationHubSubtitle": {
+        "message": "Tüm platformlar, tek liste."
+    },
+    "conversationHubButton": {
+        "message": "Konuşmalar"
+    },
+    "conversationHubButtonTitle": {
+        "message": "Konuşmalar"
+    },
+    "conversationHubSearchPlaceholder": {
+        "message": "Konuşmalarda ara"
+    },
+    "conversationHubSync": {
+        "message": "Senkronize Et"
+    },
+    "conversationHubEmpty": {
+        "message": "Henüz konuşma yok."
+    },
+    "conversationHubReady": {
+        "message": "Senkronizasyona hazır."
+    },
+    "conversationHubAllServices": {
+        "message": "Tüm servisler"
+    },
+    "conversationHubClear": {
+        "message": "Geçmişi Temizle"
+    },
+    "conversationHubExport": {
+        "message": "Konuşmaları Dışa Aktar"
+    },
+    "conversationHubExportMd": {
+        "message": "Markdown olarak dışa aktar"
+    },
+    "conversationHubExportJs": {
+        "message": "JSON olarak dışa aktar"
+    },
+    "conversationHubClearConfirm": {
+        "message": "Önbelleğe alınmış tüm konuşmaları temizlemek istediğinizden emin misiniz? Bu işlem, ilgili servislerdeki konuşmaları silmez."
+    },
+    "exportTitle": {
+        "message": "Konuşmaları Dışa Aktar"
+    },
+    "exportFormat": {
+        "message": "Biçim"
+    },
+    "exportService": {
+        "message": "Servis"
+    },
+    "exportCancel": {
+        "message": "İptal"
+    },
+    "exportConfirm": {
+        "message": "Dışa Aktar"
+    },
+    "clearConfirm": {
+        "message": "Tümünü Temizle"
     }
 }

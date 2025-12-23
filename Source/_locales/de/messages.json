@@ -264,8 +264,8 @@
         "message": "Prompt History: Kein unterstützter Anbieter erkannt"
     },
     "toggleNeuralNav": {
-    "message": "Prompt-Verlauf umschalten"
-  },
+        "message": "Prompt-Verlauf umschalten"
+    },
     "customServiceTitle": {
         "message": "Benutzerdefinierter Dienst"
     },
@@ -307,5 +307,74 @@
     },
     "customServiceAddActionButton": {
         "message": "Aktion hinzufügen"
+    },
+    "conversationHubToggle": {
+        "message": "Konversations-Hub"
+    },
+    "conversationHubPremiumDescription": {
+        "message": "Mit dem Konversations-Hub kannst du alle deine KI-Unterhaltungen an einem Ort ansehen und durchsuchen. Dies ist eine Premium-Funktion zur Unterstützung der Weiterentwicklung."
+    },
+    "conversationHubOpenMode": {
+        "message": "Unterhaltungen in neuem Tab öffnen"
+    },
+    "conversationHubTitle": {
+        "message": "Unterhaltungen"
+    },
+    "conversationHubSubtitle": {
+        "message": "Alle Plattformen, eine Liste."
+    },
+    "conversationHubButton": {
+        "message": "Unterhaltungen"
+    },
+    "conversationHubButtonTitle": {
+        "message": "Unterhaltungen"
+    },
+    "conversationHubSearchPlaceholder": {
+        "message": "Unterhaltungen suchen"
+    },
+    "conversationHubSync": {
+        "message": "Synchronisieren"
+    },
+    "conversationHubEmpty": {
+        "message": "Noch keine Unterhaltungen."
+    },
+    "conversationHubReady": {
+        "message": "Bereit zum Synchronisieren."
+    },
+    "conversationHubAllServices": {
+        "message": "Alle Dienste"
+    },
+    "conversationHubClear": {
+        "message": "Verlauf löschen"
+    },
+    "conversationHubExport": {
+        "message": "Unterhaltungen exportieren"
+    },
+    "conversationHubExportMd": {
+        "message": "Als Markdown exportieren"
+    },
+    "conversationHubExportJs": {
+        "message": "Als JSON exportieren"
+    },
+    "conversationHubClearConfirm": {
+        "message": "Möchtest du wirklich alle zwischengespeicherten Unterhaltungen löschen? Dadurch werden Unterhaltungen auf den jeweiligen Diensten nicht gelöscht."
+    },
+    "exportTitle": {
+        "message": "Unterhaltungen exportieren"
+    },
+    "exportFormat": {
+        "message": "Format"
+    },
+    "exportService": {
+        "message": "Dienst"
+    },
+    "exportCancel": {
+        "message": "Abbrechen"
+    },
+    "exportConfirm": {
+        "message": "Exportieren"
+    },
+    "clearConfirm": {
+        "message": "Alles löschen"
     }
 }

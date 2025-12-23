@@ -310,5 +310,74 @@
     },
     "customServiceAddActionButton": {
         "message": "Ajouter une action"
+    },
+    "conversationHubToggle": {
+        "message": "Hub de conversations"
+    },
+    "conversationHubPremiumDescription": {
+        "message": "Le Hub de conversations vous permet de voir et de rechercher toutes vos conversations IA au même endroit. Il s’agit d’une fonctionnalité premium pour soutenir le développement."
+    },
+    "conversationHubOpenMode": {
+        "message": "Ouvrir les conversations dans un nouvel onglet"
+    },
+    "conversationHubTitle": {
+        "message": "Conversations"
+    },
+    "conversationHubSubtitle": {
+        "message": "Toutes les plateformes, une seule liste."
+    },
+    "conversationHubButton": {
+        "message": "Conversations"
+    },
+    "conversationHubButtonTitle": {
+        "message": "Conversations"
+    },
+    "conversationHubSearchPlaceholder": {
+        "message": "Rechercher des conversations"
+    },
+    "conversationHubSync": {
+        "message": "Synchroniser"
+    },
+    "conversationHubEmpty": {
+        "message": "Aucune conversation pour le moment."
+    },
+    "conversationHubReady": {
+        "message": "Prêt à synchroniser."
+    },
+    "conversationHubAllServices": {
+        "message": "Tous les services"
+    },
+    "conversationHubClear": {
+        "message": "Effacer l’historique"
+    },
+    "conversationHubExport": {
+        "message": "Exporter les conversations"
+    },
+    "conversationHubExportMd": {
+        "message": "Exporter en Markdown"
+    },
+    "conversationHubExportJs": {
+        "message": "Exporter en JSON"
+    },
+    "conversationHubClearConfirm": {
+        "message": "Voulez-vous vraiment effacer toutes les conversations mises en cache ? Cela ne supprimera pas les conversations sur les services concernés."
+    },
+    "exportTitle": {
+        "message": "Exporter les conversations"
+    },
+    "exportFormat": {
+        "message": "Format"
+    },
+    "exportService": {
+        "message": "Service"
+    },
+    "exportCancel": {
+        "message": "Annuler"
+    },
+    "exportConfirm": {
+        "message": "Exporter"
+    },
+    "clearConfirm": {
+        "message": "Tout effacer"
     }
 }

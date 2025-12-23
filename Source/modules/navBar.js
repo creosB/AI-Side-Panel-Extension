@@ -175,6 +175,71 @@ export class NavBarManager {
     this.focusSearchInIframe(iframe, url);
   }
 
+  openConversationUrl(url, serviceId) {
+    const iframe = document.getElementById('main-iframe');
+    const supportPage = document.getElementById('support-page');
+    const splitViewBtn = document.getElementById('split-view-btn');
+    const supportBtn = document.getElementById('support-btn');
+    const toolbar = document.getElementById('toolbar');
+
+    if (!url || !iframe || !supportPage || !splitViewBtn || !supportBtn || !toolbar) {
+      return;
+    }
+
+    splitViewBtn.disabled = false;
+    splitViewBtn.title = '';
+    supportBtn.classList.remove('active');
+    supportPage.classList.remove('active');
+    setTimeout(() => {
+      supportPage.style.display = 'none';
+    }, 200);
+
+    this.toggleLoadingState(true);
+    const handleLoad = () => {
+      this.toggleLoadingState(false);
+      iframe.removeEventListener('load', handleLoad);
+    };
+    iframe.addEventListener('load', handleLoad);
+
+    iframe.src = url;
+    iframe.style.display = 'block';
+
+    toolbar.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+
+    let activeBtn = null;
+    if (serviceId) {
+      const selector = this.getButtonSelectorForService(serviceId);
+      if (selector) {
+        activeBtn = toolbar.querySelector(selector);
+      }
+    }
+
+    if (!activeBtn) {
+      try {
+        const host = new URL(url).hostname;
+        activeBtn = [...toolbar.querySelectorAll('.btn[data-url]')].find((btn) => {
+          try {
+            const candidateUrl = btn.getAttribute('data-url');
+            if (!candidateUrl) return false;
+            const candidateHost = new URL(candidateUrl).hostname;
+            return candidateHost === host || url.includes(candidateHost);
+          } catch {
+            return false;
+          }
+        });
+      } catch {
+        activeBtn = null;
+      }
+    }
+
+    if (activeBtn) {
+      activeBtn.classList.add('active');
+      this.smoothScrollToButton(toolbar, activeBtn);
+    }
+
+    this.focusSearchInIframe(iframe, url);
+  }
+
   getButtonSelectorForService(serviceId) {
     if (!serviceId) return null;
     const match = SERVICE_PRESETS.find((svc) => svc.id === serviceId && svc.buttonSelector);
@@ -361,6 +426,7 @@ export class NavBarManager {
           if (btn.id === 'support-btn') return 'support';
           if (btn.id === 'split-view-btn') return 'split-view';
           if (btn.id === 'content-extractor-btn') return 'content-extractor';
+          if (btn.id === 'conversation-hub-btn') return 'conversation-hub';
           return btn.getAttribute('data-url');
         })
         .filter(url => url !== null && url !== undefined && url !== ''); // Filter out null/undefined/empty values

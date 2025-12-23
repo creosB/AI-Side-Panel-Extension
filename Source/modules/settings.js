@@ -241,9 +241,19 @@ export class SettingsManager {
               element.setAttribute('placeholder', messages[key].message);
             }
           });
+          // Titles
+          document.querySelectorAll('[data-i18n-title]').forEach(element => {
+            const key = element.getAttribute('data-i18n-title');
+            if (messages[key]) {
+              element.setAttribute('title', messages[key].message);
+            }
+          });
           // Update content extractor language if it exists
           if (window.contentExtractorManager) {
             window.contentExtractorManager.updateLanguage(messages);
+          }
+          if (window.conversationHubManager) {
+            window.conversationHubManager.updateLanguage(messages);
           }
           resolve(); // Resolve the promise after translations are done
         })
@@ -669,6 +679,12 @@ export class SettingsManager {
       return;
     }
 
+    if (service === 'conversation-open-mode') {
+      localStorage.setItem('conversationOpenInNewTab', String(toggle.checked));
+      localStorage.setItem('conversationOpenInSidePanel', String(!toggle.checked));
+      return;
+    }
+
     // Prompt history viewer (loads/unloads neural-nav-bundle.js)
     if (service === 'prompt-history-viewer') {
       if (toggle.checked) {
@@ -691,11 +707,11 @@ export class SettingsManager {
       document.querySelectorAll('.toggle-item input[type="checkbox"]')
     ).filter(t => {
       const toggleService = t.id.replace('toggle-', '');
-      return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'kimi', 'githubcopilot', 'zai'].includes(toggleService);
+      return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'kimi', 'zai', 'notebooklm', 'aistudio'].includes(toggleService);
     }).length;
 
     // Prevent disabling last service
-    if (!toggle.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'kimi', 'githubcopilot', 'zai'].includes(service)) {
+    if (!toggle.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'kimi', 'zai', 'notebooklm', 'aistudio'].includes(service)) {
       toggle.checked = true;
       return;
     }
@@ -728,8 +744,10 @@ export class SettingsManager {
       'perplexity': '[data-url*="perplexity.ai"]',
       'qwen': '[data-url*="chat.qwen.ai"]',
       'kimi': '[data-url*="kimi.com"]',
-      'githubcopilot': '[data-url*="github.com/copilot"]',
       'zai': '[data-url*="chat.z.ai"]',
+      'notebooklm': '[data-url*="notebooklm.google.com"]',
+      'aistudio': '[data-url*="aistudio.google.com"]',
+      'conversation-hub': '#conversation-hub-btn',
       'split-view': '#split-view-btn',
       'content-extractor': '#content-extractor-btn',
       'scrollbar-always-visible': null // Special case - doesn't toggle a button
@@ -784,6 +802,7 @@ export class SettingsManager {
     } else {
       this.unloadNeuralNavBundle();
     }
+
     const toggles = {
       'remember-last-model': null,
       'chatgpt': '[data-url*="chatgpt.com"]',
@@ -796,8 +815,10 @@ export class SettingsManager {
       'perplexity': '[data-url*="perplexity.ai"]',
       'qwen': '[data-url*="chat.qwen.ai"]',
       'kimi': '[data-url*="kimi.com"]',
-      'githubcopilot': '[data-url*="github.com/copilot"]',
       'zai': '[data-url*="chat.z.ai"]',
+      'notebooklm': '[data-url*="notebooklm.google.com"]',
+      'aistudio': '[data-url*="aistudio.google.com"]',
+      'conversation-hub': '#conversation-hub-btn',
       'split-view': '#split-view-btn',
       'content-extractor': '#content-extractor-btn',
       'scrollbar-always-visible': null // Special case - doesn't toggle a button

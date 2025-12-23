@@ -16,25 +16,28 @@
 /* 5. UI components */
 @import './styles/components.css';
 
-/* 6. Support message component */
+/* 6. Conversation hub */
+@import './styles/conversation-hub.css';
+
+/* 7. Support message component */
 @import './styles/support-message.css';
 
-/* 7. Split view functionality */
+/* 8. Split view functionality */
 @import './styles/splitview.css';
 
-/* 8. Content extractor functionality */
+/* 9. Content extractor functionality */
 @import './styles/content-extractor.css';
 
-/* 9. Animations */
+/* 10. Animations */
 @import './styles/animations.css';
 
-/* 10. Accessibility (should be last to override if needed) */
+/* 11. Accessibility (should be last to override if needed) */
 @import './styles/accessibility.css';
 
-/* 11. Premium modal styles */
+/* 12. Premium modal styles */
 @import './styles/premium.css';
 
-/* 12. Themes (loaded after base to override vars and subtle accents) */
+/* 13. Themes (loaded after base to override vars and subtle accents) */
 @import './styles/themes/synthwave.css';
 @import './styles/themes/glassmorphism.css';
 @import './styles/themes/neo-brutalism.css';

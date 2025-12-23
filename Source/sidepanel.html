@@ -68,19 +68,26 @@
             style="flex:none;line-height:1; width: 20px; height: 20px;" />
           <span>Kimi</span>
         </button>
-        <button class="btn" data-url="https://github.com/copilot"
-          draggable="true">
-          <img src="logos/githubcopilot.svg" alt="Github Copilot Icon"
-            draggable="true"
-            style="flex:none;line-height:1; filter: brightness(0) invert(1); width: 20px; height: 20px;" />
-          <span>Github Copilot</span>
-        </button>
         <button class="btn" data-url="https://chat.z.ai/"
           draggable="true">
           <img src="logos/zai.svg" alt="Z AI Icon"
             draggable="true"
             style="flex:none;line-height:1; filter: brightness(0) invert(1); width: 20px; height: 20px;" />
           <span>Z AI</span>
+        </button>
+        <button class="btn" data-url="https://notebooklm.google.com/"
+          draggable="true">
+          <img src="logos/notebooklm.svg" alt="NotebookLM Icon"
+            draggable="true"
+            style="flex:none;line-height:1; width: 20px; height: 20px;" />
+          <span>NotebookLM</span>
+        </button>
+        <button class="btn" data-url="https://aistudio.google.com/app/library"
+          draggable="true">
+          <img src="logos/aistudio.svg" alt="AI Studio Icon"
+            draggable="true"
+            style="flex:none;line-height:1; width: 20px; height: 20px;" />
+          <span>AI Studio</span>
         </button>
         <div id="custom-buttons-container"></div>
         <button id="split-view-btn" class="btn" title="Split View"
@@ -195,6 +202,13 @@
                 <span class="slider"></span>
               </label>
             </div>
+            <div class="toggle-item">
+              <span data-i18n="conversationHubToggle">Conversation Hub</span>
+              <label class="switch">
+                <input type="checkbox" id="toggle-conversation-hub" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
           </div>
 
           <!-- Custom Links Section -->
@@ -282,16 +296,23 @@
               </label>
             </div>
             <div class="toggle-item">
-              <span>Github Copilot</span>
+              <span>Z AI</span>
               <label class="switch">
-                <input type="checkbox" id="toggle-githubcopilot">
+                <input type="checkbox" id="toggle-zai">
                 <span class="slider"></span>
               </label>
             </div>
             <div class="toggle-item">
-              <span>Z AI</span>
+              <span>NotebookLM</span>
               <label class="switch">
-                <input type="checkbox" id="toggle-zai">
+                <input type="checkbox" id="toggle-notebooklm">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="toggle-item">
+              <span>AI Studio</span>
+              <label class="switch">
+                <input type="checkbox" id="toggle-aistudio">
                 <span class="slider"></span>
               </label>
             </div>
@@ -549,6 +570,144 @@
             <p class="footer-text" data-i18n="footerText"></p>
           </div>
           <script type="module" src="sidepanel-modular.js"></script>
+        </div>
+        <div id="conversation-hub" class="conversation-hub" aria-hidden="true">
+          <!-- Premium Teaser -->
+          <div id="conversation-hub-premium-teaser" class="conversation-hub-premium-teaser" style="display: none;">
+            <div class="support-message-card">
+              <div class="support-heart-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M20.84 4.61C19.32 3.09 17.35 2.5 15.5 2.5C13.75 2.5 12.1 3.24 11 4.39C9.9 3.24 8.25 2.5 6.5 2.5C4.65 2.5 2.68 3.09 1.16 4.61C-0.55 6.32 -0.55 9.27 1.16 10.98L11 20.82C11.39 21.21 12.61 21.21 13 20.82L22.84 10.98C24.55 9.27 24.55 6.32 20.84 4.61Z"
+                    fill="currentColor" />
+                </svg>
+              </div>
+              <h3 class="support-title" data-i18n="supportTitle">We Need Your Support</h3>
+              <p class="support-description" data-i18n="conversationHubPremiumDescription">
+                The Conversation Hub allows you to see and search all your AI conversations in one place. 
+                This is a premium feature to support the development.
+              </p>
+              <button class="premium-cta-button" id="hub-premium-cta-button">
+                <div class="button-content">
+                  <svg class="coffee-icon" width="20" height="20"
+                    viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M12 2l3.09 6.26L22 9.27l-5 4.88L18.18 22 12 18.8 5.82 22 7 14.15l-5-4.88 6.91-1.01L12 2z" />
+                  </svg>
+                  <span data-i18n="premiumButton">Go Premium</span>
+                  <div class="button-shimmer"></div>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <div id="conversation-hub-content">
+            <div class="conversation-hub-header">
+              <div class="conversation-hub-title">
+                <h2 data-i18n="conversationHubTitle">Conversations</h2>
+                <p class="conversation-hub-subtitle"
+                  data-i18n="conversationHubSubtitle">All platforms, one list.</p>
+              </div>
+              <div class="conversation-hub-actions">
+                <div class="hub-settings-dropdown">
+                  <button id="conversation-hub-settings-btn" class="hub-action-btn" title="Settings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="3"></circle>
+                      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                  </button>
+                  <div id="hub-settings-menu" class="hub-settings-menu">
+                    <div class="menu-item toggle-item">
+                      <span data-i18n="conversationHubOpenMode">Open in new tab</span>
+                      <label class="switch">
+                        <input type="checkbox" id="toggle-conversation-open-mode">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                    <div class="menu-divider"></div>
+                    <div class="menu-item" id="hub-export-trigger">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path></svg>
+                      <span data-i18n="conversationHubExport">Export Conversations</span>
+                    </div>
+                    <div class="menu-item danger" id="conversation-hub-clear">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                      <span data-i18n="conversationHubClear">Clear History</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Export Modal -->
+            <div id="hub-export-modal" class="hub-modal">
+              <div class="hub-modal-content">
+                <h3 data-i18n="exportTitle">Export Conversations</h3>
+                <div class="field">
+                  <label data-i18n="exportFormat">Format</label>
+                  <div class="select-wrapper">
+                    <select id="export-format">
+                      <option value="md">Markdown (.md)</option>
+                      <option value="json">JSON (.json)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field">
+                  <label data-i18n="exportService">Service</label>
+                  <div class="select-wrapper">
+                    <select id="export-service">
+                      <option value="all">All Services</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="hub-modal-actions">
+                  <button id="export-cancel-btn" class="hub-btn-secondary" data-i18n="exportCancel">Cancel</button>
+                  <button id="export-confirm-btn" class="hub-btn-primary" data-i18n="exportConfirm">Export</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Clear History Modal -->
+            <div id="hub-clear-modal" class="hub-modal">
+              <div class="hub-modal-content">
+                <h3 data-i18n="conversationHubClear">Clear History</h3>
+                <p class="modal-description" data-i18n="conversationHubClearConfirm">Are you sure you want to clear all cached conversations? This will not delete conversations on the actual services.</p>
+                <div class="hub-modal-actions">
+                  <button id="clear-cancel-btn" class="hub-btn-secondary" data-i18n="exportCancel">Cancel</button>
+                  <button id="clear-confirm-btn" class="hub-btn-primary danger" data-i18n="clearConfirm">Clear All</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="conversation-hub-controls">
+              <div class="conversation-hub-search">
+                <input type="text" id="conversation-hub-search"
+                  placeholder="Search conversations" autocomplete="off"
+                  spellcheck="false" aria-label="Search conversations" />
+                <svg class="conversation-hub-search-icon" width="16" height="16"
+                  viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path
+                    d="M15.5 14h-.79l-.28-.27A6.5 6.5 0 1 0 14 15.5l.27.28v.79l5 4.99L20.49 19l-4.99-5ZM10 15a5 5 0 1 1 0-10 5 5 0 0 1 0 10Z" />
+                </svg>
+              </div>
+              <div class="select-wrapper conversation-hub-filter">
+                <select id="conversation-hub-filter">
+                  <option value="all">All services</option>
+                </select>
+                <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24">
+                  <path d="M7 10l5 5 5-5z" fill="currentColor" />
+                </svg>
+              </div>
+              <button id="conversation-hub-sync" class="conversation-hub-sync"
+                type="button">Sync</button>
+            </div>
+            <div class="conversation-hub-status" id="conversation-hub-status">
+              Ready to sync.
+            </div>
+            <div class="conversation-hub-list" id="conversation-hub-list"></div>
+            <div class="conversation-hub-empty" id="conversation-hub-empty"
+              aria-live="polite">No conversations yet.</div>
+          </div>
         </div>
       </main>
     </div>
