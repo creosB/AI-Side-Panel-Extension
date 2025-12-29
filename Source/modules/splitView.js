@@ -56,6 +56,8 @@ export class SplitViewManager {
     const secondIframe = document.createElement('iframe');
     secondIframe.id = 'second-iframe';
     secondIframe.frameBorder = '0';
+    secondIframe.setAttribute('allow', 'clipboard-read; clipboard-write');
+    secondIframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-same-origin allow-downloads allow-popups');
 
 
     // Create drop target first
