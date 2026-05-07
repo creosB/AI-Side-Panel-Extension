@@ -37,11 +37,6 @@ const ADAPTERS = [
     list: listMistralFromTab
   },
   {
-    id: 'perplexity',
-    label: 'Perplexity',
-    list: listPerplexityFromTab
-  },
-  {
     id: 'qwen',
     label: 'Qwen',
     list: listQwenFromTab
@@ -1490,34 +1485,6 @@ async function listZaiFromTab({ maxItems = DEFAULT_MAX_ITEMS } = {}) {
   });
 }
 
-async function listPerplexityFromTab({ maxItems = DEFAULT_MAX_ITEMS } = {}) {
-  return listFromOpenTab({
-    label: 'Perplexity Library',
-    urlPatterns: ['*://www.perplexity.ai/library*', '*://perplexity.ai/library*'],
-    include: ['/search/', '/thread/'],
-    exclude: ['/discover', '/labs', '/settings', '/spaces', '/library?tab='],
-    containerSelectors: [
-      '[data-testid="LibraryItemList"]',
-      '[data-testid*="LibraryItemList"]',
-      '[data-component="LibraryItemList"]',
-      '[data-testid*="Library"]',
-      'main'
-    ],
-    itemSelectors: [
-      'a[href^="/search/"]',
-      'a[href^="/thread/"]',
-      'a[href*="/search/"]',
-      'a[href*="/thread/"]',
-      '[data-testid*="LibraryItem"] a[href]',
-      '[data-testid*="library-item"] a[href]',
-      'a.relative[href]'
-    ],
-    titleSelectors: ['[data-testid="library-item-title"]', '[data-testid*="library-item-title"]', 'h3', 'p'],
-    pathHints: ['/search/', '/thread/'],
-    maxItems
-  });
-}
-
 async function listDeepseekFromTab({ maxItems = DEFAULT_MAX_ITEMS } = {}) {
   return listFromOpenTab({
     label: 'DeepSeek',
@@ -2437,7 +2404,7 @@ export class ConversationHubManager {
       const icon = document.createElement('div');
       icon.className = 'conversation-icon';
       const logoUrl = `logos/${item.serviceId}.svg`;
-      const needsInvert = ['chatgpt', 'grok', 'mistral', 'perplexity', 'qwen', 'zai'].includes(item.serviceId);
+      const needsInvert = ['chatgpt', 'grok', 'mistral', 'qwen', 'zai'].includes(item.serviceId);
       icon.innerHTML = `<img src="${logoUrl}" alt="${item.serviceLabel}" style="width: 20px; height: 20px; ${needsInvert ? 'filter: brightness(0) invert(1);' : ''}">`;
 
       const main = document.createElement('div');

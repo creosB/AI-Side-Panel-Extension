@@ -707,11 +707,11 @@ export class SettingsManager {
       document.querySelectorAll('.toggle-item input[type="checkbox"]')
     ).filter(t => {
       const toggleService = t.id.replace('toggle-', '');
-      return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'kimi', 'zai', 'notebooklm', 'aistudio'].includes(toggleService);
+      return t.checked && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'qwen', 'kimi', 'zai', 'notebooklm', 'aistudio'].includes(toggleService);
     }).length;
 
     // Prevent disabling last service
-    if (!toggle.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'perplexity', 'qwen', 'kimi', 'zai', 'notebooklm', 'aistudio'].includes(service)) {
+    if (!toggle.checked && enabledServicesCount === 0 && ['chatgpt', 'gemini', 'claude', 'copilot', 'deepseek', 'grok', 'mistral', 'qwen', 'kimi', 'zai', 'notebooklm', 'aistudio'].includes(service)) {
       toggle.checked = true;
       return;
     }
@@ -741,7 +741,6 @@ export class SettingsManager {
       'deepseek': '[data-url*="chat.deepseek.com"]',
       'grok': '[data-url*="grok.com"]',
       'mistral': '[data-url*="chat.mistral.ai/chat"]',
-      'perplexity': '[data-url*="perplexity.ai"]',
       'qwen': '[data-url*="chat.qwen.ai"]',
       'kimi': '[data-url*="kimi.com"]',
       'zai': '[data-url*="chat.z.ai"]',
@@ -812,7 +811,6 @@ export class SettingsManager {
       'deepseek': '[data-url*="chat.deepseek.com"]',
       'grok': '[data-url*="grok.com"]',
       'mistral': '[data-url*="chat.mistral.ai/chat"]',
-      'perplexity': '[data-url*="perplexity.ai"]',
       'qwen': '[data-url*="chat.qwen.ai"]',
       'kimi': '[data-url*="kimi.com"]',
       'zai': '[data-url*="chat.z.ai"]',

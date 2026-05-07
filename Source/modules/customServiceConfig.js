@@ -6,7 +6,6 @@ export const SERVICE_PRESETS = [
   { id: 'chatgpt', label: 'ChatGPT', baseUrl: 'https://chatgpt.com/?q=', buttonSelector: '[data-url*="chatgpt.com"]' },
   { id: 'gemini', label: 'Gemini', baseUrl: 'https://gemini.google.com/app?q=', buttonSelector: '[data-url*="gemini.google.com"]' },
   { id: 'claude', label: 'Claude', baseUrl: 'https://claude.ai/new?q=', buttonSelector: '[data-url*="claude.ai"]' },
-  { id: 'perplexity', label: 'Perplexity', baseUrl: 'https://www.perplexity.ai/search?q=', buttonSelector: '[data-url*="perplexity.ai"]' },
   { id: 'mistral', label: 'Mistral', baseUrl: 'https://chat.mistral.ai/chat?q=', buttonSelector: '[data-url*="chat.mistral.ai/chat"]' },
   { id: 'deepseek', label: 'DeepSeek', baseUrl: 'https://chat.deepseek.com/?q=', buttonSelector: '[data-url*="chat.deepseek.com"]' },
   { id: 'copilot', label: 'Copilot', baseUrl: 'https://copilot.microsoft.com/?q=', buttonSelector: '[data-url*="copilot.microsoft.com"]' },
@@ -29,7 +28,7 @@ export const DEFAULT_CUSTOM_SERVICE_SETTINGS = {
   defaultService: 'chatgpt',
   customBaseUrl: '',
   openInSidePanel: true,
-  enabledServices: ['grok', 'chatgpt', 'gemini', 'claude', 'perplexity', 'mistral', 'deepseek', 'copilot'],
+  enabledServices: ['grok', 'chatgpt', 'gemini', 'claude', 'mistral', 'deepseek', 'copilot'],
   enabledActions: ACTION_PRESETS.map((a) => a.id),
   customActions: [],
   actionTemplates: ACTION_PRESETS.reduce((acc, action) => {

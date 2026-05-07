@@ -1,0 +1,10 @@
+# AI ignore file
+.git/
+node_modules/
+dist/
+build/
+.tldr/
+.gemini/
+*.log
+.DS_Store
+Thumbs.db
