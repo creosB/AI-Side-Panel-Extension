@@ -300,6 +300,9 @@ export class ContentExtractorManager {
         throw new Error('No active tab found');
       }
 
+      if (extractors[extractionType]?.mode === 'file-injection') {
+        return await this.extractViaFileInjection(activeTab.id, extractionType, activeTab.url);
+      }
 
       // Inject content script to extract content from the active tab
       const results = await chrome.scripting.executeScript({
@@ -1028,6 +1031,86 @@ Try refreshing the page and trying again.`,
         error: error.message
       };
     }
+  }
+
+  async extractViaFileInjection(tabId, extractionType, tabUrl) {
+    const bundleFiles = {
+      defuddle: 'modules/defuddle/defuddle.min.js'
+    };
+
+    const bundleFile = bundleFiles[extractionType];
+    if (!bundleFile) {
+      throw new Error(`No bundle file configured for extraction type: ${extractionType}`);
+    }
+
+    try {
+      await chrome.scripting.executeScript({
+        target: { tabId },
+        files: [bundleFile],
+        world: 'ISOLATED'
+      });
+    } catch (error) {
+      console.error('Failed to load extraction library:', error);
+      throw new Error('Failed to load extraction library. The page may have security restrictions.');
+    }
+
+    let results;
+    try {
+      results = await chrome.scripting.executeScript({
+        target: { tabId },
+        world: 'ISOLATED',
+        func: () => {
+          if (!window.Defuddle) {
+            return { error: 'Defuddle library not loaded' };
+          }
+          try {
+            const instance = new window.Defuddle(document);
+            const result = instance.parse();
+            const tmp = document.createElement('div');
+            tmp.innerHTML = result.content || '';
+            const plainContent = tmp.textContent || tmp.innerText || '';
+            return {
+              title: result.title || '',
+              content: plainContent,
+              description: result.description || '',
+              author: result.author || '',
+              domain: result.domain || '',
+              wordCount: result.wordCount || 0,
+              published: result.published || '',
+              language: result.language || ''
+            };
+          } catch (e) {
+            return { error: `Defuddle parse failed: ${e.message}` };
+          }
+        }
+      });
+    } catch (error) {
+      console.error('Defuddle extraction failed:', error);
+      throw new Error('Defuddle extraction failed. The page structure may be incompatible.');
+    }
+
+    if (!results || results.length === 0 || !results[0]) {
+      throw new Error('Defuddle script injection returned no results.');
+    }
+
+    const extractionResult = results[0].result;
+
+    if (extractionResult?.error) {
+      throw new Error(extractionResult.error);
+    }
+
+    const formattedOutput = this.formatContent(extractionResult.title, extractionResult.content);
+
+    return {
+      title: extractionResult.title || 'Extracted Content',
+      content: extractionResult.content || 'No content could be extracted',
+      url: tabUrl || '',
+      siteType: extractionType,
+      extractionMethod: 'file-injection',
+      timestamp: Date.now(),
+      success: true,
+      formattedOutput
+    };
   }
 
 

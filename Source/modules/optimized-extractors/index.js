@@ -9,6 +9,7 @@ import { mediumExtractor } from './medium.js';
 import { githubReadmeExtractor, githubCodeExtractor } from './github.js';
 import { newsExtractor } from './news.js';
 import { linkedinExtractor } from './linkedin.js';
+import { defuddleExtractor } from './defuddle.js';
 
 // Export all extractors in the specified order
 export const extractors = {
@@ -20,11 +21,12 @@ export const extractors = {
   medium: mediumExtractor,
   'github-readme': githubReadmeExtractor,
   'github-code': githubCodeExtractor,
-  techcrunch: techcrunchExtractor
+  techcrunch: techcrunchExtractor,
+  defuddle: defuddleExtractor
 };
 
 // Top extractors that always show first
-export const topExtractors = ['twitter', 'reddit', 'general', 'news'];
+export const topExtractors = ['defuddle', 'twitter', 'reddit', 'general', 'news'];
 
 // Get all extractor keys for easy iteration
 export const extractorKeys = Object.keys(extractors);

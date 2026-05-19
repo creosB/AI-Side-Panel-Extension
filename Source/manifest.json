@@ -13,7 +13,7 @@
         "storage"
     ],
     "description": "__MSG_appDescription__",
-    "version": "1.3.8",
+    "version": "1.4.0",
     "side_panel": {
         "default_path": "sidepanel.html"
     },
@@ -75,7 +75,8 @@
                 "images/icon16.png",
                 "images/icon32.png",
                 "images/icon48.png",
-                "images/icon128.png"
+                "images/icon128.png",
+                "modules/defuddle/defuddle.min.js"
             ],
             "use_dynamic_url": true
         }
