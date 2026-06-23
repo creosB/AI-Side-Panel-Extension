@@ -26,22 +26,40 @@
 .premium-modal {
   position: relative;
   width: 100%;
-  max-width: 480px;
+  max-width: 440px;
+  max-height: 88vh;
+  overflow-y: auto;
   border-radius: 16px;
   background: linear-gradient(135deg,
-    rgba(10, 10, 10, 0.92) 0%,
-    rgba(20, 20, 20, 0.92) 50%,
-    rgba(30, 30, 30, 0.92) 100%);
+    rgba(10, 10, 10, 0.94) 0%,
+    rgba(20, 20, 20, 0.94) 50%,
+    rgba(30, 30, 30, 0.94) 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
   transform: translateY(6px) scale(0.98);
   opacity: 0;
   animation: modal-in var(--spring-duration) var(--ease-spring) forwards;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom Scrollbar for Modal */
+.premium-modal::-webkit-scrollbar {
+  width: 6px;
+}
+.premium-modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+.premium-modal::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+.premium-modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .premium-modal-header {
-  padding: 20px 24px 0 24px;
+  padding: 16px 20px 0 20px;
 }
 
 .premium-modal-title {
@@ -61,22 +79,22 @@
 }
 
 .premium-modal-body {
-  padding: 20px 24px 24px 24px;
+  padding: 12px 20px 20px 20px;
 }
 
 .premium-features {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
-  margin: 12px 0 16px 0;
+  gap: 8px;
+  margin: 8px 0 12px 0;
 }
 
 .premium-feature {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
 }
 
 .premium-form {
@@ -174,6 +192,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  z-index: 10;
 }
 
 .premium-close:hover { background: rgba(255, 255, 255, 0.06); }
@@ -185,4 +204,240 @@
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* ── Discount Toast Styles ─────────────────────────── */
+.discount-toast {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 400px;
+  background: rgba(20, 22, 26, 0.95);
+  border: 1px solid var(--primary-color);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 9999;
+  transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.discount-toast.is-visible {
+  bottom: 16px;
+}
+
+.discount-toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.discount-toast-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.discount-toast-btn {
+  background: var(--primary-color);
+  color: var(--bg-color, #0c0c0c);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  white-space: nowrap;
+}
+
+.discount-toast-btn:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+.discount-toast-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.discount-toast-close:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Premium Modal Discount Banner ────────────────── */
+.premium-discount-banner {
+  position: relative;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.discount-banner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.discount-banner-title {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--text-color);
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+.discount-banner-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--primary-color);
+  padding: 5px 12px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  user-select: none;
+}
+
+.discount-banner-pill:hover {
+  transform: translateY(-1px) scale(1.02);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.discount-code-text {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--primary-color);
+  letter-spacing: 0.5px;
+}
+
+.copy-icon {
+  color: var(--primary-color);
+}
+
+.discount-scarcity {
+  margin-top: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-color);
+  opacity: 0.5;
+}
+
+/* Copy Tooltip */
+.copy-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  background: #0c0c0c;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.discount-banner-pill:hover .copy-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-8px);
+}
+
+/* Conversion Actions */
+.premium-conversion-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+.premium-btn.conversion-btn {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.premium-btn.conversion-btn.primary {
+  background: var(--primary-color);
+  color: var(--bg-color, #0c0c0c);
+  box-shadow: none;
+}
+
+.premium-btn.conversion-btn.primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.premium-btn.conversion-btn.secondary {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.premium-btn.conversion-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--primary-color);
+}
+
+.store-coupon-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+/* Verification Section */
+.premium-verify-section {
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+.premium-verify-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-color);
+  opacity: 0.4;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  text-align: center;
 }

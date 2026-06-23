@@ -239,6 +239,27 @@
   background: #000000;
 }
 
+@keyframes premium-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(241, 196, 15, 0.6), 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(241, 196, 15, 0), 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(241, 196, 15, 0), 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@keyframes premium-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
 /* Premium social button variant */
 .premium-social-button {
   cursor: pointer;
@@ -253,9 +274,30 @@
   align-items: center;
   justify-content: center;
   margin-left: 10px;
+  overflow: hidden;
+  animation: premium-glow 2s infinite;
   transition: 
     transform calc(var(--quick-duration) * var(--motion-duration-multiplier)) var(--ease-out-back),
     box-shadow calc(var(--standard-duration) * var(--motion-duration-multiplier)) var(--ease-out-quart);
+}
+
+.premium-social-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: skewX(-25deg);
+  animation: premium-shimmer 3s infinite;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .premium-badge {

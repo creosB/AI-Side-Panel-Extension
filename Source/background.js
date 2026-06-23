@@ -77,6 +77,16 @@ function initiate () {
         });
     });
     primeCustomServiceSettings().then(() => rebuildCustomContextMenus());
+
+    // Set 30% off promo badge if not cleared yet
+    try {
+        chrome.storage.local.get(['badgeCleared'], (res) => {
+            if (!res || !res.badgeCleared) {
+                chrome.action.setBadgeText({ text: "%" });
+                chrome.action.setBadgeBackgroundColor({ color: "#00ffaa" });
+            }
+        });
+    } catch (_) {}
 };
 
 initiate();

@@ -86,6 +86,23 @@ export default class PremiumManager {
 				<button class="premium-close" aria-label="Close" data-premium-close>
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12l-4.9 4.89a1 1 0 1 0 1.41 1.42L12 13.41l4.89 4.9a1 1 0 0 0 1.42-1.42L13.41 12l4.9-4.89a1 1 0 0 0-.01-1.4Z"/></svg>
 				</button>
+				
+				<!-- 30% Off Promo Hero Banner -->
+				<div class="premium-discount-banner">
+					<div class="discount-banner-content">
+						<div class="discount-banner-title">30% STORE-WIDE DISCOUNT</div>
+						<div class="discount-banner-pill" id="discount-copy-pill" title="Click to copy code">
+							<span class="discount-code-text">AISUMMER</span>
+							<svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+								<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+							</svg>
+							<span class="copy-tooltip" id="copy-tooltip">Copy</span>
+						</div>
+					</div>
+					<div class="discount-scarcity">Ends July 7 — Limited Time Only!</div>
+				</div>
+
 				<div class="premium-modal-header">
 					<h2 id="premium-title" class="premium-modal-title" data-premium-title>Premium</h2>
 					<div class="premium-modal-subtitle" data-premium-subtitle>Unlock extra features and support development.</div>
@@ -97,14 +114,27 @@ export default class PremiumManager {
 						<div class="premium-feature"><span>✔</span><span data-premium-feature-3>Priority support</span></div>
 						<div class="premium-feature"><span>✔</span><span data-premium-feature-4>The Conversation Hub allows you to see and search all your AI conversations in one place. This is a premium feature to support the development.</span></div>
 					</div>
-					<div class="premium-form" data-premium-form>
-						<input type="email" class="premium-input" placeholder="Email used at checkout" data-premium-email />
-						<input type="text" class="premium-input" placeholder="License key" data-premium-code />
+
+					<!-- Primary & Secondary Conversion Buttons -->
+					<div class="premium-conversion-actions" id="premium-conversion-actions">
+						<button class="premium-btn primary conversion-btn" data-premium-buy>Go Premium, 30% OFF</button>
+						<a href="https://artistscompany.lemonsqueezy.com/?checkout[discount_code]=AISUMMER" target="_blank" class="premium-btn secondary conversion-btn" id="premium-browse-store">
+							Browse All Products, 30% OFF
+							<span class="store-coupon-badge">AISUMMER</span>
+						</a>
 					</div>
-					<div class="premium-status" data-premium-status></div>
-					<div class="premium-actions" data-premium-actions>
-						<button class="premium-btn primary" data-premium-buy>Go Premium</button>
-						<button class="premium-btn secondary" data-premium-verify>Verify</button>
+
+					<!-- Separate Verification Section -->
+					<div class="premium-verify-section" id="premium-verify-section">
+						<div class="premium-verify-section-title">Have a license? Verify below</div>
+						<div class="premium-form" data-premium-form>
+							<input type="email" class="premium-input" placeholder="Email used at checkout" data-premium-email />
+							<input type="text" class="premium-input" placeholder="License key" data-premium-code />
+						</div>
+						<div class="premium-status" data-premium-status></div>
+						<div class="premium-actions" data-premium-actions style="margin-top: 10px; display: block;">
+							<button class="premium-btn secondary" data-premium-verify style="width: 100%;">Verify License</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -124,9 +154,28 @@ export default class PremiumManager {
 		overlay.querySelector('[data-premium-backdrop]')?.addEventListener('click', () => this.close());
 		this.closeBtn?.addEventListener('click', () => this.close());
 		this.buyBtn?.addEventListener('click', () => {
-			window.open('https://artistscompany.lemonsqueezy.com/buy/07ad19ea-1d92-4855-a68e-56d9c77a0b6a', '_blank');
+			window.open('https://artistscompany.lemonsqueezy.com/buy/07ad19ea-1d92-4855-a68e-56d9c77a0b6a?checkout[discount_code]=AISUMMER', '_blank');
 		});
 		this.verifyBtn?.addEventListener('click', () => this.handleVerify());
+
+		// Copy to Clipboard logic
+		const copyPill = overlay.querySelector('#discount-copy-pill');
+		const copyTooltip = overlay.querySelector('#copy-tooltip');
+		copyPill?.addEventListener('click', () => {
+			navigator.clipboard.writeText('AISUMMER').then(() => {
+				if (copyTooltip) {
+					copyTooltip.textContent = 'Copied!';
+					copyPill.classList.add('copied');
+					setTimeout(() => {
+						copyTooltip.textContent = 'Copy';
+						copyPill.classList.remove('copied');
+					}, 2000);
+				}
+			}).catch(err => {
+				console.error('Failed to copy text: ', err);
+			});
+		});
+
 		this.localizeModal();
 
 		// pre-fill status if already premium
@@ -203,8 +252,14 @@ export default class PremiumManager {
 	}
 
 	showVerifyForm(show) {
-		if (this.formEl) this.formEl.style.display = show ? '' : 'none';
-		if (this.verifyBtn) this.verifyBtn.style.display = show ? '' : 'none';
+		const verifySection = this.overlay?.querySelector('#premium-verify-section');
+		if (verifySection) verifySection.style.display = show ? '' : 'none';
+		
+		const buyBtn = this.overlay?.querySelector('[data-premium-buy]');
+		if (buyBtn) buyBtn.style.display = show ? '' : 'none';
+
+		const discountBanner = this.overlay?.querySelector('.premium-discount-banner');
+		if (discountBanner) discountBanner.style.display = show ? '' : 'none';
 	}
 
 	setPremiumBadge(visible) {

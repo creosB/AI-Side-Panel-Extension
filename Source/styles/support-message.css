@@ -343,7 +343,7 @@
   
   .support-title {
     background: none;
-    color: var(--text-color) !important;
+    color: transparent !important;
   }
   
   .premium-cta-button {
@@ -351,4 +351,19 @@
     color: var(--bg-color) !important;
     border: 2px solid var(--text-color);
   }
+}
+
+/* Minimalist Promo Badge */
+.support-promo-badge {
+  display: inline-block;
+  margin: 0 auto 0.8rem auto;
+  padding: 4px 10px;
+  border-radius: 99px;
+  border: 1px solid var(--primary-color);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--primary-color);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
