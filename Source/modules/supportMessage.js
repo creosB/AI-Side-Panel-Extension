@@ -44,6 +44,17 @@ class SupportMessage {
         
         // Touch support for mobile
         this.card.addEventListener('touchstart', this.onCardTouch.bind(this), { passive: true });
+
+        // Support again link interaction
+        const supportAgainLink = document.getElementById('support-again-link');
+        if (supportAgainLink) {
+            supportAgainLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Proceed with opening store through the premium manager event path
+                const ev = new CustomEvent('openPremiumModal', { detail: { source: 'supportMessage' } });
+                window.dispatchEvent(ev);
+            });
+        }
     }
 
     onCardHover() {

@@ -55,9 +55,16 @@ export default class PremiumManager {
 		this.replaceSupportButton();
 		// Listen for global requests to open the premium modal (e.g. from supportMessage)
 		window.addEventListener('openPremiumModal', () => {
-			try { this.open(); } catch (e) { /* ignore */ }
+			try {
+				if (this.isPremium) {
+					window.open('https://buymeacoffee.com/creos', '_blank');
+				} else {
+					this.open();
+				}
+			} catch (e) { /* ignore */ }
 		});
 		this.ensurePort();
+		this.updateStatusFromStorage();
 	}
 
 	ensurePort() {
@@ -193,15 +200,6 @@ export default class PremiumManager {
 
 	replaceSupportButton() {
 		try {
-			// Hook up the premium CTA button in the support message card
-			const premiumCta = document.getElementById('premium-cta-button');
-			if (premiumCta) {
-				premiumCta.addEventListener('click', (e) => {
-					e.preventDefault();
-					this.open();
-				});
-			}
-
 			// Hook up the premium social button in the footer
 			const premiumSocial = document.getElementById('premium-social-button');
 			if (premiumSocial) {
@@ -220,8 +218,16 @@ export default class PremiumManager {
 	async updateStatusFromStorage() {
 		try {
 			const bg = await chrome.runtime.sendMessage({ type: 'GET_PREMIUM_STATUS' });
+			const isPremium = bg?.isPremium === true;
+			this.isPremium = isPremium;
+
+			// Drive the support card and footer badge which are independent of the modal
+			this.applySupportCard(bg?.isPremium);
+			this.setPremiumBadge(isPremium);
+
 			const statusEl = this.statusBox;
 			if (!statusEl) return;
+
 			if (!bg || bg.isPremium === undefined) {
 				statusEl.className = 'premium-status info show';
 				statusEl.textContent = this.t('premiumModalStatusPrompt', 'Enter your email and license to verify.');
@@ -237,7 +243,6 @@ export default class PremiumManager {
 					this.buyBtn.style.display = 'none';
 					this.buyBtn.setAttribute('aria-hidden', 'true');
 				}
-				this.setPremiumBadge(true);
 			} else {
 				statusEl.className = 'premium-status info show';
 				statusEl.textContent = this.t('premiumModalStatusPending', 'License not verified yet.');
@@ -246,9 +251,47 @@ export default class PremiumManager {
 					this.buyBtn.style.display = '';
 					this.buyBtn.removeAttribute('aria-hidden');
 				}
-				this.setPremiumBadge(false);
 			}
 		} catch (_) {}
+	}
+
+	applySupportCard(isPremium) {
+		const card = document.querySelector('.support-message-card');
+		if (!card) return;
+
+		const titleEl = card.querySelector('.support-title');
+		const premiumCta = card.querySelector('#premium-cta-button');
+		const supportAgainLink = card.querySelector('#support-again-link');
+
+		if (isPremium === true) {
+			card.classList.add('is-premium');
+			if (titleEl) {
+				titleEl.textContent = 'Premium active';
+			}
+			if (supportAgainLink) {
+				supportAgainLink.style.display = 'inline-block';
+			}
+		} else {
+			card.classList.remove('is-premium');
+			if (titleEl) {
+				const key = titleEl.getAttribute('data-i18n');
+				if (key && window._i18nMessages?.[key]?.message) {
+					titleEl.innerHTML = window._i18nMessages[key].message;
+				} else {
+					titleEl.textContent = 'We Need Your Support';
+				}
+			}
+			if (supportAgainLink) {
+				supportAgainLink.style.display = 'none';
+			}
+			if (premiumCta) {
+				if (isPremium === false) {
+					premiumCta.style.display = '';
+				} else {
+					premiumCta.style.display = 'none';
+				}
+			}
+		}
 	}
 
 	showVerifyForm(show) {

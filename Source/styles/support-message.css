@@ -367,3 +367,50 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
+
+/* Premium Collapsed Support Card */
+.support-message-card.is-premium {
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  border-radius: 12px;
+  background: linear-gradient(135deg, 
+    rgba(0, 255, 170, 0.05) 0%, 
+    rgba(0, 255, 255, 0.03) 100%);
+}
+
+.support-message-card.is-premium .support-title {
+  margin: 0;
+  font-size: 0.95rem;
+  background: linear-gradient(135deg, #ffffff, #00ffaa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  animation: none; /* Turn off pulsing glow for clean static text */
+}
+
+.support-message-card.is-premium .support-again-link {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--primary-color) !important;
+  text-decoration: underline;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.support-message-card.is-premium .support-again-link:hover {
+  color: #00e6bb !important;
+}
+
+/* Hide everything else under premium */
+.support-message-card.is-premium .support-heart-icon,
+.support-message-card.is-premium .support-promo-badge,
+.support-message-card.is-premium .support-description,
+.support-message-card.is-premium #premium-cta-button,
+.support-message-card.is-premium .support-sparkles {
+  display: none !important;
+}
+
