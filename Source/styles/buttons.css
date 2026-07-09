@@ -499,3 +499,32 @@
 .btn img.icon-invert {
   filter: brightness(0) invert(1);
 }
+
+/* ── Toolbar Layout Options ── */
+
+/* 1. Comfortable (current stacked layout, handled natively by existing styles) */
+
+/* 2. Compact Layout */
+[data-toolbar-layout="compact"] .btn {
+  min-width: 36px !important;
+  max-width: 36px !important;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+[data-toolbar-layout="compact"] .btn span {
+  display: none !important;
+}
+
+[data-toolbar-layout="compact"] .btn svg,
+[data-toolbar-layout="compact"] .btn img {
+  margin-bottom: 0 !important;
+  width: 20px !important;
+  height: 20px !important;
+}

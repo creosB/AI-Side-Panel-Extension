@@ -14,6 +14,7 @@ export class SettingsManager {
     this.initializeThemeSettings();
     this.initializeRememberLastModelSetting();
     this.initializeCustomServiceSettings();
+    this.initializeToolbarLayoutSettings();
   }
 
   initializeShortcutSettings() {
@@ -255,6 +256,7 @@ export class SettingsManager {
           if (window.conversationHubManager) {
             window.conversationHubManager.updateLanguage(messages);
           }
+          this.updateButtonTooltips();
           resolve(); // Resolve the promise after translations are done
         })
         .catch(error => {
@@ -910,5 +912,70 @@ export class SettingsManager {
 
   unloadNeuralNavBundle() {
     chrome.storage.local.set({ 'promptHistoryViewerEnabled': false });
+  }
+
+  initializeToolbarLayoutSettings() {
+    const layoutSelect = document.getElementById('toolbar-layout-select');
+    const root = document.documentElement;
+
+    // Apply stored layout on load (default to "compact")
+    let storedLayout = localStorage.getItem('toolbarLayout');
+    if (storedLayout !== 'comfortable' && storedLayout !== 'compact') {
+      storedLayout = 'compact';
+    }
+    this.applyToolbarLayout(root, storedLayout);
+    if (layoutSelect) {
+      layoutSelect.value = storedLayout;
+    }
+
+    if (layoutSelect) {
+      layoutSelect.addEventListener('change', () => {
+        const value = layoutSelect.value;
+        localStorage.setItem('toolbarLayout', value);
+        this.applyToolbarLayout(root, value);
+      });
+    }
+  }
+
+  applyToolbarLayout(root, layout) {
+    if (!root) return;
+    let sanitizedLayout = layout;
+    if (sanitizedLayout !== 'comfortable' && sanitizedLayout !== 'compact') {
+      sanitizedLayout = 'compact';
+    }
+    root.setAttribute('data-toolbar-layout', sanitizedLayout);
+    this.updateButtonTooltips();
+  }
+
+  updateButtonTooltips() {
+    const toolbar = document.getElementById('toolbar');
+    if (!toolbar) return;
+    const buttons = toolbar.querySelectorAll('.btn');
+    buttons.forEach(button => {
+      // Handle split view and settings buttons
+      if (button.id === 'split-view-btn') {
+        const span = button.querySelector('span');
+        const name = span?.textContent?.trim() || button.getAttribute('title') || 'Split View';
+        button.setAttribute('title', name);
+        button.setAttribute('aria-label', name);
+        return;
+      }
+      if (button.id === 'support-btn') {
+        const span = button.querySelector('span');
+        const name = span?.textContent?.trim() || button.getAttribute('title') || 'Settings';
+        button.setAttribute('title', name);
+        button.setAttribute('aria-label', name);
+        return;
+      }
+      
+      const span = button.querySelector('span');
+      if (span) {
+        const name = span.textContent.trim();
+        if (name) {
+          button.setAttribute('title', name);
+          button.setAttribute('aria-label', name);
+        }
+      }
+    });
   }
 }

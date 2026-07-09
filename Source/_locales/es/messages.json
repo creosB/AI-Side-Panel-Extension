@@ -499,8 +499,17 @@
     },
     "navbarZoomXLarge": {
         "message": "Muy grande (130%)"
-    }
-,  "onboardingBrandName": {
+    },
+    "toolbarLayoutLabel": {
+        "message": "Barra de herramientas"
+    },
+    "toolbarLayoutComfortable": {
+        "message": "Cómodo"
+    },
+    "toolbarLayoutCompact": {
+        "message": "Compacto"
+    },
+  "onboardingBrandName": {
     "message": "AI Side Panel"
   },
   "onboardingSkipBtn": {

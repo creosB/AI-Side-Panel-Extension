@@ -500,6 +500,15 @@
   "navbarZoomXLarge": {
     "message": "X&#8209;Large (130%)"
   },
+  "toolbarLayoutLabel": {
+    "message": "Toolbar"
+  },
+  "toolbarLayoutComfortable": {
+    "message": "Comfortable"
+  },
+  "toolbarLayoutCompact": {
+    "message": "Compact"
+  },
   "onboardingBrandName": {
     "message": "AI Side Panel"
   },

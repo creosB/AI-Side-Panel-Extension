@@ -383,3 +383,11 @@ iframe.loading {
   display: none;
 }
 
+/* ── Toolbar Layout Container Overrides ── */
+
+/* 2. Compact Layout */
+[data-toolbar-layout="compact"] .toolbar {
+  padding: 4px 8px !important;
+  gap: 6px !important;
+}
+

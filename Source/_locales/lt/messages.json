@@ -499,8 +499,17 @@
   },
   "navbarZoomXLarge": {
     "message": "Labai didelis (130%)"
-  }
-,   "onboardingBrandName": {
+  },
+  "toolbarLayoutLabel": {
+    "message": "Įrankių juosta"
+  },
+  "toolbarLayoutComfortable": {
+    "message": "Patogus"
+  },
+  "toolbarLayoutCompact": {
+    "message": "Kompaktiškas"
+  },
+  "onboardingBrandName": {
     "message": "AI Side Panel"
   },
   "onboardingSkipBtn": {

@@ -3,6 +3,13 @@
 // flash of un-themed content when the panel reopens.
 (function () {
   try {
+    // Apply toolbar layout (defaults to 'compact')
+    var layout = localStorage.getItem('toolbarLayout');
+    if (layout !== 'comfortable' && layout !== 'compact') {
+      layout = 'compact';
+    }
+    document.documentElement.setAttribute('data-toolbar-layout', layout);
+
     if (localStorage.getItem('typography-enabled') !== 'true') return;
     var r = document.documentElement.style;
     var fonts = {

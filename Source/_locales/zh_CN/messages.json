@@ -499,8 +499,17 @@
     },
     "navbarZoomXLarge": {
         "message": "超大 (130%)"
-    }
-,  "onboardingBrandName": {
+    },
+    "toolbarLayoutLabel": {
+        "message": "工具栏"
+    },
+    "toolbarLayoutComfortable": {
+        "message": "舒适"
+    },
+    "toolbarLayoutCompact": {
+        "message": "紧凑"
+    },
+  "onboardingBrandName": {
     "message": "AI Side Panel"
   },
   "onboardingSkipBtn": {

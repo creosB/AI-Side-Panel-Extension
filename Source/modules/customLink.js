@@ -165,6 +165,12 @@ export class CustomLinkManager {
       });
     }
     
+    // Update button tooltips and aria-labels for accessibility
+    try {
+      window.settingsManager?.updateButtonTooltips();
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   addCustomLink(url) {

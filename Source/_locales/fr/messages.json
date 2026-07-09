@@ -503,6 +503,15 @@
     "navbarZoomXLarge": {
         "message": "Très grande (130%)"
     },
+    "toolbarLayoutLabel": {
+        "message": "Barre d'outils"
+    },
+    "toolbarLayoutComfortable": {
+        "message": "Confortable"
+    },
+    "toolbarLayoutCompact": {
+        "message": "Compact"
+    },
     "onboardingBrandName": {
         "message": "AI Side Panel"
     },

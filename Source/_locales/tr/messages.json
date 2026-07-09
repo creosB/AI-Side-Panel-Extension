@@ -499,8 +499,17 @@
     },
     "navbarZoomXLarge": {
         "message": "Çok Büyük (130%)"
-    }
-,  "onboardingBrandName": {
+    },
+    "toolbarLayoutLabel": {
+        "message": "Araç Çubuğu"
+    },
+    "toolbarLayoutComfortable": {
+        "message": "Geniş"
+    },
+    "toolbarLayoutCompact": {
+        "message": "Kompakt"
+    },
+  "onboardingBrandName": {
     "message": "AI Side Panel"
   },
   "onboardingSkipBtn": {
