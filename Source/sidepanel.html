@@ -217,6 +217,66 @@
         font-size: 12px;
         font-weight: 600;
       }
+      /* ── Features navigation section ───────────────────────── */
+      .features-section {
+        margin: 10px 0 4px;
+        padding: 14px 14px 12px;
+        border: 1.5px solid rgba(255,255,255,0.08);
+        border-radius: 12px;
+        background: rgba(255,255,255,0.02);
+        text-align: left;
+      }
+      .features-section-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 4px;
+      }
+      .features-section-header svg {
+        width: 16px;
+        height: 16px;
+        color: #00e5ff;
+        flex-shrink: 0;
+      }
+      .features-section-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #e0e0e0;
+        margin: 0;
+      }
+      .features-section-desc {
+        font-size: 11px;
+        color: #777;
+        margin: 0 0 10px 24px;
+        line-height: 1.4;
+      }
+      .features-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-left: 24px;
+      }
+      .feature-link {
+        display: inline-block;
+        padding: 6px 10px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 500;
+        color: #c9ced6 !important;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+      .feature-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.16);
+        color: #ffffff !important;
+        transform: translateY(-1px);
+      }
+      .feature-link:active {
+        transform: translateY(0);
+      }
     </style>
   </head>
   <body>
@@ -455,6 +515,32 @@
             </div>
           </div>
 
+          <!-- Features Section (Jump Links) -->
+          <div class="features-section">
+            <div class="features-section-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+              <p class="features-section-title" data-i18n="quickNavigation">Quick Navigation</p>
+            </div>
+            <p class="features-section-desc">Jump directly to a specific settings section.</p>
+            <div class="features-links">
+              <a href="#customize-navigation-section" class="feature-link" data-i18n="customizeNavigation">Customize Navigation</a>
+              <a href="#privacy-mask-section" class="feature-link" data-i18n="privacyMask">Privacy Mask</a>
+              <a href="#national-id-settings" class="feature-link" data-i18n="nationalIds">National IDs</a>
+              <a href="#toolbar-settings-section" class="feature-link" data-i18n="toolbarLayoutLabel">Toolbar</a>
+              <a href="#custom-links-section" class="feature-link" data-i18n="customLinks">Custom Links</a>
+              <a href="#models-section" class="feature-link" data-i18n="models">Models</a>
+              <a href="#custom-service-section" class="feature-link" data-i18n="customServiceTitle">Custom Service</a>
+              <a href="#shortcut-section" class="feature-link" data-i18n="shortcutLabel">Shortcuts</a>
+              <a href="#language-section" class="feature-link" data-i18n="language">Language</a>
+              <a href="#typography-settings-section" class="feature-link" data-i18n="typographyLabel">Typography</a>
+              <a href="#theme-settings-section" class="feature-link" data-i18n="themeLabel">Theme</a>
+            </div>
+          </div>
+
           <!-- Customize Navigation Section -->
           <div class="toggle-container" id="customize-navigation-section">
             <h3 data-i18n="customizeNavigation"></h3>
@@ -512,6 +598,91 @@
             </div>
           </div>
 
+          <!-- Privacy Mask Section -->
+          <div class="toggle-container" id="privacy-mask-section">
+            <h3 data-i18n="privacyMask"></h3>
+            <div class="settings-group">
+              <div class="toggle-item">
+                <span data-i18n="enablePrivacyMask">Enable Privacy Mask</span>
+                <label class="switch">
+                  <input type="checkbox" id="toggle-privacy-mask" aria-label="Privacy Mask">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+            <div class="settings-group" style="margin-top: 16px;">
+              <div class="toggle-item">
+                <span data-i18n="pmTypeEmail">Email</span>
+                <label class="switch"><input type="checkbox" id="pm-type-email" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypePhone">Phone</span>
+                <label class="switch"><input type="checkbox" id="pm-type-phone" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeCard">Card</span>
+                <label class="switch"><input type="checkbox" id="pm-type-card" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeIban">IBAN</span>
+                <label class="switch"><input type="checkbox" id="pm-type-iban" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeIpv4">IPv4</span>
+                <label class="switch"><input type="checkbox" id="pm-type-ipv4" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeIpv6">IPv6</span>
+                <label class="switch"><input type="checkbox" id="pm-type-ipv6" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeSecret">Secret (JWT / API key)</span>
+                <label class="switch"><input type="checkbox" id="pm-type-secret" checked><span class="slider"></span></label>
+              </div>
+            </div>
+            <div class="settings-group" id="national-id-settings" style="margin-top: 16px;">
+              <h3 data-i18n="nationalIds" style="font-size: 14px; margin-bottom: 8px;">National IDs</h3>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeTckn">Turkish TCKN</span>
+                <label class="switch"><input type="checkbox" id="pm-type-tckn" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeSsn">US SSN</span>
+                <label class="switch"><input type="checkbox" id="pm-type-ssn" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeUkNino">UK NINO (Pattern Only)</span>
+                <label class="switch"><input type="checkbox" id="pm-type-uk-nino"><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeDeSteuerid">Germany Steuer-ID</span>
+                <label class="switch"><input type="checkbox" id="pm-type-de-steuerid" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeFrInsee">France INSEE/NIR</span>
+                <label class="switch"><input type="checkbox" id="pm-type-fr-insee" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeEsDni">Spain DNI/NIE</span>
+                <label class="switch"><input type="checkbox" id="pm-type-es-dni" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeItCf">Italy Codice Fiscale</span>
+                <label class="switch"><input type="checkbox" id="pm-type-it-cf" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-item">
+                <span data-i18n="pmTypeEuPassport">EU Passport (Pattern Only)</span>
+                <label class="switch"><input type="checkbox" id="pm-type-eu-passport"><span class="slider"></span></label>
+              </div>
+            </div>
+            <div class="settings-group" id="pm-custom-rules-settings" style="margin-top: 16px;">
+              <h3 data-i18n="pmCustomRules" style="font-size: 14px; margin-bottom: 4px;">Custom Rules</h3>
+              <p class="pm-custom-hint" data-i18n="pmCustomRulesHint" style="font-size: 12px; opacity: 0.7; margin: 0 0 8px 0;"># = digit    ? = letter    everything else matches exactly</p>
+              <div id="pm-custom-rules-list"></div>
+              <button type="button" id="pm-add-rule-btn" class="pm-add-rule-btn" data-i18n="pmAddRule">Add rule</button>
+            </div>
+          </div>
+
           <!-- Toolbar Section -->
           <div class="toggle-container" id="toolbar-settings-section">
             <h3 data-i18n="toolbarLayoutLabel">Toolbar</h3>
@@ -528,7 +699,7 @@
           </div>
 
           <!-- Custom Links Section -->
-          <div class="custom-links-container">
+          <div class="custom-links-container" id="custom-links-section">
             <h3 data-i18n="customLinks"></h3>
             <div class="add-link-form">
               <input type="text" id="custom-link-input"

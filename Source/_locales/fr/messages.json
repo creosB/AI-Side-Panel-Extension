@@ -584,6 +584,9 @@
     "onboardingFeature3": {
         "message": "Soutenez l'éducation et le développement futur"
     },
+    "onboardingFeature4": {
+        "message": "Privacy Mask : censurez les données sensibles avant de les envoyer à l'IA"
+    },
     "onboardingNextBtn": {
         "message": "Suivant"
     },

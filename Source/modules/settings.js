@@ -15,6 +15,53 @@ export class SettingsManager {
     this.initializeRememberLastModelSetting();
     this.initializeCustomServiceSettings();
     this.initializeToolbarLayoutSettings();
+    this.initializePrivacyMaskGate();
+  }
+
+  initializePrivacyMaskGate() {
+    const section = document.getElementById('privacy-mask-section');
+    if (!section) { return; }
+
+    const applyGate = (isPrem) => {
+      section.classList.toggle('gated', !isPrem);
+      // Disable every interactive control inside the card when gated.
+      section.querySelectorAll('input, button, select').forEach((el) => {
+        el.disabled = !isPrem;
+      });
+    };
+
+    const openPremium = (e) => {
+      if (section.classList.contains('gated')) {
+        e.preventDefault();
+        if (window.premiumManager?.open) window.premiumManager.open();
+      }
+    };
+
+    // Click anywhere on the gated card -> upgrade modal.
+    const clickHandler = (e) => openPremium(e);
+    section.addEventListener('click', clickHandler);
+
+    // Initial state.
+    try {
+      chrome.runtime.sendMessage({ type: 'GET_PREMIUM_STATUS' }, (bg) => {
+        applyGate(bg?.isPremium === true);
+      });
+    } catch (_) { }
+
+    // Live updates — connect a port if the theme gate hasn't already, else
+    // piggyback a second listener on the shared port.
+    try {
+      if (!this._premiumPort) {
+        this._premiumPort = chrome.runtime.connect({ name: 'premium-status' });
+      }
+      this._premiumPort.onMessage.addListener((msg) => {
+        if (msg?.type === 'PREMIUM_STATUS_UPDATED') {
+          chrome.runtime.sendMessage({ type: 'GET_PREMIUM_STATUS' }, (bg) => {
+            applyGate(bg?.isPremium === true);
+          });
+        }
+      });
+    } catch (_) { }
   }
 
   initializeShortcutSettings() {
@@ -681,6 +728,51 @@ export class SettingsManager {
       return;
     }
 
+        // Privacy Mask toggles.
+        if (toggle.id === 'toggle-privacy-mask') {
+            chrome.storage.local.set({ privacyMaskEnabled: toggle.checked });
+            return;
+        }
+        if (toggle.id.startsWith('pm-type-')) {
+            const typeMap = {
+                'pm-type-email': 'email', 'pm-type-phone': 'phone', 'pm-type-card': 'card',
+                'pm-type-iban': 'iban', 'pm-type-ipv4': 'ipv4', 'pm-type-ipv6': 'ipv6',
+                'pm-type-secret': 'secret',
+                'pm-type-tckn': 'nationalId.tr_tckn', 'pm-type-ssn': 'nationalId.us_ssn',
+                'pm-type-uk-nino': 'nationalId.uk_nino', 'pm-type-de-steuerid': 'nationalId.de_steuerid',
+                'pm-type-fr-insee': 'nationalId.fr_insee', 'pm-type-es-dni': 'nationalId.es_dni',
+                'pm-type-it-cf': 'nationalId.it_cf', 'pm-type-eu-passport': 'nationalId.eu_passport',
+            };
+            const typeKey = typeMap[toggle.id];
+            if (typeKey) {
+                chrome.storage.local.get(['privacyMaskTypes'], (res) => {
+                    const types = res.privacyMaskTypes || {
+                        email: true, phone: true, card: true, iban: true,
+                        ipv4: true, ipv6: true, secret: true,
+                        nationalId: {
+                            tr_tckn: true,
+                            us_ssn: true,
+                            uk_nino: false,
+                            de_steuerid: true,
+                            fr_insee: true,
+                            es_dni: true,
+                            it_cf: true,
+                            eu_passport: false
+                        },
+                    };
+                    if (typeKey.includes('.')) {
+                        const [parent, child] = typeKey.split('.');
+                        if (!types[parent]) { types[parent] = {}; }
+                        types[parent][child] = toggle.checked;
+                    } else {
+                        types[typeKey] = toggle.checked;
+                    }
+                    chrome.storage.local.set({ privacyMaskTypes: types });
+                });
+            }
+            return;
+        }
+
     if (service === 'conversation-open-mode') {
       localStorage.setItem('conversationOpenInNewTab', String(toggle.checked));
       localStorage.setItem('conversationOpenInSidePanel', String(!toggle.checked));
@@ -902,6 +994,223 @@ export class SettingsManager {
     // Restore button order after toggles are set
     if (window.saveManager) {
       window.saveManager.restoreButtonOrder();
+    }
+
+        // Restore Privacy Mask toggles + custom rules.
+        chrome.storage.local.get(
+            ['privacyMaskEnabled', 'privacyMaskTypes', 'privacyMaskCustomRules'],
+            (res) => {
+                const pmToggle = document.getElementById('toggle-privacy-mask');
+                if (pmToggle) { pmToggle.checked = res.privacyMaskEnabled === true; }
+
+                const types = res.privacyMaskTypes || {
+                    email: true, phone: true, card: true, iban: true,
+                    ipv4: true, ipv6: true, secret: true,
+                    nationalId: {
+                        tr_tckn: true,
+                        us_ssn: true,
+                        uk_nino: false,
+                        de_steuerid: true,
+                        fr_insee: true,
+                        es_dni: true,
+                        it_cf: true,
+                        eu_passport: false
+                    },
+                };
+                const typeCheckboxMap = {
+                    'pm-type-email': types.email, 'pm-type-phone': types.phone,
+                    'pm-type-card': types.card, 'pm-type-iban': types.iban,
+                    'pm-type-ipv4': types.ipv4, 'pm-type-ipv6': types.ipv6,
+                    'pm-type-secret': types.secret,
+                    'pm-type-tckn': types.nationalId ? types.nationalId.tr_tckn : false,
+                    'pm-type-ssn': types.nationalId ? types.nationalId.us_ssn : false,
+                    'pm-type-uk-nino': types.nationalId ? types.nationalId.uk_nino : false,
+                    'pm-type-de-steuerid': types.nationalId ? types.nationalId.de_steuerid : false,
+                    'pm-type-fr-insee': types.nationalId ? types.nationalId.fr_insee : false,
+                    'pm-type-es-dni': types.nationalId ? types.nationalId.es_dni : false,
+                    'pm-type-it-cf': types.nationalId ? types.nationalId.it_cf : false,
+                    'pm-type-eu-passport': types.nationalId ? types.nationalId.eu_passport : false,
+                };
+                for (const [id, checked] of Object.entries(typeCheckboxMap)) {
+                    const el = document.getElementById(id);
+                    if (el) { el.checked = !!checked; }
+                }
+
+                // Custom rules: render + bind events once.
+                const customRules = Array.isArray(res.privacyMaskCustomRules) ? res.privacyMaskCustomRules : [];
+                this.pmRenderRules(customRules);
+                this.pmBindCustomRulesEvents();
+            }
+        );
+  }
+
+  // === Privacy Mask: custom rules ===
+
+  pmGetRulesList() {
+    return document.getElementById('pm-custom-rules-list');
+  }
+
+  pmRenderRules(rules) {
+    const list = this.pmGetRulesList();
+    if (!list) { return; }
+    list.innerHTML = '';
+    (rules || []).forEach((rule) => {
+      list.appendChild(this.pmCreateRuleRow(rule));
+    });
+  }
+
+  pmCreateRuleRow(rule) {
+    const i18n = (typeof chrome !== 'undefined' && chrome.i18n)
+      ? (k) => chrome.i18n.getMessage(k) : () => null;
+    const row = document.createElement('div');
+    row.className = 'pm-custom-rule-row';
+    row.dataset.ruleId = rule.id;
+
+    const patternInput = document.createElement('input');
+    patternInput.type = 'text';
+    patternInput.className = 'pm-pattern-input';
+    patternInput.value = rule.pattern || '';
+    patternInput.placeholder = i18n('pmPatternPlaceholder') || 'e.g. ACME-###### or Jane Doe';
+    patternInput.dataset.field = 'pattern';
+
+    const labelInput = document.createElement('input');
+    labelInput.type = 'text';
+    labelInput.className = 'pm-label-input';
+    labelInput.value = rule.label || '';
+    labelInput.placeholder = i18n('pmLabelPlaceholder') || 'e.g. TICKET';
+    labelInput.dataset.field = 'label';
+    labelInput.maxLength = 20;
+
+    const toggleLabel = document.createElement('label');
+    toggleLabel.className = 'switch';
+    const toggle = document.createElement('input');
+    toggle.type = 'checkbox';
+    toggle.checked = rule.enabled !== false;
+    toggle.dataset.field = 'enabled';
+    toggleLabel.appendChild(toggle);
+    const slider = document.createElement('span');
+    slider.className = 'slider';
+    toggleLabel.appendChild(slider);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.type = 'button';
+    deleteBtn.className = 'pm-delete-btn';
+    deleteBtn.textContent = '\u{1F5D1}';
+    deleteBtn.title = 'Delete rule';
+    deleteBtn.dataset.action = 'delete';
+
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'pm-rule-error';
+    errorDiv.dataset.field = 'error';
+
+    row.appendChild(patternInput);
+    row.appendChild(labelInput);
+    row.appendChild(toggleLabel);
+    row.appendChild(deleteBtn);
+    row.appendChild(errorDiv);
+
+    return row;
+  }
+
+  pmReadRulesFromDom() {
+    const list = this.pmGetRulesList();
+    if (!list) { return []; }
+    const rules = [];
+    list.querySelectorAll('.pm-custom-rule-row').forEach((row) => {
+      rules.push({
+        id: row.dataset.ruleId,
+        pattern: row.querySelector('[data-field="pattern"]').value,
+        label: row.querySelector('[data-field="label"]').value,
+        enabled: row.querySelector('[data-field="enabled"]').checked,
+      });
+    });
+    return rules;
+  }
+
+  pmValidateEngine() {
+    return (window.__privacyMask && typeof window.__privacyMask.validateCustomRule === 'function')
+      ? window.__privacyMask.validateCustomRule
+      : null;
+  }
+
+  pmSaveRules(rules) {
+    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+      chrome.storage.local.set({ privacyMaskCustomRules: rules || [] });
+    }
+  }
+
+  pmValidateRow(row) {
+    const validate = this.pmValidateEngine();
+    const errorDiv = row.querySelector('[data-field="error"]');
+    const patternInput = row.querySelector('[data-field="pattern"]');
+    if (!validate || !errorDiv || !patternInput) { return true; }
+    const result = validate(patternInput.value);
+    if (!result.ok) {
+      errorDiv.textContent = result.error;
+      return false;
+    }
+    errorDiv.textContent = '';
+    return true;
+  }
+
+  pmBindCustomRulesEvents() {
+    const list = this.pmGetRulesList();
+    if (!list || list.dataset.pmBound === '1') { return; }
+    list.dataset.pmBound = '1';
+
+    // Pattern blur: validate + save.
+    list.addEventListener('blur', (e) => {
+      if (e.target.classList && e.target.classList.contains('pm-pattern-input')) {
+        const row = e.target.closest('.pm-custom-rule-row');
+        if (row && this.pmValidateRow(row)) {
+          this.pmSaveRules(this.pmReadRulesFromDom());
+        }
+      }
+    }, true);
+
+    // Label change + toggle change: save.
+    list.addEventListener('change', (e) => {
+      const row = e.target.closest('.pm-custom-rule-row');
+      if (!row) { return; }
+      if (e.target.dataset.field === 'label' || e.target.dataset.field === 'enabled') {
+        this.pmSaveRules(this.pmReadRulesFromDom());
+      }
+    });
+
+    // Delete button: remove row + save.
+    list.addEventListener('click', (e) => {
+      if (e.target.dataset && e.target.dataset.action === 'delete') {
+        const row = e.target.closest('.pm-custom-rule-row');
+        if (row) {
+          row.remove();
+          this.pmSaveRules(this.pmReadRulesFromDom());
+        }
+      }
+    });
+
+    // Add rule button.
+    const addBtn = document.getElementById('pm-add-rule-btn');
+    if (addBtn && !addBtn.dataset.pmBound) {
+      addBtn.dataset.pmBound = '1';
+      addBtn.addEventListener('click', () => {
+        chrome.storage.local.get(['privacyMaskCustomRules'], (res) => {
+          const rules = Array.isArray(res.privacyMaskCustomRules) ? res.privacyMaskCustomRules : [];
+          const newRule = {
+            id: 'r' + Date.now() + Math.random().toString(36).slice(2, 6),
+            pattern: '',
+            label: '',
+            enabled: true,
+          };
+          rules.push(newRule);
+          this.pmRenderRules(rules);
+          this.pmSaveRules(rules);
+          const listEl = this.pmGetRulesList();
+          if (listEl) {
+            const lastPattern = listEl.querySelector('.pm-custom-rule-row:last-child .pm-pattern-input');
+            if (lastPattern) { lastPattern.focus(); }
+          }
+        });
+      });
     }
   }
 

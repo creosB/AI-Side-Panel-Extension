@@ -581,6 +581,9 @@
   "onboardingFeature3": {
     "message": "Eğitimi ve gelecekteki geliştirmeyi destekleyin"
   },
+  "onboardingFeature4": {
+    "message": "Privacy Mask: AI'a göndermeden önce hassas verileri gizle"
+  },
   "onboardingNextBtn": {
     "message": "İleri"
   },

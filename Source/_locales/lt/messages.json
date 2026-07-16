@@ -581,6 +581,9 @@
   "onboardingFeature3": {
     "message": "Paremkite švietimą ir tolesnį vystymą"
   },
+  "onboardingFeature4": {
+    "message": "Privacy Mask: cenzūruokite slaptus duomenis prieš siųsdami į DI"
+  },
   "onboardingNextBtn": {
     "message": "Kitas"
   },

@@ -13,7 +13,7 @@
         "storage"
     ],
     "description": "__MSG_appDescription__",
-    "version": "1.4.4",
+    "version": "1.5.0",
     "side_panel": {
         "default_path": "sidepanel.html"
     },
@@ -52,6 +52,31 @@
             ],
             "run_at": "document_start",
             "all_frames": true
+        },
+        {
+            "matches": [
+                "*://chatgpt.com/*",
+                "*://chat.openai.com/*",
+                "*://gemini.google.com/*",
+                "*://claude.ai/*",
+                "*://chat.qwen.ai/*",
+                "*://qwen.ai/*",
+                "*://chat.z.ai/*",
+                "*://z.ai/*",
+                "*://copilot.microsoft.com/*",
+                "*://www.bing.com/chat*",
+                "*://kimi.com/*",
+                "*://www.kimi.com/*",
+                "*://x.ai/*",
+                "*://chat.deepseek.com/*"
+            ],
+            "js": [
+                "modules/privacy-mask/privacy-mask-bundle.js"
+            ],
+            "css": [
+                "modules/privacy-mask/privacy-mask.css"
+            ],
+            "run_at": "document_idle"
         }
     ],
     "icons": {

@@ -32,6 +32,7 @@ export default class PremiumManager {
 		const featureTwoEl = this.overlay.querySelector('[data-premium-feature-2]');
 		const featureThreeEl = this.overlay.querySelector('[data-premium-feature-3]');
 		const featureFourEl = this.overlay.querySelector('[data-premium-feature-4]');
+		const featureFiveEl = this.overlay.querySelector('[data-premium-feature-5]');
 
 		if (titleEl) titleEl.textContent = this.t('premiumModalTitle', 'Premium');
 		if (subtitleEl) subtitleEl.textContent = this.t('premiumModalSubtitle', 'Unlock extra features and support development.');
@@ -39,6 +40,7 @@ export default class PremiumManager {
 		if (featureTwoEl) featureTwoEl.textContent = this.t('onboardingFeature2', 'Exclusive Theme Selector & custom styles');
 		if (featureThreeEl) featureThreeEl.textContent = this.t('premiumModalFeature3', 'Priority support');
 		if (featureFourEl) featureFourEl.textContent = this.t('conversationHubPremiumDescription', 'The Conversation Hub allows you to see and search all your AI conversations in one place. This is a premium feature to support the development.');
+		if (featureFiveEl) featureFiveEl.textContent = this.t('onboardingFeature4', 'Privacy Mask: redact sensitive data before sending to AI');
 
 		if (this.emailInput) this.emailInput.placeholder = this.t('premiumModalEmailPlaceholder', 'Email used at checkout');
 		if (this.codeInput) this.codeInput.placeholder = this.t('premiumModalLicensePlaceholder', 'License key');
@@ -107,7 +109,7 @@ export default class PremiumManager {
 							<span class="copy-tooltip" id="copy-tooltip">Copy</span>
 						</div>
 					</div>
-					<div class="discount-scarcity">Ends July 7 — Limited Time Only!</div>
+					<div class="discount-scarcity">Ends August 31 — Limited Time Only!</div>
 				</div>
 
 				<div class="premium-modal-header">
@@ -120,7 +122,8 @@ export default class PremiumManager {
 						<div class="premium-feature"><span>✔</span><span data-premium-feature-2>Enhance your browsing with beautiful, custom themes.</span></div>
 						<div class="premium-feature"><span>✔</span><span data-premium-feature-3>Priority support</span></div>
 						<div class="premium-feature"><span>✔</span><span data-premium-feature-4>The Conversation Hub allows you to see and search all your AI conversations in one place. This is a premium feature to support the development.</span></div>
-					</div>
+						<div class="premium-feature"><span>✔</span><span data-premium-feature-5>Privacy Mask: redact sensitive data before sending to AI</span></div>
+						</div>
 
 					<!-- Primary & Secondary Conversion Buttons -->
 					<div class="premium-conversion-actions" id="premium-conversion-actions">

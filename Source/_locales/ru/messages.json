@@ -581,6 +581,9 @@
     "onboardingFeature3": {
         "message": "Поддержка развития и будущих обновлений"
     },
+    "onboardingFeature4": {
+        "message": "Privacy Mask: скрывайте конфиденциальные данные перед отправкой ИИ"
+    },
     "onboardingNextBtn": {
         "message": "Далее"
     },

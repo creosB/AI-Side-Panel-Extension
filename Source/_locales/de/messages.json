@@ -581,6 +581,9 @@
   "onboardingFeature3": {
     "message": "Bildung und zukünftige Entwicklung unterstützen"
   },
+  "onboardingFeature4": {
+    "message": "Privacy Mask: sensible Daten schwärzen, bevor sie an die KI gesendet werden"
+  },
   "onboardingNextBtn": {
     "message": "Weiter"
   },

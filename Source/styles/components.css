@@ -7,6 +7,7 @@
   height: 100%;
   width: 100%;
   overflow-y: auto;
+  scroll-behavior: smooth;
   background-color: var(--bg-color);
   position: absolute;
   top: 0;
@@ -112,6 +113,17 @@
 
 #theme-section.gated select,
 #theme-settings-section.gated select {
+  cursor: not-allowed;
+}
+
+/* Premium-gated privacy mask section */
+#privacy-mask-section.gated {
+  opacity: 0.7;
+  cursor: pointer;
+}
+#privacy-mask-section.gated input,
+#privacy-mask-section.gated button,
+#privacy-mask-section.gated select {
   cursor: not-allowed;
 }
 
@@ -498,4 +510,77 @@ input:checked + .slider:before {
 #synthwave-dim-container,
 #conversation-hub-premium-teaser {
   display: none;
+}
+
+/* Custom redact rules */
+#pm-custom-rules-settings input[type="text"] {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-color);
+  padding: 8px 10px;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+#pm-custom-rules-settings input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+#pm-custom-rules-settings input[type="text"]:focus {
+  outline: 2px solid var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.pm-custom-rule-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.pm-custom-rule-row input.pm-pattern-input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pm-custom-rule-row input.pm-label-input {
+  width: 80px;
+  flex: 0 0 80px;
+}
+
+.pm-custom-rule-row .pm-delete-btn {
+  flex: 0 0 auto;
+  background: transparent;
+  border: none;
+  color: var(--text-color, #888);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 2px 6px;
+}
+
+.pm-custom-rule-row .pm-delete-btn:hover {
+  color: #e53935;
+}
+
+.pm-custom-rule-row .pm-rule-error {
+  flex: 1 0 100%;
+  color: #e53935;
+  font-size: 11px;
+  margin: -2px 0 4px 0;
+}
+
+.pm-add-rule-btn {
+  margin-top: 4px;
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px dashed var(--border-color, #555);
+  color: var(--text-color, inherit);
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.pm-add-rule-btn:hover {
+  border-color: var(--accent-color, #888);
 }

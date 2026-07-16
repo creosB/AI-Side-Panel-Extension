@@ -581,6 +581,9 @@
   "onboardingFeature3": {
     "message": "支持教育与未来开发"
   },
+  "onboardingFeature4": {
+    "message": "隐私遮罩：发送给 AI 前隐藏敏感数据"
+  },
   "onboardingNextBtn": {
     "message": "下一步"
   },

@@ -581,6 +581,9 @@
   "onboardingFeature3": {
     "message": "Support education & future development"
   },
+  "onboardingFeature4": {
+    "message": "Privacy Mask: redact sensitive data before sending to AI"
+  },
   "onboardingNextBtn": {
     "message": "Next"
   },
@@ -598,5 +601,32 @@
   },
   "showFeatureTour": {
     "message": "Show feature tour"
-  }
+  },
+  "privacyMask": { "message": "Privacy Mask" },
+  "enablePrivacyMask": { "message": "Enable Privacy Mask" },
+  "pmTypeEmail": { "message": "Email" },
+  "pmTypePhone": { "message": "Phone" },
+  "pmTypeCard": { "message": "Card" },
+  "pmTypeIban": { "message": "IBAN" },
+  "pmTypeIpv4": { "message": "IPv4" },
+  "pmTypeIpv6": { "message": "IPv6" },
+  "pmTypeSecret": { "message": "Secret (JWT / API key)" },
+  "pmTypeTckn": { "message": "Turkish TCKN" },
+  "pmTypeSsn": { "message": "US SSN" },
+  "pmTypeUkNino": { "message": "UK NINO (Pattern Only)" },
+  "pmTypeDeSteuerid": { "message": "Germany Steuer-ID" },
+  "pmTypeFrInsee": { "message": "France INSEE/NIR" },
+  "pmTypeEsDni": { "message": "Spain DNI/NIE" },
+  "pmTypeItCf": { "message": "Italy Codice Fiscale" },
+  "pmTypeEuPassport": { "message": "EU Passport (Pattern Only)" },
+  "nationalIds": { "message": "National IDs" },
+  "pmCustomRules": { "message": "Custom Rules" },
+  "pmCustomRulesHint": { "message": "# = digit    ? = letter    everything else matches exactly" },
+  "pmAddRule": { "message": "Add rule" },
+  "pmPatternPlaceholder": { "message": "e.g. ACME-###### or Jane Doe" },
+  "pmLabelPlaceholder": { "message": "e.g. TICKET" },
+  "pmErrorEmpty": { "message": "Pattern cannot be empty." },
+  "pmErrorNoLiteral": { "message": "Pattern must contain at least one literal character (a letter or symbol that isn't # or ?)." },
+  "pmErrorTooLong": { "message": "Pattern must be 100 characters or fewer." },
+  "quickNavigation": { "message": "Quick Navigation" }
 }
