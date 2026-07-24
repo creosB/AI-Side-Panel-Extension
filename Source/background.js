@@ -1,6 +1,7 @@
 import { STORAGE_KEY_PREFIX, MAX_ATTEMPTS, ATTEMPT_WINDOW_MS, isValidEmail, isValidCode, toSortedObject } from './modules/premiumShared.js';
 import { CUSTOM_SERVICE_STORAGE_KEY, SERVICE_PRESETS, buildServiceUrl, getAllActions, normalizeSettings } from './modules/customServiceConfig.js';
 import { readCustomServiceSettings } from './modules/customServiceStore.js';
+import { track } from './modules/analytics.js';
 
 const CONTEXT_MENU_ROOT_ID = 'ai-side-panel-custom-service';
 let contextMenuRebuildInFlight = null;
@@ -31,7 +32,7 @@ function contextMenusCreate(createProperties) {
 
 function initiate () {
     chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch((error) => console.error(error));
-    chrome.runtime.onInstalled.addListener(function () {
+    chrome.runtime.onInstalled.addListener(function (details) {
         chrome.declarativeNetRequest.updateDynamicRules({
             removeRuleIds: [1],
             addRules: [{
@@ -75,6 +76,17 @@ function initiate () {
                     }
                 }]
         });
+
+        // ── v1.6 re-exposure lever ────────────────────────────────────
+        // On update, arm a one-shot What's-New flag. The next time the side
+        // panel opens, non-premium users get the onboarding overlay jumped
+        // to the premium slide; premium users skip it. sidepanel-modular.js
+        // owns the reveal + flag clear.
+        if (details && details.reason === 'update') {
+            try {
+                chrome.storage.local.set({ showWhatsNew: true });
+            } catch (_) {}
+        }
     });
     primeCustomServiceSettings().then(() => rebuildCustomContextMenus());
 
@@ -446,7 +458,7 @@ function handlePremiumClear(email) {
 
 // Premium message handling
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (!message || !message.type) return; 
+  if (!message || !message.type) return;
   if (message.type === 'CHECK_PREMIUM_STATUS') {
     handlePremiumCheck(message.payload || {}).then(sendResponse);
     return true; // async
@@ -459,6 +471,51 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     handlePremiumClear(message.payload?.email);
     sendResponse({ success: true });
   }
+});
+
+// Analytics bridge: content scripts (privacy-mask, neural-nav) can't import
+// the ES analytics module, so they forward events here. Fire-and-forget.
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  try {
+    if (message && message.type === 'TRACK_EVENT') {
+      track(message.name, message.props || {});
+    }
+  } catch (_) { /* analytics must never break the panel */ }
+  // synchronous ack; no async work needed by caller
+  if (sendResponse) sendResponse({ ok: true });
+});
+
+// Privacy Mask gate (v1.6): when a free user hits the redact limit inside
+// an AI site, surface the side panel so the Go-Pro affordance is reachable.
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  try {
+    if (message && message.type === 'OPEN_PREMIUM_FROM_CONTENT') {
+      const tab = sender?.tab;
+      if (tab?.id && chrome.sidePanel?.open) {
+        chrome.sidePanel.open({ tabId: tab.id }).catch(() => {});
+      }
+    }
+  } catch (_) {}
+  if (sendResponse) sendResponse({ ok: true });
+});
+
+// Rating-prompt session suppression bridge (v1.6.1): content scripts can't
+// write the side panel's chrome.storage.session directly from an AI page in
+// all cases, so they forward the suppression intent here.
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  try {
+    if (message && message.type === 'SUPPRESS_RATING') {
+      const reason = message.reason;
+      const flag = reason === 'privacy_block' ? 'sessionPrivacyBlock'
+        : reason === 'hub_limit' ? 'sessionHubLimitHit'
+        : reason === 'premium_modal' ? 'sessionPremiumModalShown'
+        : null;
+      if (flag && chrome.storage?.session) {
+        chrome.storage.session.set({ [flag]: true });
+      }
+    }
+  } catch (_) {}
+  if (sendResponse) sendResponse({ ok: true });
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {

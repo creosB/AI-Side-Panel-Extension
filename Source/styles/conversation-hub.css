@@ -492,3 +492,36 @@
     width: 100%;
   }
 }
+
+/* ── v1.6 free-tier upgrade row ─────────────────────────── */
+.conversation-upgrade-row {
+  cursor: pointer;
+  border: 1px dashed color-mix(in srgb, var(--primary-color, #00ffaa) 45%, transparent);
+  background: color-mix(in srgb, var(--primary-color, #00ffaa) 8%, transparent);
+  border-radius: 10px;
+  margin-top: 6px;
+  transition: background-color var(--standard-duration, 0.2s) ease,
+    border-color var(--standard-duration, 0.2s) ease;
+}
+
+.conversation-upgrade-row:hover {
+  background: color-mix(in srgb, var(--primary-color, #00ffaa) 16%, transparent);
+  border-color: var(--primary-color, #00ffaa);
+}
+
+.conversation-upgrade-icon {
+  color: var(--primary-color, #00ffaa);
+}
+
+.conversation-upgrade-row .conversation-title {
+  color: var(--primary-color, #00ffaa);
+  font-weight: 600;
+}
+
+.conversation-upgrade-tag {
+  color: var(--primary-color, #00ffaa);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 10px;
+}

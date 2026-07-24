@@ -626,12 +626,74 @@
 
     // === § adapter: redact ===
 
+    // Free-tier gate (v1.6): non-premium users get ONE successful
+    // redact-and-send, then the feature is gated. Premium is unlimited.
+    const PM_FREE_USES_KEY = 'privacyMaskFreeUses';
+    const PM_FREE_USES_LIMIT = 1;
+
+    function pmGetFreeUses() {
+        return new Promise((resolve) => {
+            try {
+                chrome.storage.local.get([PM_FREE_USES_KEY], (res) => {
+                    resolve(Number(res?.[PM_FREE_USES_KEY]) || 0);
+                });
+            } catch (_) { resolve(0); }
+        });
+    }
+
+    function pmIncrementFreeUses() {
+        return new Promise((resolve) => {
+            try {
+                chrome.storage.local.get([PM_FREE_USES_KEY], (res) => {
+                    const next = (Number(res?.[PM_FREE_USES_KEY]) || 0) + 1;
+                    chrome.storage.local.set({ [PM_FREE_USES_KEY]: next }, () => resolve(next));
+                });
+            } catch (_) { resolve(0); }
+        });
+    }
+
+    // Forward an analytics event to the background bridge (content scripts
+    // can't import the ES analytics module). Best-effort, never throws.
+    function pmTrack(name, props) {
+        try {
+            chrome.runtime.sendMessage({ type: 'TRACK_EVENT', name, props: props || {} }, () => {
+                // consume lastError so the console stays clean
+                void chrome.runtime.lastError;
+            });
+        } catch (_) { }
+    }
+
     function redact() {
         if (!provider) { return { masked: false, reason: 'no-provider' }; }
         if (!isPremium) {
-            openUpgrade();
-            return { masked: false, reason: 'not-premium' };
+            // Defer the gate check: the first redact is allowed, the second
+            // is blocked. We resolve the async count and then proceed or gate.
+            return (async () => {
+                const uses = await pmGetFreeUses();
+                if (uses >= PM_FREE_USES_LIMIT) {
+                    pmTrack('privacy_mask_limit_hit', { uses, limit: PM_FREE_USES_LIMIT });
+                    // Suppress the rating prompt for this session (paywall-adjacent).
+                    try {
+                        chrome.runtime.sendMessage({ type: 'SUPPRESS_RATING', reason: 'privacy_block' }, () => {
+                            void chrome.runtime.lastError;
+                        });
+                    } catch (_) { }
+                    openUpgrade();
+                    return { masked: false, reason: 'free-limit' };
+                }
+                // Allowed this once — perform the redact, then persist the use.
+                const result = performRedact();
+                if (result && result.masked) {
+                    await pmIncrementFreeUses();
+                    pmTrack('privacy_mask_used', { uses: uses + 1 });
+                }
+                return result;
+            })();
         }
+        return performRedact();
+    }
+
+    function performRedact() {
         const composer = provider.composer();
         if (!composer) { return { masked: false, reason: 'no-composer' }; }
 
@@ -695,7 +757,15 @@
         } catch (_) { }
     }
     function openUpgrade() {
-        showToast('Privacy Mask is a Premium feature. Upgrade to unlock.');
+        showToast('Privacy Mask is a Premium feature. Open the side panel to upgrade.');
+        // Best-effort: surface the side panel so the Go-Pro modal is reachable.
+        // This runs in the AI site content script; opening the panel is only
+        // possible when the extension icon maps to the side panel.
+        try {
+            chrome.runtime.sendMessage({ type: 'OPEN_PREMIUM_FROM_CONTENT' }, () => {
+                void chrome.runtime.lastError;
+            });
+        } catch (_) { }
     }
 
     function findNnBtn() {

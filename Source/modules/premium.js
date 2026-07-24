@@ -1,6 +1,8 @@
 // Premium Module: modal, verification, and UI wiring
 import { checkPremiumStatus } from './premiumAuth.js';
 import { ATTEMPT_WINDOW_MS, MAX_ATTEMPTS, isValidEmail, isValidCode } from './premiumShared.js';
+import { track } from './analytics.js';
+import { suppressThisSession } from './ratingPrompt.js';
 
 export default class PremiumManager {
 	constructor() {
@@ -55,13 +57,15 @@ export default class PremiumManager {
 
 	init() {
 		this.replaceSupportButton();
-		// Listen for global requests to open the premium modal (e.g. from supportMessage)
-		window.addEventListener('openPremiumModal', () => {
+		// Listen for global requests to open the premium modal (e.g. from
+		// supportMessage, conversationHub). Attribute the source for analytics.
+		window.addEventListener('openPremiumModal', (event) => {
 			try {
 				if (this.isPremium) {
 					window.open('https://buymeacoffee.com/creos', '_blank');
 				} else {
-					this.open();
+					const source = event?.detail?.source || 'direct';
+					this.openFrom(source);
 				}
 			} catch (e) { /* ignore */ }
 		});
@@ -95,44 +99,40 @@ export default class PremiumManager {
 				<button class="premium-close" aria-label="Close" data-premium-close>
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12l-4.9 4.89a1 1 0 1 0 1.41 1.42L12 13.41l4.89 4.9a1 1 0 0 0 1.42-1.42L13.41 12l4.9-4.89a1 1 0 0 0-.01-1.4Z"/></svg>
 				</button>
-				
-				<!-- 30% Off Promo Hero Banner -->
-				<div class="premium-discount-banner">
-					<div class="discount-banner-content">
-						<div class="discount-banner-title">30% STORE-WIDE DISCOUNT</div>
-						<div class="discount-banner-pill" id="discount-copy-pill" title="Click to copy code">
+
+				<div class="premium-modal-header">
+					<h2 id="premium-title" class="premium-modal-title" data-premium-title>Go Pro</h2>
+					<div class="premium-modal-subtitle" data-premium-subtitle>Unlock unlimited history + privacy tools. One payment, yours forever.</div>
+				</div>
+				<div class="premium-modal-body">
+					<div class="premium-features">
+						<div class="premium-feature"><span>✔</span><span data-premium-feature-4>See and search all your AI conversations in one place — no depth limit.</span></div>
+						<div class="premium-feature"><span>✔</span><span data-premium-feature-5>Privacy Mask: redact sensitive data before it reaches the AI.</span></div>
+						<div class="premium-feature"><span>✔</span><span data-premium-feature-2>Exclusive themes & custom styles.</span></div>
+						<div class="premium-feature"><span>✔</span><span data-premium-feature-3>Priority support.</span></div>
+						</div>
+
+					<!-- Single primary CTA: one lifetime price -->
+					<div class="premium-conversion-actions" id="premium-conversion-actions">
+						<button class="premium-btn primary conversion-btn premium-lifetime-cta" data-premium-buy>
+							<span class="premium-cta-label">Unlock Lifetime Premium</span>
+						</button>
+					</div>
+
+					<!-- AISUMMER as the closer (small), not a competing hero -->
+					<div class="premium-discount-closer" id="premium-discount-closer">
+						<button type="button" class="discount-banner-pill" id="discount-copy-pill" title="Click to copy code">
 							<span class="discount-code-text">AISUMMER</span>
 							<svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 								<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
 								<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
 							</svg>
 							<span class="copy-tooltip" id="copy-tooltip">Copy</span>
-						</div>
+						</button>
+						<div class="discount-scarcity">30% off — ends Aug 31</div>
 					</div>
-					<div class="discount-scarcity">Ends August 31 — Limited Time Only!</div>
-				</div>
 
-				<div class="premium-modal-header">
-					<h2 id="premium-title" class="premium-modal-title" data-premium-title>Premium</h2>
-					<div class="premium-modal-subtitle" data-premium-subtitle>Unlock extra features and support development.</div>
-				</div>
-				<div class="premium-modal-body">
-					<div class="premium-features">
-						<div class="premium-feature"><span>✔</span><span data-premium-feature-1>Your support helps fund ongoing development and my education.</span></div>
-						<div class="premium-feature"><span>✔</span><span data-premium-feature-2>Enhance your browsing with beautiful, custom themes.</span></div>
-						<div class="premium-feature"><span>✔</span><span data-premium-feature-3>Priority support</span></div>
-						<div class="premium-feature"><span>✔</span><span data-premium-feature-4>The Conversation Hub allows you to see and search all your AI conversations in one place. This is a premium feature to support the development.</span></div>
-						<div class="premium-feature"><span>✔</span><span data-premium-feature-5>Privacy Mask: redact sensitive data before sending to AI</span></div>
-						</div>
-
-					<!-- Primary & Secondary Conversion Buttons -->
-					<div class="premium-conversion-actions" id="premium-conversion-actions">
-						<button class="premium-btn primary conversion-btn" data-premium-buy>Go Premium, 30% OFF</button>
-						<a href="https://artistscompany.lemonsqueezy.com/?checkout[discount_code]=AISUMMER" target="_blank" class="premium-btn secondary conversion-btn" id="premium-browse-store">
-							Browse All Products, 30% OFF
-							<span class="store-coupon-badge">AISUMMER</span>
-						</a>
-					</div>
+					<div class="premium-support-secondary" data-premium-feature-1>Every purchase also supports ongoing development & education. ❤️</div>
 
 					<!-- Separate Verification Section -->
 					<div class="premium-verify-section" id="premium-verify-section">
@@ -164,6 +164,7 @@ export default class PremiumManager {
 		overlay.querySelector('[data-premium-backdrop]')?.addEventListener('click', () => this.close());
 		this.closeBtn?.addEventListener('click', () => this.close());
 		this.buyBtn?.addEventListener('click', () => {
+			try { track('checkout_click', { plan: 'lifetime', code: 'AISUMMER' }); } catch (_) {}
 			window.open('https://artistscompany.lemonsqueezy.com/buy/07ad19ea-1d92-4855-a68e-56d9c77a0b6a?checkout[discount_code]=AISUMMER', '_blank');
 		});
 		this.verifyBtn?.addEventListener('click', () => this.handleVerify());
@@ -195,6 +196,17 @@ export default class PremiumManager {
 	open() {
 		this.createModal();
 		this.overlay.classList.add('is-open');
+		try {
+			track('premium_modal_view', { source: this._openSource || 'direct' });
+			this._openSource = null;
+		} catch (_) {}
+		// Suppress the rating prompt for this session (paywall-adjacent).
+		try { suppressThisSession('premium_modal'); } catch (_) {}
+	}
+
+	openFrom(source) {
+		this._openSource = source || 'direct';
+		this.open();
 	}
 
 	close() {
@@ -208,7 +220,7 @@ export default class PremiumManager {
 			if (premiumSocial) {
 				premiumSocial.addEventListener('click', (e) => {
 					e.preventDefault();
-					this.open();
+					this.openFrom('footer');
 				});
 				// track badge element for toggling
 				this.footerBadge = premiumSocial.querySelector('.premium-badge');
@@ -304,14 +316,24 @@ export default class PremiumManager {
 		const buyBtn = this.overlay?.querySelector('[data-premium-buy]');
 		if (buyBtn) buyBtn.style.display = show ? '' : 'none';
 
-		const discountBanner = this.overlay?.querySelector('.premium-discount-banner');
-		if (discountBanner) discountBanner.style.display = show ? '' : 'none';
+		const discountCloser = this.overlay?.querySelector('#premium-discount-closer');
+		if (discountCloser) discountCloser.style.display = show ? '' : 'none';
+
+		const supportSecondary = this.overlay?.querySelector('.premium-support-secondary');
+		if (supportSecondary) supportSecondary.style.display = show ? '' : 'none';
 	}
 
 	setPremiumBadge(visible) {
 		try {
-			if (!this.footerBadge) return;
-			this.footerBadge.style.display = visible ? 'inline-block' : 'none';
+			// The footer button is a persistent "Go Pro" pill for non-premium
+			// users; once premium, collapse it back to the bare star icon.
+			const btn = document.getElementById('premium-social-button');
+			if (btn) btn.classList.toggle('is-premium', !!visible);
+
+			// Keep the legacy badge span state in sync (hidden unless premium).
+			if (this.footerBadge) {
+				this.footerBadge.style.display = visible ? 'inline-block' : 'none';
+			}
 		} catch (_) {}
 	}
 
@@ -360,6 +382,7 @@ export default class PremiumManager {
 			try {
 				const result = await checkPremiumStatus(email, code);
 				if (result.isPremium) {
+						try { track('license_verified', { plan: 'lifetime' }); } catch (_) {}
 						show('success', this.t(result.messageKey || 'premiumModalStatusSuccess', 'Access granted. Welcome to Premium!'));
 					setTimeout(() => this.close(), 1500);
 				} else {

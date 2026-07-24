@@ -1633,6 +1633,9 @@ function formatRelativeTime(value) {
   return `Updated ${days}d ago`;
 }
 
+import { track } from './analytics.js';
+import { registerHubOpen, suppressThisSession } from './ratingPrompt.js';
+
 export class ConversationHubManager {
   constructor() {
     this.conversations = [];
@@ -1643,6 +1646,11 @@ export class ConversationHubManager {
     this.selectedService = 'all';
     this.isOpen = false;
     this.hasSyncedOnce = false;
+    // Free-tier cap: non-premium users can see their 3 most recent
+    // conversations across all services. The 4th slot becomes an inline
+    // upgrade row that opens the premium modal.
+    this.isPremium = false;
+    this.FREE_ITEM_LIMIT = 3;
     this.init();
   }
 
@@ -1676,18 +1684,19 @@ export class ConversationHubManager {
       const bg = await chrome.runtime.sendMessage({ type: 'GET_PREMIUM_STATUS' });
       isPremium = !!(bg && bg.isPremium);
     } catch (_) { }
+    this.isPremium = isPremium;
 
     if (this.premiumTeaser && this.hubContent) {
-      if (isPremium) {
-        this.premiumTeaser.style.display = 'none';
-        this.hubContent.style.display = 'block';
-        if (!this.hasSyncedOnce) {
-          this.sync();
-        }
-      } else {
-        this.premiumTeaser.style.display = 'block';
-        this.hubContent.style.display = 'none';
+      // v1.6: free users no longer hit a full teaser wall. They can sync
+      // and see their 3 most recent conversations (capped in renderList),
+      // with an inline upgrade row replacing the 4th slot. The legacy
+      // teaser markup stays hidden in the free path; premium is unlimited.
+      this.premiumTeaser.style.display = 'none';
+      this.hubContent.style.display = 'block';
+      if (!this.hasSyncedOnce) {
+        this.sync();
       }
+      this.applyFilters();
     }
     return isPremium;
   }
@@ -2120,6 +2129,10 @@ export class ConversationHubManager {
     if (this.isOpen) return;
     this.isOpen = true;
 
+    try { track('hub_opened', { premium: this.isPremium ? 1 : 0 }); } catch (_) {}
+    // Rating prompt: counts Hub opens for free users (shown at the 3rd).
+    try { registerHubOpen(); } catch (_) {}
+
     const isPremium = await this.refreshView();
 
     const iframe = document.getElementById('main-iframe');
@@ -2384,7 +2397,21 @@ export class ConversationHubManager {
 
     if (this.emptyState) this.emptyState.classList.remove('visible');
 
-    this.filteredConversations.forEach((item, index) => {
+    // Free-tier cap: show only the N most recent. If the full filtered set
+    // exceeds the cap, replace the tail with one inline upgrade row and
+    // fire hub_limit_hit (once per render that actually truncates).
+    const limit = this.isPremium ? Infinity : this.FREE_ITEM_LIMIT;
+    const totalCount = this.filteredConversations.length;
+    const capped = totalCount > limit ? this.filteredConversations.slice(0, limit) : this.filteredConversations;
+    const isTruncated = totalCount > limit;
+
+    if (isTruncated) {
+      try { track('hub_limit_hit', { shown: capped.length, total: totalCount }); } catch (_) {}
+      // Suppress the rating prompt for this session (paywall-adjacent).
+      try { suppressThisSession('hub_limit'); } catch (_) {}
+    }
+
+    capped.forEach((item, index) => {
       const row = document.createElement('div');
       row.className = 'conversation-item';
       if (item.url) {
@@ -2447,6 +2474,71 @@ export class ConversationHubManager {
 
       this.list.appendChild(row);
     });
+
+    // Inline upgrade row (free users only, when truncated).
+    if (isTruncated) {
+      this.list.appendChild(this.buildUpgradeRow(totalCount - capped.length));
+    }
+  }
+
+  // Inline upgrade row that replaces the truncated tail of the list for
+  // free users. Clicking it opens the premium modal (value moment).
+  buildUpgradeRow(hiddenCount) {
+    const row = document.createElement('div');
+    row.className = 'conversation-item conversation-upgrade-row';
+    row.setAttribute('role', 'button');
+    row.setAttribute('tabindex', '0');
+
+    const icon = document.createElement('div');
+    icon.className = 'conversation-icon conversation-upgrade-icon';
+    icon.innerHTML = `
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.88L18.18 22 12 18.8 5.82 22 7 14.15l-5-4.88 6.91-1.01L12 2z"/>
+      </svg>`;
+
+    const main = document.createElement('div');
+    main.className = 'conversation-item-main';
+
+    const title = document.createElement('div');
+    title.className = 'conversation-title';
+    title.textContent = hiddenCount > 0
+      ? `Unlock ${hiddenCount} more conversation${hiddenCount === 1 ? '' : 's'}`
+      : 'Unlock unlimited history';
+
+    const meta = document.createElement('div');
+    meta.className = 'conversation-meta';
+    const tag = document.createElement('span');
+    tag.className = 'conversation-service conversation-upgrade-tag';
+    tag.textContent = 'Go Pro';
+    meta.appendChild(tag);
+
+    main.appendChild(title);
+    main.appendChild(meta);
+
+    const indicator = document.createElement('span');
+    indicator.className = 'conversation-open-indicator';
+    indicator.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18l6-6-6-6"></path>
+      </svg>`;
+
+    row.appendChild(icon);
+    row.appendChild(main);
+    row.appendChild(indicator);
+
+    const openUpgrade = () => {
+      try { track('hub_limit_hit', { action: 'upgrade_click', hidden: hiddenCount }); } catch (_) {}
+      window.dispatchEvent(new CustomEvent('openPremiumModal', { detail: { source: 'conversationHub' } }));
+    };
+    row.addEventListener('click', openUpgrade);
+    row.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openUpgrade();
+      }
+    });
+
+    return row;
   }
 
   updateStatusLine() {

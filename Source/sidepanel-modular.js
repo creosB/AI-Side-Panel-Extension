@@ -1,4 +1,5 @@
 // Main Application Entry Point
+import { initWhatsNewReveal } from './modules/whatsNewReveal.js';
 import { SplitViewManager } from './modules/splitView.js';
 import { SettingsManager } from './modules/settings.js';
 import { TypographyManager } from './modules/typography.js';
@@ -121,7 +122,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   // ── Onboarding overlay ────────────────────────────────────────────
   initOnboarding();
   initKnownIssuesModal();
-  initDiscountToast();
+
+  // ── What's New re-exposure (v1.6) ─────────────────────────────────
+  // On update, background arms `showWhatsNew`. Non-premium users get a
+  // short value-first reveal (Hub → Privacy → Premium CTA); premium users
+  // skip it entirely. See modules/whatsNewReveal.js.
+  initWhatsNewReveal();
 });
 
 // ── Onboarding overlay management ────────────────────────────────────
@@ -259,48 +265,3 @@ window.restoreButtonOrder = () => {
     window.saveManager.restoreButtonOrder();
   }
 };
-
-function initDiscountToast() {
-  const toast = document.getElementById('discount-toast');
-  const btn = document.getElementById('discount-toast-btn');
-  const closeBtn = document.getElementById('discount-toast-close');
-  if (!toast) return;
-
-  // Check if already premium or if dismissed in this session
-  try {
-    chrome.runtime.sendMessage({ type: 'GET_PREMIUM_STATUS' }, (res) => {
-      if (res && res.isPremium) {
-        return; // Already premium, no toast
-      }
-
-      chrome.storage.session.get(['discountToastDismissed'], (sessionRes) => {
-        if (sessionRes && sessionRes.discountToastDismissed) {
-          return; // Dismissed in this session
-        }
-
-        // Show toast after 1.5s delay
-        setTimeout(() => {
-          toast.classList.add('is-visible');
-        }, 1500);
-      });
-    });
-  } catch (_) {
-    // Fallback if storage/runtime unavailable
-  }
-
-  const dismissToast = () => {
-    toast.classList.remove('is-visible');
-    try {
-      chrome.storage.session.set({ discountToastDismissed: true });
-    } catch (_) {}
-  };
-
-  btn?.addEventListener('click', () => {
-    dismissToast();
-    window.premiumManager?.open?.();
-  });
-
-  closeBtn?.addEventListener('click', () => {
-    dismissToast();
-  });
-}
