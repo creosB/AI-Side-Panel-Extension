@@ -46,7 +46,7 @@ export default class PremiumManager {
 
 		if (this.emailInput) this.emailInput.placeholder = this.t('premiumModalEmailPlaceholder', 'Email used at checkout');
 		if (this.codeInput) this.codeInput.placeholder = this.t('premiumModalLicensePlaceholder', 'License key');
-		if (this.buyBtn) this.buyBtn.textContent = this.t('onboardingGoPremiumBtn', 'Go Premium');
+		if (this.buyBtn) this.buyBtn.textContent = this.t('onboardingGoPremiumBtn', 'Go Pro');
 		if (this.verifyBtn) this.verifyBtn.textContent = this.t('premiumModalVerifyButton', 'Verify');
 		if (this.closeBtn) this.closeBtn.setAttribute('aria-label', this.t('extractionModalClose', 'Close'));
 
@@ -286,6 +286,9 @@ export default class PremiumManager {
 			if (supportAgainLink) {
 				supportAgainLink.style.display = 'inline-block';
 			}
+			if (premiumCta) {
+				premiumCta.style.display = 'none';
+			}
 		} else {
 			card.classList.remove('is-premium');
 			if (titleEl) {
@@ -300,11 +303,7 @@ export default class PremiumManager {
 				supportAgainLink.style.display = 'none';
 			}
 			if (premiumCta) {
-				if (isPremium === false) {
-					premiumCta.style.display = '';
-				} else {
-					premiumCta.style.display = 'none';
-				}
+				premiumCta.style.display = '';
 			}
 		}
 	}
