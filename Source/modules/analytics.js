@@ -1,5 +1,5 @@
 const GA4_MEASUREMENT_ID = 'G-E1PZSW5S7L';
-const GA4_ENDPOINT_BASE = 'https://www.google-analytics.com/g/collect';
+const GA4_ENDPOINT_BASE = 'https://www.google-analytics.com/mp/collect';
 
 // Obfuscated api_secret payload (base64 of secret XOR'd against a
 // position-mixed key stream derived from SEED_CODES). Reconstructed at
