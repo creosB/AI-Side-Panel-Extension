@@ -31,7 +31,7 @@ jobs:
           bundle.write_text(source.replace(old, new))
 
           test = Path('Source/modules/privacy-mask/prompt-history-dropdown.test.js')
-          test.write_text("""// Regression test for the Privacy Mask -> Prompt History handoff.
+          test.write_text(r"""// Regression test for the Privacy Mask -> Prompt History handoff.
           // Run with: node --test Source/modules/privacy-mask/prompt-history-dropdown.test.js
 
           const { test } = require('node:test');
