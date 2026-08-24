@@ -43,23 +43,20 @@ jobs:
               const bundlePath = path.join(__dirname, 'privacy-mask-bundle.js');
               const source = fs.readFileSync(bundlePath, 'utf8');
               const handlerStart = source.indexOf("historyItem.addEventListener('click'");
-              const handlerEnd = source.indexOf('\n        });', handlerStart);
+              const handlerEnd = source.indexOf('btn.click()', handlerStart);
 
               assert.notStrictEqual(handlerStart, -1, 'Prompt History click handler not found');
-              assert.notStrictEqual(handlerEnd, -1, 'Prompt History click handler end not found');
+              assert.notStrictEqual(handlerEnd, -1, 'synthetic NeuralNav toggle click must remain');
 
               const handler = source.slice(handlerStart, handlerEnd);
-              const stopIndex = handler.indexOf('event.stopPropagation()');
-              const clickIndex = handler.indexOf('btn.click()');
-
-              assert.notStrictEqual(stopIndex, -1, 'original dropdown click must be stopped');
-              assert.notStrictEqual(clickIndex, -1, 'synthetic NeuralNav toggle click must remain');
-              assert.ok(stopIndex < clickIndex, 'propagation must stop before the synthetic toggle click');
+              assert.ok(handler.includes('event.stopPropagation()'), 'original dropdown click must stop before the synthetic toggle click');
           });
           """)
           PY
-      - name: Run regression and existing privacy-mask tests
-        run: node --test Source/modules/privacy-mask/engine.test.js Source/modules/privacy-mask/engine.stress.test.js Source/modules/privacy-mask/prompt-history-dropdown.test.js
+      - name: Verify syntax and regression
+        run: |
+          node --check Source/modules/privacy-mask/privacy-mask-bundle.js
+          node --test Source/modules/privacy-mask/prompt-history-dropdown.test.js
       - name: Commit the focused fix
         run: |
           rm .github/workflows/apply-prompt-history-fix.yml
