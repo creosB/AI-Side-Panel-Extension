@@ -1,0 +1,75 @@
+name: Apply Prompt History regression fix
+
+on:
+  push:
+    branches:
+      - copilot/fix-prompt-history-regression
+    paths:
+      - .github/workflows/apply-prompt-history-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: copilot/fix-prompt-history-regression
+      - name: Patch click propagation and add regression test
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          bundle = Path('Source/modules/privacy-mask/privacy-mask-bundle.js')
+          source = bundle.read_text()
+          old = """historyItem.addEventListener('click', () => {
+                      closeDropdown();"""
+          new = """historyItem.addEventListener('click', (event) => {
+                      // Keep the original menu click from reaching NeuralNav's
+                      // document-level click-away handler after the synthetic toggle click.
+                      event.stopPropagation();
+                      closeDropdown();"""
+          if source.count(old) != 1:
+              raise SystemExit(f'Expected one Prompt History handler, found {source.count(old)}')
+          bundle.write_text(source.replace(old, new))
+
+          test = Path('Source/modules/privacy-mask/prompt-history-dropdown.test.js')
+          test.write_text("""// Regression test for the Privacy Mask -> Prompt History handoff.
+          // Run with: node --test Source/modules/privacy-mask/prompt-history-dropdown.test.js
+
+          const { test } = require('node:test');
+          const assert = require('node:assert');
+          const fs = require('node:fs');
+          const path = require('node:path');
+
+          test('Prompt History menu click is stopped before the synthetic toggle click', () => {
+              const bundlePath = path.join(__dirname, 'privacy-mask-bundle.js');
+              const source = fs.readFileSync(bundlePath, 'utf8');
+              const handlerStart = source.indexOf("historyItem.addEventListener('click'");
+              const handlerEnd = source.indexOf('\n        });', handlerStart);
+
+              assert.notStrictEqual(handlerStart, -1, 'Prompt History click handler not found');
+              assert.notStrictEqual(handlerEnd, -1, 'Prompt History click handler end not found');
+
+              const handler = source.slice(handlerStart, handlerEnd);
+              const stopIndex = handler.indexOf('event.stopPropagation()');
+              const clickIndex = handler.indexOf('btn.click()');
+
+              assert.notStrictEqual(stopIndex, -1, 'original dropdown click must be stopped');
+              assert.notStrictEqual(clickIndex, -1, 'synthetic NeuralNav toggle click must remain');
+              assert.ok(stopIndex < clickIndex, 'propagation must stop before the synthetic toggle click');
+          });
+          """)
+          PY
+      - name: Run regression and existing privacy-mask tests
+        run: node --test Source/modules/privacy-mask/engine.test.js Source/modules/privacy-mask/engine.stress.test.js Source/modules/privacy-mask/prompt-history-dropdown.test.js
+      - name: Commit the focused fix
+        run: |
+          rm .github/workflows/apply-prompt-history-fix.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Source/modules/privacy-mask/privacy-mask-bundle.js Source/modules/privacy-mask/prompt-history-dropdown.test.js .github/workflows/apply-prompt-history-fix.yml
+          git commit -m "fix: keep Prompt History open from Privacy Mask menu"
+          git push origin HEAD:copilot/fix-prompt-history-regression
