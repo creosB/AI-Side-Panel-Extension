@@ -806,7 +806,10 @@
         const historyItem = document.createElement('button');
         historyItem.className = 'pm-dropdown-item';
         historyItem.innerHTML = '<span class="pm-item-icon">💬</span> Prompt History';
-        historyItem.addEventListener('click', () => {
+        historyItem.addEventListener('click', (event) => {
+            // Keep the original menu click from reaching NeuralNav's
+            // document-level click-away handler after the synthetic toggle click.
+            event.stopPropagation();
             closeDropdown();
             // Bypass our hijack and let neural-nav's handler run.
             bypassing = true;
