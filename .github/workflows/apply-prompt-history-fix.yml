@@ -24,13 +24,8 @@ jobs:
 
           bundle = Path('Source/modules/privacy-mask/privacy-mask-bundle.js')
           source = bundle.read_text()
-          old = """historyItem.addEventListener('click', () => {
-                      closeDropdown();"""
-          new = """historyItem.addEventListener('click', (event) => {
-                      // Keep the original menu click from reaching NeuralNav's
-                      // document-level click-away handler after the synthetic toggle click.
-                      event.stopPropagation();
-                      closeDropdown();"""
+          old = "historyItem.addEventListener('click', () => {"
+          new = "historyItem.addEventListener('click', (event) => {\n            // Keep the original menu click from reaching NeuralNav's\n            // document-level click-away handler after the synthetic toggle click.\n            event.stopPropagation();"
           if source.count(old) != 1:
               raise SystemExit(f'Expected one Prompt History handler, found {source.count(old)}')
           bundle.write_text(source.replace(old, new))
